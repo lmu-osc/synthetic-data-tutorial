@@ -122,11 +122,67 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<!-- Matomo -->
 
+<script>
 
-<!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+    var _paq = window._paq = window._paq || [];
 
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
 
+    _paq.push(['trackPageView']);
+
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+
+        var u = "https://www.analytics.osc.lmu.de/";
+
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+
+        _paq.push(['setSiteId', '12']);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+
+        g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+
+    })();
+
+</script>
+
+<!-- End Matomo Code -->
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
 </head>
@@ -155,7 +211,7 @@ div.csl-indent {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Generating and evaluating synthetic data in <code>R</code></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -247,10 +303,11 @@ div.csl-indent {
    
   <ul>
   <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-  <li><a href="#loading-the-required-packages" id="toc-loading-the-required-packages" class="nav-link" data-scroll-target="#loading-the-required-packages">Loading the required packages</a></li>
   <li><a href="#getting-to-know-the-data" id="toc-getting-to-know-the-data" class="nav-link" data-scroll-target="#getting-to-know-the-data">Getting to know the data</a></li>
-  <li><a href="#creating-synthetic-data" id="toc-creating-synthetic-data" class="nav-link" data-scroll-target="#creating-synthetic-data">Creating synthetic data</a></li>
+  <li><a href="#sec-creating" id="toc-sec-creating" class="nav-link" data-scroll-target="#sec-creating">Creating synthetic data</a></li>
   <li><a href="#specifying-custom-synthesis-models" id="toc-specifying-custom-synthesis-models" class="nav-link" data-scroll-target="#specifying-custom-synthesis-models">Specifying custom synthesis models</a></li>
+  <li><a href="#advanced-extensions-to-synthpop" id="toc-advanced-extensions-to-synthpop" class="nav-link" data-scroll-target="#advanced-extensions-to-synthpop">Advanced: Extensions to <code>synthpop</code></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -276,16 +333,26 @@ div.csl-indent {
 </header>
 
 
-<p>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <code>R</code>. Throughout, we will use the <code>synthpop</code> package <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok, Raab, and Dibben 2016</a>)</span>, which is a powerful tool explicitly designed to generate synthetic data. Other alternatives to create synthetic data are, for example, the <code>R</code>-package <code>mice</code> <span class="citation" data-cites="mice volker_anonymiced_2021">(<a href="#ref-mice" role="doc-biblioref">van Buuren and Groothuis-Oudshoorn 2011</a>; <a href="#ref-volker_anonymiced_2021" role="doc-biblioref">Volker and Vink 2021</a>)</span> or the stand-alone software IVEware <span class="citation" data-cites="iveware">(<a href="#ref-iveware" role="doc-biblioref">Raghunathan, Solenberger, and Van Hoewyk 2002</a>)</span>.</p>
+<p>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <code>R</code>. Throughout, we will use the <code>synthpop</code> package <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok, Raab, and Dibben 2016</a>)</span>, which is a powerful tool explicitly designed to generate synthetic data. Other alternatives to create synthetic data are, for example, the <code>R</code>-package <code>mice</code> <span class="citation" data-cites="mice volker_anonymiced_2021">(<a href="#ref-mice" role="doc-biblioref">van Buuren and Groothuis-Oudshoorn 2011</a>; <a href="#ref-volker_anonymiced_2021" role="doc-biblioref">Volker and Vink 2021</a>)</span> or the stand-alone software <code>IVEware</code> <span class="citation" data-cites="iveware">(<a href="#ref-iveware" role="doc-biblioref">Raghunathan, Solenberger, and Van Hoewyk 2002</a>)</span>. Additionally, we will use the additional package <code>densityratio</code> <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref">Volker, Gonzalez Poses, and van Kesteren 2024</a>)</span> to evaluate the utility of synthetic data.</p>
+<p>Make sure to load all of the required packages, and in case you haven’t installed them already, install them first, using <code>install.packages("package_name")</code>.</p>
+<hr>
+<p><strong>1. Load the <code>R</code>-packages <code>synthpop</code> and <code>densityratio</code> using <code>library()</code>.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code: Loading required packages</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <hr>
 <section id="data" class="level1">
 <h1>Data</h1>
 <hr>
 <p>Throughout the practical, we will continue with the <code>boys</code> data from the <code>mice</code> package that we also used in the previous section. Note that you cannot simply load the data from the <code>mice</code> package, because the missing values are imputed to simplify the practical. You can download the data as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>boys</code> data contains measurements on 9 variables on 748 Dutch boys. The variables in the data are described in the block below.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Description of the `boys` data">
@@ -316,28 +383,6 @@ Description of the <code>boys</code> data
 </div>
 <hr>
 </section>
-<section id="loading-the-required-packages" class="level1">
-<h1>Loading the required packages</h1>
-<hr>
-<p>In this workshop, you will use the packages <code>synthpop</code> <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok, Raab, and Dibben 2016</a>)</span> and <code>densityratio</code> <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref">Volker, Gonzalez Poses, and van Kesteren 2024</a>)</span>. Make sure to load all of the required packages, and in case you haven’t installed them already, install them first, using <code>install.packages("package_name")</code>.</p>
-<hr>
-<p><strong>1. Install the <code>R</code>-packages <code>synthpop</code> and <code>densityratio</code> from <code>CRAN</code>, and load these packages using <code>library()</code>.</strong></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Show code: Installing required packages</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"synthpop"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"densityratio"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show code: Loading required packages</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<hr>
-</section>
 <section id="getting-to-know-the-data" class="level1">
 <h1>Getting to know the data</h1>
 <hr>
@@ -348,7 +393,7 @@ Description of the <code>boys</code> data
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Inspect first few rows</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
@@ -357,16 +402,93 @@ Description of the <code>boys</code> data
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Inspect first few rows</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>You may notice a couple of things. First, the data seems to be sorted on age. You may verify this by running <code>!is.unsorted(data$age)</code>. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is). Third, you may notice that the variables <code>hgt</code>, <code>wgt</code> and <code>bmi</code> yield a deterministic system when considered simultaneously. That is, the values for <code>bmi</code> should be consistent with the respective values of <code>hgt</code> and <code>wgt</code>. This is also we want to take into account when modelling the data. Finally, the data consists of a mix of continuous and categorical variables, which allows to model variables of both types.</p>
 <hr>
 </section>
-<section id="creating-synthetic-data" class="level1">
+<section id="sec-creating" class="level1">
 <h1>Creating synthetic data</h1>
 <hr>
-<p>We will continue creating synthetic data with a relatively simple, parametric, synthesis model. To this end, we need to decide on a parametric model to synthesize each variable. Using <code>synthpop</code>, this is a piece of cake, as it allows to specify <code>method = "parametric"</code>, which selects a parametric model that matches the variable type of the variable at hand. This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality using a nifty transformation of the data. Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression, depending on whether the categories are ordered or not, respectively.</p>
+<p>Throughout the tutorial, we create data using fully conditional specification, which is implemented in the <code>synthpop</code> package. The most important function in the package is <code>syn()</code>. The <code>syn()</code> function takes a dataset, estimates a set of conditional models, and draws synthetic data from these models. The other arguments allow to specify various modelling choices, for example which model to use for which variable, which set of predictor variables to use for modelling each synthetic variable, whether there are particular constraints that need to be taken into account, and so on.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Modelling choices in synthpop">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Modelling choices in synthpop
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some of the most important arguments of the <code>syn()</code> function are the following (you can use <code>?synthpop::syn()</code> for a more exaustive list). The <code>syn()</code> function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called <code>syn</code> in the output list, adheres to these specifications.</p>
+<section id="method" class="level3">
+<h3 class="anchored" data-anchor-id="method"><code>method</code></h3>
+<p>Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees <span class="citation" data-cites="islr">(for an introduction, see, for instance, Section 8.1 in <a href="#ref-islr" role="doc-biblioref">James et al. 2023</a>)</span> for all variables, which is a flexible, non-parametric technique for modelling synthetic data. Other synthesis models that are available are listed below (for a more thorough explanation, see <code>?synthpop::syn.METHOD</code>, with <code>METHOD</code> replaced by the actual method as specified below).</p>
+<p><strong>Methods for continuous variables</strong></p>
+<ul>
+<li><code>bag</code>: bagging.</li>
+<li><code>cart</code>: classification and regression trees.</li>
+<li><code>norm</code>: linear regression.</li>
+<li><code>sqrtnorm</code>: linear regression on the square root of the outcome variable.</li>
+<li><code>cubertnorm</code>: linear regression on the cubic root of the outcome variable.</li>
+<li><code>lognorm</code>: linear regression on the natural logarithm of the outcome.variable.</li>
+<li><code>normrank</code>: linear regression on normal quantiles of the ranks of the outcome, new values are drawn by matching synthetic ranks with observed ranks, and drawing synthetic values corresponding to the observed ranks.</li>
+<li><code>pmm</code>: predictive mean matching.</li>
+<li><code>ranger</code>: random forests using the <code>ranger</code> package.</li>
+<li><code>rf</code>: random forests using the <code>randomForest</code> package.</li>
+<li><code>sample</code>: random sampling with replacement from the observed data.</li>
+</ul>
+<p><strong>Methods for categorical data</strong></p>
+<ul>
+<li><code>satcat</code>: Generates a variable from all possible combination of its predictors using sampling (so only combinations with observed values can be synthesized).</li>
+<li><code>catall</code>: Extends <code>satcat</code>, by drawing generating all categorical variables simultaneously from a multinomial distribution. This allows to generate synthetic values for combinations of cells that are not in the observed data, and to specify structural zeros (i.e., combinations of cells that are impossible). The multinomial model is actually a joint model for the categorical variables. The continuous variables can then be modelled using the fully conditional specification approach (this only works when first using joint modelling, and then modelling the remainder using fully conditional specification).</li>
+<li><code>ipf</code>: Iterative proportional fitting with additional noise to yield better privacy guarantees <span class="citation" data-cites="Desfontaines_2023">(satisfies differential privacy, for a non-technical introduction on this, see <a href="#ref-Desfontaines_2023" role="doc-biblioref">Desfontaines 2023</a>)</span>.</li>
+<li><code>logreg</code>: logistic regression.</li>
+<li><code>polr</code>: ordered polytomous regression (logistic regression with an outcome with <span class="math inline">\(&gt; 2\)</span> categories).</li>
+<li><code>polyreg</code>: unordered polytomous regression.</li>
+<li><code>nested</code>: synthesizes a variable that is nested in the categories of another variable.</li>
+<li><code>cart</code> <code>pmm</code>, <code>ranger</code>, <code>rf</code> and <code>sample</code> are all also available for categorical variables.</li>
+</ul>
+<p><strong>Methods for survival data</strong></p>
+<ul>
+<li><code>survctree</code>: generates synthetic survival data using classification and regression trees.</li>
+</ul>
+</section>
+<section id="default.method" class="level3">
+<h3 class="anchored" data-anchor-id="default.method"><code>default.method</code></h3>
+<p>A string of length four with a user-specified default method for (1) continuous variables, (2) categorical variables with 2 levels, (3) ordered categorical variables with more than 2 levels, and (4) unordered categorical variables with more than 2 levels. Note that this <code>default.method</code> is only used when <code>method = "parametric"</code>, or when there is a mismatch between the synthesis method and the variable type.</p>
+</section>
+<section id="visit.sequence" class="level3">
+<h3 class="anchored" data-anchor-id="visit.sequence"><code>visit.sequence</code></h3>
+<p>Determines the order in which the variables are synthesized. While in theory this order is not supposed to matter much, in practice it can make a difference in some cases. <span class="citation" data-cites="raabetal_guidelines_2017">Raab, Nowok, and Dibben (<a href="#ref-raabetal_guidelines_2017" role="doc-biblioref">2017</a>)</span> state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.</p>
+</section>
+<section id="predictor.matrix" class="level3">
+<h3 class="anchored" data-anchor-id="predictor.matrix"><code>predictor.matrix</code></h3>
+<p>You might want to exclude some variables as predictor for subsequent variables. This can be helpful if you know there are no relationships between some of the variables, or if you want to include an ID variable in the synthetic data, but not use this as a predictor of subsequent variables.</p>
+</section>
+<section id="k" class="level3">
+<h3 class="anchored" data-anchor-id="k"><code>k</code></h3>
+<p>The number of synthetic records that will be generated. You can generate more or less observations than in the observed data, but note that the information in the synthetic samples cannot exceed the information in the observed data.</p>
+</section>
+<section id="rules-and-rvalues" class="level3">
+<h3 class="anchored" data-anchor-id="rules-and-rvalues"><code>rules</code> and <code>rvalues</code></h3>
+<p>The <code>rules</code> argument expects a named list that contains rules for restricted values. These restricted values are determined by values of other variables: for example, monthly income should be zero for children who are too young to have a paid job (in the Netherlands, the age limit is 12 years). The <code>rvalues</code> argument expects a named list, but with the values to attach to those observations who adhere to the rules specified in <code>rules</code>. So, if you want to specify that every boy with genital tanner stage “G1” has pubic hair tanner stage “P1”, you can set</p>
+<pre><code>rules = list(phb = "gen == 'G1'")
+rvalues = list(phb = 1)</code></pre>
+</section>
+<section id="semicont" class="level3">
+<h3 class="anchored" data-anchor-id="semicont"><code>semicont</code></h3>
+<p>Some variables might have a point mass for some values. For example, income variables often have a spike at 0 for people who don’t have a paid job. This point mass can be modelled separately by first predicting whether an observation has either a zero or non-zero value, and subsequently modelling the income values for those observations with a non-zero value.</p>
+</section>
+<section id="smoothing" class="level3">
+<h3 class="anchored" data-anchor-id="smoothing"><code>smoothing</code></h3>
+<p>Some imputation methods for continuous variables sample the synthetic values from the observed variable. Since re-using observed values may worsen privacy risks, smoothing can be applied such that there is additional randomness in the values that end up in the synthetic data. The <code>smoothing</code> argument expects a character string with the smoothing method per variable.</p>
+</section>
+</div>
+</div>
+<p>We will first create synthetic data with a relatively simple, parametric, synthesis model. To this end, we need to decide on a parametric model to synthesize each variable, which can be done my specifying <code>method = "parametric"</code> in the call to <code>syn()</code>. This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality. Specifically, <code>normrank</code> first transforms the observed data to standard normal quantiles based on the relative ranks of the values. Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data. Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.</p>
 <hr>
 <p><strong>4. Use <code>synthpop()</code> to create a synthetic data set in an object called <code>syn_param</code> using <code>method = "parametric"</code>. Use <code>seed = 123</code> if you want to replicate our results.</strong></p>
 <hr>
@@ -397,7 +519,7 @@ Description of the <code>boys</code> data
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># can call ?syn.logreg to get more information.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>If all is well, all continuous variables are strictly positive, which is due to the transformation synthpop performs when modelling the continuous variables. However, there is a problem that you might have noticed. The variable <code>bmi</code> is not equal to <code>wgt / (hgt/100)^2</code>. This issue can be fixed using <em>passive</em> synthesis.</p>
+<p>If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above). However, there is a problem that you might have noticed. The variable <code>bmi</code> is not equal to <code>wgt / (hgt/100)^2</code>. This issue can be fixed using <em>passive</em> synthesis.</p>
 <hr>
 </section>
 <section id="specifying-custom-synthesis-models" class="level1">
@@ -456,15 +578,69 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </details>
 </div>
 <p>The <code>bmi</code> values correspond to the synthetic <code>hgt</code> and <code>wgt</code> values, as we wanted. Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. There are too many possibilities to cover in this practical, but the <code>synthpop</code> package contains extensive documentation on the possibilities (see, for instance, <code>?synthpop::syn</code> and <code>vignette("synthpop", "synthpop")</code>).</p>
-<p>The previous exercises showed that generating synthetic data can be quite easy. However, depending on the data at hand, it can become more involved. For example, there might be a hierarchical structure in the data that you want to preserve, for example because observations are nested within groups, or because the data is longitudinal <span class="citation" data-cites="yucel_sequential_2017 speidel_hmi_2020">(to read more about this in the context of imputation for missing data, see <a href="#ref-yucel_sequential_2017" role="doc-biblioref">Yucel et al. 2017</a>; <a href="#ref-speidel_hmi_2020" role="doc-biblioref">Speidel, Drechsler, and Jolani 2020</a>)</span>. Modelling such instances might require specialized software, but by using fully conditional specification, one can stitch multiple models together, one variable at a time, to model the joint distribution of the data. However, in many use-cases, such advanced modelling is not required, and tuning some synthesis models might already be sufficient. In the <a href="../evaluation/">subsequent section</a>, we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.</p>
+</section>
+<section id="advanced-extensions-to-synthpop" class="level1">
+<h1>Advanced: Extensions to <code>synthpop</code></h1>
+<p>Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. It can, however, occur that you want models that are not yet incorporated. In <code>synthpop</code>, it is possible to write custom synthesis functions that extend the existing suite of methods. Leaving the nitty-gritty aside, we can write a synthesis function that starts with <code>syn.</code> and then some name, that takes arguments <code>y</code> (the observed variable to be synthesized), <code>x</code> (the predictors in the observed data), <code>xp</code> (the previously synthesized predictor variables) and additional parameters for the model at hand (in our case, there aren’t any). Then, we need to fit the model on the observed data, <code>x</code> and <code>y</code>, and from this model draw new observations from the synthetic predictors, <code>xp</code>. This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line (this is a very stupid idea, but it allows to display the procedure in a straightforward manner). The output of the synthetic data function should be a list with arguments <code>res</code>, the synthetic data values, and <code>fit</code>, the parameters of the fitted model. Note here that you don’t accidentally leak the observed data!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    new_y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(y)             <span class="co"># variable to be synthesized</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    new_x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)             <span class="co"># observed predictor variables</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    new_xp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">as.matrix</span>(xp)) <span class="co"># previously synthesized variables</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_y<span class="sc">~</span>new_x)            <span class="co"># fitted model</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">res =</span> new_xp <span class="sc">%*%</span> <span class="fu">coef</span>(fit), <span class="co"># synthetic values</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">fit =</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"hgt"</span>] <span class="ot">&lt;-</span> <span class="st">"synthesis_function"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>syn_method_spec <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Variable(s) bmi with passive synthesis: relationship does not hold in data.
+Total of 723 case(s) where predictors do not give value present in data.
+You might want to recompute the variable(s) in the original data.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <code>synthpop</code>. This also allows to model, for example, a hierarchical structure, using the <code>R</code>-package <code>lme4</code> <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref"><strong>lme4?</strong></a>)</span>, <code>glmmTMB</code> <span class="citation" data-cites="glmmTMB">(<a href="#ref-glmmTMB" role="doc-biblioref"><strong>glmmTMB?</strong></a>)</span> or, if you prefer a Bayesian procedure, with <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref"><strong>brms?</strong></a>)</span>. In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages. Since no one has done this for synthetic data yet, relevant resources do not seem to exist, but feel free to reach out if you plan on doing this. To read more about modelling hierarchical data in the context of imputation for missing data, see <span class="citation" data-cites="yucel_sequential_2017">Yucel et al. (<a href="#ref-yucel_sequential_2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="speidel_hmi_2020">Speidel, Drechsler, and Jolani (<a href="#ref-speidel_hmi_2020" role="doc-biblioref">2020</a>)</span>].</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>The exercises here showed that <code>synthpop</code> allows quite some flexibility when modelling synthetic data, and simplifies the process substantially. However, further refinements might sometimes be possible. In the <a href="../evaluation/">subsequent section</a>, we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.</p>
 
 
 
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Desfontaines_2023" class="csl-entry" role="listitem">
+Desfontaines, Damien. 2023. <span>“A Friendly, Non-Technical Introduction to Differential Privacy.”</span> <a href="https://desfontain.es/blog/friendly-intro-to-differential-privacy.html">https://desfontain.es/blog/friendly-intro-to-differential-privacy.html</a>.
+</div>
+<div id="ref-islr" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2023. <em>An Introduction to Statistical Learning</em>. 2nd ed. Springer Texts in Statistics. New York: Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
+</div>
 <div id="ref-synthpop" class="csl-entry" role="listitem">
 Nowok, Beata, Gillian M. Raab, and Chris Dibben. 2016. <span>“<span class="nocase">synthpop</span>: Bespoke Creation of Synthetic Data in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 74 (11): 1–26. <a href="https://doi.org/10.18637/jss.v074.i11">https://doi.org/10.18637/jss.v074.i11</a>.
+</div>
+<div id="ref-raabetal_guidelines_2017" class="csl-entry" role="listitem">
+Raab, Gillian M., Beata Nowok, and Chris Dibben. 2017. <span>“Guidelines for Producing Useful Synthetic Data.”</span> <a href="https://arxiv.org/abs/1712.04078">https://arxiv.org/abs/1712.04078</a>.
 </div>
 <div id="ref-iveware" class="csl-entry" role="listitem">
 Raghunathan, Trivellore E, Peter W Solenberger, and John Van Hoewyk. 2002. <span>“IVEware: Imputation and Variance Estimation Software.”</span> <em>Ann Arbor, MI: Survey Methodology Program, Survey Research Center, Institute for Social Research, University of Michigan</em>.

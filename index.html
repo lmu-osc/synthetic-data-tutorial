@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,10 +103,37 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<!-- Matomo -->
 
+<script>
 
-<!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+    var _paq = window._paq = window._paq || [];
 
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+
+    _paq.push(['trackPageView']);
+
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+
+        var u = "https://www.analytics.osc.lmu.de/";
+
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+
+        _paq.push(['setSiteId', '12']);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+
+        g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+
+    })();
+
+</script>
+
+<!-- End Matomo Code -->
+
+  
 
 
 <link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
@@ -101,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Generating and evaluating synthetic data in <code>R</code></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -220,7 +282,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="tutorial-overview" class="level1">
 <h1>Tutorial Overview</h1>
-<p>This <strong>self-paced tutorial</strong> will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. The tutorial is intended to take approximately 4 hours to complete.</p>
+<p>This <strong>self-paced tutorial</strong> will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. Advantages of open (synthetic) data are numerous: other researchers can re-run analyses with data that is close to the actual data, which allows them to verify the main results. Additionally, open (synthetic) data allows researchers to perform exploratory analyses that may lead to novel hypotheses, and in quite some instances performing such analyses with synthetic data yields rather accurate results. Moreover, realistic synthetic can be used in teaching, or for starting with model building when access to the real data is currently still prohibited. All in all, synthetic data makes open science practices easier and might spark collaborations with potential data users.</p>
+<p>The tutorial is intended to take approximately 2-3 hours to complete.</p>
 <p>The tutorial is split into the following sections:</p>
 <ol type="1">
 <li><a href="sdc/">Statistical Disclosure Control</a> provides a very brief introduction to statistical disclosure control.</li>
@@ -248,7 +311,14 @@ Recommended Software
 <ul>
 <li><a href="https://synthpop.org.uk/get-started.html"><code>synthpop</code></a></li>
 <li><a href="https://thomvolker.github.io/densityratio"><code>densityratio</code></a></li>
+<li><a href="https://mvtnorm.r-forge.r-project.org/"><code>mvtnorm</code></a></li>
 </ul>
+<p>Before starting, please install the required packages as follows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"synthpop"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"densityratio"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mvtnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 

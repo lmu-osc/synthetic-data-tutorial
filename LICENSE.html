@@ -67,10 +67,37 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<!-- Matomo -->
 
+<script>
 
-<!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+    var _paq = window._paq = window._paq || [];
 
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+
+    _paq.push(['trackPageView']);
+
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+
+        var u = "https://www.analytics.osc.lmu.de/";
+
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+
+        _paq.push(['setSiteId', '12']);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+
+        g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+
+    })();
+
+</script>
+
+<!-- End Matomo Code -->
+
+  
 
 
 <link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
@@ -100,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Generating and evaluating synthetic data in <code>R</code></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->

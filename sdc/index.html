@@ -87,10 +87,37 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<!-- Matomo -->
 
+<script>
 
-<!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+    var _paq = window._paq = window._paq || [];
 
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+
+    _paq.push(['trackPageView']);
+
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+
+        var u = "https://www.analytics.osc.lmu.de/";
+
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+
+        _paq.push(['setSiteId', '12']);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+
+        g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+
+    })();
+
+</script>
+
+<!-- End Matomo Code -->
+
+  
 
 
 <link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
@@ -120,7 +147,7 @@ div.csl-indent {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Generating and evaluating synthetic data in <code>R</code></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -242,12 +269,18 @@ div.csl-indent {
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Collected research data often contains sensitive information about individuals. For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals. Such private information may harm the people involved if disclosed to the public. Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed. At the same time, broad data availability is very valuable to researchers and governmental institutions alike. Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education. That is, open data is valuable for many applications, but simply releasing the data is often not an option.</p>
-<p>The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. Anonymization requires that potentially identifying information is removed from the collected data. Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information. However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. For example, in 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the IMDB database. This might not be a problem for most users, but for some it would yield a high risk of disclosing their sexual orientation. To prevent indirect identification, statistical disclosure control can be applied to the data.</p>
+<p>The first step in the process of releasing data is to anonymize it [TODO: see Data Anonymization tutorial]. Anonymization requires that potentially identifying information is removed from the collected data. Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information. However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. In 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the Internet Movie Database (IMDb). This might not be a problem for most users, but turned out to be problematic for some. For example, the reviewed movies were quite explicit about some users’ sexual orientation, and revealing this information could put some in an awkward position. To prevent indirect identification, statistical disclosure control can be applied to the data.</p>
 </section>
 <section id="statistical-disclosure-control" class="level1">
 <h1>Statistical disclosure control</h1>
-<p>The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>. Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. Two types of disclosure risk are commonly considered. First, re-identification disclosure concerns when individuals can be singled out from the released data, resulting in confidential data being leaked. Second, attribute disclosure occurs when some characteristic of an individual can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status. Every data release requires that these types of disclosure risk are sufficiently small.</p>
-<p>At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data. Similarity, in this context, means that the released, but protected, data can be used for the same purposes as the original data. To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data. Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distribution of the observed and released data is similar. Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data. The level of protection required depends on the data at hand: data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected. At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved. Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others.</p>
+<p>The term “Statistical disclosure control” refers to a suite of statistical methods that aim to protect collected data such that they can be safely released to the public without disclosing confidential information about these individuals. The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>. Disclosure is here defined as the release of information about an individual that would not have become public if the data would be kept private. Two types of disclosure risk are commonly considered:</p>
+<ol type="1">
+<li><strong>Re-identification disclosure</strong> occurs when individuals can be singled out from the released data, resulting in confidential data being leaked.</li>
+<li><strong>Attribute disclosure</strong> refers to situations in which characteristics of individuals can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status.</li>
+</ol>
+<p>Every data release requires that both re-identification disclosure and attribute disclosure risks are sufficiently small.</p>
+<p>At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data. Similarity, in this context, means that the released, but protected, data can be used for the same purposes as the original data. To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data. Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distributions of the observed and released data are similar. Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data.</p>
+<p>The level of protection required depends on the data at hand: data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected. At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved. Note that the privacy-utility trade-off is very much relative: a released data set can be very useful for some purposes, but almost useless for others.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-privacy-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -265,16 +298,16 @@ Figure&nbsp;1: The privacy-utility trade-off: one can typically attain either hi
 </section>
 <section id="conventional-statistical-disclosure-control-methods" class="level1">
 <h1>Conventional statistical disclosure control methods</h1>
-<p>In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years. Typically, these techniques introduce both bias and variance to the data to limit disclosure <span class="citation" data-cites="fienberg_slavkovic_2011">(<a href="#ref-fienberg_slavkovic_2011" role="doc-biblioref">Fienberg and Slavković 2011</a>)</span>. Common methods that have traditionally been used for statistical disclosure control are <span class="citation" data-cites="reiter_2011 hundepool2024">(e.g., <a href="#ref-reiter_2011" role="doc-biblioref">Reiter 2011</a>; <a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>:</p>
+<p>In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years. Typically, these techniques limit the amount of information that is released, thereby introducing statistical bias and variance <span class="citation" data-cites="fienberg_slavkovic_2011">(<a href="#ref-fienberg_slavkovic_2011" role="doc-biblioref">Fienberg and Slavković 2011</a>)</span>. For example, one might threshold variables such that extreme values are not released, which typically creates bias in the distribution of the released values. As an other example, adding noise to observed values will increase the variance of the released data relative to the observed data. Common methods that have traditionally been used for statistical disclosure control are <span class="citation" data-cites="reiter_2011 hundepool2024">(e.g., <a href="#ref-reiter_2011" role="doc-biblioref">Reiter 2011</a>; <a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>:</p>
 <ul>
-<li>Aggregation: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
-<li>Rounding: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
-<li>Top coding: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).</li>
-<li>Microaggregation: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
-<li>Suppression: remove sensitive or identifying values from the released data directly (this can even be an entire variable).</li>
-<li>Adding noise: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
+<li><strong>Aggregation</strong>: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
+<li><strong>Rounding</strong>: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
+<li><strong>Top coding</strong>: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure).</li>
+<li><strong>Microaggregation</strong>: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
+<li><strong>Suppression</strong>: remove sensitive or identifying values from the released data directly (this can even be an entire variable).</li>
+<li><strong>Adding noise</strong>: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
 </ul>
-<p>While it is possible for the above approaches to take relationships between variables into account, this is not so common. While these approaches can do a reasonable job in protecting disclosure, they also typically distort data quality tremendously. These approaches are often applied on a variably by variable basis, distorting relationships between variables. Synthetic data is one way to deal with this, as it attempts to model the joint distribution of the variables in the data, and thus allows to capture relationships between variables (at least theoretically). The idea of synthetic data will be more thoroughly explained in <a href="../synthetic/">the subsequent section</a>.</p>
+<p>Each of these methods methods either introduce errors in the data, such that the released information cannot be inferred to be entirely accurate, or limits the amount of information that is released in such a way that disclosure risks are small. However, an important limitation of these methods is that relationships between variables are usually not accounted for. While it is possible for some of these approaches to be applied on a multivariate level, this is often not easy and typically not done in practice. Thus, when relationships between variables are of interest, for example when the released data should allow to reproduce regression analyses on the observed data, these traditional methods might distort the data too much. Synthetic data might provide a better solution, as instead of distorting the data, it attempts to model the multivariate distribution of the data, and thus allows to capture relationships between variables. The idea of synthetic data will be more thoroughly explained in <a href="../synthetic/">the subsequent section</a>.</p>
 
 
 

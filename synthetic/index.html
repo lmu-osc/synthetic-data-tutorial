@@ -126,10 +126,37 @@ div.csl-indent {
 
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+<!-- Matomo -->
 
+<script>
 
-<!-- See the OSC internal instructions on how to generate and include the code necessary for the Matomo Analytics tracking. -->
+    var _paq = window._paq = window._paq || [];
 
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+
+    _paq.push(['trackPageView']);
+
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+
+        var u = "https://www.analytics.osc.lmu.de/";
+
+        _paq.push(['setTrackerUrl', u + 'matomo.php']);
+
+        _paq.push(['setSiteId', '12']);
+
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+
+        g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+
+    })();
+
+</script>
+
+<!-- End Matomo Code -->
+
+  
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -188,7 +215,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Generating and evaluating synthetic data in <code>R</code></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -280,8 +307,19 @@ window.Quarto = {
    
   <ul>
   <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
-  <li><a href="#modelling-synthetic-data" id="toc-modelling-synthetic-data" class="nav-link" data-scroll-target="#modelling-synthetic-data">Modelling synthetic data</a></li>
-  <li><a href="#exercise-a-simple-synthetic-data-model" id="toc-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#exercise-a-simple-synthetic-data-model">Exercise: A simple synthetic data model</a></li>
+  <li><a href="#sec-modelling" id="toc-sec-modelling" class="nav-link" data-scroll-target="#sec-modelling">Modelling synthetic data</a>
+  <ul class="collapse">
+  <li><a href="#joint-modelling" id="toc-joint-modelling" class="nav-link" data-scroll-target="#joint-modelling">Joint modelling</a></li>
+  <li><a href="#fully-conditional-specification" id="toc-fully-conditional-specification" class="nav-link" data-scroll-target="#fully-conditional-specification">Fully conditional specification</a></li>
+  </ul></li>
+  <li><a href="#exercise-a-simple-synthetic-data-model" id="toc-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#exercise-a-simple-synthetic-data-model">Exercise: A simple synthetic data model</a>
+  <ul class="collapse">
+  <li><a href="#applying-joint-modelling-in-practice" id="toc-applying-joint-modelling-in-practice" class="nav-link" data-scroll-target="#applying-joint-modelling-in-practice">Applying joint modelling in practice</a></li>
+  <li><a href="#synthetic-data-with-fully-conditional-specification" id="toc-synthetic-data-with-fully-conditional-specification" class="nav-link" data-scroll-target="#synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</a></li>
+  <li><a href="#comparing-the-results" id="toc-comparing-the-results" class="nav-link" data-scroll-target="#comparing-the-results">Comparing the results</a></li>
+  <li><a href="#conclusion-fully-conditional-specification-versus-joint-modelling" id="toc-conclusion-fully-conditional-specification-versus-joint-modelling" class="nav-link" data-scroll-target="#conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</a></li>
+  </ul></li>
+  <li><a href="#specifying-synthetic-data-models" id="toc-specifying-synthetic-data-models" class="nav-link" data-scroll-target="#specifying-synthetic-data-models">Specifying synthetic data models</a></li>
   <li><a href="#synthetic-data-for-open-science" id="toc-synthetic-data-for-open-science" class="nav-link" data-scroll-target="#synthetic-data-for-open-science">Synthetic data for open science</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -308,33 +346,42 @@ window.Quarto = {
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  include: false</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="synthetic-data-what-it-is-and-what-it-is-about" class="level1">
 <h1>Synthetic data: What it is and what it is about?</h1>
 <hr>
-<p>The idea of synthetic data has first been proposed independently by Donald B. Rubin and Roderick J.A. Little, who you may know as members of the founding fathers of modern missing data theory in 1993 <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it.</p>
+<p>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it. These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</p>
 <p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
 <hr>
 </section>
-<section id="modelling-synthetic-data" class="level1">
+<section id="sec-modelling" class="level1">
 <h1>Modelling synthetic data</h1>
 <hr>
-<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because the newly sampled synthetic observations are independent of the observed data.</p>
-<p>Two strategies have emerged to generate synthetic samples. First, we can model the multivariate distribution of the data directly, specifying one joint model for all variables. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit. In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation we just discussed). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, but extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
+<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because many real-world processes are far from deterministic. These random fluctuations typically provide sufficient uncertainty to prevent both identity and attribute disclosure. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
+<section id="joint-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="joint-modelling">Joint modelling</h2>
+<p>One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit.</p>
+<p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation we just discussed). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
+</section>
+<section id="fully-conditional-specification" class="level2">
+<h2 class="anchored" data-anchor-id="fully-conditional-specification">Fully conditional specification</h2>
 <p>A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables). That is, we can factor the joint distribution of the data into a series of conditionals <span class="math display">\[
 f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
-\]</span> which greatly simplifies the modelling task. That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model, but with the addition of reasonable assumptions for the noise. Starting from the first variable, we specify a distribution that provides a reasonable approximation to the distribution of the data at hand. For the second variable, we specify a prediction model that allows to predict this variable on the basis of the first variable, and a distribution for the variance around these predictions. This model could, for example, be a linear regression model with normally distributed errors. Then, we build a regression model to predict the second variable from the first in the observed data. This model is used to predict the second variable from the first in the synthetic data, after which the variance is added by drawing random errors from a normal distribution with mean zero and variance equal to the residual variance of the fitted model. For the third variable, we can use a prediction model based on the first two variables, and so on, until all variables are synthesized.</p>
-<p>This procedure allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by classification and regression trees or gradient boosting methods. Moreover, all model evaluation techniques (such as posterior predictive checking) can be used now, and possible improvements can be directly incorporated in the synthesis model. For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model. Throughout, we focus on synthesis methods that employ this conditional modelling strategy (commonly called fully conditional specification or sequential regression).</p>
+\]</span> which greatly simplifies the modelling task. That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model, but with the addition of reasonable assumptions for the noise. In practice, we might proceed as follows.</p>
+<ul>
+<li>Starting from the first variable, we specify a distribution that provides a reasonable approximation to the distribution of the data at hand.</li>
+<li>For the second variable, we specify a prediction model that predicts this variable on the basis of the first, and combine this model with a distribution for the residual variance. If we would use, for example, a linear regression model with normally distributed errors, we fit a regression model with the first variable as predictor and the second variable as outcome. This model is used to predict the second variable from the first in the synthetic data, after which the variance is added by drawing random errors from a normal distribution with mean zero and variance equal to the residual variance of the fitted model.</li>
+<li>For the third variable, we can use a prediction model based on the first two variables, and so on, until all variables are synthesized.</li>
+</ul>
+<p>Note that, although in theory the order of synthesis should not matter much, in practice it may make a difference in some cases. We will come back to this issue and provide some concrete advice in <a href="../generation/index.html#sec-creating">the next section</a>.</p>
+<p>Fully conditional specification has two distinct advantages over joint modelling: 1. It allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by non-linear (e.g., non-parametric) models that capture non-linear relationships (or non-normal error terms). 2. Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see <a href="https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks">the relevant vignette from the <code>performance</code> package</a> for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model.</p>
+<p>In what follows, we focus on synthesis methods that employ this conditional modelling strategy (commonly called fully conditional specification or sequential regression).</p>
 <hr>
+</section>
 </section>
 <section id="exercise-a-simple-synthetic-data-model" class="level1">
 <h1>Exercise: A simple synthetic data model</h1>
 <hr>
-<p><em>The following exercise is purely illustrational. In practice, we don’t write our synthesis code from scratch, but we use dedicated software. If you find these exercises hard to follow, feel free to skim through them such that you get the main idea. In the <a href="../generation/">next section</a>, we will use dedicated software to achieve the same.</em></p>
+<p><em>The following exercise is purely illustrational. In practice, we don’t write our synthesis code from scratch, but we use dedicated <code>R</code> packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. The related code is not essential, but try to understand the general workflow. In the <a href="../generation/">next section</a>, we will use the <code>synthpop</code> package to achieve similar results.</em></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Additional resources">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -358,13 +405,13 @@ Additional resources
 </ul>
 </div>
 </div>
-<p>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. For this exercise (and all exercises in subsequent sections), we will use the <code>boys</code> data from the <code>R</code>-package <code>mice</code>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and for the time being, we focus on the first three variables. You can obtain the data as follows:</p>
+<p>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. For this exercise (and all exercises in subsequent sections), we will use the <code>boys</code> data from the <code>R</code>-package <code>mice</code>,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and for the time being, we focus on the first three variables <code>age</code>, <code>hgt</code> and <code>wgt</code>. You can obtain the data as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Description of the `boys` data">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -391,9 +438,9 @@ Description of the <code>boys</code> data
 <li><code>reg</code>: Region (north, east, west, south, city)</li>
 </ul>
 <div class="cell" data-tbl-cap="The `boys` data from the `R`-package `mice`">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data) <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
 <caption>The <code>boys</code> data from the <code>R</code>-package <code>mice</code></caption>
@@ -485,7 +532,18 @@ Description of the <code>boys</code> data
 </div>
 </div>
 <hr>
-<p><strong>1. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
+<p>We start by applying the joint modelling strategy on the <code>boys</code> data. For simplicity, we draw synthetic samples by approximating the multivariate distribution of <code>age</code>, <code>hgt</code> and <code>wgt</code> using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data. To generate these synthetic samples, we use the <code>R</code>-package <code>mvtnorm</code> <span class="citation" data-cites="mvtnorm">(<a href="#ref-mvtnorm" role="doc-biblioref">Genz and Bretz 2009</a>)</span>.</p>
+<section id="applying-joint-modelling-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="applying-joint-modelling-in-practice">Applying joint modelling in practice</h2>
+<p><strong>1. Load the <code>R</code>-package <code>mvtnorm</code> using the function <code>library()</code>.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code: Loading <code>mvtnorm</code></summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><strong>2. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -494,8 +552,8 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p><strong>2. Create your first synthetic data set by calling <code>mvtnorm::rmvnorm</code> with the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
-<p><em>Note: You may set the seed here for reproducibility.</em></p>
+<p><strong>3. Create your first synthetic data set by calling the function <code>rmvnorm()</code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
+<p><em>Note: You may set a seed here for reproducibility (below, <code>seed = 123</code> is used, but this is no better than any other seed).</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -509,9 +567,12 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p>We will now do the same, but then using the conditional modelling strategy outlined above. To do this, we need the regression models <code>hgt ~ age</code> and <code>wgt ~ age + hgt</code> fitted on the observed data. Moreover, we need the residual variances of each model.</p>
+</section>
+<section id="synthetic-data-with-fully-conditional-specification" class="level2">
+<h2 class="anchored" data-anchor-id="synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</h2>
+<p>We will now do the same thing, but with the fully conditional specification strategy outlined above. To do this, we need the regression models <code>hgt ~ age</code> and <code>wgt ~ age + hgt</code> fitted on the observed data. Moreover, we need the residual variances of each model.</p>
 <hr>
-<p><strong>3. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
+<p><strong>4. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -520,7 +581,7 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p><strong>4. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
+<p><strong>5. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -530,7 +591,7 @@ Description of the <code>boys</code> data
 </div>
 <p>Now, we have everything in place to start the synthesis process. We first generate the variable <code>age</code>, then <code>hgt</code> and then <code>wgt</code>.</p>
 <hr>
-<p><strong>5. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
+<p><strong>6. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -543,7 +604,7 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p><strong>6. Use the synthetic <code>age</code> values to predict an equal number of <code>hgt</code> values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+<p><strong>7. Use the synthetic <code>age</code> values to predict an equal number of <code>hgt</code> values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -553,7 +614,10 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p><strong>7. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+</section>
+<section id="comparing-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-results">Comparing the results</h2>
+<p><strong>8. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -564,7 +628,7 @@ Description of the <code>boys</code> data
 </details>
 </div>
 <hr>
-<p><strong>8. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
+<p><strong>9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
 <hr>
 <p>First, we calculate the means of the observed and synthetic variables.</p>
 <div class="cell">
@@ -590,11 +654,21 @@ Description of the <code>boys</code> data
 </div>
 <p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
 <hr>
-<blockquote class="blockquote">
-<p><em>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. In the subsequent sections, we don’t generate synthetic data using this cumbersome, ad hoc method of writing all code from scratch. Instead, we will use dedicated software for generating the synthetic data.</em></p>
-</blockquote>
+</section>
+<section id="conclusion-fully-conditional-specification-versus-joint-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</h2>
+<p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were essentially the same, this is not generally the case. That is, the combination of three conditional normal models with solely main effects is equivalent to a tri-variate normal distribution, but using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in <a href="#sec-modelling" class="quarto-xref">Section&nbsp;2</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and it’s presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
 <hr>
-<p>We conclude with the statement that synthetic data models can be misspecified in two ways. First, it can be that our model of <span class="math inline">\(f(X)\)</span> is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. We could also miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility. However, it can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
+</section>
+</section>
+<section id="specifying-synthetic-data-models" class="level1">
+<h1>Specifying synthetic data models</h1>
+<p>Regardless of which approach to generating synthetic data you use, it is important that you specify an appropriate synthesis model. That is, <span class="math inline">\(\hat{f}(x)\)</span> needs to model the true data distribution adequately. In general, synthetic data models can be misspecified in two ways.</p>
+<ol type="1">
+<li>It can be that our model is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. We could also miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility.</li>
+<li>It can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly.</li>
+</ol>
+<p>You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-privacy-utility-model" class="quarto-float quarto-figure quarto-figure-center anchored" width="864">
@@ -609,13 +683,23 @@ Figure&nbsp;1
 </div>
 </div>
 </div>
-<p>For a better grasp of this privacy-utility trade-off, <a href="#fig-privacy-utility-model" class="quarto-xref">Figure&nbsp;1</a> might be illuminating. The figure shows the relationship between age and testicular volume for a small subset of Dutch boys, from a random sample of 10% from the cross-sectional data (see <code>?mice::boys</code> for more information). It is quite clear that until approximately 10 years, testicular volume is very small and remains close to constant, after which it increases between 10 and 16 years, after which it tapers of again. If we would model this using a linear model (the green line), and generate new samples from this (the green points in the left subplot on the second row), we see a relatively poor fit: some negative values occur, some values that are too large between age 5 and 10 and too many values relatively small after age 16. So, our synthetic data is not too realistic if we would use this model, and it can be argued that it has relatively low utility. If we would model the data with a very flexible model (the blue line, and blue points in the middle plot on the second row), we can achieve very high utility. In fact, we can reproduce the observed testicular volume values exactly from the observed age values. This poses a significant privacy threat, as knowing someones age allows to directly infer their testicular volume, which is information someone perhaps rather keeps private. The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points.</p>
+<p>For a better grasp of this privacy-utility trade-off, <a href="#fig-privacy-utility-model" class="quarto-xref">Figure&nbsp;1</a> might be illuminating. The figure shows the relationship between age and testicular volume for a small subset of the <code>boys</code> data. It is quite clear that until approximately 10 years, testicular volume is very small and remains close to constant, after which it increases between 10 and 16 years, after which it tapers of again. Without going into the specifics of the applied models (although all are implemented using fully conditional specification), we consider the following three approaches to modelling this relationship:</p>
+<ol type="1">
+<li>If we would model this using a linear model (the green line), and generate new samples from this (the green points in the left subplot on the second row), we see a relatively poor fit: some negative values occur, some values that are too large between age 5 and 10 and too many values relatively small after age 16. So, our synthetic data is not too realistic if we would use this model, and it can be argued that it has relatively low utility.</li>
+<li>If we would model the data with a very flexible model (the blue line, and blue points in the middle plot on the second row), we can achieve very high utility. In fact, we can reproduce the observed testicular volume values exactly from the observed age values (which can also be considered a form of overfitting). This poses a significant privacy threat, as knowing someones age allows to directly infer their testicular volume, which is information someone perhaps rather keeps private.</li>
+<li>The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points. In this case, this is achieved by transforming <code>tv</code> by taking its square-root (which substantially reduces the variance for the lower <code>tv</code> scores), and non-linear regression model (with a natural cubic spline basis, see <code>?ns</code> for help if you are interested in this).</li>
+</ol>
+<p>The bottom line is that you want a synthesis model to be simple enough to leave sufficient uncertainty with respect to the exact relationships between the variables. This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables. Simulaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data. Hence, you want to balance data privacy with data utility.</p>
 <hr>
 </section>
 <section id="synthetic-data-for-open-science" class="level1">
 <h1>Synthetic data for open science</h1>
 <hr>
-<p>As in any data release, the privacy-utility trade-off should guide the release of a synthetic data set. That is, what goals should be achieveable with the synthetic data, and what privacy risks are looming. From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data. Often, this depends on the analyses conducted with the real data. For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, one can thus suffice with a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects. If the data ought to be used for novel research, including complex modelling, such characteristics should be considered. Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models. Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers would love to know what your synthetic data set can and cannot be used for.</p>
+<p>The release of a synthetic data set for open science purposes should be guided by the privacy-utility trade-off, with respect to the data at hand. That is, one should consider the goals that should be attainable with the synthetic data, and what privacy risks are looming. From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data. Often, this depends on the analyses conducted with the real data.</p>
+<blockquote class="blockquote">
+<p>For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, one can thus suffice with a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.</p>
+</blockquote>
+<p>If the data ought to be used for novel research, including complex modelling, one should consider incorporating these complexities (such as higher-order moments or non-linearities) in the synthesis model. Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models. Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers would love to know what your synthetic data set can and cannot be used for.</p>
 <p>At the same time, synthetic data creators should evaluate potential disclosure risks. These risks should be evaluated at two distinct moment: before creating synthetic data one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information. For example, some synthesis methods may simply reproduce original records. The privacy-utility trade-off hints at the idea that the more complex the synthesis model, the larger the risk of disclosure. As such, it is advisable to start with simple synthesis models, and add complexity only when necessary. Some measures of disclosure risk will be covered in the upcoming sections, but when in doubt, please consider Section 3.3 on Risk Assessment in the Handbook on Statistical Disclosure Control <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>.</p>
 
 
@@ -632,6 +716,9 @@ Chollet, F., T. Kalinowski, and J. J. Allaire. 2022. <em>Deep Learning with r</e
 </div>
 <div id="ref-drechsler_synthetic_2011" class="csl-entry" role="listitem">
 Drechsler, Jörg. 2011. <em>Synthetic Datasets for Statistical Disclosure Control: Theory and Implementation</em>. Vol. 201. Springer Science &amp; Business Media. <a href="https://doi.org/10.1007/978-1-4614-0326-5">https://doi.org/10.1007/978-1-4614-0326-5</a>.
+</div>
+<div id="ref-mvtnorm" class="csl-entry" role="listitem">
+Genz, Alan, and Frank Bretz. 2009. <em>Computation of Multivariate Normal and t Probabilities</em>. Lecture Notes in Statistics. Heidelberg: Springer-Verlag.
 </div>
 <div id="ref-hundepool2024" class="csl-entry" role="listitem">
 Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing, Rainer Lenz, Jane Naylor, Eric Schulte Nordholt, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
@@ -651,7 +738,8 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>I filled in the missing values through imputation, so we don’t have to deal with these. However, this implies that we cannot use the <code>boys</code> data from the <code>mice</code>-package directly<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note, however, that no tailor-made software exists that works together with existing synthetic data generation packages.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I filled in the missing values through imputation, so we don’t have to deal with these. However, this implies that we cannot use the <code>boys</code> data from the <code>mice</code>-package directly<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
