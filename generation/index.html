@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -85,17 +85,20 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../evaluation/index.html" rel="next">
+<link href="../synthetic/index.html" rel="prev">
 <link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7c905c9fc8f78cd3d6f96538ce4b7aee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-565584ab62f845d33a399ce2a363b49d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -123,35 +126,20 @@ div.csl-indent {
   }
 }</script>
 <!-- Matomo -->
-
 <script>
-
     var _paq = window._paq = window._paq || [];
-
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-
     _paq.push(['trackPageView']);
-
     _paq.push(['enableLinkTracking']);
-
     (function() {
-
         var u = "https://www.analytics.osc.lmu.de/";
-
         _paq.push(['setTrackerUrl', u + 'matomo.php']);
-
         _paq.push(['setSiteId', '12']);
-
         var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
-
     })();
-
 </script>
-
 <!-- End Matomo Code -->
-
   
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -168,7 +156,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -194,6 +182,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and evaluating synthetic data in R</span>
     </a>
@@ -240,7 +230,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Generating synthetic data in <code>R</code> using <code>synthpop</code></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../generation/index.html">Generating synthetic data</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -253,6 +243,10 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -268,25 +262,25 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sdc/" class="sidebar-item-text sidebar-link">
+  <a href="../sdc/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical disclosure control</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../synthetic/" class="sidebar-item-text sidebar-link">
+  <a href="../synthetic/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Synthetic data: The general idea</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../generation/" class="sidebar-item-text sidebar-link active">
+  <a href="../generation/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Generating synthetic data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../evaluation/" class="sidebar-item-text sidebar-link">
+  <a href="../evaluation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Evaluating synthetic data quality</span></a>
   </div>
 </li>
@@ -296,7 +290,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="..\assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
+<p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
 </div></div>
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
@@ -340,8 +334,8 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Loading required packages</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <hr>
@@ -350,18 +344,18 @@ window.Quarto = {
 <hr>
 <p>Throughout the practical, we will continue with the <code>boys</code> data from the <code>mice</code> package that we also used in the previous section. Note that you cannot simply load the data from the <code>mice</code> package, because the missing values are imputed to simplify the practical. You can download the data as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>boys</code> data contains measurements on 9 variables on 748 Dutch boys. The variables in the data are described in the block below.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Description of the `boys` data">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Description of the <code>boys</code> data
+<span class="screen-reader-only">Tip</span>Description of the <code>boys</code> data
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -393,7 +387,7 @@ Description of the <code>boys</code> data
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Inspect first few rows</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <hr>
@@ -402,7 +396,7 @@ Description of the <code>boys</code> data
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Inspect first few rows</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>You may notice a couple of things. First, the data seems to be sorted on age. You may verify this by running <code>!is.unsorted(data$age)</code>. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is). Third, you may notice that the variables <code>hgt</code>, <code>wgt</code> and <code>bmi</code> yield a deterministic system when considered simultaneously. That is, the values for <code>bmi</code> should be consistent with the respective values of <code>hgt</code> and <code>wgt</code>. This is also we want to take into account when modelling the data. Finally, the data consists of a mix of continuous and categorical variables, which allows to model variables of both types.</p>
@@ -418,7 +412,7 @@ Description of the <code>boys</code> data
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Modelling choices in synthpop
+<span class="screen-reader-only">Tip</span>Modelling choices in synthpop
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,12 +489,12 @@ rvalues = list(phb = 1)</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Generating synthetic data with parametric models</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"parametric"</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <hr>
@@ -509,14 +503,14 @@ rvalues = list(phb = 1)</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code and context of the model object</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>syn_param</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>syn_param</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling syn_param shows you some important features of the synthesis </span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># procedure. First, it shows the number of synthetic data sets that were </span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generated (syn_param$m). Also, it shows for every variable the method </span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that was used to synthesize the data (syn_param$method). If you want to </span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># know more about a specific synthesis method, for example, logreg, you </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># can call ?syn.logreg to get more information.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># can call ?syn.logreg to get more information.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above). However, there is a problem that you might have noticed. The variable <code>bmi</code> is not equal to <code>wgt / (hgt/100)^2</code>. This issue can be fixed using <em>passive</em> synthesis.</p>
@@ -527,8 +521,8 @@ rvalues = list(phb = 1)</code></pre>
 <hr>
 <p>In <code>synthpop</code>, the synthesis method can be altered using the <code>method</code> argument. The <code>method</code>-vector is a vector that contains, for every variable, the imputation method or passive imputation equation with which this variable should be imputed. We can obtain the <code>method</code>-vector that we previously specified implicitly by extracting it from the <code>syn_param</code> object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>method</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       age        hgt        wgt        bmi         hc        gen        phb 
   "sample" "normrank" "normrank" "normrank" "normrank"     "polr"     "polr" 
@@ -538,8 +532,8 @@ rvalues = list(phb = 1)</code></pre>
 </div>
 <p>We can alter the synthesis model for any variable by changing the corresponding element in this vector. For passive imputation, we can define a function using <code>~I(equation)</code>. For <code>bmi</code>, this entails the following.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>method</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  age                   hgt                   wgt 
              "sample"            "normrank"            "normrank" 
@@ -556,12 +550,12 @@ rvalues = list(phb = 1)</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Synthesize with passive synthesis</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -574,7 +568,7 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Passive model object</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>syn_passive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>syn_passive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The <code>bmi</code> values correspond to the synthetic <code>hgt</code> and <code>wgt</code> values, as we wanted. Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. There are too many possibilities to cover in this practical, but the <code>synthpop</code> package contains extensive documentation on the possibilities (see, for instance, <code>?synthpop::syn</code> and <code>vignette("synthpop", "synthpop")</code>).</p>
@@ -583,7 +577,7 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 <h1>Advanced: Extensions to <code>synthpop</code></h1>
 <p>Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. It can, however, occur that you want models that are not yet incorporated. In <code>synthpop</code>, it is possible to write custom synthesis functions that extend the existing suite of methods. Leaving the nitty-gritty aside, we can write a synthesis function that starts with <code>syn.</code> and then some name, that takes arguments <code>y</code> (the observed variable to be synthesized), <code>x</code> (the predictors in the observed data), <code>xp</code> (the previously synthesized predictor variables) and additional parameters for the model at hand (in our case, there aren’t any). Then, we need to fit the model on the observed data, <code>x</code> and <code>y</code>, and from this model draw new observations from the synthetic predictors, <code>xp</code>. This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line (this is a very stupid idea, but it allows to display the procedure in a straightforward manner). The output of the synthetic data function should be a list with arguments <code>res</code>, the synthetic data values, and <code>fit</code>, the parameters of the fitted model. Note here that you don’t accidentally leak the observed data!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    new_y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(y)             <span class="co"># variable to be synthesized</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    new_x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)             <span class="co"># observed predictor variables</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    new_xp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">as.matrix</span>(xp)) <span class="co"># previously synthesized variables</span></span>
@@ -603,14 +597,14 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Variable(s) bmi with passive synthesis: relationship does not hold in data.
 Total of 723 case(s) where predictors do not give value present in data.
 You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -712,13 +706,14 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -733,7 +728,7 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/thomvolker\.github\.io\/synthetic-data-tutorial\/");
+        var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/synthetic-data-tutorial\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1060,6 +1055,18 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../synthetic/index.html" class="pagination-link" aria-label="Synthetic data: The general idea">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Synthetic data: The general idea</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../evaluation/index.html" class="pagination-link" aria-label="Evaluating synthetic data quality">
+        <span class="nav-page-text">Evaluating synthetic data quality</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

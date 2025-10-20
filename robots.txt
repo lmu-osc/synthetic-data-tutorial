@@ -1,1 +1,1 @@
-Sitemap: https://thomvolker.github.io/synthetic-data-tutorial/sitemap.xml
+Sitemap: https://lmu-osc.github.io/synthetic-data-tutorial/sitemap.xml
