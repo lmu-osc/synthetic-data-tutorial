@@ -351,7 +351,7 @@ Based on the density ratio, we can estimate various divergence measures between 
 
 __7. Compare the observed and synthetic data with the `ulsif()` function from the `densityratio` package. Do this for both synthetic data sets.__
 
-_Note: Set `numerator_data = data` and `denominator_data = syn_passive$syn` and `denominator_data = syn_cart$syn`._
+_Note: Set `numerator_data = data` and either `denominator_data = syn_passive$syn` or `denominator_data = syn_cart$syn`._
 
 ---
 
@@ -467,7 +467,7 @@ The visualizations again show that the `normrank` method yielded synthetic data 
 
 # Outcome-specific utility
 
-For outcome-specific utility, we of course need at least one analysis that we expect data users will be interested in.
+For outcome-specific utility, we need at least one analysis that we expect data users will be interested in.
 For now, we assume that the data users will be interested in predicting head circumference (`hc`), based on `age`, height (`hgt`), weight (`wgt`) and region (`reg`), where we include a non-linear effect for `age` and `hgt`.
 In this case, high outcome-specific utility implies that the regression coefficients obtained from the synthetic data are close to the coefficients estimated from the observed data.
 One way to measure "closeness" in this context is via the confidence interval overlap. 
@@ -594,7 +594,7 @@ Moreover, the confidence intervals of the observed data overlap substantially wi
 
 :::
 
-One tip for evaluating outcome-specific utility is that if you expect data users are solely interested in analyses in the class of general linear models (like $t$-tests, ANOVAs and linear regression models) with merely main effects, modelling the variance-covariance matrix and the means of the observed sufficiently accurate is sufficient. 
+One tip for evaluating outcome-specific utility is that if you expect data users are solely interested in analyses in the class of general linear models (like $t$-tests, ANOVAs and linear regression models) with merely main effects, modelling the variance-covariance matrix and the means of the observed date sufficiently accurately is sufficient. 
 From these characteristics, all regression coefficients or mean differences can be calculated.
 
 ---
@@ -624,10 +624,11 @@ These replicated uniques can be removed from the synthetic data, which might not
 
 Attribute disclosure is measured using a prediction model, and essentially asks the question whether we can correctly predict some target variable from a set of identifying variables. 
 If this is possible in general, knowing someone's values on a set of identifying variables allows to infer potentially sensitive information on the target variable.
-In `synthpop`, this procedure is implemented as follows [@raab_disclosure_2024].
-First, we check which combinations of the identifying variables in the observed data also occur in the synthetic data. 
-Subsequently, we evaluate whether the records with the same values on the identifying variables in the synthetic data also have the same values (or very similar values) on the target variable.
-Finally, we check whether this value corresponds to the actual value on the target variable in the original data.
+In `synthpop`, this procedure is implemented as follows [@raab_disclosure_2024]:
+
+- First, we check which combinations of the identifying variables in the observed data also occur in the synthetic data. 
+- Subsequently, we evaluate whether the records with the same values on the identifying variables in the synthetic data also have the same values (or very similar values) on the target variable.
+- Finally, we check whether this value corresponds to the actual value on the target variable in the original data.
 The proportion of records that meets each of these criteria is referred to as _DiSCO_ (Disclosive in Synthetic, Correct in Original).
 
 Both methods (_replicated uniques_ and _DiSCO_) can be evaluated in `synthpop` using the `multi.disclosure()` function.
@@ -703,7 +704,7 @@ syn_passive_sdc <- sdc(
 
 ---
 
-In these practicals, you have learned to create and evaluate synthetic data.
+In this tutorial, you have learned to create and evaluate synthetic data.
 We discussed modelling deterministic relationships, refining synthesis models based on utility measures, comparing utility of synthetic data sets, and evaluating remaining disclosure risks. 
 Remember that if you plan to release synthetic data for open science purposes, it is better to stay on the safe side with respect to privacy. 
 When in doubt, choose the option that yields the smallest risk.

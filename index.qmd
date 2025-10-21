@@ -15,12 +15,12 @@ All in all, synthetic data makes open science practices easier and might spark c
 
 The tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:
 
-1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to statistical disclosure control.
+1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to methods used to protect individuals’ private information, while keeping the released data useful for analysis.
 2.  [Synthetic data: The general idea](synthetic/) conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.
 3.  [Generating synthetic data](geneneration/) introduces the idea of synthetic data and outlines how it can be generated in `R`.
 4.  [Evaluating synthetic data quality](evaluation/) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
 
-At the end of this tutorial, you will now what synthetic data is and why it is useful, have experience with generating synthetic data, and know how to think about whether the data is fit for release. 
+At the end of this tutorial, you will know what synthetic data is and why it is useful, have experience with generating synthetic data, and know how to think about whether the data is fit for release. 
 
 
 ::: {.callout-tip title="Recommended Software"}

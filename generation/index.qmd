@@ -6,7 +6,7 @@ bibliography: ../references.bib
 Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in `R`. 
 Throughout, we will use the `synthpop` package [@synthpop], which is a powerful tool explicitly designed to generate synthetic data.
 Other alternatives to create synthetic data are, for example, the `R`-package `mice` [@mice; @volker_anonymiced_2021] or the stand-alone software `IVEware` [@iveware].
-Additionally, we will use the additional package `densityratio` [@densityratio] to evaluate the utility of synthetic data.
+Additionally, we will use the package `densityratio` [@densityratio] to evaluate the utility of synthetic data.
 
 Make sure to load all of the required packages, and in case you haven't installed them already, install them first, using `install.packages("package_name")`.
 
@@ -99,11 +99,10 @@ __3. Use the `summary()` function to get an overview of the data.__
 summary(data)
 ```
 
-You may notice a couple of things. First, the data seems to be sorted on age. You may verify this by running `!is.unsorted(data$age)`. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).
-Third, you may notice that the variables `hgt`, `wgt` and `bmi` yield a deterministic system when considered simultaneously.
-That is, the values for `bmi` should be consistent with the respective values of `hgt` and `wgt`. 
-This is also we want to take into account when modelling the data.
-Finally, the data consists of a mix of continuous and categorical variables, which allows to model variables of both types. 
+You may notice a couple of things. First, the data seems to be sorted by age. You may verify this by running `!is.unsorted(data$age)`. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).
+Third, you may notice that the variable `bmi` is mathematically linked to the variables `hgt` and `wgt`. 
+We want to take this into account when modelling the data.
+Finally, note that the data consist of a mix of continuous and categorical variables. 
 
 --- 
 
@@ -122,7 +121,7 @@ Some of the most important arguments of the `syn()` function are the following (
 
 ### `method`
 
-Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees [for an introduction, see, for instance, Section 8.1 in @islr] for all variables, which is a flexible, non-parametric technique for modelling synthetic data. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
+Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (`cart`) for all variables, which is a flexible, non-parametric technique for modelling synthetic data [for an introduction, see, for instance, Section 8.1 in @islr]. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
 
 __Methods for continuous variables__
 
@@ -194,7 +193,7 @@ The `smoothing` argument expects a character string with the smoothing method pe
 :::
 
 We will first create synthetic data with a relatively simple, parametric, synthesis model. 
-To this end, we need to decide on a parametric model to synthesize each variable, which can be done my specifying `method = "parametric"` in the call to `syn()`.
+To this end, we need to decide on a parametric model to synthesize each variable, which can be done by specifying `method = "parametric"` in the call to `syn()`.
 This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality.
 Specifically, `normrank` first transforms the observed data to standard normal quantiles based on the relative ranks of the values. 
 Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. 
@@ -246,7 +245,7 @@ syn_param
 If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above).
 However, there is a problem that you might have noticed.
 The variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
-This issue can be fixed using _passive_ synthesis. 
+This issue can be fixed using _passive_ synthesis which will be demonstrated in the next section 
 
 ---
 
@@ -309,7 +308,7 @@ syn_passive
 
 The `bmi` values correspond to the synthetic `hgt` and `wgt` values, as we wanted.
 Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. 
-There are too many possibilities to cover in this practical, but the `synthpop` package contains extensive documentation on the possibilities (see, for instance, `?synthpop::syn` and `vignette("synthpop", "synthpop")`).
+There are too many possibilities to cover in this practical, but the `synthpop` package contains extensive documentation (see, for instance, `?synthpop::syn` and `vignette("synthpop", "synthpop")`).
 
 
 # Advanced: Extensions to `synthpop`

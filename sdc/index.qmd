@@ -20,10 +20,8 @@ Anonymization requires that potentially identifying information is removed from 
 Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information.
 However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources.
 Especially in today's age of massive data collection, data sources can be linked in surprising ways.
-In 2006, researchers from the University of Texas were able to uncover the identity of Netflix users by linking Netflix movie reviews to the Internet Movie Database (IMDb).
-This might not be a problem for most users, but turned out to be problematic for some.
-For example, the reviewed movies were quite explicit about some users' sexual orientation, and revealing this information could put some in an awkward position.
-To prevent indirect identification, statistical disclosure control can be applied to the data.
+In 2006, University of Texas researchers reidentified Netflix users by linking their reviews to IMDb data. 
+While likely harmless for most, it exposed sensitive details, such as sexual orientation, leading to potential privacy risks.
 
 # Statistical disclosure control 
 
@@ -83,9 +81,9 @@ ggplot(data = data.frame(
 
 # Conventional statistical disclosure control methods
 
-In practice, many techniques for statistical disclosure control for microdata (that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data) have been developed over the years.
+In practice, many techniques for statistical disclosure control have been developped over the year for microdata; that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data.
 Typically, these techniques limit the amount of information that is released, thereby introducing statistical bias and variance [@fienberg_slavkovic_2011].
-For example, one might threshold variables such that extreme values are not released, which typically creates bias in the distribution of the released values.
+For example, one might set a threshold to variables such that extreme values are not released, which typically creates bias in the distribution of the released values.
 As an other example, adding noise to observed values will increase the variance of the released data relative to the observed data. 
 Common methods that have traditionally been used for statistical disclosure control are [e.g., @reiter_2011; @hundepool2024]: 
 
