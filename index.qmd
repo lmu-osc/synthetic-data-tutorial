@@ -9,7 +9,7 @@ This **self-paced tutorial** will introduce you to the generation and evaluation
 Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. 
 Advantages of open (synthetic) data are numerous: other researchers can re-run analyses with data that is close to the actual data, which allows them to verify the main results. 
 Additionally, open (synthetic) data allows researchers to perform exploratory analyses that may lead to novel hypotheses, and in quite some instances performing such analyses with synthetic data yields rather accurate results.
-Moreover, realistic synthetic can be used in teaching, or for starting with model building when access to the real data is currently still prohibited. 
+Moreover, realistic synthetic data can be used in teaching, or for starting with model building when access to the real data is currently still prohibited. 
 All in all, synthetic data makes open science practices easier and might spark collaborations with potential data users.
 
 

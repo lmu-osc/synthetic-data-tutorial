@@ -8,7 +8,16 @@ Throughout, we will use the `synthpop` package [@synthpop], which is a powerful 
 Other alternatives to create synthetic data are, for example, the `R`-package `mice` [@mice; @volker_anonymiced_2021] or the stand-alone software `IVEware` [@iveware].
 Additionally, we will use the package `densityratio` [@densityratio] to evaluate the utility of synthetic data.
 
-Make sure to load all of the required packages, and in case you haven't installed them already, install them first, using `install.packages("package_name")`.
+Make sure to load all of the required packages, and in case you haven't installed them already, install them first:
+
+```{r}
+#| label: install-packages
+#| eval: false
+
+install.packages("synthpop")
+install.packages("densityratio")
+install.packages("mvtnorm")
+```
 
 ---
 
@@ -99,7 +108,9 @@ __3. Use the `summary()` function to get an overview of the data.__
 summary(data)
 ```
 
-You may notice a couple of things. First, the data seems to be sorted by age. You may verify this by running `!is.unsorted(data$age)`. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).
+You may notice a couple of things. First, the data seems to be sorted by age. You may verify this by running `!is.unsorted(data$age)`. 
+<!-- Why is this relevant? -->
+Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).
 Third, you may notice that the variable `bmi` is mathematically linked to the variables `hgt` and `wgt`. 
 We want to take this into account when modelling the data.
 Finally, note that the data consist of a mix of continuous and categorical variables. 
@@ -117,7 +128,7 @@ The other arguments allow to specify various modelling choices, for example whic
 
 ::: {.callout-tip title = "Modelling choices in synthpop"}
 
-Some of the most important arguments of the `syn()` function are the following (you can use `?synthpop::syn()` for a more exaustive list). The `syn()` function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called `syn` in the output list, adheres to these specifications. 
+Some of the most important arguments of the `syn()` function are the following (you can use `?synthpop::syn()` for a more exhaustive list). The `syn()` function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called `syn` in the output list, adheres to these specifications. 
 
 ### `method`
 
