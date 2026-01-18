@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -95,7 +95,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-1a656c689f59dd6fe0969bd5bfb928d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -201,6 +201,11 @@ window.Quarto = {
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">About</span>
+    </span>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -294,7 +299,7 @@ window.Quarto = {
   <li><a href="#getting-to-know-the-data" id="toc-getting-to-know-the-data" class="nav-link" data-scroll-target="#getting-to-know-the-data">Getting to know the data</a></li>
   <li><a href="#sec-creating" id="toc-sec-creating" class="nav-link" data-scroll-target="#sec-creating">Creating synthetic data</a></li>
   <li><a href="#specifying-custom-synthesis-models" id="toc-specifying-custom-synthesis-models" class="nav-link" data-scroll-target="#specifying-custom-synthesis-models">Specifying custom synthesis models</a></li>
-  <li><a href="#advanced-extensions-to-synthpop" id="toc-advanced-extensions-to-synthpop" class="nav-link" data-scroll-target="#advanced-extensions-to-synthpop">Advanced: Extensions to <code>synthpop</code></a></li>
+  <li><a href="#advanced-and-optional-extensions-to-synthpop" id="toc-advanced-and-optional-extensions-to-synthpop" class="nav-link" data-scroll-target="#advanced-and-optional-extensions-to-synthpop">Advanced and optional: Extensions to <code>synthpop</code></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -322,15 +327,32 @@ window.Quarto = {
 
 
 <p>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <code>R</code>. Throughout, we will use the <code>synthpop</code> package <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok, Raab, and Dibben 2016</a>)</span>, which is a powerful tool explicitly designed to generate synthetic data. Other alternatives to create synthetic data are, for example, the <code>R</code>-package <code>mice</code> <span class="citation" data-cites="mice volker_anonymiced_2021">(<a href="#ref-mice" role="doc-biblioref">van Buuren and Groothuis-Oudshoorn 2011</a>; <a href="#ref-volker_anonymiced_2021" role="doc-biblioref">Volker and Vink 2021</a>)</span> or the stand-alone software <code>IVEware</code> <span class="citation" data-cites="iveware">(<a href="#ref-iveware" role="doc-biblioref">Raghunathan, Solenberger, and Van Hoewyk 2002</a>)</span>. Additionally, we will use the package <code>densityratio</code> <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref">Volker, Gonzalez Poses, and van Kesteren 2024</a>)</span> to evaluate the utility of synthetic data.</p>
-<p>Make sure to load all of the required packages, and in case you haven’t installed them already, install them first, using <code>install.packages("package_name")</code>.</p>
+<p>Make sure to load all of the required packages, and in case you haven’t installed them already, install them first:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"synthpop"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"densityratio"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mvtnorm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <hr>
 <p><strong>1. Load the <code>R</code>-packages <code>synthpop</code> and <code>densityratio</code> using <code>library()</code>.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Loading required packages</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <section id="data" class="level1">
@@ -338,13 +360,13 @@ window.Quarto = {
 <hr>
 <p>Throughout the practical, we will continue with the <code>boys</code> data from the <code>mice</code> package that we also used in the previous section. Note that you cannot simply load the data from the <code>mice</code> package, because the missing values are imputed to simplify the practical. You can download the data as follows:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>boys</code> data contains measurements on 9 variables on 748 Dutch boys. The variables in the data are described in the block below.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Description of the `boys` data">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -353,7 +375,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>age</code>: Decimal age (0-21 years)</li>
@@ -377,40 +399,87 @@ window.Quarto = {
 <p>Normally, this step would be redundant, as you probably analyzed the data of interest already and know all the ins and outs. However, if the <code>boys</code> data is new for you, it is helpful to invest some time in getting to know the data you will be working with. When creating synthetic data, it eases the modelling procedure when you know what variables there are in the data, and which kinds of relationships you can expect.</p>
 <hr>
 <p><strong>2. Inspect the first few rows of the data using <code>head()</code>.</strong></p>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Inspect first few rows</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    age  hgt   wgt   bmi   hc gen phb tv   reg
+1 0.035 50.1 3.650 14.54 33.7  G3  P4  3 south
+2 0.038 53.5 3.370 11.77 35.0  G2  P3  2 south
+3 0.057 50.0 3.140 12.56 35.2  G2  P3  2 south
+4 0.060 54.5 4.270 14.37 36.7  G2  P1  1 south
+5 0.062 57.5 5.030 15.21 37.3  G1  P2  2 south
+6 0.068 55.5 4.655 15.11 37.0  G1  P2  1 south</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <p><strong>3. Use the <code>summary()</code> function to get an overview of the data.</strong></p>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Inspect first few rows</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      age              hgt             wgt              bmi       
+ Min.   : 0.035   Min.   : 50.0   Min.   :  3.14   Min.   :11.77  
+ 1st Qu.: 1.581   1st Qu.: 84.0   1st Qu.: 11.70   1st Qu.:15.90  
+ Median :10.505   Median :145.8   Median : 34.65   Median :17.46  
+ Mean   : 9.159   Mean   :131.1   Mean   : 37.15   Mean   :18.04  
+ 3rd Qu.:15.267   3rd Qu.:175.0   3rd Qu.: 59.58   3rd Qu.:19.49  
+ Max.   :21.177   Max.   :198.0   Max.   :117.40   Max.   :31.74  
+       hc        gen      phb            tv            reg     
+ Min.   :33.70   G1:287   P1:316   Min.   : 1.000   north: 81  
+ 1st Qu.:48.50   G2:162   P2:122   1st Qu.: 2.000   east :161  
+ Median :53.20   G3: 55   P3: 54   Median : 3.000   west :240  
+ Mean   :51.64   G4: 87   P4: 63   Mean   : 8.309   south:193  
+ 3rd Qu.:56.00   G5:157   P5:102   3rd Qu.:15.000   city : 73  
+ Max.   :65.00            P6: 91   Max.   :25.000              </code></pre>
+</div>
 </div>
 <p>You may notice a couple of things. First, the data seems to be sorted by age. You may verify this by running <code>!is.unsorted(data$age)</code>. Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is). Third, you may notice that the variable <code>bmi</code> is mathematically linked to the variables <code>hgt</code> and <code>wgt</code>. We want to take this into account when modelling the data. Finally, note that the data consist of a mix of continuous and categorical variables.</p>
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="sec-creating" class="level1">
 <h1>Creating synthetic data</h1>
 <hr>
 <p>Throughout the tutorial, we create data using fully conditional specification, which is implemented in the <code>synthpop</code> package. The most important function in the package is <code>syn()</code>. The <code>syn()</code> function takes a dataset, estimates a set of conditional models, and draws synthetic data from these models. The other arguments allow to specify various modelling choices, for example which model to use for which variable, which set of predictor variables to use for modelling each synthetic variable, whether there are particular constraints that need to be taken into account, and so on.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Modelling choices in synthpop">
+<div class="callout callout-style-default callout-caution callout-titled" title="Modelling choices in synthpop">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Modelling choices in synthpop
+<span class="screen-reader-only">Caution</span>Modelling choices in synthpop
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Some of the most important arguments of the <code>syn()</code> function are the following (you can use <code>?synthpop::syn()</code> for a more exaustive list). The <code>syn()</code> function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called <code>syn</code> in the output list, adheres to these specifications.</p>
+<p>Some of the most important arguments of the <code>syn()</code> function are the following (you can use <code>?synthpop::syn()</code> for a more exhaustive list). The <code>syn()</code> function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called <code>syn</code> in the output list, adheres to these specifications.</p>
 <section id="method" class="level3">
 <h3 class="anchored" data-anchor-id="method"><code>method</code></h3>
 <p>Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (<code>cart</code>) for all variables, which is a flexible, non-parametric technique for modelling synthetic data <span class="citation" data-cites="islr">(for an introduction on classification and regression trees, see, for instance, Section 8.1 in <a href="#ref-islr" role="doc-biblioref">James et al. 2023</a>)</span>. Other synthesis models that are available are listed below (for a more thorough explanation, see <code>?synthpop::syn.METHOD</code>, with <code>METHOD</code> replaced by the actual method as specified below).</p>
@@ -476,38 +545,97 @@ rvalues = list(phb = 1)</code></pre>
 </section>
 </div>
 </div>
-<p>We will first create synthetic data with a relatively simple, parametric, synthesis model. To this end, we need to decide on a parametric model to synthesize each variable, which can be done by specifying <code>method = "parametric"</code> in the call to <code>syn()</code>. This implies that continuous variables are synthesized using a linear model that preserves the marginal distribution even in the case of non-normality. Specifically, <code>normrank</code> first transforms the observed data to standard normal quantiles based on the relative ranks of the values. Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data. Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.</p>
+<p>We will first create synthetic data with a relatively simple, parametric, synthesis model. To this end, we need to decide on a parametric model to synthesize each variable, which can be done by specifying <code>method = "parametric"</code> in the call to <code>syn()</code>. The <code>"parametric"</code> method in <code>synthpop</code> uses the <code>"normrank"</code> method for continuous variables. This method synthesizes continuous variables with an extension of a linear regression model that preserves the marginal distribution of the variables under deviations from normality. That is, skewness or other deviations are preserved along with linear relationships with other variables, without requiring complex modelling. Specifically, <code>normrank</code> first transforms the observed data to standard normal quantiles based on the relative ranks of the values. Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data. Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.</p>
 <hr>
 <p><strong>4. Use <code>synthpop()</code> to create a synthetic data set in an object called <code>syn_param</code> using <code>method = "parametric"</code>. Use <code>seed = 123</code> if you want to replicate our results.</strong></p>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Generating synthetic data with parametric models</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"parametric"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <p><strong>5. Inspect the <code>syn_param</code> object, what do you see?</strong></p>
-<hr>
-<div class="cell">
-<details class="code-fold">
-<summary>Show code and context of the model object</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>syn_param</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling syn_param shows you some important features of the synthesis </span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># procedure. First, it shows the number of synthetic data sets that were </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generated (syn_param$m). Also, it shows for every variable the method </span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that was used to synthesize the data (syn_param$method). If you want to </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># know more about a specific synthesis method, for example, logreg, you </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># can call ?syn.logreg to get more information.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above). However, there is a problem that you might have noticed. The variable <code>bmi</code> is not equal to <code>wgt / (hgt/100)^2</code>. This issue can be fixed using <em>passive</em> synthesis, which will be demonstrated in the next section</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>syn_param</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+($call) syn(data = data, method = "parametric", print.flag = FALSE, seed = 123)
+
+Number of synthesised data sets: 
+($m)  1 
+
+First rows of synthesised data set: 
+($syn)
+     age   hgt   wgt   bmi   hc gen phb tv   reg
+1 11.709 156.9 49.10 21.56 56.3  G1  P1  6  city
+2 13.300 163.3 61.70 22.57 57.3  G4  P4  8 north
+3  1.514  71.0  5.26 15.27 40.3  G1  P1  2  west
+4 14.666 177.0 78.00 26.87 59.6  G4  P4 17  city
+5  1.790  76.0  5.09 15.28 44.5  G2  P1  2  west
+6  0.796  58.5 10.23 17.76 41.0  G3  P3  2 north
+...
+
+Synthesising methods: 
+($method)
+       age        hgt        wgt        bmi         hc        gen        phb 
+  "sample" "normrank" "normrank" "normrank" "normrank"     "polr"     "polr" 
+        tv        reg 
+"normrank"  "polyreg" 
+
+Order of synthesis: 
+($visit.sequence)
+age hgt wgt bmi  hc gen phb  tv reg 
+  1   2   3   4   5   6   7   8   9 
+
+Matrix of predictors: 
+($predictor.matrix)
+    age hgt wgt bmi hc gen phb tv reg
+age   0   0   0   0  0   0   0  0   0
+hgt   1   0   0   0  0   0   0  0   0
+wgt   1   1   0   0  0   0   0  0   0
+bmi   1   1   1   0  0   0   0  0   0
+hc    1   1   1   1  0   0   0  0   0
+gen   1   1   1   1  1   0   0  0   0
+phb   1   1   1   1  1   1   0  0   0
+tv    1   1   1   1  1   1   1  0   0
+reg   1   1   1   1  1   1   1  1   0</code></pre>
+</div>
+</div>
+<p>Calling syn_param shows you some important features of the synthesis procedure. First, it shows the number of synthetic data sets that were generated (in <code>syn_param$m</code>). Also, it shows for every variable the method that was used to synthesize the data (in <code>syn_param$method</code>). If you want to know more about a specific synthesis method, say, for example, <code>logreg</code>, you can call <code>?syn.logreg</code> to get more information.</p>
+<p>If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above). However, there is a problem that you might have noticed. The variable <code>bmi</code> is not equal to <code>wgt / (hgt/100)^2</code>. This issue can be fixed using <em>passive</em> synthesis, which will be demonstrated in the next section.</p>
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="specifying-custom-synthesis-models" class="level1">
@@ -515,8 +643,8 @@ rvalues = list(phb = 1)</code></pre>
 <hr>
 <p>In <code>synthpop</code>, the synthesis method can be altered using the <code>method</code> argument. The <code>method</code>-vector is a vector that contains, for every variable, the imputation method or passive imputation equation with which this variable should be imputed. We can obtain the <code>method</code>-vector that we previously specified implicitly by extracting it from the <code>syn_param</code> object.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       age        hgt        wgt        bmi         hc        gen        phb 
   "sample" "normrank" "normrank" "normrank" "normrank"     "polr"     "polr" 
@@ -526,8 +654,8 @@ rvalues = list(phb = 1)</code></pre>
 </div>
 <p>We can alter the synthesis model for any variable by changing the corresponding element in this vector. For passive imputation, we can define a function using <code>~I(equation)</code>. For <code>bmi</code>, this entails the following.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>method</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  age                   hgt                   wgt 
              "sample"            "normrank"            "normrank" 
@@ -540,17 +668,25 @@ rvalues = list(phb = 1)</code></pre>
 <p>With this specification, <code>synthpop</code> knows that it should not use an imputation model, but rather use the synthetic <code>hgt</code> and <code>wgt</code> values to construct the <code>bmi</code> values deterministically.</p>
 <hr>
 <p><strong>6. Use <code>synthpop()</code> to create a synthetic data set in an object called <code>syn_passive</code> using the adjusted <code>method</code> vector. Again, use <code>seed = 123</code> if you want to replicate our results. Inspect the output.</strong></p>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Synthesize with passive synthesis</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Variable(s) bmi with passive synthesis: relationship does not hold in data.
@@ -560,45 +696,99 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
 <p>The printed message signals that <code>synthpop</code> detects that the specified relationship does not hold in the real data. This is not really something to worry about: it is due to rounding errors in <code>bmi</code>.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Passive model object</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>syn_passive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>syn_passive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+($call) syn(data = data, method = method, print.flag = FALSE, seed = 123)
+
+Number of synthesised data sets: 
+($m)  1 
+
+First rows of synthesised data set: 
+($syn)
+     age   hgt   wgt       bmi   hc gen phb tv   reg
+1 11.709 156.9 49.10 19.945072 58.0  G2  P1  2 south
+2 13.300 163.3 61.70 23.137306 57.6  G2  P1  6 south
+3  1.514  71.0  5.26 10.434438 38.2  G3  P3  3  east
+4 14.666 177.0 78.00 24.897060 58.5  G5  P5 25 south
+5  1.790  76.0  5.09  8.812327 38.3  G2  P3  2  west
+6  0.796  58.5 10.23 29.892615 54.1  G1  P1 10  city
+...
+
+Synthesising methods: 
+($method)
+                  age                   hgt                   wgt 
+             "sample"            "normrank"            "normrank" 
+                  bmi                    hc                   gen 
+"~I(wgt/(hgt/100)^2)"            "normrank"                "polr" 
+                  phb                    tv                   reg 
+               "polr"            "normrank"             "polyreg" 
+
+Order of synthesis: 
+($visit.sequence)
+age hgt wgt bmi  hc gen phb  tv reg 
+  1   2   3   4   5   6   7   8   9 
+
+Matrix of predictors: 
+($predictor.matrix)
+    age hgt wgt bmi hc gen phb tv reg
+age   0   0   0   0  0   0   0  0   0
+hgt   1   0   0   0  0   0   0  0   0
+wgt   1   1   0   0  0   0   0  0   0
+bmi   1   1   1   0  0   0   0  0   0
+hc    1   1   1   1  0   0   0  0   0
+gen   1   1   1   1  1   0   0  0   0
+phb   1   1   1   1  1   1   0  0   0
+tv    1   1   1   1  1   1   1  0   0
+reg   1   1   1   1  1   1   1  1   0</code></pre>
+</div>
 </div>
 <p>The <code>bmi</code> values correspond to the synthetic <code>hgt</code> and <code>wgt</code> values, as we wanted. Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. There are too many possibilities to cover in this practical, but the <code>synthpop</code> package contains extensive documentation (see, for instance, <code>?synthpop::syn</code> and <code>vignette("synthpop", "synthpop")</code>).</p>
+</div>
+</div>
+</div>
 </section>
-<section id="advanced-extensions-to-synthpop" class="level1">
-<h1>Advanced: Extensions to <code>synthpop</code></h1>
-<p>Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. It can, however, occur that you want models that are not yet incorporated. In <code>synthpop</code>, it is possible to write custom synthesis functions that extend the existing suite of methods. Leaving the nitty-gritty aside, we can write a synthesis function that starts with <code>syn.</code> and then some name, that takes arguments <code>y</code> (the observed variable to be synthesized), <code>x</code> (the predictors in the observed data), <code>xp</code> (the previously synthesized predictor variables) and additional parameters for the model at hand (in our case, there aren’t any). Then, we need to fit the model on the observed data, <code>x</code> and <code>y</code>, and from this model draw new observations from the synthetic predictors, <code>xp</code>. This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line (this is a very stupid idea, but it allows to display the procedure in a straightforward manner). The output of the synthetic data function should be a list with arguments <code>res</code>, the synthetic data values, and <code>fit</code>, the parameters of the fitted model. Note here that you don’t accidentally leak the observed data!</p>
+<section id="advanced-and-optional-extensions-to-synthpop" class="level1">
+<h1>Advanced and optional: Extensions to <code>synthpop</code></h1>
+<blockquote class="blockquote">
+<p>When the default synthetic data generation methods in <code>synthpop</code> are not sufficient for your purposes, it is possible to write extensions. This can become fairly advanced, and is usually not required. Nevertheless, extending <code>synthpop</code> can be done, and below it is shown how for those interested. This section is optional and can be skipped safely.</p>
+</blockquote>
+<p>Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. It can, however, occur that you want models that are not yet incorporated. In <code>synthpop</code>, it is possible to write custom synthesis functions that extend the existing suite of methods. The core of writing new functionality, is that you take observed data as input, train a model on this input, and generate new data from this model. In particular, new imputation functions take as input the observed data, in the form of predictors <code>x</code> and outcome <code>y</code> (this is the variable to be synthesized), and a set of synthetic predictors <code>xp</code> that is used to generate the new synthetic outcome values values. Additionally, we may use additional arguments to specify parameters for the model used to create synthetic data.</p>
+<p>In practice, we can thus write a synthesis function that starts with <code>syn.</code> and then the name of the function, with arguments <code>y</code> (outcome variable to be synthesized), <code>x</code> (predictors used to model this outcome), <code>xp</code> (the synthetic predictor variables used to generate the synthetic <code>y</code>) and potentially additional parameters for the model at hand. Subsequently, we need to fit the model on the observed data, <code>x</code> and <code>y</code>, and from this model draw new observations from the synthetic predictors, <code>xp</code>. This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line. Usually, you don’t want all values to lie on the regression line, because the variability around the predicted values is essential in making realistic synthetic data, but we stick to this example simply to illustrate the procedure. The output of the synthetic data function should be a list with two arguments.</p>
+<ol type="1">
+<li><code>res</code>: contains the synthetic values, the main output of the synthesis model.</li>
+<li><code>fit</code> (optional): the parameters of the fitted model, this allows users to generate new synthetic data based on the already fitted models.</li>
+</ol>
+<p>The naming is important, because to extract the synthetic values and allocate them at the correct location, <code>synthpop</code> internally looks for the <code>res</code> object, and will not be able to extract the synthetic values if you chance the names. Also note that when returning model parameters (through the <code>fit</code> argument), you only return <strong>parameters</strong> of the fitted model, and not the entire model object, which often includes the data itself.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    new_y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(y)             <span class="co"># variable to be synthesized</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    new_x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)             <span class="co"># observed predictor variables</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    new_xp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">as.matrix</span>(xp)) <span class="co"># previously synthesized variables</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_y<span class="sc">~</span>new_x)            <span class="co"># fitted model</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">res =</span> new_xp <span class="sc">%*%</span> <span class="fu">coef</span>(fit), <span class="co"># synthetic values</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">fit =</span> <span class="fu">coef</span>(fit)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"hgt"</span>] <span class="ot">&lt;-</span> <span class="st">"synthesis_function"</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>syn_method_spec <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    new_y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(y)             <span class="co"># variable to be synthesized</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    new_x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x)             <span class="co"># observed predictor variables</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    new_xp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">as.matrix</span>(xp)) <span class="co"># previously synthesized variables</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_y<span class="sc">~</span>new_x)            <span class="co"># fitted model</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">res =</span> new_xp <span class="sc">%*%</span> <span class="fu">coef</span>(fit), <span class="co"># synthetic values</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">fit =</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"hgt"</span>] <span class="ot">&lt;-</span> <span class="st">"synthesis_function"</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>syn_method_spec <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> method,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">print =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Variable(s) bmi with passive synthesis: relationship does not hold in data.
 Total of 723 case(s) where predictors do not give value present in data.
 You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -607,17 +797,47 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
 </div>
 </div>
-<p>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <code>synthpop</code>. This also allows to model, for example, a hierarchical structure, using the <code>R</code>-package <code>lme4</code> <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref"><strong>lme4?</strong></a>)</span>, <code>glmmTMB</code> <span class="citation" data-cites="glmmTMB">(<a href="#ref-glmmTMB" role="doc-biblioref"><strong>glmmTMB?</strong></a>)</span> or, if you prefer a Bayesian procedure, with <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref"><strong>brms?</strong></a>)</span>. In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages. Since no one has done this for synthetic data yet, relevant resources do not seem to exist, but feel free to reach out if you plan on doing this. To read more about modelling hierarchical data in the context of imputation for missing data, see <span class="citation" data-cites="yucel_sequential_2017">Yucel et al. (<a href="#ref-yucel_sequential_2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="speidel_hmi_2020">Speidel, Drechsler, and Jolani (<a href="#ref-speidel_hmi_2020" role="doc-biblioref">2020</a>)</span>].</p>
+<p>The figure shows that the synthetic <code>bmi</code> values are indeed a linear function of the synthetic <code>age</code> values, as we specified. The procedure can be altered by using a different synthesis model. Usually, you at least want to use a synthesis model that incorporates some noise in the synthetic values, which can be incorporated by drawing new residuals around the predicted values. In our case, we could draw new residuals from a normal distribution, by setting <code>res = new_xp %*% coef(fit) + rnorm(new_xp, 0, sd(fit$residuals))</code>. In other settings, noise is incorporated more implicitly, for example by drawing new labels from a binomial distribution, where the predicted probabilities are used as input, or by sampling from terminal leaves, as the <code>cart</code> models do. If you want to learn how this happens in practice, it is probably easiest to checkout the underlying code of some synthesis methods in <code>synthpop</code>, by typing <code>synthpop:::syn.cart</code> or <code>synthpop:::syn.norm</code>, or any other method.</p>
+<p>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <code>synthpop</code>. This also allows to model, for example, a hierarchical structure, using the <code>R</code>-package <code>lme4</code> <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>, <code>glmmTMB</code> <span class="citation" data-cites="glmmTMB">(<a href="#ref-glmmTMB" role="doc-biblioref">Brooks et al. 2017</a>)</span> or, if you prefer a Bayesian procedure, with <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages. Since no one has done this for synthetic data yet, relevant resources do not seem to exist, but feel free to reach out if you plan on doing this. To read more about modelling hierarchical data in the context of imputation for missing data, see <span class="citation" data-cites="yucel_sequential_2017">Yucel et al. (<a href="#ref-yucel_sequential_2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="speidel_hmi_2020">Speidel, Drechsler, and Jolani (<a href="#ref-speidel_hmi_2020" role="doc-biblioref">2020</a>)</span>].</p>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>The exercises here showed that <code>synthpop</code> allows quite some flexibility when modelling synthetic data, and simplifies the process substantially. However, further refinements might sometimes be possible. In the <a href="../evaluation/">subsequent section</a>, we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Synthetic data can be generated in <code>R</code> using the <code>synthpop</code> package, which implements fully conditional specification (FCS).</li>
+<li>The core <code>syn()</code> function sequentially fits conditional synthesis models for each variable, and draws synthetic values from these models.</li>
+<li>Different synthesis models can be specified on a per-variable basis, allowing to distinguish between continuous, categorical and survival data and to use different functional forms per variable.</li>
+<li>Synthesis order, predictors and constraints can be controlled to improve realism and preserve important relationships.</li>
+<li>Passive synthesis allows for incorporating deterministic relationships in the synthetic data.</li>
+<li><code>synthpop</code> can be extended with custom synthesis models by writing tailored synthesis functions.</li>
+</ul>
+</div>
+</div>
 
 
 
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-lme4" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
+<div id="ref-glmmTMB" class="csl-entry" role="listitem">
+Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, Arni Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin Maechler, and Benjamin M. Bolker. 2017. <span>“<span class="nocase">glmmTMB</span> Balances Speed and Flexibility Among Packages for Zero-Inflated Generalized Linear Mixed Modeling.”</span> <em>The R Journal</em> 9 (2): 378–400. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
+</div>
+<div id="ref-brms" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. <span>“<span class="nocase">brms</span>: An <span>R</span> Package for <span>Bayesian</span> Multilevel Models Using <span>Stan</span>.”</span> <em>Journal of Statistical Software</em> 80 (1): 1–28. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
 <div id="ref-Desfontaines_2023" class="csl-entry" role="listitem">
 Desfontaines, Damien. 2023. <span>“A Friendly, Non-Technical Introduction to Differential Privacy.”</span> <a href="https://desfontain.es/blog/friendly-intro-to-differential-privacy.html">https://desfontain.es/blog/friendly-intro-to-differential-privacy.html</a>.
 </div>

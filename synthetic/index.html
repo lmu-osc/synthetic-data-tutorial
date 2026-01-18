@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -95,7 +95,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-1a656c689f59dd6fe0969bd5bfb928d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -203,6 +203,11 @@ window.Quarto = {
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">About</span>
+    </span>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -295,12 +300,12 @@ window.Quarto = {
   <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
   <li><a href="#sec-modelling" id="toc-sec-modelling" class="nav-link" data-scroll-target="#sec-modelling">Modelling synthetic data</a>
   <ul class="collapse">
-  <li><a href="#joint-modelling" id="toc-joint-modelling" class="nav-link" data-scroll-target="#joint-modelling">Joint modelling</a></li>
-  <li><a href="#fully-conditional-specification" id="toc-fully-conditional-specification" class="nav-link" data-scroll-target="#fully-conditional-specification">Fully conditional specification</a></li>
+  <li><a href="#a-joint-modelling" id="toc-a-joint-modelling" class="nav-link" data-scroll-target="#a-joint-modelling">(A) Joint modelling</a></li>
+  <li><a href="#b-fully-conditional-specification" id="toc-b-fully-conditional-specification" class="nav-link" data-scroll-target="#b-fully-conditional-specification">(B) Fully conditional specification</a></li>
   </ul></li>
-  <li><a href="#exercise-a-simple-synthetic-data-model" id="toc-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#exercise-a-simple-synthetic-data-model">Exercise: A simple synthetic data model</a>
+  <li><a href="#optional-exercise-a-simple-synthetic-data-model" id="toc-optional-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#optional-exercise-a-simple-synthetic-data-model">(Optional) Exercise: A simple synthetic data model</a>
   <ul class="collapse">
-  <li><a href="#applying-joint-modelling-in-practice" id="toc-applying-joint-modelling-in-practice" class="nav-link" data-scroll-target="#applying-joint-modelling-in-practice">Applying joint modelling in practice</a></li>
+  <li><a href="#joint-modelling-in-practice" id="toc-joint-modelling-in-practice" class="nav-link" data-scroll-target="#joint-modelling-in-practice">Joint modelling in practice</a></li>
   <li><a href="#synthetic-data-with-fully-conditional-specification" id="toc-synthetic-data-with-fully-conditional-specification" class="nav-link" data-scroll-target="#synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</a></li>
   <li><a href="#comparing-the-results" id="toc-comparing-the-results" class="nav-link" data-scroll-target="#comparing-the-results">Comparing the results</a></li>
   <li><a href="#conclusion-fully-conditional-specification-versus-joint-modelling" id="toc-conclusion-fully-conditional-specification-versus-joint-modelling" class="nav-link" data-scroll-target="#conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</a></li>
@@ -336,20 +341,20 @@ window.Quarto = {
 <h1>Synthetic data: What it is and what it is about?</h1>
 <hr>
 <p>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it. These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</p>
-<p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
+<p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution from a data set at hand, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
 <hr>
 </section>
 <section id="sec-modelling" class="level1">
 <h1>Modelling synthetic data</h1>
 <hr>
-<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data: the univariate characteristics of the variables are thus preserved, but also relationships between variables are captured in the synthetic data. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, our data should be protected sufficiently well, because many real-world processes are far from deterministic. These random fluctuations typically provide sufficient uncertainty to prevent both identity and attribute disclosure. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
-<section id="joint-modelling" class="level2">
-<h2 class="anchored" data-anchor-id="joint-modelling">Joint modelling</h2>
+<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variables and the covariances between variables. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, the introduced noise adds uncertainty that provides privacy protection. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
+<section id="a-joint-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="a-joint-modelling">(A) Joint modelling</h2>
 <p>One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit.</p>
-<p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation we just discussed). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
+<p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
 </section>
-<section id="fully-conditional-specification" class="level2">
-<h2 class="anchored" data-anchor-id="fully-conditional-specification">Fully conditional specification</h2>
+<section id="b-fully-conditional-specification" class="level2">
+<h2 class="anchored" data-anchor-id="b-fully-conditional-specification">(B) Fully conditional specification</h2>
 <p>A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables). That is, we can factor the joint distribution of the data into a series of conditionals <span class="math display">\[
 f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 \]</span> which greatly simplifies the modelling task. That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model, but with the addition of reasonable assumptions for the noise. In practice, we might proceed as follows.</p>
@@ -359,8 +364,12 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <li>For the third variable, we can use a prediction model based on the first two variables, and so on, until all variables are synthesized.</li>
 </ul>
 <p>Note that, although in theory the order of synthesis should not matter much, in practice it may make a difference in some cases. We will come back to this issue and provide some concrete advice in <a href="../generation/index.html#sec-creating">the next section</a>.</p>
-<p>Fully conditional specification has two distinct advantages over joint modelling: 1. It allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by non-linear (e.g., non-parametric) models that capture non-linear relationships (or non-normal error terms). 2. Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see <a href="https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks">the relevant vignette from the <code>performance</code> package</a> for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model.</p>
-<p>In what follows, we focus on synthesis methods that employ this conditional modelling strategy (commonly called fully conditional specification or sequential regression).</p>
+<p>Fully conditional specification has two distinct advantages over joint modelling:</p>
+<ol type="1">
+<li>It allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by non-linear (e.g., non-parametric) models that capture non-linear relationships (or non-normal error terms).</li>
+<li>Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see <a href="https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks">the relevant vignette from the <code>performance</code> package</a> for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model.</li>
+</ol>
+<p>In what follows, we focus on synthesis methods that employ this <em>conditional modelling strategy</em> (also called “fully conditional specification” or “sequential regression”).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Additional resources">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -379,7 +388,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </ul>
 <p>If you are interested in any additional resources on <strong>fully conditional specification</strong>, the following papers might be informative.</p>
 <ul>
-<li><span class="citation" data-cites="buuren_fcs_2006">Buuren et al. (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
+<li><span class="citation" data-cites="buuren_fcs_2006">van Buuren et al. (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
 <li><span class="citation" data-cites="drechsler_synthetic_2011">Drechsler (<a href="#ref-drechsler_synthetic_2011" role="doc-biblioref">2011</a>)</span> (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section).</li>
 </ul>
 </div>
@@ -387,10 +396,10 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <hr>
 </section>
 </section>
-<section id="exercise-a-simple-synthetic-data-model" class="level1">
-<h1>Exercise: A simple synthetic data model</h1>
+<section id="optional-exercise-a-simple-synthetic-data-model" class="level1">
+<h1>(Optional) Exercise: A simple synthetic data model</h1>
 <hr>
-<p><em>The following exercise is purely illustrational. In practice, we don’t write our synthesis code from scratch, but we use dedicated <code>R</code> packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. The related code is not essential, but try to understand the general workflow. In the <a href="../generation/">next section</a>, we will use the <code>synthpop</code> package to achieve similar results.</em></p>
+<p><em>The following exercise is purely illustrational. In practice, we don’t write our synthesis code from scratch, but we use dedicated <code>R</code> packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. This exercise is not essential for proceeding the tutorial, but try to understand the general workflow. In the <a href="../generation/">next section</a>, we will use the <code>synthpop</code> package to achieve similar results.</em></p>
 <p>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. For this exercise (and all exercises in subsequent sections), we will use the <code>boys</code> data from the <code>R</code>-package <code>mice</code>,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and for the time being, we focus on the first three variables <code>age</code>, <code>hgt</code> and <code>wgt</code>. You can obtain the data as follows:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
@@ -518,39 +527,62 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </div>
 </div>
 <hr>
-<p>We start by applying the joint modelling strategy on the <code>boys</code> data. For simplicity, we draw synthetic samples by approximating the multivariate distribution of <code>age</code>, <code>hgt</code> and <code>wgt</code> using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data. To generate these synthetic samples, we use the <code>R</code>-package <code>mvtnorm</code> <span class="citation" data-cites="mvtnorm">(<a href="#ref-mvtnorm" role="doc-biblioref">Genz and Bretz 2009</a>)</span>.</p>
-<section id="applying-joint-modelling-in-practice" class="level2">
-<h2 class="anchored" data-anchor-id="applying-joint-modelling-in-practice">Applying joint modelling in practice</h2>
+<p>We start by applying the joint modelling strategy on the <code>boys</code> data. For simplicity, we draw synthetic samples by approximating the multivariate distribution of <code>age</code>, <code>hgt</code> and <code>wgt</code> using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data. To generate these synthetic samples, we use the <code>R</code>-package <code>mvtnorm</code> <span class="citation" data-cites="mvtnorm">(<a href="#ref-mvtnorm" role="doc-biblioref">Genz and Bretz 2009</a>)</span>. Note that this normal model provides a relatively poor fit to the data (if it were correct, people would keep growing eternally). In practice, we would thus choose a different model, and most synthetic data generation software (including the <code>synthpop</code> package that we will use subsequently) allows for this.</p>
+<section id="joint-modelling-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="joint-modelling-in-practice">Joint modelling in practice</h2>
 <p><strong>1. Load the <code>R</code>-package <code>mvtnorm</code> using the function <code>library()</code>.</strong></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code: Loading <code>mvtnorm</code></summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </div>
 <hr>
 <p><strong>2. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <p><strong>3. Create your first synthetic data set by calling the function <code>rmvnorm()</code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
 <p><em>Note: You may set a seed here for reproducibility (below, <code>seed = 123</code> is used, but this is no better than any other seed).</em></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>syn1 <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(data_subset),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> means,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> varcov</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>syn1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rmvnorm</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">n =</span> <span class="fu">nrow</span>(data_subset),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> means,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sigma =</span> varcov</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </div>
 <hr>
 </section>
@@ -559,91 +591,276 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <p>We will now do the same thing, but with the fully conditional specification strategy outlined above. To do this, we need the regression models <code>hgt ~ age</code> and <code>wgt ~ age + hgt</code> fitted on the observed data. Moreover, we need the residual variances of each model.</p>
 <hr>
 <p><strong>4. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <p><strong>5. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+</div>
+</div>
+</div>
 </div>
 <p>Now, we have everything in place to start the synthesis process. We first generate the variable <code>age</code>, then <code>hgt</code> and then <code>wgt</code>.</p>
 <hr>
 <p><strong>6. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nsyn <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_subset)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>age_syn <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> nsyn,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> mean_age,</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> sd_age</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+</div>
+</div>
+</div>
 </div>
 <hr>
 <p><strong>7. Use the synthetic <code>age</code> values to predict an equal number of <code>hgt</code> values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(hgtage)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(hgtage)<span class="sc">$</span>sigma</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>hgt_syn <span class="ot">&lt;-</span> hgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> hgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, hgt_sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>8. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>wgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(wgtagehgt)<span class="sc">$</span>sigma</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>wgt_syn <span class="ot">&lt;-</span> wgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> wgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> wgt_coefs[<span class="dv">3</span>] <span class="sc">*</span> hgt_syn <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, wgt_sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 </div>
 <hr>
 </section>
 <section id="comparing-the-results" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-the-results">Comparing the results</h2>
-<p><strong>8. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>wgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(wgtagehgt)<span class="sc">$</span>sigma</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>wgt_syn <span class="ot">&lt;-</span> wgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> wgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> wgt_coefs[<span class="dv">3</span>] <span class="sc">*</span> hgt_syn <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, wgt_sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<hr>
 <p><strong>9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
 <hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>First, we calculate the means of the observed and synthetic variables.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>syn2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(age_syn, hgt_syn, wgt_syn)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>syn2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> age_syn, <span class="at">hgt =</span> hgt_syn, <span class="at">wgt =</span> wgt_syn)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs =</span> means,</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">syn1 =</span> <span class="fu">colMeans</span>(syn1),</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">syn2 =</span> <span class="fu">colMeans</span>(syn2)</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           obs       syn1       syn2
+age   9.158866   9.442239   9.157884
+hgt 131.144519 133.304301 130.957417
+wgt  37.148036  38.336597  36.892929</code></pre>
+</div>
 </div>
 <p>These are all reasonably close! We subsequently compare the variances.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>varcov</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varcov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age      hgt       wgt
+age  47.52796  312.754  170.6746
+hgt 312.75400 2162.260 1143.0411
+wgt 170.67462 1143.041  677.9364</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age       hgt       wgt
+age  46.41841  305.6109  165.5482
+hgt 305.61091 2110.2870 1104.4046
+wgt 165.54819 1104.4046  654.6853</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          age       hgt       wgt
+age  48.27611  322.3743  171.5627
+hgt 322.37431 2253.9723 1168.3460
+wgt 171.56270 1168.3460  676.4495</code></pre>
+</div>
 </div>
 <p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
+<!-- Could we add an inference model here? I.e., as if somebody would run a regression on the synthetic data, and see if that resemlbes the original regression results. -->
+</div>
+</div>
+</div>
+<hr>
+<p><strong>10. Fit a regression model with <code>wgt</code> as dependent variable, and <code>age</code> and <code>hgt</code> as predictors for the observed and two synthetic data sets. What do you see?</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>fit_s1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn1)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>fit_s2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn2)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wgt ~ age + hgt, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.344  -4.635   0.768   2.999  47.452 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -9.29703    2.04664  -4.543 6.48e-06 ***
+age          2.33250    0.18942  12.314  &lt; 2e-16 ***
+hgt          0.19125    0.02808   6.810 2.01e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.835 on 745 degrees of freedom
+Multiple R-squared:  0.9097,    Adjusted R-squared:  0.9094 
+F-statistic:  3752 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wgt ~ age + hgt, data = syn1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.4597  -5.3649  -0.3647   5.3121  22.7489 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -5.81656    2.13118  -2.729   0.0065 ** 
+age          2.59669    0.19651  13.214  &lt; 2e-16 ***
+hgt          0.14729    0.02914   5.054 5.45e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.893 on 745 degrees of freedom
+Multiple R-squared:  0.9051,    Adjusted R-squared:  0.9048 
+F-statistic:  3552 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wgt ~ age + hgt, data = syn2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.3136  -5.2886   0.3328   5.1427  26.8789 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -11.30133    2.05179  -5.508 5.00e-08 ***
+age           2.05671    0.19537  10.527  &lt; 2e-16 ***
+hgt           0.22419    0.02859   7.841 1.55e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.863 on 745 degrees of freedom
+Multiple R-squared:  0.9088,    Adjusted R-squared:  0.9086 
+F-statistic:  3714 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>You see that the regression coefficients of both synthetic data regressions are very similar to those obtained in the real data, and are in fact within sampling error, in the sense that they are approximately one <span class="math inline">\(SE\)</span> away from the coefficients obtained on the real data.</p>
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="conclusion-fully-conditional-specification-versus-joint-modelling" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</h2>
-<p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were essentially the same, this is not generally the case. That is, the combination of three conditional normal models with solely main effects is equivalent to a tri-variate normal distribution, but using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in <a href="#sec-modelling" class="quarto-xref">Section&nbsp;2</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and it’s presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
+<p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were the same, this is not generally the case. That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in the section <a href="#sec-modelling">Modelling synthetic data</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and it’s presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
 <hr>
 </section>
 </section>
@@ -652,7 +869,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <p>Regardless of which approach to generating synthetic data you use, it is important that you specify an appropriate synthesis model. That is, <span class="math inline">\(\hat{f}(x)\)</span> needs to model the true data distribution adequately. In general, synthetic data models can be misspecified in two ways.</p>
 <ol type="1">
 <li>It can be that our model is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. We could also miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility.</li>
-<li>It can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly.</li>
+<li>It can also be the case that the model fits the data a bit too good. If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. Moreover, overfitted models have a limited utility, as they typically fail to generalize to new data.</li>
 </ol>
 <p>You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</p>
 <div class="cell">
@@ -675,18 +892,36 @@ Figure&nbsp;1
 <li>If we would model the data with a very flexible model (the blue line, and blue points in the middle plot on the second row), we can achieve very high utility. In fact, we can reproduce the observed testicular volume values exactly from the observed age values (which can also be considered a form of overfitting). This poses a significant privacy threat, as knowing someones age allows to directly infer their testicular volume, which is information someone perhaps rather keeps private.</li>
 <li>The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points. In this case, this is achieved by transforming <code>tv</code> by taking its square-root (which substantially reduces the variance for the lower <code>tv</code> scores), and non-linear regression model (with a natural cubic spline basis, see <code>?ns</code> for help if you are interested in this).</li>
 </ol>
-<p>In conclusion, you want a synthesis model to be simple enough to leave sufficient uncertainty with respect to the exact relationships between the variables. This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables. Simultaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data. Hence, you want to balance data privacy with data utility.</p>
+<p>In conclusion, you want a synthesis model to be simple enough to leave sufficient uncertainty with respect to the exact relationships between the variables. This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables. Simultaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data. Hence, you want to balance data privacy with data utility. How to balance privacy and utility will be the subject of the upcoming sections.</p>
 <hr>
 </section>
 <section id="synthetic-data-for-open-science" class="level1">
 <h1>Synthetic data for open science</h1>
 <hr>
 <p>The release of a synthetic data set for open science purposes should be guided by the privacy-utility trade-off, with respect to the data at hand. That is, one should consider the goals that should be attainable with the synthetic data, and what privacy risks are looming. From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data. Often, this depends on the analyses conducted with the real data.</p>
-<blockquote class="blockquote">
 <p>For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, it may be sufficiant to have a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.</p>
-</blockquote>
-<p>If the data ought to be used for novel research, including complex modelling, one should consider incorporating these complexities (such as higher-order moments or non-linearities) in the synthesis model. Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models. Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers would love to know what your synthetic data set can and cannot be used for.</p>
-<p>At the same time, synthetic data creators should evaluate potential disclosure risks. These risks should be evaluated at two distinct moment: before creating synthetic data, one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information. For example, some synthesis methods may simply reproduce original records. The privacy-utility trade-off hints at the idea that the more complex the synthesis model, the larger the risk of disclosure. As such, it is advisable to start with simple synthesis models, and add complexity only when necessary. Some measures of disclosure risk will be covered in the upcoming sections, but when in doubt, please consider Section 3.3 on Risk Assessment in the Handbook on Statistical Disclosure Control <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>.</p>
+<p>If the data ought to be used for novel research, including complex modelling, one should consider incorporating these complexities (such as higher-order moments or non-linearities) in the synthesis model. Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models. Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers should know what your synthetic data set can and cannot be used for. Some advice on how to define what the synthetic data can be used for will be provided in the chapter <a href="../publishing/">Publishing a synthetic data set</a>.</p>
+<p>At the same time, synthetic data creators should evaluate potential disclosure risks. These risks should be evaluated at two distinct moments: before creating synthetic data, one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information. For example, some synthesis methods may simply reproduce original records, such as the model in <a href="#fig-privacy-utility-model" class="quarto-xref">Figure&nbsp;1</a> displayed by the blue line. The privacy-utility trade-off hints at the idea that the more complex the synthesis model, the larger the risk of disclosure. As such, it is advisable to start with simple synthesis models, and add complexity only when necessary. Some measures of disclosure risk will be covered in the upcoming sections, but when in doubt, please consider Section 3.3 on Risk Assessment in the Handbook on Statistical Disclosure Control <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Synthetic data can help to protect privacy of respondents.</li>
+<li>Synthetic data are fake observations generated from a model that can be disseminated instead of the original data.</li>
+<li>Joint modelling and fully conditional specification are two common strategies of generating synthetic data.</li>
+<li>For tabular data, fully conditional specification is typically preferable, as it allows for more flexibility and makes synthetic data model refinements easier.</li>
+<li>The privacy-utility trade-off guides the synthesis process: using only little information in the synthesis models often provides better privacy protection, but may render rather unrealistic synthetic data. The quality of synthetic data can typically be substantially improved with more complex models, but this increases privacy risks.</li>
+<li>Synthesis models should be tailored to intended use.</li>
+</ul>
+</div>
+</div>
 
 
 
@@ -694,9 +929,6 @@ Figure&nbsp;1
 
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-buuren_fcs_2006" class="csl-entry" role="listitem">
-Buuren, S. Van, J. P. L. Brand, C. G. M. Groothuis-Oudshoorn, and D. B. Rubin. 2006. <span>“Fully Conditional Specification in Multivariate Imputation.”</span> <em>Journal of Statistical Computation and Simulation</em> 76 (12): 1049–64. <a href="https://doi.org/10.1080/10629360600810434">https://doi.org/10.1080/10629360600810434</a>.
-</div>
 <div id="ref-chollet_deep_2022" class="csl-entry" role="listitem">
 Chollet, F., T. Kalinowski, and J. J. Allaire. 2022. <em>Deep Learning with r</em>. Manning.
 </div>
@@ -718,13 +950,16 @@ Murray, Jared S. 2018. <span>“Multiple Imputation: A Review of Practical and T
 <div id="ref-rubin1993statistical" class="csl-entry" role="listitem">
 Rubin, Donald B. 1993. <span>“Statistical Disclosure Limitation.”</span> <em>Journal of Official Statistics</em> 9 (2): 461–68.
 </div>
+<div id="ref-buuren_fcs_2006" class="csl-entry" role="listitem">
+van Buuren, S., J. P. L. Brand, C. G. M. Groothuis-Oudshoorn, and D. B. Rubin. 2006. <span>“Fully Conditional Specification in Multivariate Imputation.”</span> <em>Journal of Statistical Computation and Simulation</em> 76 (12): 1049–64. <a href="https://doi.org/10.1080/10629360600810434">https://doi.org/10.1080/10629360600810434</a>.
+</div>
 <div id="ref-volker_gans_2025" class="csl-entry" role="listitem">
 Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Data with Keras in r.”</span> July 14, 2025. <a href="https://thomvolker.github.io/blog/1407_gans_in_r/">https://thomvolker.github.io/blog/1407_gans_in_r/</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Note, however, that no tailor-made software exists that works together with existing synthetic data generation packages.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note, however, that until now (beginning of 2026) no tailor-made software exists that works together with existing synthetic data generation packages.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>I filled in the missing values through imputation, so we don’t have to deal with these. However, this implies that we cannot use the <code>boys</code> data from the <code>mice</code>-package directly<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

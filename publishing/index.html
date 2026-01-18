@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical disclosure control – Generating and evaluating synthetic data in R</title>
+<title>index – Generating and evaluating synthetic data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +30,6 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../synthetic/index.html" rel="next">
-<link href="../index.html" rel="prev">
 <link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -169,7 +147,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sdc/index.html">Statistical disclosure control</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -197,7 +175,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sdc/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../sdc/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistical disclosure control</span></a>
   </div>
 </li>
@@ -227,138 +205,18 @@ div.csl-indent {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#statistical-disclosure-control" id="toc-statistical-disclosure-control" class="nav-link" data-scroll-target="#statistical-disclosure-control">Statistical disclosure control</a></li>
-  <li><a href="#the-privacy-utility-trade-off" id="toc-the-privacy-utility-trade-off" class="nav-link" data-scroll-target="#the-privacy-utility-trade-off">The privacy-utility trade-off</a></li>
-  <li><a href="#conventional-statistical-disclosure-control-methods" id="toc-conventional-statistical-disclosure-control-methods" class="nav-link" data-scroll-target="#conventional-statistical-disclosure-control-methods">Conventional statistical disclosure control methods</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Statistical disclosure control</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>Collected research data often contains sensitive information about individuals. For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals. Such private information may harm the people involved if disclosed to the public. Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed.</p>
-<p>At the same time, broad data availability is very valuable to researchers and governmental institutions alike. Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education. That is, open data is valuable for many applications, but simply releasing the data is often not an option.</p>
-<p>The first step in the process of releasing data - both the actual and synthetic data - is to anonymize it (see for instance our <a href="https://lmu-osc.github.io/data-anonymization/">Data Anonymization tutorial</a>). Anonymization requires that potentially identifying information is removed from the collected data. Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information. However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. For example, in 2006, <span class="citation" data-cites="narayanan_netflix_2007">Narayanan and Shmatikov (<a href="#ref-narayanan_netflix_2007" role="doc-biblioref">2007</a>)</span> reidentified Netflix users by linking their reviews to IMDb data. While likely harmless for most, it exposed sensitive details, such as sexual orientation, leading to potential privacy risks.</p>
-</section>
-<section id="statistical-disclosure-control" class="level1">
-<h1>Statistical disclosure control</h1>
-<p>The term “Statistical disclosure control” refers to a suite of statistical methods that aim to protect collected data such that they can be safely released to the public without disclosing confidential information about these individuals. The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>. Disclosure is here defined as the release of information about individuals that would not have become public if the data would be kept private. That is, the release of information that is already in the public domain would not be considered a disclosure. Two types of disclosure risk are commonly considered:</p>
-<ol type="1">
-<li><strong>Re-identification disclosure</strong> occurs when individuals can be singled out from the released data, resulting in confidential data being leaked. For example, when data is released on airports and there is an airport with more than 50.000 employees in the Netherlands in the data, one can be fairly confident that this concerns Schiphol Airport. Likewise, if data is released on a patient that has spent a remarkably long time in some hospital, the identity of this patient might become known.</li>
-<li><strong>Attribute disclosure</strong> refers to situations in which characteristics of individuals can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status, even without knowing which record corresponds to this person.</li>
-</ol>
-<p>Every data release requires that both re-identification disclosure and attribute disclosure risks are “sufficiently” small. What it means for the risks to be “sufficiently small” very much depends on the case at hand, but we will discuss some general evaluation strategies of disclosure risk in Section <a href="../evaluation/">Evaluating synthetic data quality</a>. At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data.</p>
-<div class="callout callout-style-default callout-tip callout-empty-content callout-titled" title="*Similarity*, in this context, means that the released, but protected, data can be used for the same purposes as the original data.">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><em>Similarity</em>, in this context, means that the released, but protected, data can be used for the same purposes as the original data.
-</div>
-</div>
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-<p>To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data. Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distributions of the observed and released data are similar.</p>
-</section>
-<section id="the-privacy-utility-trade-off" class="level1">
-<h1>The privacy-utility trade-off</h1>
-<p>Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data. That is, if privacy is (almost) not an issue, the original data or a very lightly perturbed version of the original data can be released. For example, data access servers often work with only slightly altered versions of a collected data set. If stricter privacy regulations are in place, more information will be redacted, or the released data will be perturbed to a larger degree. Hence, stricter privacy typically comes with lower data utility.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-privacy-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-privacy-utility-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The privacy-utility trade-off: one can typically attain either high privacy or high utility, but not both at the same time. Typically, there can be substantial utility of the synthetic data, but some privacy risk will remain.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>This idea is visually displayed in <a href="#fig-privacy-utility" class="quarto-xref">Figure&nbsp;1</a>. When maximum privacy is required, nothing about the original data can be released. This strategy is trivially safe, but suboptimal from a data-users perspective: they can do nothing with it. As we stretch the privacy requirements, some utility is possible: perhaps we can do some simple analyses, like evaluating the means and standard deviations for some variables. If we further lower our privacy requirements, more advanced analyses become feasible, and, in principle, there is more we can learn from the released data. Ultimately, we may release the original data, but the cost hereof is high: with regards to the individuals and their information in our data, there will be no privacy left. It is probably redundant to remark that protection strategies that perturb the data significantly are not inherently safe. That is, particular strategies may reduce the utility substantially, without making any headway regarding the protection of privacy. As a contrived example, consider the case where only the non-sensitive variables are removed from the data. If these variables are interesting from an analytical perspective, data utility is reduced substantially without improving the privacy of the respondents.</p>
-<p>Finally, note that the level of required protection depends on the sensitivity of the data at hand. Data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected. In protecting the individuals of the sensitive survey, more information may need to be sacrifized to provide proper protection. At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved. Hence, the privacy-utility trade-off is relative to the re-use scenario: a released data set can be very useful for some purposes, but almost useless for others.</p>
-</section>
-<section id="conventional-statistical-disclosure-control-methods" class="level1">
-<h1>Conventional statistical disclosure control methods</h1>
-<p>In practice, many techniques for statistical disclosure control have been developed over the last years for microdata; that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data. Typically, these techniques limit the amount of information that is released, thereby introducing statistical bias and variance <span class="citation" data-cites="fienberg_slavkovic_2011">(<a href="#ref-fienberg_slavkovic_2011" role="doc-biblioref">Fienberg and Slavković 2011</a>)</span>. For example, one might set a threshold to variables such that extreme values are not released, which typically creates bias in the distribution of the released values. As an other example, adding noise to observed values will increase the variance of the released data relative to the observed data. Common methods that have traditionally been used for statistical disclosure control are <span class="citation" data-cites="reiter_2011 hundepool2024">(e.g., <a href="#ref-reiter_2011" role="doc-biblioref">Reiter 2011</a>; <a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>:</p>
-<ul>
-<li><strong>Aggregation</strong>: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
-<li><strong>Rounding</strong>: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
-<li><strong>Top coding</strong>: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure; this technique is also called “Winsorizing”).</li>
-<li><strong>Microaggregation</strong>: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
-<li><strong>Suppression</strong>: remove sensitive or identifying values from the released data directly (i.e., setting particular values to “missing”/<code>NA</code>, or even removing entire variables).</li>
-<li><strong>Adding noise</strong>: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
-</ul>
-<p>Each of these methods either introduces errors in the data, such that the released information is not entirely accurate, or limits the amount of information that is released in such a way that disclosure risks are small. However, an important limitation of these methods is that relationships between variables are usually not accounted for. While it is possible for some of these approaches to be applied on a multivariate level, this is often not easy and typically not done in practice. Thus, when relationships between variables are of interest, for example when the released data should allow to reproduce regression analyses on the observed data, these traditional methods might distort the data too much. Synthetic data might provide a better solution, as instead of distorting the data, it attempts to model the multivariate distribution of the data, and thus allows to capture relationships between variables. The idea of synthetic data will be more thoroughly explained in <a href="../synthetic/">the subsequent section</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Summary
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Open research data provides a wealth of opportunities for follow-up research, but often contains sensitive information, and can thus rarely be shared without data protection measures.</li>
-<li>Every released data must be anonymized, but mere anonymization is rarely enough: the data might still contain identifying variables or linkage to external sources can lead to re-identification.</li>
-<li>Statistical disclosure control aims to enable data release while preventing re-identification and attribute disclosure risks.</li>
-<li>Disclosure limitations inherently comes with the privacy-utility trade-off: more stringent protection strategies typically remove more information from the data.</li>
-<li>Traditional disclosure techniques (aggregation, suppression, top coding, rounding, noise, microaggregation) reduces risk but may lead to unacceptable utility degradation; <strong>synthetic data</strong> may provide higher utility at similar privacy levels.</li>
-</ul>
-</div>
-</div>
 
 
 
-</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-fienberg_slavkovic_2011" class="csl-entry" role="listitem">
-Fienberg, Stephen E., and Aleksandra B. Slavković. 2011. <span>“Data Privacy and Confidentiality.”</span> In <em>International Encyclopedia of Statistical Science</em>, edited by Miodrag Lovric, 342–45. Berlin, Heidelberg: Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-04898-2_202">https://doi.org/10.1007/978-3-642-04898-2_202</a>.
-</div>
-<div id="ref-hundepool2024" class="csl-entry" role="listitem">
-Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing, Rainer Lenz, Jane Naylor, Eric Schulte Nordholt, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
-</div>
-<div id="ref-narayanan_netflix_2007" class="csl-entry" role="listitem">
-Narayanan, Arvind, and Vitaly Shmatikov. 2007. <span>“How to Break Anonymity of the Netflix Prize Dataset.”</span> <a href="https://arxiv.org/abs/cs/0610105">https://arxiv.org/abs/cs/0610105</a>.
-</div>
-<div id="ref-reiter_2011" class="csl-entry" role="listitem">
-Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidentiality in Public Use Data.”</span> In <em>International Encyclopedia of Statistical Science</em>, edited by Miodrag Lovric, 1386–88. Berlin, Heidelberg: Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-04898-2_537">https://doi.org/10.1007/978-3-642-04898-2_537</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -759,18 +617,6 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Overview">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../synthetic/index.html" class="pagination-link" aria-label="Synthetic data: The general idea">
-        <span class="nav-page-text">Synthetic data: The general idea</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -779,7 +625,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
     </div>   
     <div class="nav-footer-center">
 <p>Copyright, 2025 Open Science Center at LMU Munich</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/publishing/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
