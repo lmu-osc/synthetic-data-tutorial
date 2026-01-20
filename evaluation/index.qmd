@@ -27,15 +27,18 @@ library(ggplot2)
 syn_param <- syn(
     data = data,
     method = "parametric",
+    default.method = c("norm", "logreg", "polyreg", "polr"),
     seed = 123
 )
 
 method <- syn_param$method
 method["bmi"] <- "~I(wgt/(hgt/100)^2)"
+visit <- c("age", "hgt", "wgt", "hc", "gen", "phb", "tv", "reg", "bmi")
 
 syn_passive <- syn(
     data = data,
     method = method,
+    visit.sequence = visit,
     seed = 123,
     print = FALSE
 )
@@ -50,7 +53,7 @@ syn_passive <- syn(
 The quality of synthetic data can be evaluated on multiple levels and in different ways.
 Often, three types of utility measures are distinguished [@drechsler_30years_2024]:
 
-1. _Fit-for-purpose measures_ are typically the first step in evaluating synthetic data utility, and evaluates for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between `hgt`, `wgt` and `bmi`).
+1. _Fit-for-purpose measures_ are typically the first step in evaluating synthetic data utility, and evaluate for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between `hgt`, `wgt` and `bmi`).
 2. _Global utility measures_ compare the observed and synthetic data on the level of the entire (multivariate) distribution. In theory, if the observed and synthetic data are drawn from the same distribution, any analysis performed on the synthetic data should yield results that are close to results obtained from the observed data. However, in practice, such global measures can be too broad, and high global utility does not guarantee that results of specific analyses are similar between observed and synthetic data.
 3. _Outcome-specific utility measures_ evaluate utility for a specific analysis. In the context of synthetic data for open science, it would be helpful if results from the observed data can be approximated closely in the synthetic data. Note that specific utility really focuses on a set of analyses, but does not need to transfer to different analyses.
 
@@ -67,39 +70,27 @@ In what follows, we briefly discuss all three types of measures.
 
 ---
 
-We already evaluated whether the synthetic data looked plausible, by checking that the variables were strictly positive, and that the relationship for `bmi` was preserved in the synthetic data.
-We now go one step further, and compare the marginal distributions of the variables in the synthetic data with the corresponding variables in the observed data.
+We already evaluated whether the synthetic data looked plausible, and noticed that our synthetic data had some impossible negative values and fixed the relationship between `hgt` and `wgt` for the `bmi` variable in the synthetic data.
+We now go one step further, and compare the entire marginal distributions of the variables in the synthetic data with the corresponding variables in the observed data.
 
 ---
 
 __1. Compare descriptive statistics from `syn_passive` with descriptive statistics we calculated in the observed data. What do you see?__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: compare-summary
-#| code-fold: true
-#| code-summary: "Show code: Descriptive statistics of the observed and synthetic data"
-#| eval: false
-
 
 summary(data)
 summary(syn_passive$syn)
 ```
 
-:::{.callout-tip collapse="true" title="Show output"}
-```{r}
-#| label: compare-summary-output
-#| code-fold: true
-#| code-summary: "Show code: Descriptive statistics of the observed and synthetic data"
-#| echo: false
-
-
-summary(data)
-summary(syn_passive$syn)
-```
-
-All descriptives are quite close, although the categorical variables seem to have somewhat different counts per category in the synthetic data. Perhaps we can finetune our model here still. 
+Most centrality measures are quite close, but the minima and maxima are often substantially off. 
+That is, we can observe negative values for `wgt`, `bmi`, `hc` and `tv`. 
+Moreover, some exceptionally large values occur for `hgt`, `bmi` and `hc`. 
+Also, the categorical variables seem to have somewhat different counts per category in the synthetic data. 
+This leaves quite some room for further fine-tuning of our synthesis model. 
 
 :::
 
@@ -107,15 +98,13 @@ All descriptives are quite close, although the categorical variables seem to hav
 
 __2. Use `compare()` from the `synthpop` package to compare the distributions of the observed data with the `syn_passive` data, set the parameters `utility.stats = NULL` and `utility.for.plot = NULL`. What do you see?__
 
-_Note: We set `utility.stats = NULL` and `utiltiy.for.plot = NULL` because here we just focus on the visualiztions. We will use different utility statistics later on._
+_Note: We set `utility.stats = NULL` and `utility.for.plot = NULL` because here we just focus on the visualizations. We will use different utility statistics later on._
 
----
+:::{.callout-tip title="Show solution" collapse=true}
+
 
 ```{r}
 #| label: compare-synds
-#| code-fold: true
-#| code-summary: "Show code: Compare synthetic and observed data"
-#| eval: false
 
 compare(
     syn_passive, 
@@ -126,26 +115,9 @@ compare(
 )
 ```
 
-:::{.callout-tip collapse="true" title="Show output"}
-```{r}
-#| label: compare-synds-output
-#| code-fold: true
-#| code-summary: "Show code: Compare synthetic and observed data"
-#| echo: false
-
-compare(
-    syn_passive, 
-    data, 
-    utility.stats = NULL, 
-    utility.for.plot = NULL,
-    print.flag = FALSE
-)
-```
-
-Marginally, we see that the distributions of the variables are quite okay, but some improvements are possible. For example, for `wgt`, quite some values between 10 and 50 kilograms are observed in the real data, but barely any synthetic values fall in this range. 
-Also, `bmi` values seem to be over or under estimated. 
-In fact, `bmi` values below 10 are very problematic and highly unlikely.
-All in all, this suggests that the relationship between `hgt` and `wgt` has not been modelled appropriately.
+Here, we see that we really did not do a great job in preserving the marginal distributions of the variables. 
+While for `age`, `hgt` and `wgt` the distributions are close to reasonable (although some problems arise in the tails), the marginal distributions of `bmi`, `hc` and `tv` are really off, with tails that are way too long and certain areas of the distribution that are poorly captured. 
+All in all, this suggests that we can do substantially better still when our goal is to model the entire distribution of the observed data.
 
 :::
 
@@ -156,30 +128,10 @@ Since visual inspection is typically most insightful, we use the `plot()` functi
 
 __3. Plot the variables `age`, `hgt`, `wgt`, `bmi`, `hc` and `tv` against each other, by calling `plot()` on the subset of the data containing these variables. Do the same for the synthetic data.__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: plot-bivariate
-#| code-fold: true
-#| code-summary: "Show code: Plot observed and synthetic data"
-#| eval: false
-
-plot(
-    data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Observed data"
-)
-plot(
-    syn_passive$syn[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Synthetic data"
-)
-```
-
-:::{.callout-tip collapse="true" title="Show output"}
-```{r}
-#| label: plot-bivariate-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
 
 plot(
     data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
@@ -192,12 +144,17 @@ plot(
 ```
 
 We see that the distributions of the synthetic data are much more noisy than the distributions of the observed data. 
-That is, even though linear relationships between variables are more or less preserved, the non-linear relationships are not captured very well, leading to more noisy synthetic data.
-
+Moreover, non-linear relationships are not captured, and the relationships of all variables with `hc` and `tv` really seem quite off.
+So, there are really some improvements that we can still make.
 :::
 
-Now that we investigate fit-for-purpose utility, we must decide whether the synthetic data is of sufficient quality.
-By now, you probably suspect that this depends on the use-case at hand. 
+---
+
+Now that we investigated fit-for-purpose utility, we must decide whether the synthetic data is of sufficient quality.
+By now, you probably suspect that this depends on the use-case at hand.
+You have seen that some measures of utility indicate substantial problems with the synthetic data, in the sense that certain aspects of the distribution of the data are poorly modelled. 
+At the same time, this is not to say that the synthetic data is useless, there is already quite some information in the synthetic data and there is quite a lot that we can do with it already. 
+We will come back to this in the [section on outcome-specific utility measures](@sec-outcome-utility).
 We decide that we attempt to further improve the utility of the synthetic data.
 
 # Further synthesis improvements
@@ -210,18 +167,16 @@ This smoothing is often essential from a privacy-perspective, because it makes s
 
 ---
 
-__4. Adjust the previously created method vector by replacing every instance of `"normrank"` with `"cart"`, and call `syn()` with this new method vector and `smoothing = "spline"`.__
+__4. Adjust the previously created method vector by replacing every instance of `"norm"` with `"cart"`, and call `syn()` with this new method vector and `smoothing = "spline"`.__
 
 _You may again use `seed = 123` to replicate our results._
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: syn-cart
-#| code-fold: true
-#| code-summary: "Show code: Synthetic data with `cart`"
 
-method[method == "normrank"] <- "cart"
+method[method == "norm"] <- "cart"
 
 syn_cart <- synthpop::syn(
     data,
@@ -234,17 +189,16 @@ syn_cart <- synthpop::syn(
 
 We once more get the message that the relationship for `bmi` does not hold in the observed data, but we ignore this again.
 
+:::
+
 ---
 
 __5. Check whether the synthetic data looks okay using the `compare()` function that we used previously.__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: compare-synds-cart
-#| code-fold: true
-#| code-summary: "Show code: Compare synthetic and observed data"
-#| eval: false
 
 compare(
     syn_cart, 
@@ -255,21 +209,7 @@ compare(
 )
 ```
 
-:::{.callout-tip collapse="true" title="Show output"}
-```{r}
-#| label: compare-synds-cart-output
-#| echo: false
-
-compare(
-    syn_cart, 
-    data, 
-    utility.stats = NULL, 
-    utility.for.plot = NULL,
-    print.flag = FALSE
-)
-```
-
-Marginally, we see that the distributions of the variables are better already than using `normrank`. This looks promising.
+Marginally, we see that the distributions of the variables are a lot better than in our previous synthesis with `norm`. This looks promising.
 
 :::
 
@@ -277,30 +217,10 @@ Marginally, we see that the distributions of the variables are better already th
 
 __6. Plot the variables `age`, `hgt`, `wgt`, `bmi`, `hc` and `tv` against each other, by calling `plot()` on `syn_cart$syn`.__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: plot-bivariate-cart
-#| code-fold: true
-#| code-summary: "Show code: Plot synthetic data with `cart`"
-#| eval: false
-
-plot(
-    data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Observed data"
-)
-plot(
-    syn_cart$syn[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Synthetic data"
-)
-```
-
-:::{.callout-tip collapse="true" title="Show output"}
-```{r}
-#| label: plot-bivariate-cart-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
 
 plot(
     data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
@@ -332,6 +252,7 @@ This is often done using one of two ways.
 2. Another method is to train a classification model to distinguish between the observed and synthetic data, a method commonly called the propensity mean squared error [$pMSE$\; for more information about this method, see @snoke_utility_2018]. The easier it is for the classifier to distinguish between the observed and synthetic data, the lower the global utility, because this implies that the observed and synthetic data are different on some aspects.
 
 We discuss the former approach, as it performed better for evaluating synthetic data utility according to @volker_density_2024.
+Still, the $pMSE$ is also used relatively often and can also yield insight in the global utility of a synthetic data set.
 
 ---
 
@@ -353,12 +274,10 @@ __7. Compare the observed and synthetic data with the `ulsif()` function from th
 
 _Note: Set `numerator_data = data` and `denominator_data = syn_passive$syn` first, and `denominator_data = syn_cart$syn` second._
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: fit-ulsif
-#| code-fold: true
-#| code-summary: "Show code: Estimate density ratio with `ulsif()`"
 
 r_passive <- ulsif(data, syn_passive$syn)
 r_cart <- ulsif(data, syn_cart$syn)
@@ -366,31 +285,17 @@ r_cart <- ulsif(data, syn_cart$syn)
 
 The `ulsif()` function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.
 
----
+:::
 
 __8. Call `plot()` on the estimated model objects. This displays the distributions of the estimated density ratio values for the observed and synthetic data.__
 
-_Hint:_ The more these distributions overlap, the higher the similarity between the observed and synthetic data.
+_Hint:_ The more these distributions overlap, the higher the similarity between the observed and synthetic data distributions.
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: plot-dr-dist
-#| code-fold: true
-#| code-summary: "Show code: Plot density ratio values"
-#| eval: false
 
-plot(r_passive)
-plot(r_cart)
-```
-
-:::{.callout-tip collapse="true" title="Show output"}
-
-```{r}
-#| label: plot-dr-dist-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
 plot(r_passive)
 plot(r_cart)
 ```
@@ -403,23 +308,10 @@ You will see that the density ratio values of the `syn_passive` data overlap muc
 
 __9. Call `summary()` on the density ratio objects to obtain the estimated Pearson divergence between the observed and synthetic data sets.__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: summary-ulsif
-#| code-fold: true
-#| code-summary: "Show code: Summary of the density ratio objects"
-#| eval: false
-
-summary(r_passive)
-summary(r_cart)
-```
-
-:::{.callout-tip collapse="true" title="Show output"}
-
-```{r}
-#| label: summary-ulsif-output
-#| echo: false
 
 summary(r_passive)
 summary(r_cart)
@@ -437,39 +329,25 @@ __10. Use `plot_bivariate()` on the fitted density ratio models, and set `grid =
 
 _Hint:_ Very dark blue values indicate that synthetic data points in those regions are rather scarce in the observed data, whereas dark red values indicate that in some regions, the synthetic data is underrepresented.
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: plot-bivariate-dr
-#| code-fold: true
-#| code-summary: "Show code: Plot density ratio values against the variables"
-#| eval: false
 
 plot_bivariate(r_passive, grid = TRUE, samples = "denominator")
 plot_bivariate(r_cart, grid = TRUE, samples = "denominator")
 ```
 
-:::{.callout-tip collapse="true" title="Show output"}
-
-```{r}
-#| label: plot-bivariate-dr-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
-
-plot_bivariate(r_passive, grid = TRUE, samples = "denominator")
-plot_bivariate(r_cart, grid = TRUE, samples = "denominator")
-```
-
-The visualizations again show that the `normrank` method yielded synthetic data in regions where it was not so much expected, and that the `cart` method produces synthetic data with higher utility.
+The visualizations again show that the `syn_passive` method yielded synthetic data in regions where it was not so much expected, and that the `cart` method produces synthetic data with higher utility.
 
 :::
 
-# Outcome-specific utility
+# Outcome-specific utility {#sec-outcome-utility}
 
 For outcome-specific utility, we need at least one analysis that we expect data users will be interested in.
-For now, we assume that the data users will be interested in predicting head circumference (`hc`), based on `age`, height (`hgt`), weight (`wgt`) and region (`reg`), where we include a non-linear effect for `age` and `hgt`.
-In this case, high outcome-specific utility implies that the regression coefficients obtained from the synthetic data are close to the coefficients estimated from the observed data.
+For now, we assume that the data users will be interested in predicting head circumference (`hc`), based on `age`, height (`hgt`), weight (`wgt`) and region (`reg`).
+Additionally, we will fit a regression analysis where we add quadratic terms for `age` and `hgt`. 
+High outcome-specific utility implies that the regression coefficients obtained from the synthetic data are close to the coefficients estimated from the observed data.
 One way to measure "closeness" in this context is via the confidence interval overlap. 
 The confidence interval overlap quantifies to what extent the confidence intervals of the observed and synthetic coefficients overlap:
 $$
@@ -542,25 +420,20 @@ Conversely, if the overlap is small (or even negative), the coefficients are rel
 
 ---
 
-__TODO: ADD MAIN EFFECTS ANALYSIS__
+__11. Fit a linear regression model with main effects only using `lm.synds()` for both synthetic data sets. Compare the results with the observed data using `compare.fit.synds()`.__
 
-__11. Fit a linear regression model with the above specification using `lm.synds()` for both synthetic data sets. Compare the results with the observed data using `compare.fit.synds()`.__
-
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
-#| label: fit-models
-#| code-fold: true
-#| code-summary: "Show code: Regression models"
-#| eval: false
+#| label: fit-main-models
 
 fit_passive <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
+    hc ~ age + hgt + wgt + reg, 
     data = syn_passive
 )
 
 fit_cart <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
+    hc ~ age + hgt + wgt + reg, 
     data = syn_cart
 )
 
@@ -568,36 +441,59 @@ compare.fit.synds(fit_passive, data = data)
 compare.fit.synds(fit_cart, data = data)
 ```
 
-:::{.callout-tip collapse="true" title="Show output"}
-
-```{r}
-#| label: fit-models-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
-
-
-fit_passive <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
-    data = syn_passive
-)
-
-fit_cart <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
-    data = syn_cart
-)
-
-compare.fit.synds(fit_passive, data = data)
-compare.fit.synds(fit_cart, data = data)
-```
-
-The results show that the `syn_cart` data yields substantially higher outcome-specific utility, as the estimated regression coefficients are substantially closer to the estimates from the observed data than the `syn_passive` estimates. 
-Moreover, the confidence intervals of the observed data overlap substantially with the confidence intervals of `syn_cart`, suggesting that the differences between the estimates are relatively small compared to the uncertainty around the regression coefficients. 
+The results show that the `syn_passive` data yields very similar outcome-specific utility as the `syn_cart` data, even though previous utility measures showed much higher utility for `syn_cart`.
+The output shows both the regression coefficients in the synthetic and observed data, along with the raw and standardized difference between these coefficients and the confidence interval overlap.
+Further, the results show the Mahalanobis distance ratio (over the expected Mahalanobis distance between observed and synthetic data under a correct synthesis model), and the corresponding test statistic.
+The corresponding figure shows the confidence intervals for the observed and synthetic data coefficients.
+For both synthesis methods, the confidence intervals overlap substantially with those obtained in the real data, suggesting that the differences between the estimates are relatively small compared to the uncertainty around the regression coefficients (i.e., the sampling error). 
 
 :::
 
-One tip for evaluating outcome-specific utility is that if you expect data users are solely interested in analyses in the class of general linear models (like $t$-tests, ANOVAs and linear regression models) with merely main effects, modelling the variance-covariance matrix and the means of the observed data sufficiently accurate is sufficient. 
-From these characteristics, all regression coefficients or mean differences can be calculated.
+---
+
+This illustration has important consequences! 
+If you expect that the synthetic data users are solely interested in analyses on main effects (i.e., regression coefficients in linear models, or mean-differences in t-tests), modelling solely these main effects appropriately is typically sufficient to obtain reasonable synthetic data. 
+Even if the marginal (univariate) distributions are poorly captured, many standard analyses can still be conducted.
+Moreover, modelling every aspect of the synthetic data is thus often not required to obtain useful synthetic data. 
+Additionally, this analysis shows that low global utility does not necessarily mean that outcome-specific utility will also be low. 
+The reverse holds equivalently, though not in this dataset: high global utility also does not automatically render high outcome-specific utility.
+It is often helpful to be explicit about what the synthetic data can and cannot do, and this is easier with relatively simple synthesis models, such as the parametric models used in `syn_passive` [see also [the section on publishing synthetic data](/publishing/)].
+More complex non-parametric models are inherently more of a black-box, and it can be surprising what comes out, even if you carefully evaluated its utility.
+
+
+---
+
+__12. Fit a linear regression model with the above specification using `lm.synds()` for both synthetic data sets, but now add the quadratic effects for `age` and `hgt`. Compare the results with the observed data using `compare.fit.synds()`.__
+
+:::{.callout-tip title="Show solution" collapse=true}
+
+```{r}
+#| label: fit-models
+
+fit_passive_qd <- lm.synds(
+    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
+    data = syn_passive
+)
+
+fit_cart_qd <- lm.synds(
+    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
+    data = syn_cart
+)
+
+compare.fit.synds(fit_passive_qd, data = data)
+compare.fit.synds(fit_cart_qd, data = data)
+```
+
+
+Here, we see that the coefficients of the `syn_passive` data are substantially off. 
+This is no surprise, as we did not include these quadratic effects in our synthesis model.
+Since the variables obtained from the quadratic transformations are typically correlated with the variables on the original scale, this typically biases the regression coefficients.
+This is exactly how we modelled the synthetic data, and we thus knew what we could expect.
+The coefficients of `syn_cart` look much better, and have substantial confidence interval overlap with those obtained in the true data.
+So, in these scenarios, the `syn_cart` data really shows much higher utility in essentially every respect, as compared to the parametric synthesis with passive imputation.
+
+
+:::
 
 ---
 
@@ -608,7 +504,7 @@ From these characteristics, all regression coefficients or mean differences can 
 Synthetic data can provide a relatively safe framework for sharing data. However, some risks will remain present, and it is important to evaluate these risks. For example, it can be the case that the synthesis models were so complex that the synthetic records are very similar or even identical to the original records, which can lead to privacy breaches.
 
 :::{.callout-warning title = "Privacy of synthetic data"}
-Synthetic data by itself does not provide any formal privacy guarantees. These guarantees can be incorporated, for example by using differentially private synthesis methods. However, these methods are not yet widely available in R. If privacy is not built-in by design, it remains important to inspect the synthetic data for potential risks. Especially if you’re not entirely sure, it is better to stay at the safe side: use relatively simple, parametric models, check for outliers, and potentially add additional noise to the synthetic data. See also Chapter 4 in the book Synthetic Data for Official Statistics.
+Synthetic data by itself does not provide any formal privacy guarantees. These guarantees can be incorporated, for example by using differentially private synthesis methods. Without going into the details, differential privacy starts from the point that every individual in a data set contributes some information to the parameters of a model, from which an adversary might learn something about the sampled individuals. Differential privacy bounds the influence a single observation can have on the synthesis model, and adds noise to the model parameters that is proportional to this influence. That is, if a single individual can have a large influence on the model parameters, more noise is added to protect the privacy of this single individual. For an accessible introduction to differential privacy, the blog by @desfontainesblog20180816 is highly recommended. @bowen_dp_synthesis_2020 reviews differentially private synthesis methods. However, these methods are not yet widely available in R. If privacy is not built-in by design, it remains important to inspect the synthetic data for potential risks. Especially if you’re not entirely sure, it is better to stay at the safe side: use relatively simple, parametric models, check for outliers, and potentially add additional noise to the synthetic data. See also Chapter 4 in the book [Synthetic Data for Official Statistics](https://unece.org/statistics/publications/synthetic-data-official-statistics-starter-guide).
 :::
 
 We focus the evaluation of disclosure again on identity disclosure and attribute disclosure, as discussed in the [Statistical Disclosure Control section](../sdc/).
@@ -637,36 +533,22 @@ Both methods (_replicated uniques_ and _DiSCO_) can be evaluated in `synthpop` u
 
 ---
 
-__12. Call the function `multi.disclosure()` on the `syn_passive` and `syn_cart` data sets. Use `age`, `hgt` and `reg` as identifying variables (the `keys` argument).__
+__13. Call the function `multi.disclosure()` on the `syn_passive` and `syn_cart` data sets. Use `age`, `hgt` and `reg` as identifying variables (the `keys` argument).__
 
----
+:::{.callout-tip title="Show solution" collapse=true}
 
 ```{r}
 #| label: sdc
-#| code-fold: true
-#| code-summary: "Show code: Statistical disclosure control"
-#| eval: false
-
-
-multi.disclosure(syn_passive, data, keys = c("age", "hgt", "reg"))
-multi.disclosure(syn_cart, data, keys = c("age", "hgt", "reg"))
-```
-
-:::{.callout-tip collapse="true" title="Show output"}
-
-```{r}
-#| label: sdc-output
-#| echo: false
-#| fig-width: 9
-#| fig-height: 7
 
 multi.disclosure(syn_passive, data, keys = c("age", "hgt", "reg"))
 multi.disclosure(syn_cart, data, keys = c("age", "hgt", "reg"))
 ```
 
 From the output, it can be seen that disclosure risk is very low for both synthesis methods, according to the criteria defined here. 
-For the `syn_passive` data, there are 3 replicated uniques, and for the `syn_cart` data, there are none.
-The figures show that the attribute disclosure measures are equal to zero in the synthetic data. 
+For both synthetic data sets, there are no replicated uniques, and the figures likewise show that the attribute disclosure risk is equal to zero for both data sets. 
+Note that here we used a subset of the variables we deemed identifying, but this differs per data set, and should also be considered per data set.
+The same holds for the potentially identifying variables. 
+For the sake of illustration, I chose `age`, `hgt` and `reg`, but depending on the use case, different choices might be reasonable.
 
 :::
 
@@ -676,21 +558,19 @@ For example, one might remove the _replicated uniques_ from the synthetic data, 
 Additionally, it is possible to cap outliers using the `bottom.top.coding` argument or to smooth variables using `smooth.vars`.
 
 In our case, we already applied smoothing, and there are not really any extreme outliers present. 
-Therefore, we only remove the replicated uniques from the data.
+Therefore, the `sdc()` function cannot do much more to further enhance our privacy protection.
+For the sake of illustration, we show how to apply the `sdc()` function below anyhow.
 
 ---
 
-__13. Apply the `sdc()` function with `keys = c("age", "hgt", "reg")` and set `rm.replicated.uniques = TRUE` and store the results in `syn_passive_sdc`.__
+__14. Apply the `sdc()` function with `keys = c("age", "hgt", "reg")` and set `rm.replicated.uniques = TRUE` and store the results in `syn_passive_sdc`.__
 
-_Hint:_ This function updates the synthetic data object, make sure to release the synthetic data from the updated object if you use this function.
+_Hint:_ This function updates the synthetic data object to remove duplicated records from the observed data (if these records were unique in the original data), make sure to release the synthetic data from the updated object if you use this function.
 
----
+:::{.callout-tip collapse="true" title="Show output"}
 
 ```{r}
 #| label: apply-sdc
-#| code-fold: true
-#| code-summary: "Show code: Apply statistical disclosure control methods"
-#| output: false
 
 syn_passive_sdc <- sdc(
     syn_passive, 
@@ -699,6 +579,8 @@ syn_passive_sdc <- sdc(
     rm.replicated.uniques = TRUE,
 )
 ```
+
+:::
 
 ---
 
@@ -710,8 +592,17 @@ In this tutorial, you have learned to create and evaluate synthetic data.
 We discussed modelling deterministic relationships, refining synthesis models based on utility measures, comparing utility of synthetic data sets, and evaluating remaining disclosure risks. 
 Remember that if you plan to release synthetic data for open science purposes, it is better to stay on the safe side with respect to privacy. 
 When in doubt, choose the option that yields the smallest risk.
-Also, make clear that the synthetic data is not real data, and that new analyses should thus be conducted with caution. 
-Unless the synthesis model is correctly specified, new analyses are likely to give biased results, and results should thus not be overinterpreted.
+We will share some advice on publishing synthetic data in the [next section](/publishing/).
 
 
-# ADD SUMMARY
+::: {.callout-tip}
+
+## Summary
+
+- Synthetic data utility can be evaluated from multiple perspectives, including fit-for-purpose utility, global distributional similarity and outcome-specific utility.
+- Visual comparisons of observed and synthetic data provide an intuitive first assessment of utility, but can be complemented by additional quantitative measures.
+- Simpler parametric models may produce implausible values, but can still yield decent outcome-specific utility.
+- More flexible synthesis models, such as CART, can better capture non-linear relationships and improve utility for specific analyses, but typically increase disclosure risk. 
+- When in doubt, prioritize privacy. Synthetic data are best suited for exploratory analyses, code development and reproducibility checks, rather than definitive inference, and utility is therefore always of secondary importance only.
+
+:::

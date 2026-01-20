@@ -131,8 +131,8 @@ The idea of synthetic data will be more thoroughly explained in [the subsequent 
 ## Summary
 
 * Open research data provides a wealth of opportunities for follow-up research, but often contains sensitive information, and can thus rarely be shared without data protection measures.
-* Every released data must be anonymized, but mere anonymization is rarely enough: the data might still contain identifying variables or linkage to external sources can lead to re-identification.
+* Every released data set must be anonymized, but mere anonymization is rarely enough: the data might still contain identifying variables or linkage to external sources can lead to re-identification.
 * Statistical disclosure control aims to enable data release while preventing re-identification and attribute disclosure risks.
-* Disclosure limitations inherently comes with the privacy-utility trade-off: more stringent protection strategies typically remove more information from the data.
+* Disclosure limitations inherently come with the privacy-utility trade-off: more stringent protection strategies typically remove more information from the data.
 * Traditional disclosure techniques (aggregation, suppression, top coding, rounding, noise, microaggregation) reduces risk but may lead to unacceptable utility degradation; **synthetic data** may provide higher utility at similar privacy levels.
 :::

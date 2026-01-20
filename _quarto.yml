@@ -52,6 +52,8 @@ website:
         href: generation/index.qmd
       - text: "Evaluating synthetic data quality"
         href: evaluation/index.qmd
+      - text: "Publishing and using synthetic data"
+        href: publishing/index.qmd
 # End Website
 
 

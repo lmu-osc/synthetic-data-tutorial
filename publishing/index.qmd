@@ -1,0 +1,80 @@
+---
+title: "Publishing and using synthetic data"
+bibliography: ../references.bib
+page-navigation: true
+---
+
+# Publishing synthetic data
+
+_There are currently (beginning of 2026) no widely accepted guidelines on publishing synthetic data, so the below are our own convictions. You may disagree with this, and any criticism on this is much appreciated. If you have suggestions or concerns, please feel free to create a [GitHub issue here](https://github.com/lmu-osc/synthetic-data-tutorial/issues)._
+
+## Safe dissemination
+
+For data disseminators, it is essential that privacy protection is embedded in the synthetic data generation pipeline. 
+First, the data needs to be anonymized appropriately [see our other course on this topic](https://lmu-osc.github.io/data-anonymization/3_PROTECTION/3_1_Data_security_fundamentals.html).
+Additionally, it is important that no sensitive information is accidentally leaked through the synthetic data.
+The most obvious place to start, is to evaluate what information is present in the synthesis models. 
+For complex, non-parametric models, this might be hard to determine, but for simpler parametric models, this is often doable.
+For example, when synthetic data is created using linear regression analyses with normal errors, all information that flows into the model are the regression coefficients, that are based on the means, variances and covariances of the observed data. 
+If no individual has too large an effect on any of these parameters, then there is typically sufficient noise to protect the privacy of the sampled individuals.
+For more complex, or non-parametric models, it is good to consider how flexible the used model is. 
+As we have seen, overly flexible models may reproduce the original data, thus producing synthetic data that is too close to the original. 
+
+When in doubt about potentially remaining privacy risks, think about the sensitivity of the data, and are there any pre-processing steps that you want to take care of (such as removing outliers, removing or collapsing very rare categories). 
+For very sensitive data, you might also consider employing differentially private synthesis techniques (see the [section on statistical disclosure control here](evaluation/)).
+It is always advisable to complete all steps of the statistical disclosure control tools (e.g., the `sdc()` function) that are implemented in `synthpop`. 
+This can flag potential problems, and potential problems here might provide a starting point to look back into your synthesis models. 
+Finally, errors may occur, as in any data analysis pipeline, and it is important to remain critical to spot these. 
+Always prioritize privacy over data utility, as data users can always request access to the observed data (potentially through a secure server or by planning a research visit). 
+However, once unsafe data is published, it is impossible to fix the mistake. 
+
+## Practical advice on sharing synthetic data
+
+For every release of synthetic data, data users would want to know what the synthetic data can be used for. 
+In principle, synthetic data suffers from the same problems as the collected data (in terms of sampling bias and measurement error). 
+On top of this comes additional uncertainty regarding the quality of the synthesis procedure.
+It is thus important to be explicit on how the synthetic data was generated, as this will provide some guidance on what the synthetic data can be reasonably used for. 
+If you generated synthetic data using solely linear models, then state so explicitly, as researchers should not attempt to evaluate certain non-linear effects. 
+By explicitly modelled certain non-linear effects, you will increase the likelihood that these are indeed present in the synthetic data.
+When using non-parametric models, you can probably not be sure about which effects are in the synthetic data. 
+This is okay, a data user should not expect that everything is possible with synthetic data. 
+In any case, do not publish the synthesis models.
+That is, do not store the synthesis model and disseminate it, because it will contain additional information about the original data not originally contained in the synthetic data.  
+However, the code used to generate synthetic data data can be safely published, because this documents how the data were generated, but does not reveal what was learned from the original data. 
+If you do this, make sure that there is no information on individual subjects hidden in the code file (e.g., code to remove subject X with address Y and sensitive attribute Z).
+
+
+In principle, one should not publish more than two or three files. 
+First, of course, is the synthetic data itself. 
+Flag this file clearly as a synthetic data set.
+It is good practice to state it in the file name and the meta-data or a readme file, so that users do not accidentally confuse it with the real data. 
+You might further consider prefixing all variables with the string "synthetic".
+There is only so much you can do in terms of enhancing transparency, and any ill-intentioned user can remove this information and further disseminate it.
+Second is any meta-data that applies to the data at hand. 
+This can be a relevant codebook, or another file that is required to interpret the data at hand. 
+Even though the underlying data is synthetic, users should be able to understand it before they can use it.
+If the collected data can be made accessible to trusted parties, then make this explicit in the meta-data as well. 
+For example, there might be a secure server where these parties can request access to, or perhaps someone can request a research visit to work with the source data.
+Finally, the script used to generate the synthetic data can be disseminated, but make sure that you do not accidentally leak information from the additional data (either through the code file itself or through automatically saved history files). 
+
+
+# Using synthetic data
+
+
+Synthetic data is not real data, and all results obtained from the synthetic data should be interpreted with care.
+Hence, do not publish with results that are solely based on synthetic data (in applied research projects).
+For empirical examples, for example in methodological research, this problem seems less severe, but it would be hard to state something about the accuracy of the results. 
+Typically, the synthetic data is merely an intermediate data source, and you might want to consider running your analysis script on the actual data. 
+If so, you might request access to the data, or prepare your analysis script on the synthetic data and request that the original authors run it on the observed data. 
+If you do this, please keep the following in mind. 
+
+While synthetic data is not real data, it is based on the real data, which comes with some responsibilities. 
+It might be tempting to think that because the data is not real, questionable research practices such as $p$-hacking and HARKing (hypothesizing after the results are known) cannot be a problem. 
+However, noise that leads to spurious effects in the observed data, may be reproduced in the synthetic data.
+The extent to which data synthesis prevents problems related to questionable research practices still need to be investigated. 
+Hence, if you want to use synthetic data to pre-register your own study, use it to determine whether your planned analysis can be reasonably executed, but not to determine which hypotheses to evaluate.
+If you do use the synthetic data for exploratory purposes, there is no way to circumvent the necessity of having to collect new data to do confirmatory tests of the hypotheses of interest.
+
+Finally, remember that the generation of synthetic data is still a laborious process. 
+If you use synthetic data, please provide proper attribution to the creators, and please, __please__, inform them if you suspect that you identify any privacy issues. 
+

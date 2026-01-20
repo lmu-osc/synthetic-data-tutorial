@@ -211,11 +211,15 @@ That is, skewness or other deviations are preserved along with linear relationsh
 Specifically, `normrank` first transforms the observed data to standard normal quantiles based on the relative ranks of the values.
 Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. 
 Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data.
+This approach better approximates the marginal (univariate) distribution of the observed data in case of non-normality, but distorts linear relationships between variables. 
+For this reason, we set the default parametric method to `"norm"` in the script below. 
+
+When the data is not numerical, `synthpop` treats it as a categorical variable.
 Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.
 
 ---
 
-__4. Use `synthpop()` to create a synthetic data set in an object called `syn_param` using `method = "parametric"`. Use `seed = 123` if you want to replicate our results.__
+__4. Use `synthpop()` to create a synthetic data set in an object called `syn_param` using `method = "parametric"`, but set `default.method = c("norm", "logreg", "polyreg", "polr")`. Use `seed = 123` if you want to replicate our results.__
 
 :::{.callout-tip title="Show solution" collapse=true}
 
@@ -225,6 +229,7 @@ __4. Use `synthpop()` to create a synthetic data set in an object called `syn_pa
 syn_param <- syn(
     data = data,
     method = "parametric",
+    default.method = c("norm", "logreg", "polyreg", "polr"),
     seed = 123,
     print.flag = FALSE
 )
@@ -250,9 +255,11 @@ Also, it shows for every variable the method that was used to synthesize the dat
 If you want to know more about a specific synthesis method, say, for example, `logreg`, you can call `?syn.logreg` to get more information.
 
 
-If all is well, all continuous variables are strictly positive, which is due to matching the synthetic ranks with observed ranks and sampling the corresponding values from this (as explained above).
-However, there is a problem that you might have noticed.
-The variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
+Because we assumed that the synthetic variables are drawn from a normal distribution, there might be values outside the typical range.
+For example, the fifth value for the variable `wgt` is negative, which is impossible.
+One way to deal with this is reverting back to the `"normrank"` method. 
+Another approach is to use another transformation, or using another model (which we will do later in this tutorial). 
+Another problem that you might notice, is that the variable `bmi` is not equal to `wgt / (hgt/100)^2`. 
 This issue can be fixed using _passive_ synthesis, which will be demonstrated in the next section.
 
 :::
@@ -284,11 +291,21 @@ method["bmi"] <- "~I(wgt/(hgt/100)^2)"
 method
 ```
 
-With this specification, `synthpop` knows that it should not use an imputation model, but rather use the synthetic `hgt` and `wgt` values to construct the `bmi` values deterministically.
+With this specification, `synthpop` knows that it should not use an statistical model, but rather use the synthetic `hgt` and `wgt` values to construct the `bmi` values deterministically.
+Note that, when specifying passive synthesis models, it is essential that these variables are synthesized after the other variables, because otherwise the equation cannot be applied. 
+Moreover, it can improve utility to perform passive synthesis after imputing all other variables.
+Specifically, if some relationships between the variables are not captured adequately before passive synthesis is applied, relationships with variables synthesized later may also be distorted.
+This can be taken into account by specifying the `visit.sequence` argument, which defines the sequence in which variables are synthesized.
+
+```{r}
+#| label: visit-sequence
+
+visit <- c("age", "hgt", "wgt", "hc", "gen", "phb", "tv", "reg", "bmi")
+```
 
 ---
 
-__6. Use `synthpop()` to create a synthetic data set in an object called `syn_passive` using the adjusted `method` vector. Again, use `seed = 123` if you want to replicate our results. Inspect the output.__
+__6. Use `synthpop()` to create a synthetic data set in an object called `syn_passive` using the adjusted `method` vector and `visit.sequence`. Again, use `seed = 123` if you want to replicate our results. Inspect the output.__
 
 :::{.callout-tip title="Show solution" collapse=true}
 
@@ -298,6 +315,7 @@ __6. Use `synthpop()` to create a synthetic data set in an object called `syn_pa
 syn_passive <- syn(
     data = data,
     method = method,
+    visit.sequence = visit,
     seed = 123,
     print = FALSE
 )
@@ -378,7 +396,7 @@ If you want to learn how this happens in practice, it is probably easiest to che
 Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in `synthpop`.
 This also allows to model, for example, a hierarchical structure, using the `R`-package `lme4` [@lme4], `glmmTMB` [@glmmTMB] or, if you prefer a Bayesian procedure, with `brms` [@brms].
 In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages.
-Since no one has done this for synthetic data yet, relevant resources do not seem to exist, but feel free to reach out if you plan on doing this.
+Since, as far as we are aware of, no one has done this for synthetic data yet, relevant resources do not seem to to be widely documented yet, but feel free to reach out if you plan on doing this.
 To read more about modelling hierarchical data in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].
 
 # Conclusion

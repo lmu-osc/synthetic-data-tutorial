@@ -10,13 +10,13 @@ page-navigation: true
 
 The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory [@rubin1993statistical; @little_synthetic_1993].
 Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model.
-That is, synthetic data is nothing more than *generated* data, and is occasionally called *simulated data*, *digital twins* or even *fake* data.
+That is, synthetic data is nothing more than *generated* data, and is occasionally called *simulated data*, *digital twins* or, more colloquially, *fake* data.
 This model can be specified independent of the data at hand, but typically it is estimated on a data set.
 Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters).
 Whatever model is used, it is essential that new samples can be generated from it.
 These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.
 
-In what follows, we assume that there is a observed data set, $X$, consisting of $n$ observations measured on $p$ variables.
+In what follows, we assume that there is an observed data set, $X$, consisting of $n$ observations measured on $p$ variables.
 Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, $f(X)$.
 If we would know this distribution, we could sample new observations from it directly, but we typically do not know this.
 However, we can estimate this joint distribution from a data set at hand, leading to $\hat{f}(X)$, and sample new observations from this.
@@ -29,8 +29,8 @@ However, we can estimate this joint distribution from a data set at hand, leadin
 
 How to estimate this joint distribution is essentially a question of how to specify the synthetic data model.
 If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. 
-To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variables and the covariances between variables.
-Moreover, if we model $f(X)$ accurately and draw new samples from this model, the introduced noise adds uncertainty that provides privacy protection.
+To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variable and the covariances between variables.
+Moreover, if we model $f(X)$ accurately and draw new samples from this model, the introduced noise adds uncertainty that contributes to privacy protection.
 In what follows, we describe the two strategies that have emerged to estimate $\hat{f}(x)$ and draw samples from it.
 
 ## (A) Joint modelling
@@ -44,7 +44,7 @@ In the past decade, deep learning has become popular for the generation of synth
 An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). 
 Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. 
 While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. 
-Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness. 
+Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, substantially lowering user-friendliness. 
 
 ## (B) Fully conditional specification
 
@@ -144,6 +144,8 @@ In practice, we would thus choose a different model, and most synthetic data gen
 
 __1. Load the `R`-package `mvtnorm` using the function `library()`.__
 
+:::{.callout-tip title="Show solution" collapse=true}
+
 ```{r}
 #| label: load-mvtnorm
 #| message: false
@@ -151,6 +153,8 @@ __1. Load the `R`-package `mvtnorm` using the function `library()`.__
 
 library(mvtnorm)
 ```
+
+:::
 
 ---
 
@@ -291,8 +295,6 @@ wgt_syn <- wgt_coefs[1] + wgt_coefs[2] * age_syn + wgt_coefs[3] * hgt_syn +
 
 __9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.__
 
----
-
 :::{.callout-tip title="Show solution" collapse=true}
 
 First, we calculate the means of the observed and synthetic variables.
@@ -321,7 +323,7 @@ var(syn1)
 var(syn2)
 ```
 
-Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.
+Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error, rather than a meaningful difference between synthesis strategies. We can go further comparing the distributions of the variables, but we save that exercise for later.
 
 <!-- Could we add an inference model here? I.e., as if somebody would run a regression on the synthetic data, and see if that resemlbes the original regression results. -->
 
@@ -359,7 +361,7 @@ While in this specific example, the outcomes were the same, this is not generall
 That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. 
 However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. 
 As stated in the section [Modelling synthetic data](#sec-modelling), we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. 
-Because of this flexibility, and it's presence in existing software, we will use the fully conditional specification strategy throughout.
+Because of this flexibility, and its presence in existing software, we will use the fully conditional specification strategy throughout.
 Before we get there, we discuss some additional considerations for generating synthetic data.
 
 
@@ -586,7 +588,7 @@ Some measures of disclosure risk will be covered in the upcoming sections, but w
 
 ## Summary
 
-* Synthetic data can help to protect privacy of respondents.
+* Synthetic data can help to protect the privacy of respondents.
 * Synthetic data are fake observations generated from a model that can be disseminated instead of the original data. 
 * Joint modelling and fully conditional specification are two common strategies of generating synthetic data. 
 * For tabular data, fully conditional specification is typically preferable, as it allows for more flexibility and makes synthetic data model refinements easier. 
