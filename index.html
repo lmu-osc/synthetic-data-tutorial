@@ -233,6 +233,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Evaluating synthetic data quality</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publishing and using synthetic data</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -274,12 +280,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tutorial-overview" class="level1">
 <h1>Tutorial Overview</h1>
 <p>This <strong>self-paced tutorial</strong> will introduce you to the generation and evaluation of synthetic data. Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. Advantages of open (synthetic) data are numerous: other researchers can re-run analyses with data that is close to the actual data, which allows them to verify the main results. Additionally, open (synthetic) data allows researchers to perform exploratory analyses that may lead to novel hypotheses, and in quite some instances performing such analyses with synthetic data yields rather accurate results. Moreover, realistic synthetic data can be used in teaching, or for starting with model building when access to the real data is currently still prohibited. All in all, synthetic data makes open science practices easier and might spark collaborations with potential data users.</p>
-<p>The tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:</p>
+<p>The tutorial focuses on the generation of tabular synthetic data. This precludes the generation of text data or other high-dimensional data sources (fMRI, intensive longitudinal data, etc.). Some extensions to multilevel-data are discussed, but this is not the main goal of the materials. In total, the tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:</p>
 <ol type="1">
 <li><a href="sdc/">Statistical Disclosure Control</a> provides a very brief introduction to methods used to protect individuals’ private information, while keeping the released data useful for analysis.</li>
 <li><a href="synthetic/">Synthetic data: The general idea</a> conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.</li>
 <li><a href="geneneration/">Generating synthetic data</a> introduces the idea of synthetic data and outlines how it can be generated in <code>R</code>.</li>
 <li><a href="evaluation/">Evaluating synthetic data quality</a> addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.</li>
+<li><a href="publishing/">Publishing and using synthetic data</a> discusses when and how to publish synthetic data safely.</li>
 </ol>
 <p>At the end of this tutorial, you will know what synthetic data is and why it is useful, have experience with generating synthetic data, and know how to think about whether the data is fit for release.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Recommended Software">

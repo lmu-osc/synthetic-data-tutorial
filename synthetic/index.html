@@ -285,6 +285,12 @@ window.Quarto = {
  <span class="menu-text">Evaluating synthetic data quality</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../publishing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Publishing and using synthetic data</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -340,18 +346,18 @@ window.Quarto = {
 <section id="synthetic-data-what-it-is-and-what-it-is-about" class="level1">
 <h1>Synthetic data: What it is and what it is about?</h1>
 <hr>
-<p>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or even <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it. These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</p>
-<p>In what follows, we assume that there is a observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution from a data set at hand, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
+<p>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or, more colloquially, <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it. These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</p>
+<p>In what follows, we assume that there is an observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution from a data set at hand, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
 <hr>
 </section>
 <section id="sec-modelling" class="level1">
 <h1>Modelling synthetic data</h1>
 <hr>
-<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variables and the covariances between variables. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, the introduced noise adds uncertainty that provides privacy protection. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
+<p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variable and the covariances between variables. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, the introduced noise adds uncertainty that contributes to privacy protection. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
 <section id="a-joint-modelling" class="level2">
 <h2 class="anchored" data-anchor-id="a-joint-modelling">(A) Joint modelling</h2>
 <p>One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit.</p>
-<p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, subsantially lowering user-friendliness.</p>
+<p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, substantially lowering user-friendliness.</p>
 </section>
 <section id="b-fully-conditional-specification" class="level2">
 <h2 class="anchored" data-anchor-id="b-fully-conditional-specification">(B) Fully conditional specification</h2>
@@ -531,11 +537,6 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <section id="joint-modelling-in-practice" class="level2">
 <h2 class="anchored" data-anchor-id="joint-modelling-in-practice">Joint modelling in practice</h2>
 <p><strong>1. Load the <code>R</code>-package <code>mvtnorm</code> using the function <code>library()</code>.</strong></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<hr>
-<p><strong>2. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -549,15 +550,13 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <hr>
-<p><strong>3. Create your first synthetic data set by calling the function <code>rmvnorm()</code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
-<p><em>Note: You may set a seed here for reproducibility (below, <code>seed = 123</code> is used, but this is no better than any other seed).</em></p>
+<p><strong>2. Store the means and variance covariance matrix of the just created subset of the <code>boys</code> data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -569,6 +568,28 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>3. Create your first synthetic data set by calling the function <code>rmvnorm()</code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
+<p><em>Note: You may set a seed here for reproducibility (below, <code>seed = 123</code> is used, but this is no better than any other seed).</em></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
@@ -592,27 +613,6 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <hr>
 <p><strong>4. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Show solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<hr>
-<p><strong>5. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -625,15 +625,14 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<p>Now, we have everything in place to start the synthesis process. We first generate the variable <code>age</code>, then <code>hgt</code> and then <code>wgt</code>.</p>
 <hr>
-<p><strong>6. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
+<p><strong>5. Now store the mean of the variable <code>age</code> with corresponding standard deviation.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -645,6 +644,28 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Now, we have everything in place to start the synthesis process. We first generate the variable <code>age</code>, then <code>hgt</code> and then <code>wgt</code>.</p>
+<hr>
+<p><strong>6. Draw <span class="math inline">\(n_{syn} = 748\)</span> samples from a normal distribution with mean equal to <code>mean_age</code> and standard deviation equal to <code>sd_age</code>.</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nsyn <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_subset)</span>
@@ -660,7 +681,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <hr>
 <p><strong>7. Use the synthetic <code>age</code> values to predict an equal number of <code>hgt</code> values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -669,7 +690,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(hgtage)</span>
@@ -682,7 +703,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <hr>
 <p><strong>8. Now, use the synthetic <code>age</code> and <code>hgt</code> values to predict an equal number of <code>wgt</code> values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -691,7 +712,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
@@ -707,9 +728,8 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <section id="comparing-the-results" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-the-results">Comparing the results</h2>
 <p><strong>9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
-<hr>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -718,7 +738,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>First, we calculate the means of the observed and synthetic variables.</p>
 <div class="cell">
@@ -760,7 +780,7 @@ hgt 322.37431 2253.9723 1168.3460
 wgt 171.56270 1168.3460  676.4495</code></pre>
 </div>
 </div>
-<p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
+<p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error, rather than a meaningful difference between synthesis strategies. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
 <!-- Could we add an inference model here? I.e., as if somebody would run a regression on the synthetic data, and see if that resemlbes the original regression results. -->
 </div>
 </div>
@@ -768,7 +788,7 @@ wgt 171.56270 1168.3460  676.4495</code></pre>
 <hr>
 <p><strong>10. Fit a regression model with <code>wgt</code> as dependent variable, and <code>age</code> and <code>hgt</code> as predictors for the observed and two synthetic data sets. What do you see?</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -777,7 +797,7 @@ wgt 171.56270 1168.3460  676.4495</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data)</span>
@@ -860,7 +880,7 @@ F-statistic:  3714 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="conclusion-fully-conditional-specification-versus-joint-modelling" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</h2>
-<p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were the same, this is not generally the case. That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in the section <a href="#sec-modelling">Modelling synthetic data</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and it’s presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
+<p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were the same, this is not generally the case. That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in the section <a href="#sec-modelling">Modelling synthetic data</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and its presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
 <hr>
 </section>
 </section>
@@ -913,7 +933,7 @@ Figure&nbsp;1
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Synthetic data can help to protect privacy of respondents.</li>
+<li>Synthetic data can help to protect the privacy of respondents.</li>
 <li>Synthetic data are fake observations generated from a model that can be disseminated instead of the original data.</li>
 <li>Joint modelling and fully conditional specification are two common strategies of generating synthetic data.</li>
 <li>For tabular data, fully conditional specification is typically preferable, as it allows for more flexibility and makes synthetic data model refinements easier.</li>
