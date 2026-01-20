@@ -1,15 +1,18 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "YOUR_NAME_HERE"
-  given-names: "YOUR_NAME_HERE"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Lisa"
-  given-names: "Mona"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-title: ""
-version: 0.0.1
-doi: 
-date-released: YYYY-MM-DD
-repository-code: "https://github.com/lmu-osc/"
-url: "https://github.com/lmu-osc/"
+- family-names: "Thom"
+  given-names: "Volker"
+  orcid: "https://orcid.org/0000-0002-2408-7820"
+title: "Generating and Evaluating Synthetic Data in R"
+abstract: "A tutorial for generating and evaluating synthetic data in R"
+version: 0.0.2
+doi:
+date-released: 2026-01-20
+repository-code: https://github.com/lmu-osc/synthetic-data-tutorial
+url: https://lmu-osc.github.io/synthetic-data-tutorial/
+keywords:
+  - synthetic data
+  - R
+  - tutorial
+  - privacy
