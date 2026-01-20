@@ -465,9 +465,9 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <td style="text-align: right;">3.65</td>
 <td style="text-align: right;">14.54</td>
 <td style="text-align: right;">33.7</td>
-<td style="text-align: left;">G3</td>
-<td style="text-align: left;">P4</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: left;">G2</td>
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: left;">south</td>
 </tr>
 <tr class="even">
@@ -520,7 +520,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <td style="text-align: right;">4.66</td>
 <td style="text-align: right;">15.11</td>
 <td style="text-align: right;">37.0</td>
-<td style="text-align: left;">G1</td>
+<td style="text-align: left;">G2</td>
 <td style="text-align: left;">P2</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">south</td>
@@ -751,33 +751,33 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           obs       syn1       syn2
-age   9.158866   9.442239   9.157884
-hgt 131.144519 133.304301 130.957417
-wgt  37.148036  38.336597  36.892929</code></pre>
+age   9.158866   9.442326   9.157884
+hgt 131.090374 133.250401 130.902598
+wgt  37.182889  38.374684  36.925608</code></pre>
 </div>
 </div>
 <p>These are all reasonably close! We subsequently compare the variances.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varcov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          age      hgt       wgt
-age  47.52796  312.754  170.6746
-hgt 312.75400 2162.260 1143.0411
-wgt 170.67462 1143.041  677.9364</code></pre>
+<pre><code>          age       hgt       wgt
+age  47.52796  312.7603  171.1743
+hgt 312.76034 2163.1238 1144.9079
+wgt 171.17428 1144.9079  683.7035</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          age       hgt       wgt
-age  46.41841  305.6109  165.5482
-hgt 305.61091 2110.2870 1104.4046
-wgt 165.54819 1104.4046  654.6853</code></pre>
+age  46.41556  305.6102  166.0050
+hgt 305.61024 2111.2565 1105.9608
+wgt 166.00496 1105.9608  660.2429</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          age       hgt       wgt
-age  48.27611  322.3743  171.5627
-hgt 322.37431 2253.9723 1168.3460
-wgt 171.56270 1168.3460  676.4495</code></pre>
+age  48.27611  322.3983  171.9426
+hgt 322.39830 2255.0505 1169.6514
+wgt 171.94257 1169.6514  681.2952</code></pre>
 </div>
 </div>
 <p>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error, rather than a meaningful difference between synthesis strategies. We can go further comparing the distributions of the variables, but we save that exercise for later.</p>
@@ -813,19 +813,19 @@ lm(formula = wgt ~ age + hgt, data = data)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--18.344  -4.635   0.768   2.999  47.452 
+-18.545  -4.606   0.782   2.939  47.594 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -9.29703    2.04664  -4.543 6.48e-06 ***
-age          2.33250    0.18942  12.314  &lt; 2e-16 ***
-hgt          0.19125    0.02808   6.810 2.01e-11 ***
+(Intercept)  -8.2732     2.0829  -3.972 7.82e-05 ***
+age           2.4428     0.1929  12.663  &lt; 2e-16 ***
+hgt           0.1761     0.0286   6.158 1.21e-09 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 7.835 on 745 degrees of freedom
-Multiple R-squared:  0.9097,    Adjusted R-squared:  0.9094 
-F-statistic:  3752 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 8.008 on 745 degrees of freedom
+Multiple R-squared:  0.9065,    Adjusted R-squared:  0.9062 
+F-statistic:  3610 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -835,19 +835,19 @@ lm(formula = wgt ~ age + hgt, data = syn1)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--22.4597  -5.3649  -0.3647   5.3121  22.7489 
+-22.9061  -5.4188  -0.4484   5.4546  23.0955 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -5.81656    2.13118  -2.729   0.0065 ** 
-age          2.59669    0.19651  13.214  &lt; 2e-16 ***
-hgt          0.14729    0.02914   5.054 5.45e-07 ***
+(Intercept) -4.68705    2.16635  -2.164   0.0308 *  
+age          2.71583    0.19991  13.585  &lt; 2e-16 ***
+hgt          0.13072    0.02964   4.410 1.19e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 7.893 on 745 degrees of freedom
-Multiple R-squared:  0.9051,    Adjusted R-squared:  0.9048 
-F-statistic:  3552 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 8.063 on 745 degrees of freedom
+Multiple R-squared:  0.9018,    Adjusted R-squared:  0.9015 
+F-statistic:  3421 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -857,19 +857,19 @@ lm(formula = wgt ~ age + hgt, data = syn2)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--22.3136  -5.2886   0.3328   5.1427  26.8789 
+-22.8057  -5.4053   0.3401   5.2561  27.4716 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -11.30133    2.05179  -5.508 5.00e-08 ***
-age           2.05671    0.19537  10.527  &lt; 2e-16 ***
-hgt           0.22419    0.02859   7.841 1.55e-14 ***
+(Intercept) -10.31097    2.08797  -4.938 9.73e-07 ***
+age           2.16180    0.19898  10.864  &lt; 2e-16 ***
+hgt           0.20961    0.02911   7.200 1.48e-12 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 7.863 on 745 degrees of freedom
-Multiple R-squared:  0.9088,    Adjusted R-squared:  0.9086 
-F-statistic:  3714 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 8.037 on 745 degrees of freedom
+Multiple R-squared:  0.9055,    Adjusted R-squared:  0.9052 
+F-statistic:  3567 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>You see that the regression coefficients of both synthetic data regressions are very similar to those obtained in the real data, and are in fact within sampling error, in the sense that they are approximately one <span class="math inline">\(SE\)</span> away from the coefficients obtained on the real data.</p>

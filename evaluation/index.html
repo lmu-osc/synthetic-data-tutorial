@@ -412,35 +412,35 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>      age              hgt             wgt              bmi       
  Min.   : 0.035   Min.   : 50.0   Min.   :  3.14   Min.   :11.77  
- 1st Qu.: 1.581   1st Qu.: 84.0   1st Qu.: 11.70   1st Qu.:15.90  
- Median :10.505   Median :145.8   Median : 34.65   Median :17.46  
- Mean   : 9.159   Mean   :131.1   Mean   : 37.15   Mean   :18.04  
- 3rd Qu.:15.267   3rd Qu.:175.0   3rd Qu.: 59.58   3rd Qu.:19.49  
- Max.   :21.177   Max.   :198.0   Max.   :117.40   Max.   :31.74  
+ 1st Qu.: 1.581   1st Qu.: 84.0   1st Qu.: 11.70   1st Qu.:15.89  
+ Median :10.505   Median :145.8   Median : 34.65   Median :17.44  
+ Mean   : 9.159   Mean   :131.1   Mean   : 37.18   Mean   :18.07  
+ 3rd Qu.:15.267   3rd Qu.:174.8   3rd Qu.: 59.58   3rd Qu.:19.50  
+ Max.   :21.177   Max.   :198.0   Max.   :117.40   Max.   :38.64  
        hc        gen      phb            tv            reg     
- Min.   :33.70   G1:287   P1:316   Min.   : 1.000   north: 81  
- 1st Qu.:48.50   G2:162   P2:122   1st Qu.: 2.000   east :161  
- Median :53.20   G3: 55   P3: 54   Median : 3.000   west :240  
- Mean   :51.64   G4: 87   P4: 63   Mean   : 8.309   south:193  
- 3rd Qu.:56.00   G5:157   P5:102   3rd Qu.:15.000   city : 73  
- Max.   :65.00            P6: 91   Max.   :25.000              </code></pre>
+ Min.   :33.70   G1:281   P1:319   Min.   : 1.000   north: 81  
+ 1st Qu.:48.27   G2:170   P2:119   1st Qu.: 2.000   east :161  
+ Median :53.20   G3: 52   P3: 56   Median : 3.000   west :240  
+ Mean   :51.63   G4: 85   P4: 62   Mean   : 8.471   south:193  
+ 3rd Qu.:56.00   G5:160   P5:103   3rd Qu.:15.000   city : 73  
+ Max.   :65.00            P6: 89   Max.   :25.000              </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(syn_passive<span class="sc">$</span>syn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      age              hgt              wgt              bmi        
- Min.   : 0.038   Min.   : 45.44   Min.   :-14.03   Min.   :-31.74  
- 1st Qu.: 1.595   1st Qu.: 82.91   1st Qu.: 12.16   1st Qu.: 14.75  
- Median :10.499   Median :138.61   Median : 40.56   Median : 19.18  
- Mean   : 9.063   Mean   :130.20   Mean   : 36.55   Mean   : 17.54  
- 3rd Qu.:15.249   3rd Qu.:171.70   3rd Qu.: 58.57   3rd Qu.: 22.65  
- Max.   :20.813   Max.   :222.34   Max.   : 92.89   Max.   : 60.06  
+ Min.   : 0.038   Min.   : 45.28   Min.   :-14.53   Min.   :-32.13  
+ 1st Qu.: 1.595   1st Qu.: 82.89   1st Qu.: 12.06   1st Qu.: 14.73  
+ Median :10.499   Median :138.53   Median : 40.66   Median : 19.19  
+ Mean   : 9.063   Mean   :130.15   Mean   : 36.59   Mean   : 17.59  
+ 3rd Qu.:15.249   3rd Qu.:171.64   3rd Qu.: 58.77   3rd Qu.: 22.76  
+ Max.   :20.813   Max.   :222.36   Max.   : 93.29   Max.   : 62.18  
        hc        gen      phb            tv            reg     
- Min.   :37.54   G1:252   P1:264   Min.   :-7.000   north: 93  
- 1st Qu.:46.49   G2:160   P2:146   1st Qu.: 2.000   east :159  
- Median :51.49   G3: 86   P3: 66   Median : 7.000   west :227  
- Mean   :51.47   G4: 94   P4: 78   Mean   : 8.404   south:196  
- 3rd Qu.:56.49   G5:156   P5:118   3rd Qu.:15.000   city : 73  
- Max.   :68.02            P6: 76   Max.   :27.000              </code></pre>
+ Min.   :37.27   G1:248   P1:267   Min.   :-7.000   north: 90  
+ 1st Qu.:46.55   G2:168   P2:145   1st Qu.: 2.000   east :161  
+ Median :51.43   G3: 73   P3: 60   Median : 7.000   west :225  
+ Mean   :51.46   G4:102   P4: 74   Mean   : 8.591   south:197  
+ 3rd Qu.:56.49   G5:157   P5:129   3rd Qu.:15.000   city : 75  
+ Max.   :68.14            P6: 73   Max.   :27.000              </code></pre>
 </div>
 </div>
 <p>Most centrality measures are quite close, but the minima and maxima are often substantially off. That is, we can observe negative values for <code>wgt</code>, <code>bmi</code>, <code>hc</code> and <code>tv</code>. Moreover, some exceptionally large values occur for <code>hgt</code>, <code>bmi</code> and <code>hc</code>. Also, the categorical variables seem to have somewhat different counts per category in the synthetic data. This leaves quite some room for further fine-tuning of our synthesis model.</p>
@@ -749,7 +749,7 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r_passive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 85 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -803,11 +803,11 @@ Kernel Information:
   Kernel type: Gaussian with L2 norm distances
   Number of kernels: 200
 
-Optimal sigma: 1.280417
+Optimal sigma: 1.311197
 Optimal lambda: 0.0379269
-Optimal kernel weights: num [1:201] 0.1062 -0.0571 0.4226 0.4695 0.2111 ...
+Optimal kernel weights: num [1:201] 0.1069 -0.0237 0.2505 -0.1082 0.2523 ...
  
-Pearson divergence between P(nu) and P(de): 0.861
+Pearson divergence between P(nu) and P(de): 0.8534
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(r_cart)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -820,11 +820,11 @@ Kernel Information:
   Kernel type: Gaussian with L2 norm distances
   Number of kernels: 200
 
-Optimal sigma: 4.554112
-Optimal lambda: 0.6951928
-Optimal kernel weights: num [1:201] 0.02124 0.011 0.00753 0.00421 0.00335 ...
+Optimal sigma: 4.589124
+Optimal lambda: 0.3359818
+Optimal kernel weights: num [1:201] 0.02799 0.00165 0.01181 0.01547 0.00911 ...
  
-Pearson divergence between P(nu) and P(de): 0.007073
+Pearson divergence between P(nu) and P(de): 0.005043
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 </div>
@@ -851,7 +851,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(r_passive, <span class="at">grid =</span> <span class="cn">TRUE</span>, <span class="at">samples =</span> <span class="st">"denominator"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 85 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output-display">
@@ -938,21 +938,21 @@ lm.synds(formula = hc ~ age + hgt + wgt + reg, data = syn_passive)
 
 Differences between results based on synthetic and observed data:
                Synthetic    Observed         Diff Std. coef diff CI overlap
-(Intercept) 31.201220779 31.17887307  0.022347705     0.03365418  0.9914146
-age         -0.560726161 -0.51998878 -0.040737385    -0.66870880  0.8294079
-hgt          0.195214065  0.19308858  0.002125480     0.25003103  0.9362154
-wgt          0.000520438 -0.00444682  0.004967258     0.46004780  0.8826387
-regeast      0.047755523  0.18300856 -0.135253040    -0.42791770  0.8908353
-regwest     -0.306890341 -0.06905627 -0.237834072    -0.79756331  0.7965362
-regsouth    -0.087509949  0.09622921 -0.183739159    -0.59610841  0.8479287
-regcity      0.200305371  0.24960372 -0.049298350    -0.13201142  0.9663230
+(Intercept) 30.602506217 30.66936281 -0.066856593    -0.10059117  0.9743385
+age         -0.596425770 -0.55595068 -0.040475086    -0.65892237  0.8319045
+hgt          0.204084456  0.20210832  0.001976133     0.23287705  0.9405915
+wgt         -0.007259125 -0.01267189  0.005412765     0.50896602  0.8701593
+regeast      0.129893022  0.15071123 -0.020818211    -0.06542263  0.9833102
+regwest     -0.334970650 -0.14074237 -0.194228275    -0.64717776  0.8349006
+regsouth     0.068988061  0.07491878 -0.005930718    -0.01911351  0.9951240
+regcity      0.243792835  0.27100778 -0.027214945    -0.07238087  0.9815352
 
 Measures for one synthesis and 8 coefficients
-Mean confidence interval overlap:  0.8926625
-Mean absolute std. coef diff:  0.4207553
+Mean confidence interval overlap:  0.926483
+Mean absolute std. coef diff:  0.2881814
 
-Mahalanobis distance ratio for lack-of-fit (target 1.0): 0.26
-Lack-of-fit test: 2.050012; p-value 0.9794 for test that synthesis model is
+Mahalanobis distance ratio for lack-of-fit (target 1.0): 0.27
+Lack-of-fit test: 2.167614; p-value 0.9754 for test that synthesis model is
 compatible with a chi-squared test with 8 degrees of freedom.
 
 Confidence interval plot:</code></pre>
@@ -971,22 +971,22 @@ Call used to fit models to the data:
 lm.synds(formula = hc ~ age + hgt + wgt + reg, data = syn_cart)
 
 Differences between results based on synthetic and observed data:
-               Synthetic    Observed         Diff Std. coef diff CI overlap
-(Intercept) 30.557547970 31.17887307 -0.621325104     -0.9356749  0.7613030
-age         -0.603580110 -0.51998878 -0.083591334     -1.3721613  0.6499524
-hgt          0.204431406  0.19308858  0.011342821      1.3343135  0.6596076
-wgt         -0.002325818 -0.00444682  0.002121002      0.1964388  0.9498871
-regeast     -0.089120508  0.18300856 -0.272129071     -0.8609703  0.7803607
-regwest     -0.124807764 -0.06905627 -0.055751495     -0.1869595  0.9523054
-regsouth    -0.119345527  0.09622921 -0.215574737     -0.6993932  0.8215801
-regcity     -0.205064643  0.24960372 -0.454668364     -1.2175136  0.6894041
+              Synthetic    Observed         Diff Std. coef diff CI overlap
+(Intercept) 30.99127753 30.66936281  0.321914719      0.4843468  0.8764399
+age         -0.63890199 -0.55595068 -0.082951302     -1.3504225  0.6554981
+hgt          0.19921996  0.20210832 -0.002888364     -0.3403788  0.9131671
+wgt          0.01477423 -0.01267189  0.027446117      2.5807774  0.3416263
+regeast      0.08083825  0.15071123 -0.069872978     -0.2195806  0.9439835
+regwest     -0.50173267 -0.14074237 -0.360990296     -1.2028367  0.6931483
+regsouth    -0.18209655  0.07491878 -0.257015324     -0.8283085  0.7886929
+regcity      0.10239185  0.27100778 -0.168615934     -0.4484510  0.8855971
 
 Measures for one synthesis and 8 coefficients
-Mean confidence interval overlap:  0.7830501
-Mean absolute std. coef diff:  0.8504281
+Mean confidence interval overlap:  0.7622692
+Mean absolute std. coef diff:  0.9318878
 
-Mahalanobis distance ratio for lack-of-fit (target 1.0): 0.57
-Lack-of-fit test: 4.571372; p-value 0.8023 for test that synthesis model is
+Mahalanobis distance ratio for lack-of-fit (target 1.0): 1.2
+Lack-of-fit test: 9.596862; p-value 0.2945 for test that synthesis model is
 compatible with a chi-squared test with 8 degrees of freedom.
 
 Confidence interval plot:</code></pre>
@@ -1038,24 +1038,24 @@ lm.synds(formula = hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt +
     reg, data = syn_passive)
 
 Differences between results based on synthetic and observed data:
-                Synthetic     Observed         Diff Std. coef diff CI overlap
-(Intercept)  3.190723e+01  7.583220128 24.324013156    22.31561196 -4.6928628
-age         -4.620698e-01 -1.929989279  1.467919457    12.60242977 -2.2149646
-I(age^2)    -5.609108e-03  0.063148825 -0.068757933   -17.03270525 -3.3451577
-hgt          1.789488e-01  0.663979162 -0.485030321   -24.10508989 -5.1493706
-I(hgt^2)     6.494959e-05 -0.001868775  0.001933725    27.69941420 -6.0663069
-wgt          8.814442e-05  0.068799183 -0.068711038    -6.75852779 -0.7241459
-regeast      6.519374e-02 -0.008439947  0.073633687     0.32616634  0.9167928
-regwest     -2.789261e-01 -0.074055195 -0.204870858    -0.96303511  0.7543233
-regsouth    -7.203150e-02 -0.034981195 -0.037050305    -0.16839329  0.9570417
-regcity      1.783107e-01  0.171141483  0.007169231     0.02686085  0.9931476
+                Synthetic    Observed         Diff Std. coef diff CI overlap
+(Intercept)  3.125143e+01  7.86589945 23.385534509     20.1754637 -4.1468965
+age         -4.993335e-01 -1.98876093  1.489427467     12.0109188 -2.0640662
+I(age^2)    -5.519209e-03  0.06293745 -0.068456663    -15.8993032 -3.0560192
+hgt          1.889536e-01  0.65653667 -0.467583051    -21.8138923 -4.5648707
+I(hgt^2)     6.059895e-05 -0.00175106  0.001811659     24.7376841 -5.3107497
+wgt         -7.706577e-03  0.04320334 -0.050909918     -4.9226741 -0.2558073
+regeast      1.418255e-01 -0.07123832  0.213063801      0.8895770  0.7730629
+regwest     -3.127436e-01 -0.19088259 -0.121861059     -0.5400926  0.8622187
+regsouth     8.098933e-02 -0.08201962  0.163008950      0.6984527  0.8218200
+regcity      2.194214e-01  0.16112124  0.058300129      0.2059689  0.9474559
 
 Measures for one synthesis and 10 coefficients
-Mean confidence interval overlap:  -1.85715
-Mean absolute std. coef diff:  11.19982
+Mean confidence interval overlap:  -1.599385
+Mean absolute std. coef diff:  10.1894
 
-Mahalanobis distance ratio for lack-of-fit (target 1.0): 78.1
-Lack-of-fit test: 780.9695; p-value 0 for test that synthesis model is
+Mahalanobis distance ratio for lack-of-fit (target 1.0): 62.58
+Lack-of-fit test: 625.8325; p-value 0 for test that synthesis model is
 compatible with a chi-squared test with 10 degrees of freedom.
 
 Confidence interval plot:</code></pre>
@@ -1075,24 +1075,24 @@ lm.synds(formula = hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt +
     reg, data = syn_cart)
 
 Differences between results based on synthetic and observed data:
-               Synthetic     Observed          Diff Std. coef diff CI overlap
-(Intercept)  8.199799771  7.583220128  0.6165796428     0.56566949  0.8556939
-age         -1.975133292 -1.929989279 -0.0451440124    -0.38757184  0.9011278
-I(age^2)     0.063332400  0.063148825  0.0001835746     0.04547507  0.9883990
-hgt          0.647387051  0.663979162 -0.0165921101    -0.82459650  0.7896399
-I(hgt^2)    -0.001733560 -0.001868775  0.0001352159     1.93688353  0.5058880
-wgt          0.051062964  0.068799183 -0.0177362187    -1.74456288  0.5549503
-regeast      0.004708119 -0.008439947  0.0131480658     0.05824042  0.9851425
-regwest     -0.104533244 -0.074055195 -0.0304780487    -0.14326797  0.9634514
-regsouth    -0.048260585 -0.034981195 -0.0132793900    -0.06035470  0.9846031
-regcity      0.006345831  0.171141483 -0.1647956513    -0.61743744  0.8424876
+               Synthetic    Observed          Diff Std. coef diff CI overlap
+(Intercept)  8.948799707  7.86589945  1.082900e+00    0.934253392  0.7616657
+age         -1.929329345 -1.98876093  5.943159e-02    0.479263338  0.8777367
+I(age^2)     0.059193937  0.06293745 -3.743517e-03   -0.869445065  0.7781987
+hgt          0.637150157  0.65653667 -1.938651e-02   -0.904428143  0.7692743
+I(hgt^2)    -0.001719818 -0.00175106  3.124157e-05    0.426594670  0.8911728
+wgt          0.068116212  0.04320334  2.491287e-02    2.408920592  0.3854681
+regeast     -0.040789759 -0.07123832  3.044856e-02    0.127127829  0.9675688
+regwest     -0.627628551 -0.19088259 -4.367460e-01   -1.935673815  0.5061966
+regsouth    -0.120704903 -0.08201962 -3.868529e-02   -0.165756807  0.9577143
+regcity      0.161698307  0.16112124  5.770689e-04    0.002038731  0.9994799
 
 Measures for one synthesis and 10 coefficients
-Mean confidence interval overlap:  0.8371383
-Mean absolute std. coef diff:  0.638406
+Mean confidence interval overlap:  0.7894476
+Mean absolute std. coef diff:  0.8253502
 
-Mahalanobis distance ratio for lack-of-fit (target 1.0): 0.82
-Lack-of-fit test: 8.212925; p-value 0.608 for test that synthesis model is
+Mahalanobis distance ratio for lack-of-fit (target 1.0): 1.87
+Lack-of-fit test: 18.71478; p-value 0.044 for test that synthesis model is
 compatible with a chi-squared test with 10 degrees of freedom.
 
 Confidence interval plot:</code></pre>
