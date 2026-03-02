@@ -2,7 +2,7 @@
 project:
   type: website
   pre-render: curl -O -L --insecure https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-custom.scss
-  post-render: rm lmu-osc-custom.scss
+  # post-render: rm lmu-osc-custom.scss
 # End Project
 
 
