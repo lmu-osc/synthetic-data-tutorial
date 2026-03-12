@@ -14,21 +14,14 @@ When releasing synthetic datasets, privacy protection must be integrated directl
 In addition, it is essential to **ensure that the synthetic data does not inadvertently reveal sensitive information**. A sensible starting point is to examine what information the synthesis models actually contain. 
 For complex, non-parametric models this may be difficult to determine, but for simpler parametric models it is often more transparent. For example, when synthetic data are generated using linear regression with normally distributed errors, the model is determined by regression coefficients derived from the means, variances, and covariances of the observed data. 
 If no single observation has an excessive influence on these parameters, the resulting estimates usually contain enough aggregation and variability to protect the privacy of individuals in the dataset.
-
-<br>
-
 For more complex or non-parametric models, it is important to consider how flexible the model is. 
 Highly flexible models may effectively reproduce the original dataset, resulting in synthetic data that are too similar to the real data and therefore potentially disclosive.
 
-<br>
 
-When there is uncertainty about residual privacy risks, it is useful to **reflect on the sensitivity of the data and possible preprocessing steps**, such as removing extreme outliers or collapsing very rare categories. 
+When there is uncertainty about potentially remaining privacy risks, it is useful to **reflect on the sensitivity of the data and possible preprocessing steps**, such as removing extreme outliers or collapsing very rare categories. 
 For particularly sensitive datasets, **differentially private synthesis methods may be appropriate** ([see the section on statistical disclosure control](evaluation/)). 
 It is also recommended to **apply the statistical disclosure control procedures** implemented in `synthpop` (for example through the `sdc()` function), which can identify potential disclosure risks. 
-Such warnings can provide useful feedback for revisiting and improving the synthesis models.
-
-<br>
-
+Signalled problems can provide useful feedback for revisiting and improving the synthesis models.
 As in any data analysis pipeline, mistakes can occur, so a **critical review of the entire process is essential**. 
 When trade-offs arise, privacy protection should always take precedence over data utility. 
 Researchers who require more detailed information can still request access to the original data through secure access mechanisms or research visits. 
@@ -39,35 +32,27 @@ In contrast, once unsafe data have been publicly released, the consequences cann
 
 For each release of synthetic data, it is important to **clarify what kinds of analyses the data are suitable for**. 
 In general, synthetic data inherit many of the same limitations as the original data, such as sampling bias and measurement error. 
-In addition, there is further uncertainty related to the quality and assumptions of the synthesis procedure itself. 
+In addition, there is uncertainty related to the quality and assumptions of the synthesis procedure itself. 
 For this reason, it is essential to clearly document how the synthetic data were generated, as this helps users judge which types of analyses are appropriate.
 
-<br>
 
 For example, if the synthesis was based solely on linear models, this should be stated explicitly. 
 In that case, researchers should not expect the synthetic data to reliably represent non-linear relationships that were not modeled. 
 Conversely, if specific non-linear effects were explicitly incorporated into the synthesis models, these relationships are more likely to be reflected in the resulting synthetic dataset. 
 When non-parametric models are used, it may be difficult to determine exactly which relationships are preserved in the synthetic data. 
 This uncertainty is acceptable, as users should not assume that synthetic data will support every possible analysis.
-
-<br>
-
-In any case, **do not publish the synthesis models.** 
-The synthesis models themselves should not be released. 
+In any case, **do not publish the synthesis models**.  
 Storing or distributing the fitted models may reveal additional information about the original dataset that is not present in the synthetic data alone. 
 In contrast, it is generally **safe to publish the code used to generate the synthetic data**, as this documents the synthesis procedure without revealing the parameter estimates learned from the original data. 
 When sharing such code, however, it is important to ensure that it does not contain any information about individual subjects, such as comments or commands referring to specific individuals or sensitive attributes.
 
-<br>
-
 In general, no more than **two or three files should accompany a synthetic data release**. 
 The first is the **synthetic dataset itself**. 
-This file should be clearly labeled as synthetic data. 
+This file should be clearly labelled as synthetic data. 
 It is good practice to indicate this in the **file name as well as in the metadata or a README file**, so users do not mistakenly treat it as the original data. 
-You may also consider **prefixing all variables with a label such as “synthetic”** to further reduce confusion. 
-Of course, transparency measures have limits—users with malicious intent could remove such indicators and redistribute the data—but clear labeling still helps prevent accidental misuse.
+You may also consider prefixing all variables with a label such as “synthetic” for additional clarification. 
+Of course, transparency measures have limits. Users with malicious intent could remove such indicators and redistribute the data, but clear labelling still helps to prevent accidental misuse.
 
-<br>
 
 The second file should contain the relevant metadata for the dataset. 
 This may include a **data dictionary** (or 'codebook') or any other documentation needed to interpret the variables and structure of the data. 
@@ -75,7 +60,6 @@ Even though the dataset is synthetic, users must still be able to **understand t
 If the original data can be accessed by trusted researchers under controlled conditions, this should also be noted in the metadata. 
 For example, access might be granted through a secure server environment or through approved research visits to work with the source data.
 
-<br>
 
 Finally, the **script used to generate the synthetic data** may also be shared. 
 However, care must be taken to ensure that the script does not inadvertently reveal information about the original dataset. 
@@ -89,14 +73,12 @@ In methodological work or illustrative examples, the issue may be less problemat
 In practice, **synthetic datasets are often used as an intermediate resource that allows researchers to develop and test their analysis workflows**. 
 Once the analysis is prepared, the script can be run on the original data—either by requesting secure access to the data or by asking the data custodians to execute the script on the observed dataset.
 
-<br>
 
 Although synthetic data are not real, they are derived from real data, which still entails responsibilities for their use. 
 One might assume that questionable research practices such as p-hacking or HARKing (hypothesizing after results are known) are less problematic with synthetic data. 
 However, random noise or spurious patterns present in the original data may also be reproduced in the synthetic data. 
-If synthetic data are used to prepare a study preregistration, they should primarily **serve to test whether the planned analysis can be implemented, rather than to determine which hypotheses to pursue**. 
+If synthetic data are used to prepare a study preregistration, after which the source data are analysed, they should primarily **serve to test whether the planned analysis can be implemented, rather than to determine which hypotheses to pursue**.
 If the synthetic data are used for exploratory analyses, proper confirmatory testing will still require new or independent data.
 
-<br>
 
-Finally, generating high-quality synthetic data is often a time-consuming and technically demanding process. When using such data, researchers should p**rovide appropriate attribution to the creators**. In addition, **if any potential privacy concerns are identified, these should be communicated promptly to the data providers**.
+Finally, generating high-quality synthetic data is often a time-consuming and technically demanding process. When using such data, researchers should **provide appropriate attribution to the creators**. In addition, **if any potential privacy concerns are identified, these should be communicated promptly to the data providers**.
