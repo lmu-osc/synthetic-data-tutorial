@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Synthetic data: The general idea – Generating and evaluating synthetic data in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1988d9f9d85e811993c1471ac0558136.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1191229d2abf6901efadd99d34c9cfc5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -145,7 +146,7 @@ div.csl-indent {
   
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -389,12 +390,12 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <p>There is, of course, much more to say about specifying synthesis models that we cannot cover all in these materials. However, if you wish to learn more about specifying <strong>joint models</strong> for creating synthetic data, you might find the following resources helpful.</p>
 <ul>
 <li><span class="citation" data-cites="murray_multiple_2018">Murray (<a href="#ref-murray_multiple_2018" role="doc-biblioref">2018</a>)</span> (section 6.1): Focuses on specifying joint models for multiple imputation of missing data, but the idea transfers directly to generation of synthetic data (that is, we assume that the missing data occurs in <span class="math inline">\(n_{syn}\)</span> new samples that are fully missing, or we overimpute the observed data).</li>
-<li><span class="citation" data-cites="chollet_deep_2022">Chollet, Kalinowski, and Allaire (<a href="#ref-chollet_deep_2022" role="doc-biblioref">2022</a>)</span> (chapter 12): On deep learning for the generation of synthetic data.</li>
+<li><span class="citation" data-cites="chollet_deep_2022">Chollet et al. (<a href="#ref-chollet_deep_2022" role="doc-biblioref">2022</a>)</span> (chapter 12): On deep learning for the generation of synthetic data.</li>
 <li><span class="citation" data-cites="volker_gans_2025">Volker (<a href="#ref-volker_gans_2025" role="doc-biblioref">2025</a>)</span>: Easy and primarily illustrative introduction on generating (simple) synthetic data based on GANs in <code>R</code>.</li>
 </ul>
 <p>If you are interested in any additional resources on <strong>fully conditional specification</strong>, the following papers might be informative.</p>
 <ul>
-<li><span class="citation" data-cites="buuren_fcs_2006">van Buuren et al. (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
+<li><span class="citation" data-cites="buuren_fcs_2006"><span class="nocase">van Buuren et al.</span> (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
 <li><span class="citation" data-cites="drechsler_synthetic_2011">Drechsler (<a href="#ref-drechsler_synthetic_2011" role="doc-biblioref">2011</a>)</span> (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section).</li>
 </ul>
 </div>
@@ -948,7 +949,7 @@ Figure&nbsp;1
 </section>
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-chollet_deep_2022" class="csl-entry" role="listitem">
 Chollet, F., T. Kalinowski, and J. J. Allaire. 2022. <em>Deep Learning with r</em>. Manning.
 </div>
@@ -956,10 +957,10 @@ Chollet, F., T. Kalinowski, and J. J. Allaire. 2022. <em>Deep Learning with r</e
 Drechsler, Jörg. 2011. <em>Synthetic Datasets for Statistical Disclosure Control: Theory and Implementation</em>. Vol. 201. Springer Science &amp; Business Media. <a href="https://doi.org/10.1007/978-1-4614-0326-5">https://doi.org/10.1007/978-1-4614-0326-5</a>.
 </div>
 <div id="ref-mvtnorm" class="csl-entry" role="listitem">
-Genz, Alan, and Frank Bretz. 2009. <em>Computation of Multivariate Normal and t Probabilities</em>. Lecture Notes in Statistics. Heidelberg: Springer-Verlag.
+Genz, Alan, and Frank Bretz. 2009. <em>Computation of Multivariate Normal and t Probabilities</em>. Lecture Notes in Statistics. Springer-Verlag.
 </div>
 <div id="ref-hundepool2024" class="csl-entry" role="listitem">
-Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing, Rainer Lenz, Jane Naylor, Eric Schulte Nordholt, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
+Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, et al. 2024. <em>Handbook on Statistical Disclosure Control</em>.
 </div>
 <div id="ref-little_synthetic_1993" class="csl-entry" role="listitem">
 Little, Roderick JA. 1993. <span>“Statistical Analysis of Masked Data.”</span> <em>Journal of Official Statistics</em> 9 (2): 407.
@@ -971,10 +972,10 @@ Murray, Jared S. 2018. <span>“Multiple Imputation: A Review of Practical and T
 Rubin, Donald B. 1993. <span>“Statistical Disclosure Limitation.”</span> <em>Journal of Official Statistics</em> 9 (2): 461–68.
 </div>
 <div id="ref-buuren_fcs_2006" class="csl-entry" role="listitem">
-van Buuren, S., J. P. L. Brand, C. G. M. Groothuis-Oudshoorn, and D. B. Rubin. 2006. <span>“Fully Conditional Specification in Multivariate Imputation.”</span> <em>Journal of Statistical Computation and Simulation</em> 76 (12): 1049–64. <a href="https://doi.org/10.1080/10629360600810434">https://doi.org/10.1080/10629360600810434</a>.
+<span class="nocase">van Buuren, S., J. P. L. Brand, C. G. M. Groothuis-Oudshoorn, and D. B. Rubin</span>. 2006. <span>“Fully Conditional Specification in Multivariate Imputation.”</span> <em>Journal of Statistical Computation and Simulation</em> 76 (12): 1049–64. <a href="https://doi.org/10.1080/10629360600810434">https://doi.org/10.1080/10629360600810434</a>.
 </div>
 <div id="ref-volker_gans_2025" class="csl-entry" role="listitem">
-Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Data with Keras in r.”</span> July 14, 2025. <a href="https://thomvolker.github.io/blog/1407_gans_in_r/">https://thomvolker.github.io/blog/1407_gans_in_r/</a>.
+Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Data with Keras in r.”</span> July 14. <a href="https://thomvolker.github.io/blog/1407_gans_in_r/">https://thomvolker.github.io/blog/1407_gans_in_r/</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 

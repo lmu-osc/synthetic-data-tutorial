@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Generating synthetic data in R using synthpop – Generating and evaluating synthetic data in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1988d9f9d85e811993c1471ac0558136.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1191229d2abf6901efadd99d34c9cfc5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,7 +144,7 @@ div.csl-indent {
   
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -332,7 +333,7 @@ window.Quarto = {
 </header>
 
 
-<p>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <code>R</code>. Throughout, we will use the <code>synthpop</code> package <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok, Raab, and Dibben 2016</a>)</span>, which is a powerful tool explicitly designed to generate synthetic data. Other alternatives to create synthetic data are, for example, the <code>R</code>-package <code>mice</code> <span class="citation" data-cites="mice volker_anonymiced_2021">(<a href="#ref-mice" role="doc-biblioref">van Buuren and Groothuis-Oudshoorn 2011</a>; <a href="#ref-volker_anonymiced_2021" role="doc-biblioref">Volker and Vink 2021</a>)</span> or the stand-alone software <code>IVEware</code> <span class="citation" data-cites="iveware">(<a href="#ref-iveware" role="doc-biblioref">Raghunathan, Solenberger, and Van Hoewyk 2002</a>)</span>. Additionally, we will use the package <code>densityratio</code> <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref">Volker, Gonzalez Poses, and van Kesteren 2024</a>)</span> to evaluate the utility of synthetic data.</p>
+<p>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <code>R</code>. Throughout, we will use the <code>synthpop</code> package <span class="citation" data-cites="synthpop">(<a href="#ref-synthpop" role="doc-biblioref">Nowok et al. 2016</a>)</span>, which is a powerful tool explicitly designed to generate synthetic data. Other alternatives to create synthetic data are, for example, the <code>R</code>-package <code>mice</code> <span class="citation" data-cites="mice volker_anonymiced_2021">(<a href="#ref-mice" role="doc-biblioref"><span class="nocase">van Buuren and Groothuis-Oudshoorn</span> 2011</a>; <a href="#ref-volker_anonymiced_2021" role="doc-biblioref">Volker and Vink 2021</a>)</span> or the stand-alone software <code>IVEware</code> <span class="citation" data-cites="iveware">(<a href="#ref-iveware" role="doc-biblioref">Raghunathan et al. 2002</a>)</span>. Additionally, we will use the package <code>densityratio</code> <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref"><span class="nocase">Volker et al.</span> 2024</a>)</span> to evaluate the utility of synthetic data.</p>
 <p>Make sure to load all of the required packages, and in case you haven’t installed them already, install them first:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"synthpop"</span>)</span>
@@ -525,7 +526,7 @@ window.Quarto = {
 </section>
 <section id="visit.sequence" class="level3">
 <h3 class="anchored" data-anchor-id="visit.sequence"><code>visit.sequence</code></h3>
-<p>Determines the order in which the variables are synthesized. While in theory this order is not supposed to matter much, in practice it can make a difference in some cases. <span class="citation" data-cites="raabetal_guidelines_2017">Raab, Nowok, and Dibben (<a href="#ref-raabetal_guidelines_2017" role="doc-biblioref">2017</a>)</span> state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.</p>
+<p>Determines the order in which the variables are synthesized. While in theory this order is not supposed to matter much, in practice it can make a difference in some cases. <span class="citation" data-cites="raabetal_guidelines_2017">Raab et al. (<a href="#ref-raabetal_guidelines_2017" role="doc-biblioref">2017</a>)</span> state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.</p>
 </section>
 <section id="predictor.matrix" class="level3">
 <h3 class="anchored" data-anchor-id="predictor.matrix"><code>predictor.matrix</code></h3>
@@ -812,7 +813,7 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
 </div>
 <p>The figure shows that the synthetic <code>bmi</code> values are indeed a linear function of the synthetic <code>age</code> values, as we specified. The procedure can be altered by using a different synthesis model. Usually, you at least want to use a synthesis model that incorporates some noise in the synthetic values, which can be incorporated by drawing new residuals around the predicted values. In our case, we could draw new residuals from a normal distribution, by setting <code>res = new_xp %*% coef(fit) + rnorm(new_xp, 0, sd(fit$residuals))</code>. In other settings, noise is incorporated more implicitly, for example by drawing new labels from a binomial distribution, where the predicted probabilities are used as input, or by sampling from terminal leaves, as the <code>cart</code> models do. If you want to learn how this happens in practice, it is probably easiest to checkout the underlying code of some synthesis methods in <code>synthpop</code>, by typing <code>synthpop:::syn.cart</code> or <code>synthpop:::syn.norm</code>, or any other method.</p>
-<p>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <code>synthpop</code>. This also allows to model, for example, a hierarchical structure, using the <code>R</code>-package <code>lme4</code> <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>, <code>glmmTMB</code> <span class="citation" data-cites="glmmTMB">(<a href="#ref-glmmTMB" role="doc-biblioref">Brooks et al. 2017</a>)</span> or, if you prefer a Bayesian procedure, with <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages. Since, as far as we are aware of, no one has done this for synthetic data yet, relevant resources do not seem to to be widely documented yet, but feel free to reach out if you plan on doing this. To read more about modelling hierarchical data in the context of imputation for missing data, see <span class="citation" data-cites="yucel_sequential_2017">Yucel et al. (<a href="#ref-yucel_sequential_2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="speidel_hmi_2020">Speidel, Drechsler, and Jolani (<a href="#ref-speidel_hmi_2020" role="doc-biblioref">2020</a>)</span>].</p>
+<p>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <code>synthpop</code>. This also allows to model, for example, a hierarchical structure, using the <code>R</code>-package <code>lme4</code> <span class="citation" data-cites="lme4">(<a href="#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>, <code>glmmTMB</code> <span class="citation" data-cites="glmmTMB">(<a href="#ref-glmmTMB" role="doc-biblioref"><span class="nocase">Brooks et al.</span> 2017</a>)</span> or, if you prefer a Bayesian procedure, with <code>brms</code> <span class="citation" data-cites="brms">(<a href="#ref-brms" role="doc-biblioref">Bürkner 2017</a>)</span>. In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages. Since, as far as we are aware of, no one has done this for synthetic data yet, relevant resources do not seem to to be widely documented yet, but feel free to reach out if you plan on doing this. To read more about modelling hierarchical data in the context of imputation for missing data, see <span class="citation" data-cites="yucel_sequential_2017">Yucel et al. (<a href="#ref-yucel_sequential_2017" role="doc-biblioref">2017</a>)</span>; <span class="citation" data-cites="speidel_hmi_2020">Speidel et al. (<a href="#ref-speidel_hmi_2020" role="doc-biblioref">2020</a>)</span>].</p>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
@@ -842,27 +843,27 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-lme4" class="csl-entry" role="listitem">
 Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
 </div>
 <div id="ref-glmmTMB" class="csl-entry" role="listitem">
-Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, Arni Magnusson, Casper W. Berg, Anders Nielsen, Hans J. Skaug, Martin Maechler, and Benjamin M. Bolker. 2017. <span>“<span class="nocase">glmmTMB</span> Balances Speed and Flexibility Among Packages for Zero-Inflated Generalized Linear Mixed Modeling.”</span> <em>The R Journal</em> 9 (2): 378–400. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
+<span class="nocase">Brooks, Mollie E., Kasper Kristensen, Koen J. van Benthem, et al.</span> 2017. <span>“<span class="nocase">glmmTMB</span> Balances Speed and Flexibility Among Packages for Zero-Inflated Generalized Linear Mixed Modeling.”</span> <em>The R Journal</em> 9 (2): 378–400. <a href="https://doi.org/10.32614/RJ-2017-066">https://doi.org/10.32614/RJ-2017-066</a>.
 </div>
 <div id="ref-brms" class="csl-entry" role="listitem">
 Bürkner, Paul-Christian. 2017. <span>“<span class="nocase">brms</span>: An <span>R</span> Package for <span>Bayesian</span> Multilevel Models Using <span>Stan</span>.”</span> <em>Journal of Statistical Software</em> 80 (1): 1–28. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
 </div>
 <div id="ref-Desfontaines_2023" class="csl-entry" role="listitem">
-Desfontaines, Damien. 2023. <span>“A Friendly, Non-Technical Introduction to Differential Privacy.”</span> <a href="https://desfontain.es/blog/friendly-intro-to-differential-privacy.html">https://desfontain.es/blog/friendly-intro-to-differential-privacy.html</a>.
+Desfontaines, Damien. 2023. <em>A Friendly, Non-Technical Introduction to Differential Privacy</em>. <a href="https://desfontain.es/blog/friendly-intro-to-differential-privacy.html">https://desfontain.es/blog/friendly-intro-to-differential-privacy.html</a>.
 </div>
 <div id="ref-islr" class="csl-entry" role="listitem">
-James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2023. <em>An Introduction to Statistical Learning</em>. 2nd ed. Springer Texts in Statistics. New York: Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2023. <em>An Introduction to Statistical Learning</em>. 2nd ed. Springer Texts in Statistics. Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
 </div>
 <div id="ref-synthpop" class="csl-entry" role="listitem">
 Nowok, Beata, Gillian M. Raab, and Chris Dibben. 2016. <span>“<span class="nocase">synthpop</span>: Bespoke Creation of Synthetic Data in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 74 (11): 1–26. <a href="https://doi.org/10.18637/jss.v074.i11">https://doi.org/10.18637/jss.v074.i11</a>.
 </div>
 <div id="ref-raabetal_guidelines_2017" class="csl-entry" role="listitem">
-Raab, Gillian M., Beata Nowok, and Chris Dibben. 2017. <span>“Guidelines for Producing Useful Synthetic Data.”</span> <a href="https://arxiv.org/abs/1712.04078">https://arxiv.org/abs/1712.04078</a>.
+Raab, Gillian M., Beata Nowok, and Chris Dibben. 2017. <em>Guidelines for Producing Useful Synthetic Data</em>. <a href="https://arxiv.org/abs/1712.04078">https://arxiv.org/abs/1712.04078</a>.
 </div>
 <div id="ref-iveware" class="csl-entry" role="listitem">
 Raghunathan, Trivellore E, Peter W Solenberger, and John Van Hoewyk. 2002. <span>“IVEware: Imputation and Variance Estimation Software.”</span> <em>Ann Arbor, MI: Survey Methodology Program, Survey Research Center, Institute for Social Research, University of Michigan</em>.
@@ -871,10 +872,10 @@ Raghunathan, Trivellore E, Peter W Solenberger, and John Van Hoewyk. 2002. <span
 Speidel, Matthias, Jörg Drechsler, and Shahab Jolani. 2020. <span>“The r Package Hmi: A Convenient Tool for Hierarchical Multiple Imputation and Beyond.”</span> <em>Journal of Statistical Software</em> 95 (9): 1–48. <a href="https://doi.org/10.18637/jss.v095.i09">https://doi.org/10.18637/jss.v095.i09</a>.
 </div>
 <div id="ref-mice" class="csl-entry" role="listitem">
-van Buuren, Stef, and Karin Groothuis-Oudshoorn. 2011. <span>“<span class="nocase">mice</span>: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://doi.org/10.18637/jss.v045.i03">https://doi.org/10.18637/jss.v045.i03</a>.
+<span class="nocase">van Buuren, Stef, and Karin Groothuis-Oudshoorn</span>. 2011. <span>“<span class="nocase">mice</span>: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://doi.org/10.18637/jss.v045.i03">https://doi.org/10.18637/jss.v045.i03</a>.
 </div>
 <div id="ref-densityratio" class="csl-entry" role="listitem">
-Volker, Thom Benjamin, Carlos Gonzalez Poses, and Erik-Jan van Kesteren. 2024. <span>“Densityratio: Distribution Comparison Through Density Ratio Estimation.”</span> <a href="https://doi.org/10.5281/zenodo.13881689">https://doi.org/10.5281/zenodo.13881689</a>.
+<span class="nocase">Volker, Thom Benjamin, Carlos Gonzalez Poses, and Erik-Jan van Kesteren</span>. 2024. <em>Densityratio: Distribution Comparison Through Density Ratio Estimation</em>. Version 0.0.1. <a href="https://doi.org/10.5281/zenodo.13881689">https://doi.org/10.5281/zenodo.13881689</a>.
 </div>
 <div id="ref-volker_anonymiced_2021" class="csl-entry" role="listitem">
 Volker, Thom Benjamin, and Gerko Vink. 2021. <span>“Anonymiced Shareable Data: Using Mice to Create and Analyze Multiply Imputed Synthetic Datasets.”</span> <em>Psych</em> 3 (4): 703–16. <a href="https://doi.org/10.3390/psych3040045">https://doi.org/10.3390/psych3040045</a>.
