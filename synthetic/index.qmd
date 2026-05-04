@@ -104,10 +104,10 @@ You can obtain the data as follows:
 ```{r}
 #| label: load data
 data <- readRDS(
-    url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
+  url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
 )
 
-data_subset <- data[,c("age", "hgt", "wgt")]
+data_subset <- data[, c("age", "hgt", "wgt")]
 ```
 
 ::: {.callout-tip collapse="true" title="Description of the `boys` data"}
@@ -126,8 +126,8 @@ The `boys` data contains measurements on `r ncol(mice::boys)` variables on `r nr
 ```{r}
 #| tbl-cap: "The `boys` data from the `R`-package `mice`"
 head(data) |>
-    knitr::kable(digits = 2) |> 
-    kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
+  knitr::kable(digits = 2) |>
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"))
 ```
 
 :::
@@ -185,11 +185,11 @@ _Note: You may set a seed here for reproducibility (below, `seed = 123` is used,
 set.seed(123)
 
 syn1 <- data.frame(
-    rmvnorm(
-        n = nrow(data_subset),
-        mean = means,
-        sigma = varcov
-    )
+  rmvnorm(
+    n = nrow(data_subset),
+    mean = means,
+    sigma = varcov
+  )
 )
 ```
 
@@ -212,7 +212,7 @@ __4. Regress `hgt` on `age` and `wgt` on `age` and `hgt`, and store the results.
 #| label: fit-conditional-regressions
 
 hgtage <- lm(hgt ~ age, data = data_subset)
-wgtagehgt <- lm(wgt ~ age + hgt, data = data_subset) 
+wgtagehgt <- lm(wgt ~ age + hgt, data = data_subset)
 ```
 
 :::
@@ -246,9 +246,9 @@ __6. Draw $n_{syn} = `r nrow(data_subset)`$ samples from a normal distribution w
 
 nsyn <- nrow(data_subset)
 age_syn <- rnorm(
-    n = nsyn,
-    mean = mean_age,
-    sd = sd_age
+  n = nsyn,
+  mean = mean_age,
+  sd = sd_age
 )
 ```
 
@@ -283,7 +283,7 @@ __8. Now, use the synthetic `age` and `hgt` values to predict an equal number of
 wgt_coefs <- coef(wgtagehgt)
 wgt_sd <- summary(wgtagehgt)$sigma
 wgt_syn <- wgt_coefs[1] + wgt_coefs[2] * age_syn + wgt_coefs[3] * hgt_syn +
-    rnorm(nsyn, 0, wgt_sd)
+  rnorm(nsyn, 0, wgt_sd)
 ```
 
 :::
@@ -307,9 +307,9 @@ First, we calculate the means of the observed and synthetic variables.
 syn2 <- data.frame(age = age_syn, hgt = hgt_syn, wgt = wgt_syn)
 
 data.frame(
-    obs = means,
-    syn1 = colMeans(syn1),
-    syn2 = colMeans(syn2)
+  obs = means,
+  syn1 = colMeans(syn1),
+  syn2 = colMeans(syn2)
 )
 ```
 
@@ -399,15 +399,15 @@ library(patchwork)
 
 # create new test data set to plot the lines
 modeldata <- data.frame(
-    age = seq(0, max(minidata$age), length.out = 1001)
+  age = seq(0, max(minidata$age), length.out = 1001)
 )
 
 # simple linear regression model
-simple_fit <- lm(tv~age, data = minidata)
+simple_fit <- lm(tv ~ age, data = minidata)
 simple_pred <- predict(
-    simple_fit, 
-    newdata = modeldata,
-    interval = "prediction"
+  simple_fit,
+  newdata = modeldata,
+  interval = "prediction"
 )
 
 # minimum norm spline
@@ -417,10 +417,12 @@ SVD <- svd(complex_x)
 # calculate minimum norm regression coefficients
 complex_fit <- SVD$v %*% ((t(SVD$u) %*% minidata$tv) / SVD$d)
 # create test data spline
-xnewspline <- splines::ns(modeldata$age, df = df,
-                          knots = attr(complex_x, "knots"), 
-                          Boundary.knots = attr(complex_x, "Boundary.knots"),
-                          intercept = TRUE)
+xnewspline <- splines::ns(modeldata$age,
+  df = df,
+  knots = attr(complex_x, "knots"),
+  Boundary.knots = attr(complex_x, "Boundary.knots"),
+  intercept = TRUE
+)
 # calculate predicted values
 complex_pred <- xnewspline %*% complex_fit
 
@@ -432,111 +434,111 @@ unsign_sq <- \(x) sign(x) * x^2
 
 color_scale <- RColorBrewer::brewer.pal(3, "Set1")
 names(color_scale) <- c(
-    "Right balance", "Privacy disaster", "Poor utility"
+  "Right balance", "Privacy disaster", "Poor utility"
 )
 
 basic <- ggplot() +
-    geom_point(aes(x = minidata$age, y = minidata$tv)) +
-    scale_color_manual(name = "Synthesis model", values = color_scale) +
-    theme_minimal() +
-    ylim(-10, 40) +
-    labs(x = "Age", y = "Testicular volume") +
-    theme(legend.position = "bottom")
+  geom_point(aes(x = minidata$age, y = minidata$tv)) +
+  scale_color_manual(name = "Synthesis model", values = color_scale) +
+  theme_minimal() +
+  ylim(-10, 40) +
+  labs(x = "Age", y = "Testicular volume") +
+  theme(legend.position = "bottom")
 
 
 p1 <- basic +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = unsign_sq(right_pred[,1]),
-            col = "Right balance"
-        )
-    ) +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = complex_pred,
-            col = "Privacy disaster"
-        )
-    ) +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = simple_pred[,1],
-            col = "Poor utility"
-        )
-    ) +
-    ylim(-2, 30)
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = unsign_sq(right_pred[, 1]),
+      col = "Right balance"
+    )
+  ) +
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = complex_pred,
+      col = "Privacy disaster"
+    )
+  ) +
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = simple_pred[, 1],
+      col = "Poor utility"
+    )
+  ) +
+  ylim(-2, 30)
 
 
 p2 <- basic +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = simple_pred[,1], 
-            col = "Poor utility"
-        )
-    ) +
-    geom_ribbon(
-        aes(
-            x = modeldata$age, 
-            ymin = simple_pred[,2],
-            ymax = simple_pred[,3],
-            col = "Poor utility"
-        ),
-        alpha = 0.2
-    ) +
-    geom_point(
-        aes(
-            x = minidata$age, 
-            y = simple_fit$fitted.values + rnorm(nrow(minidata), 0, sd(simple_fit$residuals)),
-            col = "Poor utility"
-        )
-    ) + 
-    theme(legend.position = "none")
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = simple_pred[, 1],
+      col = "Poor utility"
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      x = modeldata$age,
+      ymin = simple_pred[, 2],
+      ymax = simple_pred[, 3],
+      col = "Poor utility"
+    ),
+    alpha = 0.2
+  ) +
+  geom_point(
+    aes(
+      x = minidata$age,
+      y = simple_fit$fitted.values + rnorm(nrow(minidata), 0, sd(simple_fit$residuals)),
+      col = "Poor utility"
+    )
+  ) +
+  theme(legend.position = "none")
 
 p3 <- basic +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = complex_pred[,1], 
-            col = "Privacy disaster"
-        )
-    ) +
-    geom_point(
-        aes(
-            x = minidata$age+0.1, 
-            y = complex_x %*% complex_fit - 0.1,
-            col = "Privacy disaster"
-        )
-    ) +
-    theme(legend.position = "none")
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = complex_pred[, 1],
+      col = "Privacy disaster"
+    )
+  ) +
+  geom_point(
+    aes(
+      x = minidata$age + 0.1,
+      y = complex_x %*% complex_fit - 0.1,
+      col = "Privacy disaster"
+    )
+  ) +
+  theme(legend.position = "none")
 
 p4 <- basic +
-    geom_line(
-        aes(
-            x = modeldata$age, 
-            y = right_pred[,1] |> unsign_sq(), 
-            col = "Right balance"
-        )
-    ) +
-    geom_ribbon(
-        aes(
-            x = modeldata$age, 
-            ymin = right_pred[,2] |> unsign_sq(),
-            ymax = right_pred[,3] |> unsign_sq(),
-            col = "Right balance"
-        ),
-        alpha = 0.2
-    ) +
-    geom_point(
-        aes(
-            x = minidata$age, 
-            y = unsign_sq(right_fit$fitted.values + rnorm(nrow(minidata), 0, sd(right_fit$residuals))),
-            col = "Right balance"
-        )
-    ) +
-    theme(legend.position = "none")
+  geom_line(
+    aes(
+      x = modeldata$age,
+      y = right_pred[, 1] |> unsign_sq(),
+      col = "Right balance"
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      x = modeldata$age,
+      ymin = right_pred[, 2] |> unsign_sq(),
+      ymax = right_pred[, 3] |> unsign_sq(),
+      col = "Right balance"
+    ),
+    alpha = 0.2
+  ) +
+  geom_point(
+    aes(
+      x = minidata$age,
+      y = unsign_sq(right_fit$fitted.values + rnorm(nrow(minidata), 0, sd(right_fit$residuals))),
+      col = "Right balance"
+    )
+  ) +
+  theme(legend.position = "none")
 
 p1 / (p2 | p3 | p4)
 ```

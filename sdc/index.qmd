@@ -71,12 +71,14 @@ ggplot(data = data.frame(
   stat_function(aes(col = "Theoretical boundary"), fun = \(x) -x^2, linewidth = 1) +
   xlim(0, 1) +
   theme_classic() +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.15, 1.02),
-        legend.title = element_blank(),
-        legend.background = element_blank()) +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.15, 1.02),
+    legend.title = element_blank(),
+    legend.background = element_blank()
+  ) +
   xlab("Utility") +
   ylab("Privacy") +
   geom_point() +

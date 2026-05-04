@@ -17,7 +17,7 @@ You will need the following output.
 
 
 data <- readRDS(
-    url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
+  url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
 )
 
 library(synthpop)
@@ -25,10 +25,10 @@ library(densityratio)
 library(ggplot2)
 
 syn_param <- syn(
-    data = data,
-    method = "parametric",
-    default.method = c("norm", "logreg", "polyreg", "polr"),
-    seed = 123
+  data = data,
+  method = "parametric",
+  default.method = c("norm", "logreg", "polyreg", "polr"),
+  seed = 123
 )
 
 method <- syn_param$method
@@ -36,11 +36,11 @@ method["bmi"] <- "~I(wgt/(hgt/100)^2)"
 visit <- c("age", "hgt", "wgt", "hc", "gen", "phb", "tv", "reg", "bmi")
 
 syn_passive <- syn(
-    data = data,
-    method = method,
-    visit.sequence = visit,
-    seed = 123,
-    print = FALSE
+  data = data,
+  method = method,
+  visit.sequence = visit,
+  seed = 123,
+  print = FALSE
 )
 ```
 
@@ -107,11 +107,11 @@ _Note: We set `utility.stats = NULL` and `utility.for.plot = NULL` because here 
 #| label: compare-synds
 
 compare(
-    syn_passive, 
-    data, 
-    utility.stats = NULL, 
-    utility.for.plot = NULL,
-    print.flag = FALSE
+  syn_passive,
+  data,
+  utility.stats = NULL,
+  utility.for.plot = NULL,
+  print.flag = FALSE
 )
 ```
 
@@ -134,12 +134,12 @@ __3. Plot the variables `age`, `hgt`, `wgt`, `bmi`, `hc` and `tv` against each o
 #| label: plot-bivariate
 
 plot(
-    data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Observed data"
+  data[, c("age", "hgt", "wgt", "bmi", "hc", "tv")],
+  main = "Observed data"
 )
 plot(
-    syn_passive$syn[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Synthetic data"
+  syn_passive$syn[, c("age", "hgt", "wgt", "bmi", "hc", "tv")],
+  main = "Synthetic data"
 )
 ```
 
@@ -179,11 +179,11 @@ _You may again use `seed = 123` to replicate our results._
 method[method == "norm"] <- "cart"
 
 syn_cart <- synthpop::syn(
-    data,
-    method = method,
-    smoothing = "spline",
-    seed = 123,
-    print.flag = FALSE
+  data,
+  method = method,
+  smoothing = "spline",
+  seed = 123,
+  print.flag = FALSE
 )
 ```
 
@@ -201,11 +201,11 @@ __5. Check whether the synthetic data looks okay using the `compare()` function 
 #| label: compare-synds-cart
 
 compare(
-    syn_cart, 
-    data, 
-    utility.stats = NULL, 
-    utility.for.plot = NULL,
-    print.flag = FALSE
+  syn_cart,
+  data,
+  utility.stats = NULL,
+  utility.for.plot = NULL,
+  print.flag = FALSE
 )
 ```
 
@@ -223,12 +223,12 @@ __6. Plot the variables `age`, `hgt`, `wgt`, `bmi`, `hc` and `tv` against each o
 #| label: plot-bivariate-cart
 
 plot(
-    data[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Observed data"
+  data[, c("age", "hgt", "wgt", "bmi", "hc", "tv")],
+  main = "Observed data"
 )
 plot(
-    syn_cart$syn[,c("age", "hgt", "wgt", "bmi", "hc", "tv")],
-    main = "Synthetic data"
+  syn_cart$syn[, c("age", "hgt", "wgt", "bmi", "hc", "tv")],
+  main = "Synthetic data"
 )
 ```
 
@@ -371,46 +371,54 @@ Visually, the $CIO$ can be depicted as follows:
 #| fig-height: 4
 
 ggplot() +
-    geom_point(
-        aes(x = c(0.1, 0.5), y = c(0.5, 0.5), col = "Observed")
-    ) +
-    geom_point(
-        aes(x = c(-0.1, 0.4), y = c(0.45, 0.45), col = "Synthetic")
-    ) +
-    geom_text(
-        aes(x = c(0.1, 0.5), 
-            y = c(0.5, 0.5), 
-            label = c(paste(expression(L[obs])), 
-                      paste(expression(U[obs]))),
-            col = "Observed"),
-        parse = TRUE,
-        hjust = -0.1,
-        vjust = -0.15
-    ) +
-    geom_text(
-        aes(x = c(-0.1, 0.4), 
-            y = c(0.45, 0.45), 
-            label = c(paste(expression(L[syn])), 
-                      paste(expression(U[syn]))),
-            col = "Synthetic"),
-        parse = TRUE,
-        hjust = -0.1,
-        vjust = -0.15
-    ) +
-    geom_segment(
-        aes(y = 0.5, x = 0.1, xend = 0.5, col = "Observed"),
-        lineend = "square"
-    ) +
-    geom_segment(
-        aes(y = 0.45, x = -0.1, xend = 0.4, col = "Synthetic"),
-        lineend = "square"
-    ) +
-    geom_vline(aes(xintercept = c(0.1, 0.4)), linetype = 2) +
-    ylim(0.35, 0.6) +
-    xlim(-0.15, 0.55) +
-    scale_color_brewer(palette = "Set1") +
-    theme_minimal() +
-    labs(x = NULL, y = NULL, col = NULL)
+  geom_point(
+    aes(x = c(0.1, 0.5), y = c(0.5, 0.5), col = "Observed")
+  ) +
+  geom_point(
+    aes(x = c(-0.1, 0.4), y = c(0.45, 0.45), col = "Synthetic")
+  ) +
+  geom_text(
+    aes(
+      x = c(0.1, 0.5),
+      y = c(0.5, 0.5),
+      label = c(
+        paste(expression(L[obs])),
+        paste(expression(U[obs]))
+      ),
+      col = "Observed"
+    ),
+    parse = TRUE,
+    hjust = -0.1,
+    vjust = -0.15
+  ) +
+  geom_text(
+    aes(
+      x = c(-0.1, 0.4),
+      y = c(0.45, 0.45),
+      label = c(
+        paste(expression(L[syn])),
+        paste(expression(U[syn]))
+      ),
+      col = "Synthetic"
+    ),
+    parse = TRUE,
+    hjust = -0.1,
+    vjust = -0.15
+  ) +
+  geom_segment(
+    aes(y = 0.5, x = 0.1, xend = 0.5, col = "Observed"),
+    lineend = "square"
+  ) +
+  geom_segment(
+    aes(y = 0.45, x = -0.1, xend = 0.4, col = "Synthetic"),
+    lineend = "square"
+  ) +
+  geom_vline(aes(xintercept = c(0.1, 0.4)), linetype = 2) +
+  ylim(0.35, 0.6) +
+  xlim(-0.15, 0.55) +
+  scale_color_brewer(palette = "Set1") +
+  theme_minimal() +
+  labs(x = NULL, y = NULL, col = NULL)
 ```
 
 The length between the dashed vertical lines is the quantity in the numerator, whereas the lengths of the two horizontal lines are in the denominators.
@@ -428,13 +436,13 @@ __11. Fit a linear regression model with main effects only using `lm.synds()` fo
 #| label: fit-main-models
 
 fit_passive <- lm.synds(
-    hc ~ age + hgt + wgt + reg, 
-    data = syn_passive
+  hc ~ age + hgt + wgt + reg,
+  data = syn_passive
 )
 
 fit_cart <- lm.synds(
-    hc ~ age + hgt + wgt + reg, 
-    data = syn_cart
+  hc ~ age + hgt + wgt + reg,
+  data = syn_cart
 )
 
 compare.fit.synds(fit_passive, data = data)
@@ -471,13 +479,13 @@ __12. Fit a linear regression model with the above specification using `lm.synds
 #| label: fit-models
 
 fit_passive_qd <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
-    data = syn_passive
+  hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg,
+  data = syn_passive
 )
 
 fit_cart_qd <- lm.synds(
-    hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg, 
-    data = syn_cart
+  hc ~ age + I(age^2) + hgt + I(hgt^2) + wgt + reg,
+  data = syn_cart
 )
 
 compare.fit.synds(fit_passive_qd, data = data)
@@ -573,10 +581,10 @@ _Hint:_ This function updates the synthetic data object to remove duplicated rec
 #| label: apply-sdc
 
 syn_passive_sdc <- sdc(
-    syn_passive, 
-    data = data,
-    keys = c("age", "hgt", "reg"),
-    rm.replicated.uniques = TRUE,
+  syn_passive,
+  data = data,
+  keys = c("age", "hgt", "reg"),
+  rm.replicated.uniques = TRUE,
 )
 ```
 
