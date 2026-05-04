@@ -49,7 +49,7 @@ You can download the data as follows:
 ```{r}
 #| label: load data
 data <- readRDS(
-    url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
+  url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
 )
 ```
 
@@ -227,11 +227,11 @@ __4. Use `synthpop()` to create a synthetic data set in an object called `syn_pa
 #| label: syn-parametric
 
 syn_param <- syn(
-    data = data,
-    method = "parametric",
-    default.method = c("norm", "logreg", "polyreg", "polr"),
-    seed = 123,
-    print.flag = FALSE
+  data = data,
+  method = "parametric",
+  default.method = c("norm", "logreg", "polyreg", "polr"),
+  seed = 123,
+  print.flag = FALSE
 )
 ```
 
@@ -313,11 +313,11 @@ __6. Use `synthpop()` to create a synthetic data set in an object called `syn_pa
 #| label: impute-passive
 
 syn_passive <- syn(
-    data = data,
-    method = method,
-    visit.sequence = visit,
-    seed = 123,
-    print = FALSE
+  data = data,
+  method = method,
+  visit.sequence = visit,
+  seed = 123,
+  print = FALSE
 )
 ```
 
@@ -362,25 +362,25 @@ Also note that when returning model parameters (through the `fit` argument), you
 
 ```{r}
 syn.synthesis_function <- function(y, x, xp, ...) {
-    new_y <- as.matrix(y)             # variable to be synthesized
-    new_x <- as.matrix(x)             # observed predictor variables
-    new_xp <- cbind(1, as.matrix(xp)) # previously synthesized variables
-    fit <- lm(new_y~new_x)            # fitted model
-    return(
-        list(
-            res = new_xp %*% coef(fit), # synthetic values
-            fit = coef(fit)
-        )
+  new_y <- as.matrix(y) # variable to be synthesized
+  new_x <- as.matrix(x) # observed predictor variables
+  new_xp <- cbind(1, as.matrix(xp)) # previously synthesized variables
+  fit <- lm(new_y ~ new_x) # fitted model
+  return(
+    list(
+      res = new_xp %*% coef(fit), # synthetic values
+      fit = coef(fit)
     )
+  )
 }
 
 method["hgt"] <- "synthesis_function"
 
 syn_method_spec <- syn(
-    data = data,
-    method = method,
-    seed = 123,
-    print = FALSE
+  data = data,
+  method = method,
+  seed = 123,
+  print = FALSE
 )$syn
 
 plot(syn_method_spec$age, syn_method_spec$hgt)

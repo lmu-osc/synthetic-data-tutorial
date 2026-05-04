@@ -1,4 +1,3 @@
-
 set.seed(123)
 
 data <- mice::boys
@@ -8,10 +7,10 @@ predmat <- mice::make.predictorMatrix(data)
 predmat[c("hgt", "wgt"), "bmi"] <- 0
 
 imp <- mice::mice(
-  data, 
-  method = meth, 
+  data,
+  method = meth,
   predictorMatrix = predmat,
-  maxit = 20, 
+  maxit = 20,
   m = 1
 )
 
