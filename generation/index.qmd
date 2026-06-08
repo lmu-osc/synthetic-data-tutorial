@@ -38,7 +38,7 @@ library(densityratio)
 
 ---
 
-# Data
+## Data
 
 ---
 
@@ -72,7 +72,7 @@ The `boys` data contains measurements on `r ncol(mice::boys)` variables on `r nr
 
 ---
 
-# Getting to know the data
+## Getting to know the data
 
 ---
 
@@ -117,7 +117,7 @@ Finally, note that the data consist of a mix of continuous and categorical varia
 
 --- 
 
-# Creating synthetic data {#sec-creating}
+## Creating synthetic data {#sec-creating}
 
 ---
 
@@ -130,7 +130,7 @@ The other arguments allow to specify various modelling choices, for example whic
 
 Some of the most important arguments of the `syn()` function are the following (you can use `?synthpop::syn()` for a more exhaustive list). The `syn()` function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called `syn` in the output list, adheres to these specifications. 
 
-### `method`
+#### `method`
 
 Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (`cart`) for all variables, which is a flexible, non-parametric technique for modelling synthetic data [for an introduction on classification and regression trees, see, for instance, Section 8.1 in @islr]. Other synthesis models that are available are listed below (for a more thorough explanation, see `?synthpop::syn.METHOD`, with `METHOD` replaced by the actual method as specified below).
 
@@ -163,25 +163,25 @@ __Methods for survival data__
 
 * `survctree`: generates synthetic survival data using classification and regression trees.
 
-### `default.method`
+#### `default.method`
 
 A string of length four with a user-specified default method for (1) continuous variables, (2) categorical variables with 2 levels, (3) ordered categorical variables with more than 2 levels, and (4) unordered categorical variables with more than 2 levels. Note that this `default.method` is only used when `method = "parametric"`, or when there is a mismatch between the synthesis method and the variable type.
 
-### `visit.sequence`
+#### `visit.sequence`
 
 Determines the order in which the variables are synthesized.
 While in theory this order is not supposed to matter much, in practice it can make a difference in some cases.
 @raabetal_guidelines_2017 state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.
 
-### `predictor.matrix`
+#### `predictor.matrix`
 
 You might want to exclude some variables as predictor for subsequent variables. This can be helpful if you know there are no relationships between some of the variables, or if you want to include an ID variable in the synthetic data, but not use this as a predictor of subsequent variables.
 
-### `k`
+#### `k`
 
 The number of synthetic records that will be generated. You can generate more or less observations than in the observed data, but note that the information in the synthetic samples cannot exceed the information in the observed data.
 
-### `rules` and `rvalues`
+#### `rules` and `rvalues`
 
 The `rules` argument expects a named list that contains rules for restricted values. These restricted values are determined by values of other variables: for example, monthly income should be zero for children who are too young to have a paid job (in the Netherlands, the age limit is 12 years). The `rvalues` argument expects a named list, but with the values to attach to those observations who adhere to the rules specified in `rules`.
 So, if you want to specify that every boy with genital tanner stage "G1" has pubic hair tanner stage "P1", you can set
@@ -191,11 +191,11 @@ rules = list(phb = "gen == 'G1'")
 rvalues = list(phb = 1)
 ```
 
-### `semicont`
+#### `semicont`
 
 Some variables might have a point mass for some values. For example, income variables often have a spike at 0 for people who don't have a paid job. This point mass can be modelled separately by first predicting whether an observation has either a zero or non-zero value, and subsequently modelling the income values for those observations with a non-zero value.
 
-### `smoothing`
+#### `smoothing`
 
 Some imputation methods for continuous variables sample the synthetic values from the observed variable. 
 Since re-using observed values may worsen privacy risks, smoothing can be applied such that there is additional randomness in the values that end up in the synthetic data. 
@@ -266,7 +266,7 @@ This issue can be fixed using _passive_ synthesis, which will be demonstrated in
 
 ---
 
-# Specifying custom synthesis models
+## Specifying custom synthesis models
 
 ---
 
@@ -336,7 +336,7 @@ There are too many possibilities to cover in this practical, but the `synthpop` 
 
 :::
 
-# Advanced and optional: Extensions to `synthpop`
+## Advanced and optional: Extensions to `synthpop`
 
 > When the default synthetic data generation methods in `synthpop` are not sufficient for your purposes, it is possible to write extensions. This can become fairly advanced, and is usually not required. Nevertheless, extending `synthpop` can be done, and below it is shown how for those interested. This section is optional and can be skipped safely.
 
@@ -399,7 +399,7 @@ In such instances, one can incorporate the hierarchical structure replacing the 
 Since, as far as we are aware of, no one has done this for synthetic data yet, relevant resources do not seem to to be widely documented yet, but feel free to reach out if you plan on doing this.
 To read more about modelling hierarchical data in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].
 
-# Conclusion
+## Conclusion
 
 The exercises here showed that `synthpop` allows quite some flexibility when modelling synthetic data, and simplifies the process substantially.
 However, further refinements might sometimes be possible.
@@ -407,7 +407,7 @@ In the [subsequent section](../evaluation/), we will discuss how to evaluate the
 
 ::: {.callout-tip}
 
-## Summary
+### Summary
 
 - Synthetic data can be generated in `R` using the `synthpop` package, which implements fully conditional specification (FCS). 
 - The core `syn()` function sequentially fits conditional synthesis models for each variable, and draws synthetic values from these models.

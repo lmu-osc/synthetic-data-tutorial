@@ -4,7 +4,7 @@ bibliography: ../references.bib
 page-navigation: true
 ---
 
-# Synthetic data: What it is and what it is about?
+## Synthetic data: What it is and what it is about?
 
 ---
 
@@ -23,7 +23,7 @@ However, we can estimate this joint distribution from a data set at hand, leadin
 
 ---
 
-# Modelling synthetic data {#sec-modelling}
+## Modelling synthetic data {#sec-modelling}
 
 ---
 
@@ -33,7 +33,7 @@ To be a bit more precise, this means that both univariate and multivariate patte
 Moreover, if we model $f(X)$ accurately and draw new samples from this model, the introduced noise adds uncertainty that contributes to privacy protection.
 In what follows, we describe the two strategies that have emerged to estimate $\hat{f}(x)$ and draw samples from it.
 
-## (A) Joint modelling
+### (A) Joint modelling
 
 One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. 
 We can, for example, model the distribution of the data using a normal approximation. 
@@ -46,7 +46,7 @@ Rather, these methods attempt to learn the distribution of the data, by transfor
 While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. 
 Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, substantially lowering user-friendliness. 
 
-## (B) Fully conditional specification
+### (B) Fully conditional specification
 
 A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables).
 That is, we can factor the joint distribution of the data into a series of conditionals
@@ -91,7 +91,7 @@ If you are interested in any additional resources on __fully conditional specifi
 
 ---
 
-# (Optional) Exercise: A simple synthetic data model
+## (Optional) Exercise: A simple synthetic data model
 
 ---
 
@@ -140,7 +140,7 @@ To generate these synthetic samples, we use the `R`-package `mvtnorm` [@mvtnorm]
 Note that this normal model provides a relatively poor fit to the data (if it were correct, people would keep growing eternally). 
 In practice, we would thus choose a different model, and most synthetic data generation software (including the `synthpop` package that we will use subsequently) allows for this.
 
-## Joint modelling in practice
+### Joint modelling in practice
 
 __1. Load the `R`-package `mvtnorm` using the function `library()`.__
 
@@ -197,7 +197,7 @@ syn1 <- data.frame(
 
 ---
 
-## Synthetic data with fully conditional specification
+### Synthetic data with fully conditional specification
 
 We will now do the same thing, but with the fully conditional specification strategy outlined above. 
 To do this, we need the regression models `hgt ~ age` and `wgt ~ age + hgt` fitted on the observed data. Moreover, we need the residual variances of each model.
@@ -290,7 +290,7 @@ wgt_syn <- wgt_coefs[1] + wgt_coefs[2] * age_syn + wgt_coefs[3] * hgt_syn +
 
 ---
 
-## Comparing the results
+### Comparing the results
 
 
 __9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.__
@@ -354,7 +354,7 @@ You see that the regression coefficients of both synthetic data regressions are 
 
 ---
 
-## Conclusion: Fully conditional specification versus joint modelling
+### Conclusion: Fully conditional specification versus joint modelling
 
 Now you have a flavour of how the two modelling procedures allow to generate synthetic data. 
 While in this specific example, the outcomes were the same, this is not generally the case.
@@ -367,7 +367,7 @@ Before we get there, we discuss some additional considerations for generating sy
 
 ---
 
-# Specifying synthetic data models
+## Specifying synthetic data models
 
 Regardless of which approach to generating synthetic data you use, it is important that you specify an appropriate synthesis model.
 That is, $\hat{f}(x)$ needs to model the true data distribution adequately.
@@ -561,7 +561,7 @@ How to balance privacy and utility will be the subject of the upcoming sections.
 
 ---
 
-# Synthetic data for open science
+## Synthetic data for open science
 
 ---
 
@@ -588,7 +588,7 @@ Some measures of disclosure risk will be covered in the upcoming sections, but w
 
 ::: {.callout-tip}
 
-## Summary
+### Summary
 
 * Synthetic data can help to protect the privacy of respondents.
 * Synthetic data are fake observations generated from a model that can be disseminated instead of the original data. 

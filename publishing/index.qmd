@@ -4,11 +4,11 @@ bibliography: ../references.bib
 page-navigation: true
 ---
 
-# Publishing synthetic data
+## Publishing synthetic data
 
 _There are currently (beginning of 2026) no widely accepted guidelines on publishing synthetic data, so the below are our own convictions. You may disagree with this, and any criticism on this is much appreciated. If you have suggestions or concerns, please feel free to create a [GitHub issue here](https://github.com/lmu-osc/synthetic-data-tutorial/issues)._
 
-## Safe dissemination
+### Safe dissemination
 
 When releasing synthetic datasets, privacy protection must be integrated directly into the data synthesis workflow. First, **the original data must be properly anonymized** ([see our other course on this topic](https://lmu-osc.github.io/data-anonymization/)). 
 In addition, it is essential to **ensure that the synthetic data does not inadvertently reveal sensitive information**. A sensible starting point is to examine what information the synthesis models actually contain. 
@@ -28,7 +28,7 @@ Researchers who require more detailed information can still request access to th
 In contrast, once unsafe data have been publicly released, the consequences cannot be undone.
 
 
-## Practical advice on sharing synthetic data
+### Practical advice on sharing synthetic data
 
 For each release of synthetic data, it is important to **clarify what kinds of analyses the data are suitable for**. 
 In general, synthetic data inherit many of the same limitations as the original data, such as sampling bias and measurement error. 
@@ -65,7 +65,7 @@ Finally, the **script used to generate the synthetic data** may also be shared.
 However, care must be taken to ensure that the script does not inadvertently reveal information about the original dataset. 
 This includes checking that the code itself, as well as any automatically saved history or log files, does not contain references to individual records or other sensitive details.
 
-# Using synthetic data
+## Using synthetic data
 
 Synthetic data are not real observations, and results derived from them should therefore be interpreted with caution. 
 For applied research projects, it is generally not advisable to publish findings based solely on analyses of synthetic data. 

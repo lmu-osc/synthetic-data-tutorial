@@ -4,7 +4,7 @@ bibliography: ../references.bib
 page-navigation: true
 ---
 
-# Introduction
+## Introduction
 
 Collected research data often contains sensitive information about individuals. 
 For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals.
@@ -24,7 +24,7 @@ Especially in today's age of massive data collection, data sources can be linked
 For example, in 2006, @narayanan_netflix_2007 reidentified Netflix users by linking their reviews to IMDb data. 
 While likely harmless for most, it exposed sensitive details, such as sexual orientation, leading to potential privacy risks.
 
-# Statistical disclosure control 
+## Statistical disclosure control 
 
 The term "Statistical disclosure control" refers to a suite of statistical methods that aim to protect collected data such that they can be safely released to the public without disclosing confidential information about these individuals.
 The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred [@hundepool2024].
@@ -45,7 +45,7 @@ At the same time, the goal of a data release is to allow others to do something 
 To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data.
 Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distributions of the observed and released data are similar.
 
-# The privacy-utility trade-off
+## The privacy-utility trade-off
 
 Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data.
 That is, if privacy is (almost) not an issue, the original data or a very lightly perturbed version of the original data can be released.
@@ -106,7 +106,7 @@ At the same time, the level of utility required depends on the problem at hand: 
 Hence, the privacy-utility trade-off is relative to the re-use scenario: a released data set can be very useful for some purposes, but almost useless for others. 
 
 
-# Conventional statistical disclosure control methods
+## Conventional statistical disclosure control methods
 
 In practice, many techniques for statistical disclosure control have been developed over the last years for microdata; that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data.
 Typically, these techniques limit the amount of information that is released, thereby introducing statistical bias and variance [@fienberg_slavkovic_2011].
@@ -130,7 +130,7 @@ The idea of synthetic data will be more thoroughly explained in [the subsequent 
 
 ::: {.callout-tip}
 
-## Summary
+### Summary
 
 * Open research data provides a wealth of opportunities for follow-up research, but often contains sensitive information, and can thus rarely be shared without data protection measures.
 * Every released data set must be anonymized, but mere anonymization is rarely enough: the data might still contain identifying variables or linkage to external sources can lead to re-identification.

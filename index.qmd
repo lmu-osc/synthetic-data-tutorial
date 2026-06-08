@@ -3,7 +3,7 @@ title: "Welcome to the synthetic data tutorial!"
 page-navigation: true
 ---
 
-# Tutorial Overview
+## Tutorial Overview
 
 This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. 
 Synthetic data is generated data that can be used as an alternative to privacy-sensitive data, for example to enhance open science practices. 

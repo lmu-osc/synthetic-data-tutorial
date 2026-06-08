@@ -46,7 +46,7 @@ syn_passive <- syn(
 
 :::
 
-# Synthetic data utility
+## Synthetic data utility
 
 ---
 
@@ -66,7 +66,7 @@ In what follows, we briefly discuss all three types of measures.
 
 ---
 
-# Fit-for-purpose measures
+## Fit-for-purpose measures
 
 ---
 
@@ -157,7 +157,7 @@ At the same time, this is not to say that the synthetic data is useless, there i
 We will come back to this in the [section on outcome-specific utility measures](@sec-outcome-utility).
 We decide that we attempt to further improve the utility of the synthetic data.
 
-# Further synthesis improvements
+## Further synthesis improvements
 
 To improve the utility of the synthetic data, we use regression trees for the continuous variables (the `"cart"` model in `synthpop`), which is a non-parametric method that is better able to capture non-linear relationships between variables.
 In short, `cart` repetitively splits the predictor space according to which predictor is best able to predict the outcome, leading to so-called _leaves_ in which subsets of the outcome with relatively similar values are collected [see, e.g., Section 8.1.1 in @islr].
@@ -241,7 +241,7 @@ We will further explore this using global and outcome-specific utility measures.
 
 ---
 
-# Global utility measures
+## Global utility measures
 
 ---
 
@@ -256,7 +256,7 @@ Still, the $pMSE$ is also used relatively often and can also yield insight in th
 
 ---
 
-## Divergence estimation through density ratio estimation
+### Divergence estimation through density ratio estimation
 
 One way to evaluate global utility is by comparing the distributions of the observed and synthetic data directly. 
 This can be done using density ratio estimation, which, like the name suggests, attempts to estimate the ratio of the densities of two groups of samples (note that we mean the same thing with distribution and density, although some nuances exist).
@@ -342,7 +342,7 @@ The visualizations again show that the `syn_passive` method yielded synthetic da
 
 :::
 
-# Outcome-specific utility {#sec-outcome-utility}
+## Outcome-specific utility {#sec-outcome-utility}
 
 For outcome-specific utility, we need at least one analysis that we expect data users will be interested in.
 For now, we assume that the data users will be interested in predicting head circumference (`hc`), based on `age`, height (`hgt`), weight (`wgt`) and region (`reg`).
@@ -505,7 +505,7 @@ So, in these scenarios, the `syn_cart` data really shows much higher utility in 
 
 ---
 
-# Statistical disclosure control
+## Statistical disclosure control
 
 ---
 
@@ -592,7 +592,7 @@ syn_passive_sdc <- sdc(
 
 ---
 
-# Conclusion
+## Conclusion
 
 ---
 
@@ -605,7 +605,7 @@ We will share some advice on publishing synthetic data in the [next section](/pu
 
 ::: {.callout-tip}
 
-## Summary
+### Summary
 
 - Synthetic data utility can be evaluated from multiple perspectives, including fit-for-purpose utility, global distributional similarity and outcome-specific utility.
 - Visual comparisons of observed and synthetic data provide an intuitive first assessment of utility, but can be complemented by additional quantitative measures.
