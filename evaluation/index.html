@@ -380,8 +380,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="synthetic-data-utility" class="level1">
-<h1>Synthetic data utility</h1>
+<section id="synthetic-data-utility" class="level2">
+<h2 class="anchored" data-anchor-id="synthetic-data-utility">Synthetic data utility</h2>
 <hr>
 <p>The quality of synthetic data can be evaluated on multiple levels and in different ways. Often, three types of utility measures are distinguished <span class="citation" data-cites="drechsler_30years_2024">(<a href="#ref-drechsler_30years_2024" role="doc-biblioref">Drechsler and Haensch 2024</a>)</span>:</p>
 <ol type="1">
@@ -392,8 +392,8 @@ window.Quarto = {
 <p>In isolation, none of these measures typically provide an all-encompassing qualification of utility, also because utility is use-case dependent. In many instances, the synthetic data modeller does not know what the data will be used for. In these settings, outcome-specific utility measures are only of limited help, and global utility measures might provide the broadest picture of the utility of the synthetic data. However, for open science purposes, one could argue that fit-for-purpose measures and outcome-specific utility measures are most important, because in many instances, a data user would want to reproduce the original analyses. Note, however, that even if outcome-specific utility is low, ultimately, the synthetic data can be very useful still, as it at least allows to run the original analysis code, and evaluate whether it contains any errors. In what follows, we briefly discuss all three types of measures.</p>
 <hr>
 </section>
-<section id="fit-for-purpose-measures" class="level1">
-<h1>Fit-for-purpose measures</h1>
+<section id="fit-for-purpose-measures" class="level2">
+<h2 class="anchored" data-anchor-id="fit-for-purpose-measures">Fit-for-purpose measures</h2>
 <hr>
 <p>We already evaluated whether the synthetic data looked plausible, and noticed that our synthetic data had some impossible negative values and fixed the relationship between <code>hgt</code> and <code>wgt</code> for the <code>bmi</code> variable in the synthetic data. We now go one step further, and compare the entire marginal distributions of the variables in the synthetic data with the corresponding variables in the observed data.</p>
 <hr>
@@ -555,8 +555,8 @@ Comparing percentages observed with synthetic</code></pre>
 <hr>
 <p>Now that we investigated fit-for-purpose utility, we must decide whether the synthetic data is of sufficient quality. By now, you probably suspect that this depends on the use-case at hand. You have seen that some measures of utility indicate substantial problems with the synthetic data, in the sense that certain aspects of the distribution of the data are poorly modelled. At the same time, this is not to say that the synthetic data is useless, there is already quite some information in the synthetic data and there is quite a lot that we can do with it already. We will come back to this in the <a href="@sec-outcome-utility">section on outcome-specific utility measures</a>. We decide that we attempt to further improve the utility of the synthetic data.</p>
 </section>
-<section id="further-synthesis-improvements" class="level1">
-<h1>Further synthesis improvements</h1>
+<section id="further-synthesis-improvements" class="level2">
+<h2 class="anchored" data-anchor-id="further-synthesis-improvements">Further synthesis improvements</h2>
 <p>To improve the utility of the synthetic data, we use regression trees for the continuous variables (the <code>"cart"</code> model in <code>synthpop</code>), which is a non-parametric method that is better able to capture non-linear relationships between variables. In short, <code>cart</code> repetitively splits the predictor space according to which predictor is best able to predict the outcome, leading to so-called <em>leaves</em> in which subsets of the outcome with relatively similar values are collected <span class="citation" data-cites="islr">(see, e.g., Section 8.1.1 in <a href="#ref-islr" role="doc-biblioref">James et al. 2023</a>)</span>. Synthetic data is then obtained by splitting the predictors of the synthetic cases according to the learned splits, after which values are sampled from the leaves. Because this approach recycles observed data, we add some smoothing, so that the observed values are not exactly reproduced in the synthetic data. This smoothing is often essential from a privacy-perspective, because it makes sure that synthetic values are not exactly equal to the observed data values.</p>
 <hr>
 <p><strong>4. Adjust the previously created method vector by replacing every instance of <code>"norm"</code> with <code>"cart"</code>, and call <code>syn()</code> with this new method vector and <code>smoothing = "spline"</code>.</strong></p>
@@ -697,8 +697,8 @@ Comparing percentages observed with synthetic</code></pre>
 <p>We now have two synthetic data sets that seem to have different levels of utility. We will further explore this using global and outcome-specific utility measures.</p>
 <hr>
 </section>
-<section id="global-utility-measures" class="level1">
-<h1>Global utility measures</h1>
+<section id="global-utility-measures" class="level2">
+<h2 class="anchored" data-anchor-id="global-utility-measures">Global utility measures</h2>
 <hr>
 <p>We evaluate global utility by comparing the distributions of the synthetic data sets with the distribution of the observed data. This is often done using one of two ways.</p>
 <ol type="1">
@@ -707,8 +707,8 @@ Comparing percentages observed with synthetic</code></pre>
 </ol>
 <p>We discuss the former approach, as it performed better for evaluating synthetic data utility according to <span class="citation" data-cites="volker_density_2024">Volker, Wolf, et al. (<a href="#ref-volker_density_2024" role="doc-biblioref">2024</a>)</span>. Still, the <span class="math inline">\(pMSE\)</span> is also used relatively often and can also yield insight in the global utility of a synthetic data set.</p>
 <hr>
-<section id="divergence-estimation-through-density-ratio-estimation" class="level2">
-<h2 class="anchored" data-anchor-id="divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</h2>
+<section id="divergence-estimation-through-density-ratio-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</h3>
 <p>One way to evaluate global utility is by comparing the distributions of the observed and synthetic data directly. This can be done using density ratio estimation, which, like the name suggests, attempts to estimate the ratio of the densities of two groups of samples (note that we mean the same thing with distribution and density, although some nuances exist). That is, we attempt to estimate <span class="math display">\[
 r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 \]</span> This can be done by estimating the distributions of <span class="math inline">\(f_\text{obs}(X)\)</span> and <span class="math inline">\(f_\text{syn}(X)\)</span>, but estimating <span class="math inline">\(r(X)\)</span> directly typically yields better results. The <code>R</code>-package <code>densityratio</code> has been developed for this purpose <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref"><span class="nocase">Volker, Gonzalez Poses, et al.</span> 2024</a>)</span>. Based on the density ratio, we can estimate various divergence measures between the two data sets, which is an in-built functionality.</p>
@@ -879,8 +879,8 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 </section>
 </section>
-<section id="sec-outcome-utility" class="level1">
-<h1>Outcome-specific utility</h1>
+<section id="sec-outcome-utility" class="level2">
+<h2 class="anchored" data-anchor-id="sec-outcome-utility">Outcome-specific utility</h2>
 <p>For outcome-specific utility, we need at least one analysis that we expect data users will be interested in. For now, we assume that the data users will be interested in predicting head circumference (<code>hc</code>), based on <code>age</code>, height (<code>hgt</code>), weight (<code>wgt</code>) and region (<code>reg</code>). Additionally, we will fit a regression analysis where we add quadratic terms for <code>age</code> and <code>hgt</code>. High outcome-specific utility implies that the regression coefficients obtained from the synthetic data are close to the coefficients estimated from the observed data. One way to measure “closeness” in this context is via the confidence interval overlap. The confidence interval overlap quantifies to what extent the confidence intervals of the observed and synthetic coefficients overlap: <span class="math display">\[
 CIO = \frac{1}{2} \Big(
     \frac{\min (U_\text{obs}, U_\text{syn}) -
@@ -1114,8 +1114,8 @@ Confidence interval plot:</code></pre>
 </div>
 <hr>
 </section>
-<section id="statistical-disclosure-control" class="level1">
-<h1>Statistical disclosure control</h1>
+<section id="statistical-disclosure-control" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-disclosure-control">Statistical disclosure control</h2>
 <hr>
 <p>Synthetic data can provide a relatively safe framework for sharing data. However, some risks will remain present, and it is important to evaluate these risks. For example, it can be the case that the synthesis models were so complex that the synthetic records are very similar or even identical to the original records, which can lead to privacy breaches.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Privacy of synthetic data">
@@ -1301,8 +1301,8 @@ Variables Ordered by synthetic disclosure measure
 </div>
 <hr>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <hr>
 <p>In this tutorial, you have learned to create and evaluate synthetic data. We discussed modelling deterministic relationships, refining synthesis models based on utility measures, comparing utility of synthetic data sets, and evaluating remaining disclosure risks. Remember that if you plan to release synthetic data for open science purposes, it is better to stay on the safe side with respect to privacy. When in doubt, choose the option that yields the smallest risk. We will share some advice on publishing synthetic data in the <a href="../publishing/">next section</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
