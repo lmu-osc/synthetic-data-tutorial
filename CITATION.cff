@@ -6,9 +6,9 @@ authors:
   orcid: "https://orcid.org/0000-0002-2408-7820"
 title: "Generating and Evaluating Synthetic Data in R"
 abstract: "A tutorial for generating and evaluating synthetic data in R"
-version: 0.0.2
+version: 1.0.0
 doi: 10.5281/zenodo.18318778
-date-released: 2026-01-20
+date-released: 2026-06-08
 repository-code: https://github.com/lmu-osc/synthetic-data-tutorial
 url: https://lmu-osc.github.io/synthetic-data-tutorial/
 keywords:
