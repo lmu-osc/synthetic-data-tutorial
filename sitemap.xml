@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
-    <lastmod>2026-06-08T14:33:58.604Z</lastmod>
-  </url>
-  <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.605Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.607Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/about.html</loc>
-    <lastmod>2026-06-08T14:33:58.604Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/sdc/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.607Z</lastmod>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.605Z</lastmod>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE.html</loc>
-    <lastmod>2026-06-08T14:33:58.604Z</lastmod>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/generation/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.605Z</lastmod>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
+    <lastmod>2026-06-15T00:17:54.623Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/publishing/index.html</loc>
-    <lastmod>2026-06-08T14:33:58.605Z</lastmod>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/sdc/index.html</loc>
+    <lastmod>2026-06-15T00:17:54.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/about.html</loc>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
+    <lastmod>2026-06-15T00:17:54.621Z</lastmod>
   </url>
 </urlset>
