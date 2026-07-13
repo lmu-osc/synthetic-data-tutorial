@@ -1,9 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Volker"
-  given-names: "Thom Benjamin"
-  orcid: "https://orcid.org/0000-0002-2408-7820"
+  - family-names: "Volker"
+    given-names: "Thom Benjamin"
+    orcid: "https://orcid.org/0000-0002-2408-7820"
+    affiliation: "Utrecht University; Statistics Netherlands"
 title: "Generating and Evaluating Synthetic Data in R"
 abstract: "A tutorial for generating and evaluating synthetic data in R"
 version: 1.0.0
