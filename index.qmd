@@ -7,6 +7,7 @@ title: "Welcome to the Synthetic Data Tutorial!"
 #| echo: false
 #| warning: false
 library(downlit)
+library(xml2)
 ```
 
 ## Tutorial Overview
