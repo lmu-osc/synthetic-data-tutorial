@@ -32,15 +32,15 @@ website:
     contents:
       - text: "Overview"
         href: index.qmd
-      - text: "Statistical disclosure control"
+      - text: "Statistical Disclosure Control"
         href: sdc/index.qmd
-      - text: "Synthetic data: The general idea"
+      - text: "Synthetic Data: The General Idea"
         href: synthetic/index.qmd
-      - text: "Generating synthetic data"
+      - text: "Generating Synthetic Data"
         href: generation/index.qmd
-      - text: "Evaluating synthetic data quality"
+      - text: "Evaluating Synthetic Data Quality"
         href: evaluation/index.qmd
-      - text: "Publishing and using synthetic data"
+      - text: "Publishing and Using Synthetic Data"
         href: publishing/index.qmd
 # End Website
 
