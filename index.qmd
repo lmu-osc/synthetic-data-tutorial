@@ -2,6 +2,13 @@
 title: "Welcome to the Synthetic Data Tutorial!"
 ---
 
+```{r}
+#| eval: true
+#| echo: false
+#| warning: false
+library(downlit)
+```
+
 ## Tutorial Overview
 
 This **self-paced tutorial** will introduce you to the generation and evaluation of synthetic data. 
