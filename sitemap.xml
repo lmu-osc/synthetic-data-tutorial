@@ -2,38 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/synthetic/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.592Z</lastmod>
+    <lastmod>2026-08-25T09:46:01.230Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/publishing/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.591Z</lastmod>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
   </url>
   <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
-    <lastmod>2026-08-23T23:25:42.590Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/about.html</loc>
-    <lastmod>2026-08-23T23:25:42.590Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/generation/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE.html</loc>
-    <lastmod>2026-08-23T23:25:42.590Z</lastmod>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/footer/imprint.html</loc>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.591Z</lastmod>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE.html</loc>
+    <lastmod>2026-08-25T09:46:01.225Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/about.html</loc>
+    <lastmod>2026-08-25T09:46:01.226Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/generation/index.html</loc>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/evaluation/index.html</loc>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/LICENSE-CODE.html</loc>
+    <lastmod>2026-08-25T09:46:01.225Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/footer/accessibilty.html</loc>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lmu-osc.github.io/synthetic-data-tutorial/footer/privacy.html</loc>
+    <lastmod>2026-08-25T09:46:01.228Z</lastmod>
   </url>
   <url>
     <loc>https://lmu-osc.github.io/synthetic-data-tutorial/sdc/index.html</loc>
-    <lastmod>2026-08-23T23:25:42.592Z</lastmod>
+    <lastmod>2026-08-25T09:46:01.230Z</lastmod>
   </url>
 </urlset>

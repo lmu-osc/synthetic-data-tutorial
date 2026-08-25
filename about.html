@@ -28,7 +28,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -38,17 +92,21 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
+<link href="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-97e28f47ad423cfcb72627c3f906fd98.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-341dcaf373810ade3fa689f494de2849.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,6 +133,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <!-- Matomo -->
 <script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
@@ -95,7 +154,8 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   
 
 
-<link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
+<link rel="stylesheet" href="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+<link rel="stylesheet" href="footer/footer-style.css">
 <meta name="citation_title" content="Generating and evaluating synthetic data in R">
 <meta name="citation_author" content="Thom Benjamin Volker">
 <meta name="citation_publication_date" content="2025-12-18">
@@ -103,17 +163,219 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <meta name="citation_year" content="2025">
 <meta name="citation_online_date" content="2025-12-18">
 <meta name="citation_fulltext_html_url" content="https://lmu-osc.github.io/synthetic-data-tutorial/">
+<meta name="citation_doi" content="10.5281/zenodo.18318778">
 <meta name="citation_language" content="en">
 <meta name="citation_journal_title" content="LMU Open Science Center">
+<meta name="citation_reference" content="citation_title=LMU open science center tutorial template: A quarto extension;,citation_author=Patrick Callahan;,citation_publication_date=2026-07;,citation_cover_date=2026-07;,citation_year=2026;,citation_fulltext_html_url=https://github.com/lmu-osc/tutorial-template;,citation_doi=10.5281/zenodo.21263721;">
+<meta name="citation_reference" content="citation_title=Comparative study of differentially private data synthesis methods;,citation_author=Claire McKay Bowen;,citation_author=Fang Liu;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_issue=2;,citation_doi=10.1214/19-STS742;,citation_volume=35;,citation_journal_title=Statistical Science;,citation_publisher=Institute of Mathematical Statistics;">
+<meta name="citation_reference" content="citation_title=brms: An R package for Bayesian multilevel models using Stan;,citation_author=Paul-Christian Bürkner;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=1;,citation_doi=10.18637/jss.v080.i01;,citation_volume=80;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=Deep learning with r;,citation_author=F. Chollet;,citation_author=T. Kalinowski;,citation_author=J. J. Allaire;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_isbn=9781633439849;">
+<meta name="citation_reference" content="citation_title=Densityratio: Distribution comparison through density ratio estimation;,citation_author=Thom Benjamin Volker;,citation_author=Carlos Gonzalez Poses;,citation_author=Erik-Jan Kesteren;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://github.com/thomvolker/densityratio;,citation_doi=10.5281/zenodo.13881689;">
+<meta name="citation_reference" content="citation_title=Differential privacy in (a bit) more detail;,citation_author=Damien Desfontaines;,citation_publication_date=2018-08;,citation_cover_date=2018-08;,citation_year=2018;,citation_publisher=https://desfontain.es/blog/differential-privacy-in-more-detail.html;">
+<meta name="citation_reference" content="citation_title=A friendly, non-technical introduction to differential privacy;,citation_author=Damien Desfontaines;,citation_publication_date=2023-09;,citation_cover_date=2023-09;,citation_year=2023;,citation_fulltext_html_url=https://desfontain.es/blog/friendly-intro-to-differential-privacy.html;">
+<meta name="citation_reference" content="citation_title=Synthetic datasets for statistical disclosure control: Theory and implementation;,citation_author=Jörg Drechsler;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_doi=10.1007/978-1-4614-0326-5;,citation_volume=201;">
+<meta name="citation_reference" content="citation_title=30 years of synthetic data;,citation_author=Jörg Drechsler;,citation_author=Anna-Carolina Haensch;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_issue=2;,citation_doi=10.1214/24-STS927;,citation_volume=39;,citation_journal_title=Statistical Science;,citation_publisher=Institute of Mathematical Statistics;">
+<meta name="citation_reference" content="citation_title=Data privacy and confidentiality;,citation_author=Stephen E. Fienberg;,citation_author=Aleksandra B. Slavković;,citation_editor=Miodrag Lovric;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=https://doi.org/10.1007/978-3-642-04898-2_202;,citation_doi=10.1007/978-3-642-04898-2_202;,citation_isbn=978-3-642-04898-2;,citation_inbook_title=International encyclopedia of statistical science;">
+<meta name="citation_reference" content="citation_title=ggplot2: Elegant graphics for data analysis;,citation_author=Hadley Wickham;,citation_publication_date=2016;,citation_cover_date=2016;,citation_year=2016;,citation_fulltext_html_url=https://ggplot2.tidyverse.org;,citation_isbn=978-3-319-24277-4;">
+<meta name="citation_reference" content="citation_title=Handbook on statistical disclosure control;,citation_author=Anco Hundepool;,citation_author=Josep Domingo-Ferrer;,citation_author=Luisa Franconi;,citation_author=Sarah Giessing;,citation_author=Rainer Lenz;,citation_author=Jane Naylor;,citation_author=Eric Schulte Nordholt;,citation_author=Giovanni Seri;,citation_author=Peter-Paul De Wolf;,citation_author=Reinhard Tent;,citation_author=Andrzej Młodak;,citation_author=Johannes Gussenbauer;,citation_author=Kamil Wilak;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;">
+<meta name="citation_reference" content="citation_title=glmmTMB balances speed and flexibility among packages for zero-inflated generalized linear mixed modeling;,citation_author=Mollie E. Brooks;,citation_author=Kasper Kristensen;,citation_author=Koen J. Benthem;,citation_author=Arni Magnusson;,citation_author=Casper W. Berg;,citation_author=Anders Nielsen;,citation_author=Hans J. Skaug;,citation_author=Martin Maechler;,citation_author=Benjamin M. Bolker;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=2;,citation_doi=10.32614/RJ-2017-066;,citation_volume=9;,citation_journal_title=The R Journal;">
+<meta name="citation_reference" content="citation_title=An introduction to statistical learning;,citation_author=Gareth James;,citation_author=Daniela Witten;,citation_author=Trevor Hastie;,citation_author=Robert Tibshirani;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://link.springer.com/book/10.1007/978-1-4614-7138-7;,citation_doi=10.1007/978-1-0716-1418-1;,citation_isbn=978-1-0716-1418-1;,citation_series_title=Springer texts in statistics;">
+<meta name="citation_reference" content="citation_title=IVEware: Imputation and variance estimation software;,citation_author=Trivellore E Raghunathan;,citation_author=Peter W Solenberger;,citation_author=John Van Hoewyk;,citation_publication_date=2002;,citation_cover_date=2002;,citation_year=2002;,citation_journal_title=Ann Arbor, MI: Survey Methodology Program, Survey Research Center, Institute for Social Research, University of Michigan;">
+<meta name="citation_reference" content="citation_title=Statistical analysis of masked data;,citation_author=Roderick JA Little;,citation_publication_date=1993;,citation_cover_date=1993;,citation_year=1993;,citation_issue=2;,citation_volume=9;,citation_journal_title=Journal of Official statistics;,citation_publisher=Statistics Sweden (SCB);">
+<meta name="citation_reference" content="citation_title=Fitting linear mixed-effects models using lme4;,citation_author=Douglas Bates;,citation_author=Martin Mächler;,citation_author=Ben Bolker;,citation_author=Steve Walker;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_issue=1;,citation_doi=10.18637/jss.v067.i01;,citation_volume=67;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=mice: Multivariate imputation by chained equations in r;,citation_author=Stef Buuren;,citation_author=Karin Groothuis-Oudshoorn;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_issue=3;,citation_doi=10.18637/jss.v045.i03;,citation_volume=45;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=Computation of multivariate normal and t probabilities;,citation_author=Alan Genz;,citation_author=Frank Bretz;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_isbn=978-3-642-01688-2;,citation_series_title=Lecture notes in statistics;">
+<meta name="citation_reference" content="citation_title=Multiple imputation: A review of practical and theoretical findings;,citation_author=Jared S. Murray;,citation_publication_date=2018-05-01;,citation_cover_date=2018-05-01;,citation_year=2018;,citation_fulltext_html_url=https://doi.org/10.1214/18-STS644;,citation_issue=2;,citation_doi=10.1214/18-STS644;,citation_volume=33;,citation_journal_title=Statistical Science;">
+<meta name="citation_reference" content="citation_title=How to break anonymity of the netflix prize dataset;,citation_author=Arvind Narayanan;,citation_author=Vitaly Shmatikov;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;,citation_fulltext_html_url=https://arxiv.org/abs/cs/0610105;">
+<meta name="citation_reference" content="citation_title=Patchwork: The composer of plots;,citation_author=Thomas Lin Pedersen;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://CRAN.R-project.org/package=patchwork;,citation_doi=10.32614/CRAN.package.patchwork;">
+<meta name="citation_reference" content="citation_title=Purrr: Functional programming tools;,citation_author=Hadley Wickham;,citation_author=Lionel Henry;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_fulltext_html_url=https://github.com/tidyverse/purrr;">
+<meta name="citation_reference" content="citation_title=Guidelines for producing useful synthetic data;,citation_author=Gillian M. Raab;,citation_author=Beata Nowok;,citation_author=Chris Dibben;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://arxiv.org/abs/1712.04078;">
+<meta name="citation_reference" content="citation_title=Privacy risk from synthetic data: Practical proposals;,citation_author=Gillian M. Raab;,citation_editor=Josep Domingo-Ferrer;,citation_editor=Melek Önen;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_doi=10.1007/978-3-031-69651-0_17;,citation_isbn=978-3-031-69651-0;,citation_conference_title=Privacy in statistical databases;,citation_conference=Springer Nature Switzerland;">
+<meta name="citation_reference" content="citation_title=Statistical approaches to protecting confidentiality in public use data;,citation_author=Jerome P. Reiter;,citation_editor=Miodrag Lovric;,citation_publication_date=2011;,citation_cover_date=2011;,citation_year=2011;,citation_fulltext_html_url=https://doi.org/10.1007/978-3-642-04898-2_537;,citation_doi=10.1007/978-3-642-04898-2_537;,citation_isbn=978-3-642-04898-2;,citation_inbook_title=International encyclopedia of statistical science;">
+<meta name="citation_reference" content="citation_title=Statistical disclosure limitation;,citation_author=Donald B Rubin;,citation_publication_date=1993;,citation_cover_date=1993;,citation_year=1993;,citation_issue=2;,citation_volume=9;,citation_journal_title=Journal of official Statistics;">
+<meta name="citation_reference" content="citation_title=General and specific utility measures for synthetic data;,citation_author=Joshua Snoke;,citation_author=Gillian M. Raab;,citation_author=Beata Nowok;,citation_author=Chris Dibben;,citation_author=Aleksandra Slavkovic;,citation_publication_date=2018-03;,citation_cover_date=2018-03;,citation_year=2018;,citation_issue=3;,citation_doi=10.1111/rssa.12358;,citation_issn=0964-1998;,citation_volume=181;,citation_journal_title=Journal of the Royal Statistical Society Series A: Statistics in Society;">
+<meta name="citation_reference" content="citation_title=The r package hmi: A convenient tool for hierarchical multiple imputation and beyond;,citation_abstract=Applications of multiple imputation have long outgrown the traditional context of dealing with item nonresponse in cross-sectional data sets. Nowadays multiple imputation is also applied to impute missing values in hierarchical data sets, address confidentiality concerns, combine data from different sources, or correct measurement errors in surveys. However, software developments did not keep up with these recent extensions. Most imputation software can only deal with item nonresponse in cross-sectional settings and extensions for hierarchical data - if available at all - are typically limited in scope. Furthermore, to our knowledge no software is currently available for dealing with measurement error using multiple imputation approaches. The R package hmi tries to close some of these gaps. It offers multiple imputation routines in hierarchical settings for many variable types (for example, nominal, ordinal, or continuous variables). It also provides imputation routines for interval data and handles a common measurement error problem in survey data: biased inferences due to implicit rounding of the reported values. The user-friendly setup which only requires the data and optionally the specification of the analysis model of interest makes the package especially attractive for users less familiar with the peculiarities of multiple imputation. The compatibility with the popular mice package (Van Buuren and Groothuis-Oudshoorn 2011) ensures that the rich set of analysis and diagnostic tools and post-imputation functions available in mice can be used easily, once the data have been imputed.;,citation_author=Matthias Speidel;,citation_author=Jörg Drechsler;,citation_author=Shahab Jolani;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://www.jstatsoft.org/index.php/jss/article/view/v095i09;,citation_issue=9;,citation_doi=10.18637/jss.v095.i09;,citation_volume=95;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=synthpop: Bespoke creation of synthetic data in R;,citation_author=Beata Nowok;,citation_author=Gillian M. Raab;,citation_author=Chris Dibben;,citation_publication_date=2016;,citation_cover_date=2016;,citation_year=2016;,citation_issue=11;,citation_doi=10.18637/jss.v074.i11;,citation_volume=74;,citation_journal_title=Journal of Statistical Software;">
+<meta name="citation_reference" content="citation_title=Fully conditional specification in multivariate imputation;,citation_author=S. Buuren;,citation_author=J. P. L. Brand;,citation_author=C. G. M. Groothuis-Oudshoorn;,citation_author=D. B. Rubin;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_fulltext_html_url=https://doi.org/10.1080/10629360600810434;,citation_issue=12;,citation_doi=10.1080/10629360600810434;,citation_volume=76;,citation_journal_title=Journal of Statistical Computation and Simulation;,citation_publisher=Taylor &amp;amp;amp; Francis;">
+<meta name="citation_reference" content="citation_title=Illustrative GANs for simple synthetic data with keras in r;,citation_author=Thom Benjamin Volker;,citation_publication_date=2025-07-14;,citation_cover_date=2025-07-14;,citation_year=2025;,citation_fulltext_html_url=https://thomvolker.github.io/blog/1407_gans_in_r/;">
+<meta name="citation_reference" content="citation_title=Anonymiced shareable data: Using mice to create and analyze multiply imputed synthetic datasets;,citation_author=Thom Benjamin Volker;,citation_author=Gerko Vink;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_issue=4;,citation_doi=10.3390/psych3040045;,citation_volume=3;,citation_journal_title=Psych;">
+<meta name="citation_reference" content="citation_title=A density ratio framework for evaluating the utility of synthetic data;,citation_author=Thom Benjamin Volker;,citation_author=Peter-Paul Wolf;,citation_author=Erik-Jan Kesteren;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://arxiv.org/abs/2408.13167;">
+<meta name="citation_reference" content="citation_title=Sequential hierarchical regression imputation;,citation_author=Recai M Yucel;,citation_author=Enxu Zhao;,citation_author=Nathaniel Schenker;,citation_author=Trivellore E Raghunathan;,citation_publication_date=2017-11;,citation_cover_date=2017-11;,citation_year=2017;,citation_issue=1;,citation_doi=10.1093/jssam/smx004;,citation_issn=2325-0984;,citation_volume=6;,citation_journal_title=Journal of Survey Statistics and Methodology;">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
+    <img src="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -135,7 +397,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -151,7 +413,13 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
           </li>
       </ul>
     </div>
-    <a href="https://www.osc.uni-muenchen.de/index.html" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+    <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -173,6 +441,12 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -189,31 +463,31 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sdc/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical disclosure control</span></a>
+ <span class="menu-text">Statistical Disclosure Control</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./synthetic/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Synthetic data: The general idea</span></a>
+ <span class="menu-text">Synthetic Data: The General Idea</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./generation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Generating synthetic data</span></a>
+ <span class="menu-text">Generating Synthetic Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./evaluation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluating synthetic data quality</span></a>
+ <span class="menu-text">Evaluating Synthetic Data Quality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./publishing/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publishing and using synthetic data</span></a>
+ <span class="menu-text">Publishing and Using Synthetic Data</span></a>
   </div>
 </li>
     </ul>
@@ -221,25 +495,25 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="./assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
-</div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#contributors" id="toc-contributors" class="nav-link active" data-scroll-target="#contributors">Contributors</a></li>
   <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#tutorial-template-quarto-extension" id="toc-tutorial-template-quarto-extension" class="nav-link" data-scroll-target="#tutorial-template-quarto-extension">Tutorial Template Quarto Extension</a></li>
+  <li><a href="#how-to-cite" id="toc-how-to-cite" class="nav-link" data-scroll-target="#how-to-cite">How to Cite</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/about.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<div class="quarto-title-block"><div><h1 class="title">About</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -248,7 +522,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   <div class="quarto-title-meta-heading">Affiliations</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Thom Benjamin Volker, MSc. <a href="https://orcid.org/0000-0002-2408-7820" class="quarto-title-author-orcid" aria-label="ORCID profile for Thom Benjamin Volker"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    <p class="author">Thom Benjamin Volker, M.Sc. <a href="https://orcid.org/0000-0002-2408-7820" class="quarto-title-author-orcid" aria-label="ORCID profile for Thom Benjamin Volker"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -284,29 +558,60 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </section>
 <section id="licenses" class="level2">
 <h2 class="anchored" data-anchor-id="licenses">Licenses</h2>
-<p>The overall project is available under the <strong><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></strong> license found at <a href="./LICENSE.html">LICENSE</a>; all code without any narrative text is also (at your option) available under the <strong><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a></strong> license found at <a href="./LICENSE-CODE.html">LICENSE-CODE</a>.</p>
+<p>The overall project is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/"><strong>CC BY-SA 4.0</strong></a> license found at <a href="./LICENSE.html">LICENSE</a>; all code without any narrative text is also (at your option) available under the <a href="https://creativecommons.org/publicdomain/zero/1.0/"><strong>CC0 1.0 Universal</strong></a> license found at <a href="./LICENSE-CODE.html">LICENSE-CODE</a>.</p>
 <p>Why two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.</p>
 </section>
 <section id="notes" class="level2">
 <h2 class="anchored" data-anchor-id="notes">Notes</h2>
 <p>This tutorial was primarily written in 2025 using <code>R</code> version <code>4.5.0</code>. Major changes to <code>R</code> can be found at the <a href="https://cran.r-project.org/">R website</a> for the most up-to-date information, and to confirm that our tutorial is not out-of-date.</p>
+</section>
+<section id="tutorial-template-quarto-extension" class="level2">
+<h2 class="anchored" data-anchor-id="tutorial-template-quarto-extension">Tutorial Template Quarto Extension</h2>
+<p>This tutorial was written using the <a href="https://github.com/lmu-osc/tutorial-template"><code>lmu-osc/tutorial-template</code></a> Quarto extension <span class="citation" data-cites="callahan2026">(<a href="#ref-callahan2026" role="doc-biblioref">Callahan 2026</a>)</span>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-callahan2026" class="csl-entry" role="listitem">
+Callahan, Patrick. 2026. <em>LMU Open Science Center Tutorial Template: A Quarto Extension</em>. <a href="https://doi.org/10.5281/zenodo.21263721">https://doi.org/10.5281/zenodo.21263721</a>.
+</div>
+</div>
+</section>
+<section id="how-to-cite" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-cite">How to Cite</h2>
+<p><strong>To cite this tutorial, please refer to the project’s <a href="CITATION.cff">CITATION.cff</a> file or use the BibTeX citation provided in the appendix below.</strong></p>
 
+
+<!-- -->
 
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{benjamin_volker2025,
   author = {Benjamin Volker, Thom},
   title = {Generating and Evaluating Synthetic Data in {R}},
+  version = {1.0.0},
   date = {2025-12-18},
   url = {https://lmu-osc.github.io/synthetic-data-tutorial/},
+  doi = {10.5281/zenodo.18318778},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-benjamin_volker2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Benjamin Volker, Thom. 2025. <span>“Generating and Evaluating Synthetic
-Data in R.”</span> LMU Open Science Center, December 18. <a href="https://lmu-osc.github.io/synthetic-data-tutorial/">https://lmu-osc.github.io/synthetic-data-tutorial/</a>.
+Data in R.”</span> Version 1.0.0. LMU Open Science Center, December 18.
+<a href="https://doi.org/10.5281/zenodo.18318778">https://doi.org/10.5281/zenodo.18318778</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -376,6 +681,57 @@ Data in R.”</span> LMU Open Science Center, December 18. <a href="https://lmu-
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/synthetic-data-tutorial\/");
@@ -392,6 +748,13 @@ Data in R.”</span> LMU Open Science Center, December 18. <a href="https://lmu-
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -704,7 +1067,62 @@ Data in R.”</span> LMU Open Science Center, December 18. <a href="https://lmu-
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "About"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-12-18</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">citation:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  type: "webpage"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  title: "Generating and evaluating synthetic data in R"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  container-title: "LMU Open Science Center"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  url: https://lmu-osc.github.io/synthetic-data-tutorial/</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  doi: "10.5281/zenodo.18318778"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  version: 1.0.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Thom Benjamin Volker</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    roles: [conceptualization, formal analysis, funding acquisition, investigation, methodology, project administration, software, resources, validation, visualization, writing - original draft, writing - editing &amp; review]</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    degrees:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      - M.Sc.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">      - id: uu</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">        name: Utrecht University</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">        department: Methodology and Statistics</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">        city: Utrecht</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">        country: The Netherlands</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">      - id: cbs</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        name: Statistics Netherlands</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        department: Methodology</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">        city: The Hague</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">        country: The Netherlands</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">    orcid: 0000-0002-2408-7820</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="an">google-scholar:</span><span class="co"> true</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contributors</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>This site was authored by Thom Volker, and edits and contributions were made by Malika Ihle, Alberto Villagran, Felix Schönbrodt and Patrick Callahan.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>The overall project is available under the <span class="co">[</span><span class="ot">**CC BY-SA 4.0**</span><span class="co">](https://creativecommons.org/licenses/by-sa/4.0/)</span> license found at <span class="co">[</span><span class="ot">LICENSE</span><span class="co">](LICENSE.md)</span>; all code without any narrative text is also (at your option) available under the <span class="co">[</span><span class="ot">**CC0 1.0 Universal**</span><span class="co">](https://creativecommons.org/publicdomain/zero/1.0/)</span> license found at <span class="co">[</span><span class="ot">LICENSE-CODE</span><span class="co">](LICENSE-CODE.md)</span>.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>Why two licenses? The CC BY-SA 4.0 license is for the content of the website, while the CC0 1.0 Universal license is for the code and other content that may be reused in other projects, particularly because the CC BY-SA 4.0 license is not intended to be used with software.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>This tutorial was primarily written in 2025 using <span class="in">`R`</span> version <span class="in">`4.5.0`</span>. Major changes to <span class="in">`R`</span> can be found at the <span class="co">[</span><span class="ot">R website</span><span class="co">](https://cran.r-project.org/)</span> for the most up-to-date information, and to confirm that our tutorial is not out-of-date. </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tutorial Template Quarto Extension</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>This tutorial was written using the <span class="co">[</span><span class="ot">`lmu-osc/tutorial-template`</span><span class="co">](https://github.com/lmu-osc/tutorial-template)</span> Quarto extension <span class="co">[</span><span class="ot">@callahan2026</span><span class="co">]</span>.</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Cite</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>**To cite this tutorial, please refer to the project's [CITATION.cff](CITATION.cff) file or use the BibTeX citation provided in the appendix below.**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -713,14 +1131,103 @@ Data in R.”</span> LMU Open Science Center, December 18. <a href="https://lmu-
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/about.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
+  </div>
+</footer>
+<footer class="osc-footer-card text-white py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3 ">
+        <h4 class="fw-bold fs-5 fs-lg-4 text-white">
+          Ludwig-Maximilians-Universität<br>
+          LMU Open Science Center
+        </h4>
+        <p class="mb-0 mt-1 fw-normal fs-5">
+          Leopoldstr. 13<br>
+          80802 München
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Contact</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Prof. Dr. Felix Schönbrodt (Managing Director)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:malika.ihle@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Dr. Malika Ihle (Coordinator) 
+            </a>
+          </li>
+          <li>
+            <a href="mailto:osc@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              OSC team
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
+              Subscribe to our announcement list
+            </a>
+          </li>
+          <li>
+            <a href="https://www.osc.lmu.de/about/join-us.html" target="_blank" class="text-white text-decoration-underline" aria-label="Become a member (opens in new window)">
+              Become a member
+            </a>
+          </li>
+          <li>
+            <a href="https://matrix.to/#/#lmu-open-science-center:matrix.lmu.de" target="_blank" class="text-white text-decoration-underline" aria-label="Chat with us on Matrix (opens in new window)">
+              Chat with us on Matrix
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
+        <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/lmu-open-science-center/" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on LinkedIn (opens in new window)">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://bsky.app/profile/lmu-osc.bsky.social" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Bluesky (opens in new window)">
+          <i class="bi bi-bluesky"></i>
+        </a>
+        <a href="https://scicomm.xyz/@lmu_osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Mastodon (opens in new window)">
+          <i class="bi bi-mastodon"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-light">
+
+    <div class="d-flex flex-wrap gap-3 small">
+      <a href="./footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
+      <span aria-hidden="true">|</span>
+      <a href="./footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="./footer/accessibilty.html" class="text-white text-decoration-underline">Accessibility</a>
+    </div>
+
   </div>
 </footer>
 
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

@@ -92,17 +92,21 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../evaluation/index.html" rel="next">
 <link href="../synthetic/index.html" rel="prev">
-<link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
+<link href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-97e28f47ad423cfcb72627c3f906fd98.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-341dcaf373810ade3fa689f494de2849.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -129,6 +133,7 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <!-- Matomo -->
 <script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
@@ -178,16 +183,183 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
+<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+<link rel="stylesheet" href="../footer/footer-style.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -209,7 +381,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -225,7 +397,13 @@ window.Quarto = {
           </li>
       </ul>
     </div>
-    <a href="https://www.osc.uni-muenchen.de/index.html" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+    <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -234,7 +412,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../generation/index.html">Generating synthetic data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../generation/index.html">Generating Synthetic Data</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -247,6 +425,12 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -263,31 +447,31 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sdc/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical disclosure control</span></a>
+ <span class="menu-text">Statistical Disclosure Control</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../synthetic/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Synthetic data: The general idea</span></a>
+ <span class="menu-text">Synthetic Data: The General Idea</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../generation/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Generating synthetic data</span></a>
+ <span class="menu-text">Generating Synthetic Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../evaluation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluating synthetic data quality</span></a>
+ <span class="menu-text">Evaluating Synthetic Data Quality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../publishing/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publishing and using synthetic data</span></a>
+ <span class="menu-text">Publishing and Using Synthetic Data</span></a>
   </div>
 </li>
     </ul>
@@ -295,11 +479,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
-</div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
@@ -309,14 +490,15 @@ window.Quarto = {
   <li><a href="#advanced-and-optional-extensions-to-synthpop" id="toc-advanced-and-optional-extensions-to-synthpop" class="nav-link" data-scroll-target="#advanced-and-optional-extensions-to-synthpop">Advanced and optional: Extensions to <code>synthpop</code></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/generation/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Generating Synthetic Data in R Using <code>synthpop</code></h1>
+<div class="quarto-title-block"><div><h1 class="title">Generating Synthetic Data in R Using <code>synthpop</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -487,8 +669,8 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>Some of the most important arguments of the <code>syn()</code> function are the following (you can use <code>?synthpop::syn()</code> for a more exhaustive list). The <code>syn()</code> function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called <code>syn</code> in the output list, adheres to these specifications.</p>
-<section id="method" class="level4">
-<h4 class="anchored" data-anchor-id="method"><code>method</code></h4>
+<section id="method" class="level3">
+<h3 class="anchored" data-anchor-id="method"><code>method</code></h3>
 <p>Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (<code>cart</code>) for all variables, which is a flexible, non-parametric technique for modelling synthetic data <span class="citation" data-cites="islr">(for an introduction on classification and regression trees, see, for instance, Section 8.1 in <a href="#ref-islr" role="doc-biblioref">James et al. 2023</a>)</span>. Other synthesis models that are available are listed below (for a more thorough explanation, see <code>?synthpop::syn.METHOD</code>, with <code>METHOD</code> replaced by the actual method as specified below).</p>
 <p><strong>Methods for continuous variables</strong></p>
 <ul>
@@ -520,34 +702,34 @@ window.Quarto = {
 <li><code>survctree</code>: generates synthetic survival data using classification and regression trees.</li>
 </ul>
 </section>
-<section id="default.method" class="level4">
-<h4 class="anchored" data-anchor-id="default.method"><code>default.method</code></h4>
+<section id="default.method" class="level3">
+<h3 class="anchored" data-anchor-id="default.method"><code>default.method</code></h3>
 <p>A string of length four with a user-specified default method for (1) continuous variables, (2) categorical variables with 2 levels, (3) ordered categorical variables with more than 2 levels, and (4) unordered categorical variables with more than 2 levels. Note that this <code>default.method</code> is only used when <code>method = "parametric"</code>, or when there is a mismatch between the synthesis method and the variable type.</p>
 </section>
-<section id="visit.sequence" class="level4">
-<h4 class="anchored" data-anchor-id="visit.sequence"><code>visit.sequence</code></h4>
+<section id="visit.sequence" class="level3">
+<h3 class="anchored" data-anchor-id="visit.sequence"><code>visit.sequence</code></h3>
 <p>Determines the order in which the variables are synthesized. While in theory this order is not supposed to matter much, in practice it can make a difference in some cases. <span class="citation" data-cites="raabetal_guidelines_2017">Raab et al. (<a href="#ref-raabetal_guidelines_2017" role="doc-biblioref">2017</a>)</span> state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.</p>
 </section>
-<section id="predictor.matrix" class="level4">
-<h4 class="anchored" data-anchor-id="predictor.matrix"><code>predictor.matrix</code></h4>
+<section id="predictor.matrix" class="level3">
+<h3 class="anchored" data-anchor-id="predictor.matrix"><code>predictor.matrix</code></h3>
 <p>You might want to exclude some variables as predictor for subsequent variables. This can be helpful if you know there are no relationships between some of the variables, or if you want to include an ID variable in the synthetic data, but not use this as a predictor of subsequent variables.</p>
 </section>
-<section id="k" class="level4">
-<h4 class="anchored" data-anchor-id="k"><code>k</code></h4>
+<section id="k" class="level3">
+<h3 class="anchored" data-anchor-id="k"><code>k</code></h3>
 <p>The number of synthetic records that will be generated. You can generate more or less observations than in the observed data, but note that the information in the synthetic samples cannot exceed the information in the observed data.</p>
 </section>
-<section id="rules-and-rvalues" class="level4">
-<h4 class="anchored" data-anchor-id="rules-and-rvalues"><code>rules</code> and <code>rvalues</code></h4>
+<section id="rules-and-rvalues" class="level3">
+<h3 class="anchored" data-anchor-id="rules-and-rvalues"><code>rules</code> and <code>rvalues</code></h3>
 <p>The <code>rules</code> argument expects a named list that contains rules for restricted values. These restricted values are determined by values of other variables: for example, monthly income should be zero for children who are too young to have a paid job (in the Netherlands, the age limit is 12 years). The <code>rvalues</code> argument expects a named list, but with the values to attach to those observations who adhere to the rules specified in <code>rules</code>. So, if you want to specify that every boy with genital tanner stage “G1” has pubic hair tanner stage “P1”, you can set</p>
 <pre><code>rules = list(phb = "gen == 'G1'")
 rvalues = list(phb = 1)</code></pre>
 </section>
-<section id="semicont" class="level4">
-<h4 class="anchored" data-anchor-id="semicont"><code>semicont</code></h4>
+<section id="semicont" class="level3">
+<h3 class="anchored" data-anchor-id="semicont"><code>semicont</code></h3>
 <p>Some variables might have a point mass for some values. For example, income variables often have a spike at 0 for people who don’t have a paid job. This point mass can be modelled separately by first predicting whether an observation has either a zero or non-zero value, and subsequently modelling the income values for those observations with a non-zero value.</p>
 </section>
-<section id="smoothing" class="level4">
-<h4 class="anchored" data-anchor-id="smoothing"><code>smoothing</code></h4>
+<section id="smoothing" class="level3">
+<h3 class="anchored" data-anchor-id="smoothing"><code>smoothing</code></h3>
 <p>Some imputation methods for continuous variables sample the synthetic values from the observed variable. Since re-using observed values may worsen privacy risks, smoothing can be applied such that there is additional randomness in the values that end up in the synthetic data. The <code>smoothing</code> argument expects a character string with the smoothing method per variable.</p>
 </section>
 </div>
@@ -840,6 +1022,8 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
 
 
+<!-- -->
+
 
 </section>
 
@@ -886,6 +1070,19 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -955,6 +1152,57 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/synthetic-data-tutorial\/");
@@ -971,6 +1219,13 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -1286,16 +1541,436 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../synthetic/index.html" class="pagination-link" aria-label="Synthetic data: The general idea">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Synthetic data: The general idea</span>
+      <a href="../synthetic/index.html" class="pagination-link" aria-label="Synthetic Data: The General Idea">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Synthetic Data: The General Idea</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../evaluation/index.html" class="pagination-link" aria-label="Evaluating synthetic data quality">
-        <span class="nav-page-text">Evaluating synthetic data quality</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../evaluation/index.html" class="pagination-link" aria-label="Evaluating Synthetic Data Quality">
+        <span class="nav-page-text">Evaluating Synthetic Data Quality</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Generating Synthetic Data in R Using `synthpop`"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in <span class="in">`R`</span>. </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>Throughout, we will use the <span class="in">`synthpop`</span> package <span class="co">[</span><span class="ot">@synthpop</span><span class="co">]</span>, which is a powerful tool explicitly designed to generate synthetic data.</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>Other alternatives to create synthetic data are, for example, the <span class="in">`R`</span>-package <span class="in">`mice`</span> <span class="co">[</span><span class="ot">@mice; @volker_anonymiced_2021</span><span class="co">]</span> or the stand-alone software <span class="in">`IVEware`</span> <span class="co">[</span><span class="ot">@iveware</span><span class="co">]</span>.</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>Additionally, we will use the package <span class="in">`densityratio`</span> <span class="co">[</span><span class="ot">@densityratio</span><span class="co">]</span> to evaluate the utility of synthetic data.</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>Make sure to load all of the required packages, and in case you haven't installed them already, install them first:</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: install-packages</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"synthpop"</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"densityratio"</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mvtnorm"</span>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>__1. Load the `R`-packages `synthpop` and `densityratio` using `library()`.__</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-packages</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>Throughout the practical, we will continue with the <span class="in">`boys`</span> data from the <span class="in">`mice`</span> package that we also used in the previous section.</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>Note that you cannot simply load the data from the <span class="in">`mice`</span> package, because the missing values are imputed to simplify the practical. </span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>You can download the data as follows:</span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load data</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>The <span class="in">`boys`</span> data contains measurements on <span class="in">`r ncol(mice::boys)`</span> variables on <span class="in">`r nrow(mice::boys)`</span> Dutch boys. The variables in the data are described in the block below.</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true" title="Description of the <span class="in">`boys`</span> data"}</span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`age`</span>: Decimal age (0-21 years)</span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`hgt`</span>: Height (cm)</span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`wgt`</span>: Weight (kg)</span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bmi`</span>: Body mass index</span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`hc`</span>: Head circumference (cm)</span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`gen`</span>: Genital Tanner stage (G1-G5)</span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`phb`</span>: Pubic hair (Tanner P1-P6)</span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tv`</span>: Testicular volume (ml)</span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`reg`</span>: Region (north, east, west, south, city)</span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting to know the data</span></span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>Normally, this step would be redundant, as you probably analyzed the data of interest already and know all the ins and outs. </span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a>However, if the <span class="in">`boys`</span> data is new for you, it is helpful to invest some time in getting to know the data you will be working with. </span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>When creating synthetic data, it eases the modelling procedure when you know what variables there are in the data, and which kinds of relationships you can expect.</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a>__2. Inspect the first few rows of the data using `head()`.__</span>
+<span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inspect-data</span></span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-107"><a href="#cb24-107" aria-hidden="true" tabindex="-1"></a>__3. Use the `summary()` function to get an overview of the data.__</span>
+<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summary-data</span></span>
+<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span>
+<span id="cb24-117"><a href="#cb24-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a>You may notice a couple of things. First, the data seems to be sorted by age. You may verify this by running <span class="in">`!is.unsorted(data$age)`</span>. </span>
+<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a>Second, you may notice that most variables are non-negative, which might be something you want to take into account when modelling the data (but perhaps, this is not so relevant for the analysis at hand; for now, we assume it is).</span>
+<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a>Third, you may notice that the variable <span class="in">`bmi`</span> is mathematically linked to the variables <span class="in">`hgt`</span> and <span class="in">`wgt`</span>. </span>
+<span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a>We want to take this into account when modelling the data.</span>
+<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a>Finally, note that the data consist of a mix of continuous and categorical variables. </span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-127"><a href="#cb24-127" aria-hidden="true" tabindex="-1"></a>--- </span>
+<span id="cb24-128"><a href="#cb24-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creating synthetic data {#sec-creating}</span></span>
+<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a>Throughout the tutorial, we create data using fully conditional specification, which is implemented in the <span class="in">`synthpop`</span> package. </span>
+<span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a>The most important function in the package is <span class="in">`syn()`</span>.</span>
+<span id="cb24-135"><a href="#cb24-135" aria-hidden="true" tabindex="-1"></a>The <span class="in">`syn()`</span> function takes a dataset, estimates a set of conditional models, and draws synthetic data from these models.</span>
+<span id="cb24-136"><a href="#cb24-136" aria-hidden="true" tabindex="-1"></a>The other arguments allow to specify various modelling choices, for example which model to use for which variable, which set of predictor variables to use for modelling each synthetic variable, whether there are particular constraints that need to be taken into account, and so on.</span>
+<span id="cb24-137"><a href="#cb24-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-138"><a href="#cb24-138" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="Modelling choices in synthpop"}</span>
+<span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-140"><a href="#cb24-140" aria-hidden="true" tabindex="-1"></a>Some of the most important arguments of the <span class="in">`syn()`</span> function are the following (you can use <span class="in">`?synthpop::syn()`</span> for a more exhaustive list). The <span class="in">`syn()`</span> function will take these modelling choices into account when modelling each synthetic variable, and the resulting synthetic data, called <span class="in">`syn`</span> in the output list, adheres to these specifications. </span>
+<span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-142"><a href="#cb24-142" aria-hidden="true" tabindex="-1"></a><span class="fu">### `method`</span></span>
+<span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a>Either a single character string with a synthesis model that is applied to all variables, or a character vector with a synthesis model per variable. The default method is use classification and regression trees (<span class="in">`cart`</span>) for all variables, which is a flexible, non-parametric technique for modelling synthetic data <span class="co">[</span><span class="ot">for an introduction on classification and regression trees, see, for instance, Section 8.1 in @islr</span><span class="co">]</span>. Other synthesis models that are available are listed below (for a more thorough explanation, see <span class="in">`?synthpop::syn.METHOD`</span>, with <span class="in">`METHOD`</span> replaced by the actual method as specified below).</span>
+<span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a>__Methods for continuous variables__</span>
+<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`bag`</span>: bagging.</span>
+<span id="cb24-149"><a href="#cb24-149" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`cart`</span>: classification and regression trees.</span>
+<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`norm`</span>: linear regression.</span>
+<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`sqrtnorm`</span>: linear regression on the square root of the outcome variable.</span>
+<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`cubertnorm`</span>: linear regression on the cubic root of the outcome variable.</span>
+<span id="cb24-153"><a href="#cb24-153" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lognorm`</span>: linear regression on the natural logarithm of the outcome.variable.</span>
+<span id="cb24-154"><a href="#cb24-154" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`normrank`</span>: linear regression on normal quantiles of the ranks of the outcome, new values are drawn by matching synthetic ranks with observed ranks, and drawing synthetic values corresponding to the observed ranks.</span>
+<span id="cb24-155"><a href="#cb24-155" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`pmm`</span>: predictive mean matching.</span>
+<span id="cb24-156"><a href="#cb24-156" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`ranger`</span>: random forests using the <span class="in">`ranger`</span> package.</span>
+<span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`rf`</span>: random forests using the <span class="in">`randomForest`</span> package.</span>
+<span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`sample`</span>: random sampling with replacement from the observed data.</span>
+<span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a>__Methods for categorical data__</span>
+<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`satcat`</span>: Generates a variable from all possible combination of its predictors using sampling (so only combinations with observed values can be synthesized). </span>
+<span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`catall`</span>: Extends <span class="in">`satcat`</span>, by drawing generating all categorical variables simultaneously from a multinomial distribution. This allows to generate synthetic values for combinations of cells that are not in the observed data, and to specify structural zeros (i.e., combinations of cells that are impossible). The multinomial model is actually a joint model for the categorical variables. The continuous variables can then be modelled using the fully conditional specification approach (this only works when first using joint modelling, and then modelling the remainder using fully conditional specification).</span>
+<span id="cb24-164"><a href="#cb24-164" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`ipf`</span>: Iterative proportional fitting with additional noise to yield better privacy guarantees <span class="co">[</span><span class="ot">satisfies differential privacy, for a non-technical introduction on this, see @Desfontaines_2023</span><span class="co">]</span>.</span>
+<span id="cb24-165"><a href="#cb24-165" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`logreg`</span>: logistic regression.</span>
+<span id="cb24-166"><a href="#cb24-166" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`polr`</span>: ordered polytomous regression (logistic regression with an outcome with $&gt; 2$ categories).</span>
+<span id="cb24-167"><a href="#cb24-167" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`polyreg`</span>: unordered polytomous regression.</span>
+<span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`nested`</span>: synthesizes a variable that is nested in the categories of another variable.</span>
+<span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`cart`</span> <span class="in">`pmm`</span>, <span class="in">`ranger`</span>, <span class="in">`rf`</span> and <span class="in">`sample`</span> are all also available for categorical variables.</span>
+<span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a>__Methods for survival data__</span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`survctree`</span>: generates synthetic survival data using classification and regression trees.</span>
+<span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-175"><a href="#cb24-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### `default.method`</span></span>
+<span id="cb24-176"><a href="#cb24-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a>A string of length four with a user-specified default method for (1) continuous variables, (2) categorical variables with 2 levels, (3) ordered categorical variables with more than 2 levels, and (4) unordered categorical variables with more than 2 levels. Note that this <span class="in">`default.method`</span> is only used when <span class="in">`method = "parametric"`</span>, or when there is a mismatch between the synthesis method and the variable type.</span>
+<span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-179"><a href="#cb24-179" aria-hidden="true" tabindex="-1"></a><span class="fu">### `visit.sequence`</span></span>
+<span id="cb24-180"><a href="#cb24-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a>Determines the order in which the variables are synthesized.</span>
+<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a>While in theory this order is not supposed to matter much, in practice it can make a difference in some cases.</span>
+<span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a>@raabetal_guidelines_2017 state that if there exist a subset of variables which relationships are most important, it is often beneficial to synthesize these first. Variables with many categories are typically hard to synthesize, and may yield an unfeasible number of parameters for models of later synthesized variables, so you might consider synthesizing these at the final stages.</span>
+<span id="cb24-184"><a href="#cb24-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-185"><a href="#cb24-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### `predictor.matrix`</span></span>
+<span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-187"><a href="#cb24-187" aria-hidden="true" tabindex="-1"></a>You might want to exclude some variables as predictor for subsequent variables. This can be helpful if you know there are no relationships between some of the variables, or if you want to include an ID variable in the synthetic data, but not use this as a predictor of subsequent variables.</span>
+<span id="cb24-188"><a href="#cb24-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-189"><a href="#cb24-189" aria-hidden="true" tabindex="-1"></a><span class="fu">### `k`</span></span>
+<span id="cb24-190"><a href="#cb24-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-191"><a href="#cb24-191" aria-hidden="true" tabindex="-1"></a>The number of synthetic records that will be generated. You can generate more or less observations than in the observed data, but note that the information in the synthetic samples cannot exceed the information in the observed data.</span>
+<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a><span class="fu">### `rules` and `rvalues`</span></span>
+<span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a>The <span class="in">`rules`</span> argument expects a named list that contains rules for restricted values. These restricted values are determined by values of other variables: for example, monthly income should be zero for children who are too young to have a paid job (in the Netherlands, the age limit is 12 years). The <span class="in">`rvalues`</span> argument expects a named list, but with the values to attach to those observations who adhere to the rules specified in <span class="in">`rules`</span>.</span>
+<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a>So, if you want to specify that every boy with genital tanner stage "G1" has pubic hair tanner stage "P1", you can set</span>
+<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a><span class="in">rules = list(phb = "gen == 'G1'")</span></span>
+<span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a><span class="in">rvalues = list(phb = 1)</span></span>
+<span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### `semicont`</span></span>
+<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a>Some variables might have a point mass for some values. For example, income variables often have a spike at 0 for people who don't have a paid job. This point mass can be modelled separately by first predicting whether an observation has either a zero or non-zero value, and subsequently modelling the income values for those observations with a non-zero value.</span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### `smoothing`</span></span>
+<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a>Some imputation methods for continuous variables sample the synthetic values from the observed variable. </span>
+<span id="cb24-210"><a href="#cb24-210" aria-hidden="true" tabindex="-1"></a>Since re-using observed values may worsen privacy risks, smoothing can be applied such that there is additional randomness in the values that end up in the synthetic data. </span>
+<span id="cb24-211"><a href="#cb24-211" aria-hidden="true" tabindex="-1"></a>The <span class="in">`smoothing`</span> argument expects a character string with the smoothing method per variable.</span>
+<span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a>We will first create synthetic data with a relatively simple, parametric, synthesis model. </span>
+<span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a>To this end, we need to decide on a parametric model to synthesize each variable, which can be done by specifying <span class="in">`method = "parametric"`</span> in the call to <span class="in">`syn()`</span>.</span>
+<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a>The <span class="in">`"parametric"`</span> method in <span class="in">`synthpop`</span> uses the <span class="in">`"normrank"`</span> method for continuous variables.</span>
+<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a>This method synthesizes continuous variables with an extension of a linear regression model that preserves the marginal distribution of the variables under deviations from normality. </span>
+<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a>That is, skewness or other deviations are preserved along with linear relationships with other variables, without requiring complex modelling. </span>
+<span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a>Specifically, <span class="in">`normrank`</span> first transforms the observed data to standard normal quantiles based on the relative ranks of the values.</span>
+<span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a>Subsequently, a linear regression model is fitted on these quantiles using all predictors that were synthesized previously. </span>
+<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a>Finally, synthetic values are drawn from the observed data by backtransforming the synthetic quantiles to ranks, and matching the ranks with the observed data.</span>
+<span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a>This approach better approximates the marginal (univariate) distribution of the observed data in case of non-normality, but distorts linear relationships between variables. </span>
+<span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a>For this reason, we set the default parametric method to <span class="in">`"norm"`</span> in the script below. </span>
+<span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a>When the data is not numerical, <span class="in">`synthpop`</span> treats it as a categorical variable.</span>
+<span id="cb24-227"><a href="#cb24-227" aria-hidden="true" tabindex="-1"></a>Categorical variables with two categories are synthesized with a logistic regression model and categorical variables with more than two categories are synthesized using ordered or unordered polytomous regression (which is an extension to logistic regression for more than two categories), depending on whether the categories are ordered or not, respectively.</span>
+<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-231"><a href="#cb24-231" aria-hidden="true" tabindex="-1"></a>__4. Use `synthpop()` to create a synthetic data set in an object called `syn_param` using `method = "parametric"`, but set `default.method = c("norm", "logreg", "polyreg", "polr")`. Use `seed = 123` if you want to replicate our results.__</span>
+<span id="cb24-232"><a href="#cb24-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: syn-parametric</span></span>
+<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"parametric"</span>,</span>
+<span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a>  <span class="at">default.method =</span> <span class="fu">c</span>(<span class="st">"norm"</span>, <span class="st">"logreg"</span>, <span class="st">"polyreg"</span>, <span class="st">"polr"</span>),</span>
+<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
+<span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-252"><a href="#cb24-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a>__5. Inspect the `syn_param` object, what do you see?__</span>
+<span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: syn-parametric-object</span></span>
+<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a>syn_param</span>
+<span id="cb24-263"><a href="#cb24-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a>Calling syn_param shows you some important features of the synthesis procedure.</span>
+<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a>First, it shows the number of synthetic data sets that were generated (in <span class="in">`syn_param$m`</span>). </span>
+<span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a>Also, it shows for every variable the method that was used to synthesize the data (in <span class="in">`syn_param$method`</span>). </span>
+<span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a>If you want to know more about a specific synthesis method, say, for example, <span class="in">`logreg`</span>, you can call <span class="in">`?syn.logreg`</span> to get more information.</span>
+<span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a>Because we assumed that the synthetic variables are drawn from a normal distribution, there might be values outside the typical range.</span>
+<span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a>For example, the fifth value for the variable <span class="in">`wgt`</span> is negative, which is impossible.</span>
+<span id="cb24-273"><a href="#cb24-273" aria-hidden="true" tabindex="-1"></a>One way to deal with this is reverting back to the <span class="in">`"normrank"`</span> method. </span>
+<span id="cb24-274"><a href="#cb24-274" aria-hidden="true" tabindex="-1"></a>Another approach is to use another transformation, or using another model (which we will do later in this tutorial). </span>
+<span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a>Another problem that you might notice, is that the variable <span class="in">`bmi`</span> is not equal to <span class="in">`wgt / (hgt/100)^2`</span>. </span>
+<span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a>This issue can be fixed using _passive_ synthesis, which will be demonstrated in the next section.</span>
+<span id="cb24-277"><a href="#cb24-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-279"><a href="#cb24-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a><span class="fu">## Specifying custom synthesis models</span></span>
+<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-285"><a href="#cb24-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-286"><a href="#cb24-286" aria-hidden="true" tabindex="-1"></a>In <span class="in">`synthpop`</span>, the synthesis method can be altered using the <span class="in">`method`</span> argument.</span>
+<span id="cb24-287"><a href="#cb24-287" aria-hidden="true" tabindex="-1"></a>The <span class="in">`method`</span>-vector is a vector that contains, for every variable, the imputation method or passive imputation equation with which this variable should be imputed.</span>
+<span id="cb24-288"><a href="#cb24-288" aria-hidden="true" tabindex="-1"></a>We can obtain the <span class="in">`method`</span>-vector that we previously specified implicitly by extracting it from the <span class="in">`syn_param`</span> object.</span>
+<span id="cb24-289"><a href="#cb24-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-292"><a href="#cb24-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: extract-method</span></span>
+<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
+<span id="cb24-296"><a href="#cb24-296" aria-hidden="true" tabindex="-1"></a>method</span>
+<span id="cb24-297"><a href="#cb24-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-298"><a href="#cb24-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-299"><a href="#cb24-299" aria-hidden="true" tabindex="-1"></a>We can alter the synthesis model for any variable by changing the corresponding element in this vector. </span>
+<span id="cb24-300"><a href="#cb24-300" aria-hidden="true" tabindex="-1"></a>For passive imputation, we can define a function using <span class="in">`~I(equation)`</span>. </span>
+<span id="cb24-301"><a href="#cb24-301" aria-hidden="true" tabindex="-1"></a>For <span class="in">`bmi`</span>, this entails the following.</span>
+<span id="cb24-302"><a href="#cb24-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-305"><a href="#cb24-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-306"><a href="#cb24-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: make-passive</span></span>
+<span id="cb24-307"><a href="#cb24-307" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
+<span id="cb24-308"><a href="#cb24-308" aria-hidden="true" tabindex="-1"></a>method</span>
+<span id="cb24-309"><a href="#cb24-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-310"><a href="#cb24-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-311"><a href="#cb24-311" aria-hidden="true" tabindex="-1"></a>With this specification, <span class="in">`synthpop`</span> knows that it should not use an statistical model, but rather use the synthetic <span class="in">`hgt`</span> and <span class="in">`wgt`</span> values to construct the <span class="in">`bmi`</span> values deterministically.</span>
+<span id="cb24-312"><a href="#cb24-312" aria-hidden="true" tabindex="-1"></a>Note that, when specifying passive synthesis models, it is essential that these variables are synthesized after the other variables, because otherwise the equation cannot be applied. </span>
+<span id="cb24-313"><a href="#cb24-313" aria-hidden="true" tabindex="-1"></a>Moreover, it can improve utility to perform passive synthesis after imputing all other variables.</span>
+<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a>Specifically, if some relationships between the variables are not captured adequately before passive synthesis is applied, relationships with variables synthesized later may also be distorted.</span>
+<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a>This can be taken into account by specifying the <span class="in">`visit.sequence`</span> argument, which defines the sequence in which variables are synthesized.</span>
+<span id="cb24-316"><a href="#cb24-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-319"><a href="#cb24-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-320"><a href="#cb24-320" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: visit-sequence</span></span>
+<span id="cb24-321"><a href="#cb24-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-322"><a href="#cb24-322" aria-hidden="true" tabindex="-1"></a>visit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hc"</span>, <span class="st">"gen"</span>, <span class="st">"phb"</span>, <span class="st">"tv"</span>, <span class="st">"reg"</span>, <span class="st">"bmi"</span>)</span>
+<span id="cb24-323"><a href="#cb24-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-324"><a href="#cb24-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-325"><a href="#cb24-325" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb24-326"><a href="#cb24-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-327"><a href="#cb24-327" aria-hidden="true" tabindex="-1"></a>__6. Use `synthpop()` to create a synthetic data set in an object called `syn_passive` using the adjusted `method` vector and `visit.sequence`. Again, use `seed = 123` if you want to replicate our results. Inspect the output.__</span>
+<span id="cb24-328"><a href="#cb24-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-329"><a href="#cb24-329" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb24-330"><a href="#cb24-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-333"><a href="#cb24-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-334"><a href="#cb24-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: impute-passive</span></span>
+<span id="cb24-335"><a href="#cb24-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb24-338"><a href="#cb24-338" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> method,</span>
+<span id="cb24-339"><a href="#cb24-339" aria-hidden="true" tabindex="-1"></a>  <span class="at">visit.sequence =</span> visit,</span>
+<span id="cb24-340"><a href="#cb24-340" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb24-341"><a href="#cb24-341" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span></span>
+<span id="cb24-342"><a href="#cb24-342" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-343"><a href="#cb24-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-344"><a href="#cb24-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-345"><a href="#cb24-345" aria-hidden="true" tabindex="-1"></a>The printed message signals that <span class="in">`synthpop`</span> detects that the specified relationship does not hold in the real data.</span>
+<span id="cb24-346"><a href="#cb24-346" aria-hidden="true" tabindex="-1"></a>This is not really something to worry about: it is due to rounding errors in <span class="in">`bmi`</span>.</span>
+<span id="cb24-347"><a href="#cb24-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-350"><a href="#cb24-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-351"><a href="#cb24-351" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: impute-passive-output</span></span>
+<span id="cb24-352"><a href="#cb24-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-353"><a href="#cb24-353" aria-hidden="true" tabindex="-1"></a>syn_passive</span>
+<span id="cb24-354"><a href="#cb24-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-355"><a href="#cb24-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-356"><a href="#cb24-356" aria-hidden="true" tabindex="-1"></a>The <span class="in">`bmi`</span> values correspond to the synthetic <span class="in">`hgt`</span> and <span class="in">`wgt`</span> values, as we wanted.</span>
+<span id="cb24-357"><a href="#cb24-357" aria-hidden="true" tabindex="-1"></a>Using this approach, you can also specify different synthesis methods in general, for example to synthesize some of the variables with a random forest model, or to transform some of the variables before synthesizing them. </span>
+<span id="cb24-358"><a href="#cb24-358" aria-hidden="true" tabindex="-1"></a>There are too many possibilities to cover in this practical, but the <span class="in">`synthpop`</span> package contains extensive documentation (see, for instance, <span class="in">`?synthpop::syn`</span> and <span class="in">`vignette("synthpop", "synthpop")`</span>).</span>
+<span id="cb24-359"><a href="#cb24-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-360"><a href="#cb24-360" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-361"><a href="#cb24-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-362"><a href="#cb24-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced and optional: Extensions to `synthpop`</span></span>
+<span id="cb24-363"><a href="#cb24-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-364"><a href="#cb24-364" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; When the default synthetic data generation methods in </span><span class="in">`synthpop`</span><span class="at"> are not sufficient for your purposes, it is possible to write extensions. This can become fairly advanced, and is usually not required. Nevertheless, extending </span><span class="in">`synthpop`</span><span class="at"> can be done, and below it is shown how for those interested. This section is optional and can be skipped safely.</span></span>
+<span id="cb24-365"><a href="#cb24-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-366"><a href="#cb24-366" aria-hidden="true" tabindex="-1"></a>Synthpop comes with an extensive suite of functionality for generating synthetic data, that already allow for a wide range of applications. </span>
+<span id="cb24-367"><a href="#cb24-367" aria-hidden="true" tabindex="-1"></a>It can, however, occur that you want models that are not yet incorporated. </span>
+<span id="cb24-368"><a href="#cb24-368" aria-hidden="true" tabindex="-1"></a>In <span class="in">`synthpop`</span>, it is possible to write custom synthesis functions that extend the existing suite of methods. </span>
+<span id="cb24-369"><a href="#cb24-369" aria-hidden="true" tabindex="-1"></a>The core of writing new functionality, is that you take observed data as input, train a model on this input, and generate new data from this model.</span>
+<span id="cb24-370"><a href="#cb24-370" aria-hidden="true" tabindex="-1"></a>In particular, new imputation functions take as input the observed data, in the form of predictors <span class="in">`x`</span> and outcome <span class="in">`y`</span> (this is the variable to be synthesized), and a set of synthetic predictors <span class="in">`xp`</span> that is used to generate the new synthetic outcome values values. </span>
+<span id="cb24-371"><a href="#cb24-371" aria-hidden="true" tabindex="-1"></a>Additionally, we may use additional arguments to specify parameters for the model used to create synthetic data. </span>
+<span id="cb24-372"><a href="#cb24-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-373"><a href="#cb24-373" aria-hidden="true" tabindex="-1"></a>In practice, we can thus write a synthesis function that starts with <span class="in">`syn.`</span> and then the name of the function, with arguments <span class="in">`y`</span> (outcome variable to be synthesized), <span class="in">`x`</span> (predictors used to model this outcome), <span class="in">`xp`</span> (the synthetic predictor variables used to generate the synthetic <span class="in">`y`</span>) and potentially additional parameters for the model at hand. </span>
+<span id="cb24-374"><a href="#cb24-374" aria-hidden="true" tabindex="-1"></a>Subsequently, we need to fit the model on the observed data, <span class="in">`x`</span> and <span class="in">`y`</span>, and from this model draw new observations from the synthetic predictors, <span class="in">`xp`</span>.</span>
+<span id="cb24-375"><a href="#cb24-375" aria-hidden="true" tabindex="-1"></a>This is illustrated below with a regression model, where all synthetic values lie exactly on the regression line.</span>
+<span id="cb24-376"><a href="#cb24-376" aria-hidden="true" tabindex="-1"></a>Usually, you don't want all values to lie on the regression line, because the variability around the predicted values is essential in making realistic synthetic data, but we stick to this example simply to illustrate the procedure.</span>
+<span id="cb24-377"><a href="#cb24-377" aria-hidden="true" tabindex="-1"></a>The output of the synthetic data function should be a list with two arguments.</span>
+<span id="cb24-378"><a href="#cb24-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-379"><a href="#cb24-379" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`res`</span>: contains the synthetic values, the main output of the synthesis model.</span>
+<span id="cb24-380"><a href="#cb24-380" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`fit`</span> (optional): the parameters of the fitted model, this allows users to generate new synthetic data based on the already fitted models.</span>
+<span id="cb24-381"><a href="#cb24-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-382"><a href="#cb24-382" aria-hidden="true" tabindex="-1"></a>The naming is important, because to extract the synthetic values and allocate them at the correct location, <span class="in">`synthpop`</span> internally looks for the <span class="in">`res`</span> object, and will not be able to extract the synthetic values if you chance the names.</span>
+<span id="cb24-383"><a href="#cb24-383" aria-hidden="true" tabindex="-1"></a>Also note that when returning model parameters (through the <span class="in">`fit`</span> argument), you only return __parameters__ of the fitted model, and not the entire model object, which often includes the data itself.</span>
+<span id="cb24-384"><a href="#cb24-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-385"><a href="#cb24-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-388"><a href="#cb24-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-389"><a href="#cb24-389" aria-hidden="true" tabindex="-1"></a>syn.synthesis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(y, x, xp, ...) {</span>
+<span id="cb24-390"><a href="#cb24-390" aria-hidden="true" tabindex="-1"></a>  new_y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(y) <span class="co"># variable to be synthesized</span></span>
+<span id="cb24-391"><a href="#cb24-391" aria-hidden="true" tabindex="-1"></a>  new_x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x) <span class="co"># observed predictor variables</span></span>
+<span id="cb24-392"><a href="#cb24-392" aria-hidden="true" tabindex="-1"></a>  new_xp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, <span class="fu">as.matrix</span>(xp)) <span class="co"># previously synthesized variables</span></span>
+<span id="cb24-393"><a href="#cb24-393" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(new_y <span class="sc">~</span> new_x) <span class="co"># fitted model</span></span>
+<span id="cb24-394"><a href="#cb24-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(</span>
+<span id="cb24-395"><a href="#cb24-395" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb24-396"><a href="#cb24-396" aria-hidden="true" tabindex="-1"></a>      <span class="at">res =</span> new_xp <span class="sc">%*%</span> <span class="fu">coef</span>(fit), <span class="co"># synthetic values</span></span>
+<span id="cb24-397"><a href="#cb24-397" aria-hidden="true" tabindex="-1"></a>      <span class="at">fit =</span> <span class="fu">coef</span>(fit)</span>
+<span id="cb24-398"><a href="#cb24-398" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-399"><a href="#cb24-399" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-400"><a href="#cb24-400" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-401"><a href="#cb24-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-402"><a href="#cb24-402" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"hgt"</span>] <span class="ot">&lt;-</span> <span class="st">"synthesis_function"</span></span>
+<span id="cb24-403"><a href="#cb24-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-404"><a href="#cb24-404" aria-hidden="true" tabindex="-1"></a>syn_method_spec <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
+<span id="cb24-405"><a href="#cb24-405" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb24-406"><a href="#cb24-406" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> method,</span>
+<span id="cb24-407"><a href="#cb24-407" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb24-408"><a href="#cb24-408" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span></span>
+<span id="cb24-409"><a href="#cb24-409" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>syn</span>
+<span id="cb24-410"><a href="#cb24-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-411"><a href="#cb24-411" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(syn_method_spec<span class="sc">$</span>age, syn_method_spec<span class="sc">$</span>hgt)</span>
+<span id="cb24-412"><a href="#cb24-412" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-413"><a href="#cb24-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-414"><a href="#cb24-414" aria-hidden="true" tabindex="-1"></a>The figure shows that the synthetic <span class="in">`bmi`</span> values are indeed a linear function of the  synthetic <span class="in">`age`</span> values, as we specified.</span>
+<span id="cb24-415"><a href="#cb24-415" aria-hidden="true" tabindex="-1"></a>The procedure can be altered by using a different synthesis model.</span>
+<span id="cb24-416"><a href="#cb24-416" aria-hidden="true" tabindex="-1"></a>Usually, you at least want to use a synthesis model that incorporates some noise in the synthetic values, which can be incorporated by drawing new residuals around the predicted values.</span>
+<span id="cb24-417"><a href="#cb24-417" aria-hidden="true" tabindex="-1"></a>In our case, we could draw new residuals from a normal distribution, by setting <span class="in">`res = new_xp %*% coef(fit) + rnorm(new_xp, 0, sd(fit$residuals))`</span>. </span>
+<span id="cb24-418"><a href="#cb24-418" aria-hidden="true" tabindex="-1"></a>In other settings, noise is incorporated more implicitly, for example by drawing new labels from a binomial distribution, where the predicted probabilities are used as input, or by sampling from terminal leaves, as the <span class="in">`cart`</span> models do. </span>
+<span id="cb24-419"><a href="#cb24-419" aria-hidden="true" tabindex="-1"></a>If you want to learn how this happens in practice, it is probably easiest to checkout the underlying code of some synthesis methods in <span class="in">`synthpop`</span>, by typing <span class="in">`synthpop:::syn.cart`</span> or <span class="in">`synthpop:::syn.norm`</span>, or any other method.</span>
+<span id="cb24-420"><a href="#cb24-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-421"><a href="#cb24-421" aria-hidden="true" tabindex="-1"></a>Using this procedure, you can combine modelling functions that are self-written or stem from alternative packages with the synthesis procedure in <span class="in">`synthpop`</span>.</span>
+<span id="cb24-422"><a href="#cb24-422" aria-hidden="true" tabindex="-1"></a>This also allows to model, for example, a hierarchical structure, using the <span class="in">`R`</span>-package <span class="in">`lme4`</span> <span class="co">[</span><span class="ot">@lme4</span><span class="co">]</span>, <span class="in">`glmmTMB`</span> <span class="co">[</span><span class="ot">@glmmTMB</span><span class="co">]</span> or, if you prefer a Bayesian procedure, with <span class="in">`brms`</span> <span class="co">[</span><span class="ot">@brms</span><span class="co">]</span>.</span>
+<span id="cb24-423"><a href="#cb24-423" aria-hidden="true" tabindex="-1"></a>In such instances, one can incorporate the hierarchical structure replacing the single level models with their hierarchical counterparts from these packages.</span>
+<span id="cb24-424"><a href="#cb24-424" aria-hidden="true" tabindex="-1"></a>Since, as far as we are aware of, no one has done this for synthetic data yet, relevant resources do not seem to to be widely documented yet, but feel free to reach out if you plan on doing this.</span>
+<span id="cb24-425"><a href="#cb24-425" aria-hidden="true" tabindex="-1"></a>To read more about modelling hierarchical data in the context of imputation for missing data, see @yucel_sequential_2017; @speidel_hmi_2020].</span>
+<span id="cb24-426"><a href="#cb24-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-427"><a href="#cb24-427" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
+<span id="cb24-428"><a href="#cb24-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-429"><a href="#cb24-429" aria-hidden="true" tabindex="-1"></a>The exercises here showed that <span class="in">`synthpop`</span> allows quite some flexibility when modelling synthetic data, and simplifies the process substantially.</span>
+<span id="cb24-430"><a href="#cb24-430" aria-hidden="true" tabindex="-1"></a>However, further refinements might sometimes be possible.</span>
+<span id="cb24-431"><a href="#cb24-431" aria-hidden="true" tabindex="-1"></a>In the <span class="co">[</span><span class="ot">subsequent section</span><span class="co">](../evaluation/)</span>, we will discuss how to evaluate the quality of the synthetic data at hand, from both a privacy and utility perspective.</span>
+<span id="cb24-432"><a href="#cb24-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-433"><a href="#cb24-433" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb24-434"><a href="#cb24-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-435"><a href="#cb24-435" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb24-436"><a href="#cb24-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-437"><a href="#cb24-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Synthetic data can be generated in <span class="in">`R`</span> using the <span class="in">`synthpop`</span> package, which implements fully conditional specification (FCS). </span>
+<span id="cb24-438"><a href="#cb24-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The core <span class="in">`syn()`</span> function sequentially fits conditional synthesis models for each variable, and draws synthetic values from these models.</span>
+<span id="cb24-439"><a href="#cb24-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Different synthesis models can be specified on a per-variable basis, allowing to distinguish between continuous, categorical and survival data and to use different functional forms per variable.</span>
+<span id="cb24-440"><a href="#cb24-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Synthesis order, predictors and constraints can be controlled to improve realism and preserve important relationships.</span>
+<span id="cb24-441"><a href="#cb24-441" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Passive synthesis allows for incorporating deterministic relationships in the synthetic data.</span>
+<span id="cb24-442"><a href="#cb24-442" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`synthpop`</span> can be extended with custom synthesis models by writing tailored synthesis functions.</span>
+<span id="cb24-443"><a href="#cb24-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-444"><a href="#cb24-444" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1304,14 +1979,103 @@ Yucel, Recai M, Enxu Zhao, Nathaniel Schenker, and Trivellore E Raghunathan. 201
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/generation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/generation/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
+  </div>
+</footer>
+<footer class="osc-footer-card text-white py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3 ">
+        <h4 class="fw-bold fs-5 fs-lg-4 text-white">
+          Ludwig-Maximilians-Universität<br>
+          LMU Open Science Center
+        </h4>
+        <p class="mb-0 mt-1 fw-normal fs-5">
+          Leopoldstr. 13<br>
+          80802 München
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Contact</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Prof. Dr. Felix Schönbrodt (Managing Director)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:malika.ihle@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Dr. Malika Ihle (Coordinator) 
+            </a>
+          </li>
+          <li>
+            <a href="mailto:osc@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              OSC team
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
+              Subscribe to our announcement list
+            </a>
+          </li>
+          <li>
+            <a href="https://www.osc.lmu.de/about/join-us.html" target="_blank" class="text-white text-decoration-underline" aria-label="Become a member (opens in new window)">
+              Become a member
+            </a>
+          </li>
+          <li>
+            <a href="https://matrix.to/#/#lmu-open-science-center:matrix.lmu.de" target="_blank" class="text-white text-decoration-underline" aria-label="Chat with us on Matrix (opens in new window)">
+              Chat with us on Matrix
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
+        <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/lmu-open-science-center/" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on LinkedIn (opens in new window)">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://bsky.app/profile/lmu-osc.bsky.social" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Bluesky (opens in new window)">
+          <i class="bi bi-bluesky"></i>
+        </a>
+        <a href="https://scicomm.xyz/@lmu_osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Mastodon (opens in new window)">
+          <i class="bi bi-mastodon"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-light">
+
+    <div class="d-flex flex-wrap gap-3 small">
+      <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/accessibilty.html" class="text-white text-decoration-underline">Accessibility</a>
+    </div>
+
   </div>
 </footer>
 
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

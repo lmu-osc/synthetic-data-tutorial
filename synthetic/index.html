@@ -92,17 +92,21 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../generation/index.html" rel="next">
 <link href="../sdc/index.html" rel="prev">
-<link href="../assets/LMU_OSC_favicon.jpg" rel="icon" type="image/jpeg">
+<link href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-97e28f47ad423cfcb72627c3f906fd98.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3c3f1368ed8db972a012dae01a8e5220.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-341dcaf373810ade3fa689f494de2849.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -129,6 +133,7 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <!-- Matomo -->
@@ -180,16 +185,183 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css">
+<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+<link rel="stylesheet" href="../footer/footer-style.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -211,7 +383,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -227,7 +399,13 @@ window.Quarto = {
           </li>
       </ul>
     </div>
-    <a href="https://www.osc.uni-muenchen.de/index.html" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+    <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -236,7 +414,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../synthetic/index.html">Synthetic data: The general idea</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../synthetic/index.html">Synthetic Data: The General Idea</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -249,6 +427,12 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -265,31 +449,31 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../sdc/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical disclosure control</span></a>
+ <span class="menu-text">Statistical Disclosure Control</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../synthetic/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Synthetic data: The general idea</span></a>
+ <span class="menu-text">Synthetic Data: The General Idea</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../generation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Generating synthetic data</span></a>
+ <span class="menu-text">Generating Synthetic Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../evaluation/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluating synthetic data quality</span></a>
+ <span class="menu-text">Evaluating Synthetic Data Quality</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../publishing/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Publishing and using synthetic data</span></a>
+ <span class="menu-text">Publishing and Using Synthetic Data</span></a>
   </div>
 </li>
     </ul>
@@ -297,11 +481,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p><img src="../assets/LMU_OSC_logo.svg" class="img-fluid" width="175"></p>
-</div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
@@ -320,14 +501,15 @@ window.Quarto = {
   <li><a href="#specifying-synthetic-data-models" id="toc-specifying-synthetic-data-models" class="nav-link" data-scroll-target="#specifying-synthetic-data-models">Specifying synthetic data models</a></li>
   <li><a href="#synthetic-data-for-open-science" id="toc-synthetic-data-for-open-science" class="nav-link" data-scroll-target="#synthetic-data-for-open-science">Synthetic data for open science</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/synthetic/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Synthetic Data: The General Idea</h1>
+<div class="quarto-title-block"><div><h1 class="title">Synthetic Data: The General Idea</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -945,6 +1127,8 @@ Figure&nbsp;1
 </div>
 
 
+<!-- -->
+
 
 </section>
 
@@ -986,6 +1170,19 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1055,6 +1252,57 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
       });
       clipboardModal.on('success', onCopySuccess);
     }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/lmu-osc\.github\.io\/synthetic-data-tutorial\/");
@@ -1071,6 +1319,13 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -1386,16 +1641,616 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../sdc/index.html" class="pagination-link" aria-label="Statistical disclosure control">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistical disclosure control</span>
+      <a href="../sdc/index.html" class="pagination-link" aria-label="Statistical Disclosure Control">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistical Disclosure Control</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../generation/index.html" class="pagination-link" aria-label="Generating synthetic data">
-        <span class="nav-page-text">Generating synthetic data</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../generation/index.html" class="pagination-link" aria-label="Generating Synthetic Data">
+        <span class="nav-page-text">Generating Synthetic Data</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Synthetic Data: The General Idea"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Synthetic data: What it is and what it is about?</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="co">[</span><span class="ot">@rubin1993statistical; @little_synthetic_1993</span><span class="co">]</span>.</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model.</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>That is, synthetic data is nothing more than *generated* data, and is occasionally called *simulated data*, *digital twins* or, more colloquially, *fake* data.</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>This model can be specified independent of the data at hand, but typically it is estimated on a data set.</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters).</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>Whatever model is used, it is essential that new samples can be generated from it.</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>In what follows, we assume that there is an observed data set, $X$, consisting of $n$ observations measured on $p$ variables.</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, $f(X)$.</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>If we would know this distribution, we could sample new observations from it directly, but we typically do not know this.</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>However, we can estimate this joint distribution from a data set at hand, leading to $\hat{f}(X)$, and sample new observations from this.</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelling synthetic data {#sec-modelling}</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model.</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. </span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variable and the covariances between variables.</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>Moreover, if we model $f(X)$ accurately and draw new samples from this model, the introduced noise adds uncertainty that contributes to privacy protection.</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>In what follows, we describe the two strategies that have emerged to estimate $\hat{f}(x)$ and draw samples from it.</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### (A) Joint modelling</span></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. </span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>We can, for example, model the distribution of the data using a normal approximation. </span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. </span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>For many data sets, however, this normal approximation provides a poor fit.</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>In the past decade, deep learning has become popular for the generation of synthetic data. </span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). </span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. </span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. </span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, substantially lowering user-friendliness. </span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### (B) Fully conditional specification</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables).</span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>That is, we can factor the joint distribution of the data into a series of conditionals</span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}), </span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>which greatly simplifies the modelling task. </span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model, but with the addition of reasonable assumptions for the noise.</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>In practice, we might proceed as follows.</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Starting from the first variable, we specify a distribution that provides a reasonable approximation to the distribution of the data at hand. </span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the second variable, we specify a prediction model that predicts this variable on the basis of the first, and combine this model with a distribution for the residual variance. If we would use, for example, a linear regression model with normally distributed errors, we fit a regression model with the first variable as predictor and the second variable as outcome. This model is used to predict the second variable from the first in the synthetic data, after which the variance is added by drawing random errors from a normal distribution with mean zero and variance equal to the residual variance of the fitted model. </span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the third variable, we can use a prediction model based on the first two variables, and so on, until all variables are synthesized. </span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>Note that, although in theory the order of synthesis should not matter much, in practice it may make a difference in some cases. </span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>We will come back to this issue and provide some concrete advice in <span class="co">[</span><span class="ot">the next section</span><span class="co">](/generation/index.qmd#sec-creating)</span>.</span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>Fully conditional specification has two distinct advantages over joint modelling:</span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>It allows great flexibility, because a different model can be used for each variable. That is, this linear model can be combined with or replaced by non-linear (e.g., non-parametric) models that capture non-linear relationships (or non-normal error terms).</span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Traditional model evaluation techniques, such as regression diagnostics and posterior predictive checks can be used directly (see <span class="co">[</span><span class="ot">the relevant vignette from the `performance` package</span><span class="co">](https://easystats.github.io/performance/articles/check_model.html#posterior-predictive-checks)</span> for a practical introduction), and potential improvements can be readily incorporated into the synthesis model.^<span class="co">[</span><span class="ot">Note, however, that until now (beginning of 2026) no tailor-made software exists that works together with existing synthetic data generation packages.</span><span class="co">]</span></span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>For example, if a model with a linear relationship between two variables yields a poor fit, a non-linear relationship can be easily incorporated in the synthesis model.</span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a>In what follows, we focus on synthesis methods that employ this *conditional modelling strategy* (also called "fully conditional specification" or "sequential regression").</span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Additional resources"}</span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a>There is, of course, much more to say about specifying synthesis models that we cannot cover all in these materials. However, if you wish to learn more about specifying __joint models__ for creating synthetic data, you might find the following resources helpful.</span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@murray_multiple_2018 (section 6.1): Focuses on specifying joint models for multiple imputation of missing data, but the idea transfers directly to generation of synthetic data (that is, we assume that the missing data occurs in $n_{syn}$ new samples that are fully missing, or we overimpute the observed data).</span>
+<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@chollet_deep_2022 (chapter 12): On deep learning for the generation of synthetic data. </span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@volker_gans_2025: Easy and primarily illustrative introduction on generating (simple) synthetic data based on GANs in <span class="in">`R`</span>. </span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a>If you are interested in any additional resources on __fully conditional specification__, the following papers might be informative.</span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@buuren_fcs_2006: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@drechsler_synthetic_2011 (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section). </span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Optional) Exercise: A simple synthetic data model</span></span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a>_The following exercise is purely illustrational. In practice, we don't write our synthesis code from scratch, but we use dedicated `R` packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. This exercise is not essential for proceeding the tutorial, but try to understand the general workflow. In the [next section](../generation/), we will use the `synthpop` package to achieve similar results._</span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. </span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a>For this exercise (and all exercises in subsequent sections), we will use the <span class="in">`boys`</span> data from the <span class="in">`R`</span>-package <span class="in">`mice`</span>,^<span class="co">[</span><span class="ot">I filled in the missing values through imputation, so we don't have to deal with these. However, this implies that we cannot use the `boys` data from the `mice`-package directly</span><span class="co">]</span> and for the time being, we focus on the first three variables <span class="in">`age`</span>, <span class="in">`hgt`</span> and <span class="in">`wgt`</span>. </span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a>You can obtain the data as follows:</span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load data</span></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>)]</span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true" title="Description of the <span class="in">`boys`</span> data"}</span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>The <span class="in">`boys`</span> data contains measurements on <span class="in">`r ncol(mice::boys)`</span> variables on <span class="in">`r nrow(mice::boys)`</span> Dutch boys. The variables in the data are described below, as well as the first six observations.</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`age`</span>: Decimal age (0-21 years)</span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`hgt`</span>: Height (cm)</span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`wgt`</span>: Weight (kg)</span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bmi`</span>: Body mass index</span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`hc`</span>: Head circumference (cm)</span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`gen`</span>: Genital Tanner stage (G1-G5)</span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`phb`</span>: Pubic hair (Tanner P1-P6)</span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tv`</span>: Testicular volume (ml)</span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`reg`</span>: Region (north, east, west, south, city)</span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "The `boys` data from the `R`-package `mice`"</span></span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data) <span class="sc">|&gt;</span></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a>We start by applying the joint modelling strategy on the <span class="in">`boys`</span> data. </span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a>For simplicity, we draw synthetic samples by approximating the multivariate distribution of <span class="in">`age`</span>, <span class="in">`hgt`</span> and <span class="in">`wgt`</span> using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data.</span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a>To generate these synthetic samples, we use the <span class="in">`R`</span>-package <span class="in">`mvtnorm`</span> <span class="co">[</span><span class="ot">@mvtnorm</span><span class="co">]</span>.</span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>Note that this normal model provides a relatively poor fit to the data (if it were correct, people would keep growing eternally). </span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a>In practice, we would thus choose a different model, and most synthetic data generation software (including the <span class="in">`synthpop`</span> package that we will use subsequently) allows for this.</span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Joint modelling in practice</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a>__1. Load the `R`-package `mvtnorm` using the function `library()`.__</span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-mvtnorm</span></span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>__2. Store the means and variance covariance matrix of the just created subset of the `boys` data.__</span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: store-params</span></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>__3. Create your first synthetic data set by calling the function `rmvnorm()` from the `mvtnorm` package to sample new observations from a multivariate normal distribution. Set the sample size equal to $n = `r nrow(mice::boys)`$, and use the stored mean-vector and variance-covariance matrix.__</span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a>_Note: You may set a seed here for reproducibility (below, `seed = 123` is used, but this is no better than any other seed)._</span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: joint-normal-model</span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>syn1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmvnorm</span>(</span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(data_subset),</span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> means,</span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> varcov</span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Synthetic data with fully conditional specification</span></span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a>We will now do the same thing, but with the fully conditional specification strategy outlined above. </span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a>To do this, we need the regression models <span class="in">`hgt ~ age`</span> and <span class="in">`wgt ~ age + hgt`</span> fitted on the observed data. Moreover, we need the residual variances of each model.</span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>__4. Regress `hgt` on `age` and `wgt` on `age` and `hgt`, and store the results.__</span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit-conditional-regressions</span></span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset)</span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>__5. Now store the mean of the variable `age` with corresponding standard deviation.__</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: store-params-age</span></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>Now, we have everything in place to start the synthesis process. We first generate the variable <span class="in">`age`</span>, then <span class="in">`hgt`</span> and then <span class="in">`wgt`</span>.</span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>__6. Draw $n_{syn} = `r nrow(data_subset)`$ samples from a normal distribution with mean equal to `mean_age` and standard deviation equal to `sd_age`.__</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: generate-age-conditional</span></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a>nsyn <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_subset)</span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a>age_syn <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> nsyn,</span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> mean_age,</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> sd_age</span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>__7. Use the synthetic `age` values to predict an equal number of `hgt` values, and add normal noise based on the residual standard deviation of the model fitted on the observed data.__</span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: synthesize-hgt-conditional</span></span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a>hgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(hgtage)</span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a>hgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(hgtage)<span class="sc">$</span>sigma</span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a>hgt_syn <span class="ot">&lt;-</span> hgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> hgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, hgt_sd)</span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>__8. Now, use the synthetic `age` and `hgt` values to predict an equal number of `wgt` values, and again add normal noise based on the residual standard deviation of the model fitted on the observed data.__</span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: synthesize-wgt-conditional</span></span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a>wgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(wgtagehgt)<span class="sc">$</span>sigma</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a>wgt_syn <span class="ot">&lt;-</span> wgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> wgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> wgt_coefs[<span class="dv">3</span>] <span class="sc">*</span> hgt_syn <span class="sc">+</span></span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, wgt_sd)</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparing the results</span></span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a>__9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.__</span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a>First, we calculate the means of the observed and synthetic variables.</span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compare-means</span></span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>syn2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> age_syn, <span class="at">hgt =</span> hgt_syn, <span class="at">wgt =</span> wgt_syn)</span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> means,</span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a>  <span class="at">syn1 =</span> <span class="fu">colMeans</span>(syn1),</span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>  <span class="at">syn2 =</span> <span class="fu">colMeans</span>(syn2)</span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>These are all reasonably close! We subsequently compare the variances.</span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compare-vars</span></span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a>varcov</span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a>Also the variance covariance matrices are very close, as we would expect. However, these are the parameters that we specified, so these should be reasonably close, because anything else suggests a coding error, rather than a meaningful difference between synthesis strategies. We can go further comparing the distributions of the variables, but we save that exercise for later.</span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Could we add an inference model here? I.e., as if somebody would run a regression on the synthetic data, and see if that resemlbes the original regression results. --&gt;</span></span>
+<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a>__10. Fit a regression model with `wgt` as dependent variable, and `age` and `hgt` as predictors for the observed and two synthetic data sets. What do you see?__</span>
+<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip title="Show solution" collapse=true}</span>
+<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: compare-regressions</span></span>
+<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data)</span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a>fit_s1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn1)</span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a>fit_s2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn2)</span>
+<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s1)</span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s2)</span>
+<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a>You see that the regression coefficients of both synthetic data regressions are very similar to those obtained in the real data, and are in fact within sampling error, in the sense that they are approximately one $SE$ away from the coefficients obtained on the real data.</span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conclusion: Fully conditional specification versus joint modelling</span></span>
+<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. </span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a>While in this specific example, the outcomes were the same, this is not generally the case.</span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a>That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. </span>
+<span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a>However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. </span>
+<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a>As stated in the section <span class="co">[</span><span class="ot">Modelling synthetic data</span><span class="co">](#sec-modelling)</span>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. </span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a>Because of this flexibility, and its presence in existing software, we will use the fully conditional specification strategy throughout.</span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a>Before we get there, we discuss some additional considerations for generating synthetic data.</span>
+<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a><span class="fu">## Specifying synthetic data models</span></span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a>Regardless of which approach to generating synthetic data you use, it is important that you specify an appropriate synthesis model.</span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a>That is, $\hat{f}(x)$ needs to model the true data distribution adequately.</span>
+<span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a>In general, synthetic data models can be misspecified in two ways.</span>
+<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>It can be that our model is far from accurate, because it misses important aspects of the underlying distribution. </span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a>For example, we might select a model that does not capture the shape of some variables. </span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a>We could also miss some important relationships between variables. </span>
+<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a>In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data.</span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a>That is, the synthetic data has low utility.</span>
+<span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>It can also be the case that the model fits the data a bit too good. </span>
+<span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a>If the synthetic data model overfits, we risk that the observed data is reproduced when sampling from the synthetic data model, protecting privacy very poorly. Moreover, overfitted models have a limited utility, as they typically fail to generalize to new data.</span>
+<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a>You might notice that also here the privacy-utility trade-off plays a major role: a simpler synthesis model typically leaks less information, but might also fail to capture more complex characteristics of the observed data.</span>
+<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-412"><a href="#cb25-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-privacy-utility-model</span></span>
+<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 9</span></span>
+<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7</span></span>
+<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../data/boys.RDS"</span>)</span>
+<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a>minidata <span class="ot">&lt;-</span> data[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(data), <span class="at">length.out =</span> <span class="dv">25</span>), ]</span>
+<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a><span class="co"># create new test data set to plot the lines</span></span>
+<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a>modeldata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">max</span>(minidata<span class="sc">$</span>age), <span class="at">length.out =</span> <span class="dv">1001</span>)</span>
+<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a><span class="co"># simple linear regression model</span></span>
+<span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a>simple_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(tv <span class="sc">~</span> age, <span class="at">data =</span> minidata)</span>
+<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a>simple_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
+<span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a>  simple_fit,</span>
+<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> modeldata,</span>
+<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="st">"prediction"</span></span>
+<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a><span class="co"># minimum norm spline</span></span>
+<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="dv">32</span></span>
+<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a>complex_x <span class="ot">&lt;-</span> splines<span class="sc">::</span><span class="fu">ns</span>(minidata<span class="sc">$</span>age, <span class="at">df =</span> df, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a>SVD <span class="ot">&lt;-</span> <span class="fu">svd</span>(complex_x)</span>
+<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate minimum norm regression coefficients</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a>complex_fit <span class="ot">&lt;-</span> SVD<span class="sc">$</span>v <span class="sc">%*%</span> ((<span class="fu">t</span>(SVD<span class="sc">$</span>u) <span class="sc">%*%</span> minidata<span class="sc">$</span>tv) <span class="sc">/</span> SVD<span class="sc">$</span>d)</span>
+<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a><span class="co"># create test data spline</span></span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a>xnewspline <span class="ot">&lt;-</span> splines<span class="sc">::</span><span class="fu">ns</span>(modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df,</span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a>  <span class="at">knots =</span> <span class="fu">attr</span>(complex_x, <span class="st">"knots"</span>),</span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a>  <span class="at">Boundary.knots =</span> <span class="fu">attr</span>(complex_x, <span class="st">"Boundary.knots"</span>),</span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercept =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate predicted values</span></span>
+<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a>complex_pred <span class="ot">&lt;-</span> xnewspline <span class="sc">%*%</span> complex_fit</span>
+<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate more or less correct model</span></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a>right_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(tv) <span class="sc">~</span> splines<span class="sc">::</span><span class="fu">ns</span>(age, <span class="at">knots =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">16</span>)), minidata)</span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a>right_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(right_fit, <span class="at">newdata =</span> modeldata, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a>unsign_sq <span class="ot">&lt;-</span> \(x) <span class="fu">sign</span>(x) <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a>color_scale <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">3</span>, <span class="st">"Set1"</span>)</span>
+<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(color_scale) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Right balance"</span>, <span class="st">"Privacy disaster"</span>, <span class="st">"Poor utility"</span></span>
+<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a>basic <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> minidata<span class="sc">$</span>age, <span class="at">y =</span> minidata<span class="sc">$</span>tv)) <span class="sc">+</span></span>
+<span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Synthesis model"</span>, <span class="at">values =</span> color_scale) <span class="sc">+</span></span>
+<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-470"><a href="#cb25-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Testicular volume"</span>) <span class="sc">+</span></span>
+<span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> basic <span class="sc">+</span></span>
+<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">unsign_sq</span>(right_pred[, <span class="dv">1</span>]),</span>
+<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Right balance"</span></span>
+<span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> complex_pred,</span>
+<span id="cb25-487"><a href="#cb25-487" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Privacy disaster"</span></span>
+<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> simple_pred[, <span class="dv">1</span>],</span>
+<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Poor utility"</span></span>
+<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-496"><a href="#cb25-496" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-497"><a href="#cb25-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">30</span>)</span>
+<span id="cb25-498"><a href="#cb25-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-499"><a href="#cb25-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-500"><a href="#cb25-500" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> basic <span class="sc">+</span></span>
+<span id="cb25-501"><a href="#cb25-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-502"><a href="#cb25-502" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-503"><a href="#cb25-503" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-504"><a href="#cb25-504" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> simple_pred[, <span class="dv">1</span>],</span>
+<span id="cb25-505"><a href="#cb25-505" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Poor utility"</span></span>
+<span id="cb25-506"><a href="#cb25-506" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-507"><a href="#cb25-507" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-508"><a href="#cb25-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
+<span id="cb25-509"><a href="#cb25-509" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-510"><a href="#cb25-510" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-511"><a href="#cb25-511" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> simple_pred[, <span class="dv">2</span>],</span>
+<span id="cb25-512"><a href="#cb25-512" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> simple_pred[, <span class="dv">3</span>],</span>
+<span id="cb25-513"><a href="#cb25-513" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Poor utility"</span></span>
+<span id="cb25-514"><a href="#cb25-514" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb25-515"><a href="#cb25-515" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.2</span></span>
+<span id="cb25-516"><a href="#cb25-516" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-517"><a href="#cb25-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb25-518"><a href="#cb25-518" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-519"><a href="#cb25-519" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> minidata<span class="sc">$</span>age,</span>
+<span id="cb25-520"><a href="#cb25-520" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> simple_fit<span class="sc">$</span>fitted.values <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(minidata), <span class="dv">0</span>, <span class="fu">sd</span>(simple_fit<span class="sc">$</span>residuals)),</span>
+<span id="cb25-521"><a href="#cb25-521" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Poor utility"</span></span>
+<span id="cb25-522"><a href="#cb25-522" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-523"><a href="#cb25-523" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-524"><a href="#cb25-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb25-525"><a href="#cb25-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-526"><a href="#cb25-526" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> basic <span class="sc">+</span></span>
+<span id="cb25-527"><a href="#cb25-527" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-528"><a href="#cb25-528" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-529"><a href="#cb25-529" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-530"><a href="#cb25-530" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> complex_pred[, <span class="dv">1</span>],</span>
+<span id="cb25-531"><a href="#cb25-531" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Privacy disaster"</span></span>
+<span id="cb25-532"><a href="#cb25-532" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-533"><a href="#cb25-533" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-534"><a href="#cb25-534" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> minidata<span class="sc">$</span>age <span class="sc">+</span> <span class="fl">0.1</span>,</span>
+<span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> complex_x <span class="sc">%*%</span> complex_fit <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Privacy disaster"</span></span>
+<span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb25-542"><a href="#cb25-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-543"><a href="#cb25-543" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> basic <span class="sc">+</span></span>
+<span id="cb25-544"><a href="#cb25-544" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb25-545"><a href="#cb25-545" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-546"><a href="#cb25-546" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-547"><a href="#cb25-547" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> right_pred[, <span class="dv">1</span>] <span class="sc">|&gt;</span> <span class="fu">unsign_sq</span>(),</span>
+<span id="cb25-548"><a href="#cb25-548" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Right balance"</span></span>
+<span id="cb25-549"><a href="#cb25-549" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-550"><a href="#cb25-550" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-551"><a href="#cb25-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
+<span id="cb25-552"><a href="#cb25-552" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-553"><a href="#cb25-553" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> modeldata<span class="sc">$</span>age,</span>
+<span id="cb25-554"><a href="#cb25-554" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> right_pred[, <span class="dv">2</span>] <span class="sc">|&gt;</span> <span class="fu">unsign_sq</span>(),</span>
+<span id="cb25-555"><a href="#cb25-555" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> right_pred[, <span class="dv">3</span>] <span class="sc">|&gt;</span> <span class="fu">unsign_sq</span>(),</span>
+<span id="cb25-556"><a href="#cb25-556" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Right balance"</span></span>
+<span id="cb25-557"><a href="#cb25-557" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb25-558"><a href="#cb25-558" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.2</span></span>
+<span id="cb25-559"><a href="#cb25-559" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-560"><a href="#cb25-560" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb25-561"><a href="#cb25-561" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb25-562"><a href="#cb25-562" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> minidata<span class="sc">$</span>age,</span>
+<span id="cb25-563"><a href="#cb25-563" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">unsign_sq</span>(right_fit<span class="sc">$</span>fitted.values <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(minidata), <span class="dv">0</span>, <span class="fu">sd</span>(right_fit<span class="sc">$</span>residuals))),</span>
+<span id="cb25-564"><a href="#cb25-564" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"Right balance"</span></span>
+<span id="cb25-565"><a href="#cb25-565" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-566"><a href="#cb25-566" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-567"><a href="#cb25-567" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb25-568"><a href="#cb25-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-569"><a href="#cb25-569" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">/</span> (p2 <span class="sc">|</span> p3 <span class="sc">|</span> p4)</span>
+<span id="cb25-570"><a href="#cb25-570" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-571"><a href="#cb25-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-572"><a href="#cb25-572" aria-hidden="true" tabindex="-1"></a>For a better grasp of this privacy-utility trade-off, @fig-privacy-utility-model might be illuminating. </span>
+<span id="cb25-573"><a href="#cb25-573" aria-hidden="true" tabindex="-1"></a>The figure shows the relationship between age and testicular volume for a small subset of the <span class="in">`boys`</span> data.</span>
+<span id="cb25-574"><a href="#cb25-574" aria-hidden="true" tabindex="-1"></a>It shows that up to around age 10, testicular volume remains very small and nearly constant, then increases between ages 10 and 16, and finally levels off.</span>
+<span id="cb25-575"><a href="#cb25-575" aria-hidden="true" tabindex="-1"></a>Without going into the specifics of the applied models (although all are implemented using fully conditional specification), we consider the following three approaches to modelling this relationship:</span>
+<span id="cb25-576"><a href="#cb25-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-577"><a href="#cb25-577" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>If we would model this using a linear model (the green line), and generate new samples from this (the green points in the left subplot on the second row), we see a relatively poor fit: some negative values occur, some values that are too large between age 5 and 10 and too many values relatively small after age 16. </span>
+<span id="cb25-578"><a href="#cb25-578" aria-hidden="true" tabindex="-1"></a>So, our synthetic data is not too realistic if we would use this model, and it can be argued that it has relatively low utility.</span>
+<span id="cb25-579"><a href="#cb25-579" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>If we would model the data with a very flexible model (the blue line, and blue points in the middle plot on the second row), we can achieve very high utility. In fact, we can reproduce the observed testicular volume values exactly from the observed age values (which can also be considered a form of overfitting). This poses a significant privacy threat, as knowing someones age allows to directly infer their testicular volume, which is information someone perhaps rather keeps private.</span>
+<span id="cb25-580"><a href="#cb25-580" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points. In this case, this is achieved by transforming <span class="in">`tv`</span> by taking its square-root (which substantially reduces the variance for the lower <span class="in">`tv`</span> scores), and non-linear regression model (with a natural cubic spline basis, see <span class="in">`?ns`</span> for help if you are interested in this).</span>
+<span id="cb25-581"><a href="#cb25-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-582"><a href="#cb25-582" aria-hidden="true" tabindex="-1"></a>In conclusion, you want a synthesis model to be simple enough to leave sufficient uncertainty with respect to the exact relationships between the variables.</span>
+<span id="cb25-583"><a href="#cb25-583" aria-hidden="true" tabindex="-1"></a>This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables.</span>
+<span id="cb25-584"><a href="#cb25-584" aria-hidden="true" tabindex="-1"></a>Simultaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data.</span>
+<span id="cb25-585"><a href="#cb25-585" aria-hidden="true" tabindex="-1"></a>Hence, you want to balance data privacy with data utility.</span>
+<span id="cb25-586"><a href="#cb25-586" aria-hidden="true" tabindex="-1"></a>How to balance privacy and utility will be the subject of the upcoming sections.</span>
+<span id="cb25-587"><a href="#cb25-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-588"><a href="#cb25-588" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-589"><a href="#cb25-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-590"><a href="#cb25-590" aria-hidden="true" tabindex="-1"></a><span class="fu">## Synthetic data for open science</span></span>
+<span id="cb25-591"><a href="#cb25-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-592"><a href="#cb25-592" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb25-593"><a href="#cb25-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-594"><a href="#cb25-594" aria-hidden="true" tabindex="-1"></a>The release of a synthetic data set for open science purposes should be guided by the privacy-utility trade-off, with respect to the data at hand.</span>
+<span id="cb25-595"><a href="#cb25-595" aria-hidden="true" tabindex="-1"></a>That is, one should consider the goals that should be attainable with the synthetic data, and what privacy risks are looming.</span>
+<span id="cb25-596"><a href="#cb25-596" aria-hidden="true" tabindex="-1"></a>From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data.</span>
+<span id="cb25-597"><a href="#cb25-597" aria-hidden="true" tabindex="-1"></a>Often, this depends on the analyses conducted with the real data. </span>
+<span id="cb25-598"><a href="#cb25-598" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-599"><a href="#cb25-599" aria-hidden="true" tabindex="-1"></a>For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, it may be sufficiant to have a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.</span>
+<span id="cb25-600"><a href="#cb25-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-601"><a href="#cb25-601" aria-hidden="true" tabindex="-1"></a>If the data ought to be used for novel research, including complex modelling, one should consider incorporating these complexities (such as higher-order moments or non-linearities) in the synthesis model.</span>
+<span id="cb25-602"><a href="#cb25-602" aria-hidden="true" tabindex="-1"></a>Typically, it is safe to assume that aspects of the data that are not modelled explicitly (e.g., interactions between variables, non-linear relationships, fat tails or even multi-level structure) will not appear in the synthetic data, although some exceptions are possible by choosing flexible synthesis models.</span>
+<span id="cb25-603"><a href="#cb25-603" aria-hidden="true" tabindex="-1"></a>Whatever procedure is followed to create the synthetic data, make sure to be transparent: researchers should know what your synthetic data set can and cannot be used for.</span>
+<span id="cb25-604"><a href="#cb25-604" aria-hidden="true" tabindex="-1"></a>Some advice on how to define what the synthetic data can be used for will be provided in the chapter <span class="co">[</span><span class="ot">Publishing a synthetic data set</span><span class="co">](/publishing/)</span>.</span>
+<span id="cb25-605"><a href="#cb25-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-606"><a href="#cb25-606" aria-hidden="true" tabindex="-1"></a>At the same time, synthetic data creators should evaluate potential disclosure risks. </span>
+<span id="cb25-607"><a href="#cb25-607" aria-hidden="true" tabindex="-1"></a>These risks should be evaluated at two distinct moments: before creating synthetic data, one should decide what information must be protected, and after creating synthetic data, one should evaluate how well one actually protected that information.</span>
+<span id="cb25-608"><a href="#cb25-608" aria-hidden="true" tabindex="-1"></a>For example, some synthesis methods may simply reproduce original records, such as the model in @fig-privacy-utility-model displayed by the blue line.</span>
+<span id="cb25-609"><a href="#cb25-609" aria-hidden="true" tabindex="-1"></a>The privacy-utility trade-off hints at the idea that the more complex the synthesis model, the larger the risk of disclosure.</span>
+<span id="cb25-610"><a href="#cb25-610" aria-hidden="true" tabindex="-1"></a>As such, it is advisable to start with simple synthesis models, and add complexity only when necessary.</span>
+<span id="cb25-611"><a href="#cb25-611" aria-hidden="true" tabindex="-1"></a>Some measures of disclosure risk will be covered in the upcoming sections, but when in doubt, please consider Section 3.3 on Risk Assessment in the Handbook on Statistical Disclosure Control <span class="co">[</span><span class="ot">@hundepool2024</span><span class="co">]</span>.</span>
+<span id="cb25-612"><a href="#cb25-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-613"><a href="#cb25-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-614"><a href="#cb25-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-615"><a href="#cb25-615" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb25-616"><a href="#cb25-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-617"><a href="#cb25-617" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb25-618"><a href="#cb25-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-619"><a href="#cb25-619" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Synthetic data can help to protect the privacy of respondents.</span>
+<span id="cb25-620"><a href="#cb25-620" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Synthetic data are fake observations generated from a model that can be disseminated instead of the original data. </span>
+<span id="cb25-621"><a href="#cb25-621" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Joint modelling and fully conditional specification are two common strategies of generating synthetic data. </span>
+<span id="cb25-622"><a href="#cb25-622" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For tabular data, fully conditional specification is typically preferable, as it allows for more flexibility and makes synthetic data model refinements easier. </span>
+<span id="cb25-623"><a href="#cb25-623" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The privacy-utility trade-off guides the synthesis process: using only little information in the synthesis models often provides better privacy protection, but may render rather unrealistic synthetic data. The quality of synthetic data can typically be substantially improved with more complex models, but this increases privacy risks.</span>
+<span id="cb25-624"><a href="#cb25-624" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Synthesis models should be tailored to intended use.</span>
+<span id="cb25-625"><a href="#cb25-625" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-626"><a href="#cb25-626" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1404,14 +2259,103 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/synthetic/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
+  </div>
+</footer>
+<footer class="osc-footer-card text-white py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-md-6 col-lg-3 ">
+        <h4 class="fw-bold fs-5 fs-lg-4 text-white">
+          Ludwig-Maximilians-Universität<br>
+          LMU Open Science Center
+        </h4>
+        <p class="mb-0 mt-1 fw-normal fs-5">
+          Leopoldstr. 13<br>
+          80802 München
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Contact</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Prof. Dr. Felix Schönbrodt (Managing Director)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:malika.ihle@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              Dr. Malika Ihle (Coordinator) 
+            </a>
+          </li>
+          <li>
+            <a href="mailto:osc@lmu.de" class="text-white text-decoration-underline">
+              <i class="bi bi-envelope me-1"></i>
+              OSC team
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
+        <ul class="list-unstyled mt-2 mb-0">
+          <li>
+            <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
+              Subscribe to our announcement list
+            </a>
+          </li>
+          <li>
+            <a href="https://www.osc.lmu.de/about/join-us.html" target="_blank" class="text-white text-decoration-underline" aria-label="Become a member (opens in new window)">
+              Become a member
+            </a>
+          </li>
+          <li>
+            <a href="https://matrix.to/#/#lmu-open-science-center:matrix.lmu.de" target="_blank" class="text-white text-decoration-underline" aria-label="Chat with us on Matrix (opens in new window)">
+              Chat with us on Matrix
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
+        <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/lmu-open-science-center/" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on LinkedIn (opens in new window)">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://bsky.app/profile/lmu-osc.bsky.social" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Bluesky (opens in new window)">
+          <i class="bi bi-bluesky"></i>
+        </a>
+        <a href="https://scicomm.xyz/@lmu_osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on Mastodon (opens in new window)">
+          <i class="bi bi-mastodon"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-light">
+
+    <div class="d-flex flex-wrap gap-3 small">
+      <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="../footer/accessibilty.html" class="text-white text-decoration-underline">Accessibility</a>
+    </div>
+
   </div>
 </footer>
 
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
