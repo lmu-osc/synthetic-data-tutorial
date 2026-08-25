@@ -1,7 +1,5 @@
 ---
 title: "Synthetic Data: The General Idea"
-bibliography: ../references.bib
-page-navigation: true
 ---
 
 ## Synthetic data: What it is and what it is about?

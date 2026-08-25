@@ -1,7 +1,5 @@
 ---
 title: "Evaluating Privacy and Utility of Synthetic Data"
-bibliography: ../references.bib
-page-navigation: true
 ---
 
 ::: {.callout-important title="Code so far"}
@@ -15,9 +13,10 @@ You will need the following output.
 #| message: false
 #| warning: false
 
-
 data <- readRDS(
-  url("https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS")
+  url(
+    "https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"
+  )
 )
 
 library(synthpop)
@@ -511,7 +510,7 @@ So, in these scenarios, the `syn_cart` data really shows much higher utility in 
 
 Synthetic data can provide a relatively safe framework for sharing data. However, some risks will remain present, and it is important to evaluate these risks. For example, it can be the case that the synthesis models were so complex that the synthetic records are very similar or even identical to the original records, which can lead to privacy breaches.
 
-:::{.callout-warning title = "Privacy of synthetic data"}
+:::{.callout-warning title="Privacy of synthetic data"}
 Synthetic data by itself does not provide any formal privacy guarantees. These guarantees can be incorporated, for example by using differentially private synthesis methods. Without going into the details, differential privacy starts from the point that every individual in a data set contributes some information to the parameters of a model, from which an adversary might learn something about the sampled individuals. Differential privacy bounds the influence a single observation can have on the synthesis model, and adds noise to the model parameters that is proportional to this influence. That is, if a single individual can have a large influence on the model parameters, more noise is added to protect the privacy of this single individual. For an accessible introduction to differential privacy, the blog by @desfontainesblog20180816 is highly recommended. @bowen_dp_synthesis_2020 reviews differentially private synthesis methods. However, these methods are not yet widely available in R. If privacy is not built-in by design, it remains important to inspect the synthetic data for potential risks. Especially if you’re not entirely sure, it is better to stay at the safe side: use relatively simple, parametric models, check for outliers, and potentially add additional noise to the synthetic data. See also Chapter 4 in the book [Synthetic Data for Official Statistics](https://unece.org/statistics/publications/synthetic-data-official-statistics-starter-guide).
 :::
 

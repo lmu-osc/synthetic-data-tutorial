@@ -1,6 +1,5 @@
 ---
 title: "Welcome to the Synthetic Data Tutorial!"
-page-navigation: true
 ---
 
 ## Tutorial Overview
@@ -15,7 +14,7 @@ All in all, synthetic data makes open science practices easier and might spark c
 
 The tutorial focuses on the generation of tabular synthetic data. This precludes the generation of text data or other high-dimensional data sources (fMRI, intensive longitudinal data, etc.). Some extensions to multilevel-data are discussed, but this is not the main goal of the materials. In total, the tutorial is intended to take approximately 2-3 hours to complete, and is split into the following sections:
 
-1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to methods used to protect individuals’ private information, while keeping the released data useful for analysis.
+1.  [Statistical Disclosure Control](sdc/) provides a very brief introduction to methods used to protect individuals' private information, while keeping the released data useful for analysis.
 2.  [Synthetic data: The general idea](synthetic/) conceptually introduces the idea of synthetic data and contains an optional section on coding your own simple synthesizer.
 3.  [Generating synthetic data](generation/) introduces the idea of synthetic data and outlines how it can be generated in `R`.
 4.  [Evaluating synthetic data quality](evaluation/) addresses the privacy-utility trade-off, and discusses how the quality of synthetic data can be evaluated from both sides of this trade-off.
@@ -48,3 +47,29 @@ install.packages("mvtnorm")
 ```
 
 :::
+
+
+:::: {.columns}
+
+::: {.column width="47.5%"}
+
+::: {.callout-tip title="Support the LMU Open Science Center!"}
+
+**Like this tutorial? Be sure to give [the repository](https://github.com/lmu-osc/synthetic-data-tutorial) a star and [follow us on GitHub](https://github.com/lmu-osc)!**
+:::
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="47.5%"}
+
+
+::: {.callout-tip title="Questions about this tutorial?"}
+**If you have questions for the author of this tutorial, please take a look at the [About](about.qmd) page.**
+:::
+
+:::
+
+::::

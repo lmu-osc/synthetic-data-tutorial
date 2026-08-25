@@ -1,28 +1,19 @@
 # Begin Project
 project:
-  type: website
+  type: tutorial-template
 # End Project
-
 
 # Begin Website
 website:
   title: "Generating and Evaluating Synthetic Data in R"
   page-footer:
-    center: "© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0."
     border: false
-  search:
-    location: sidebar
+    center: "© 2026 Thom Volker. Published by LMU Open Science Center. Licensed under CC BY-SA 4.0."
   repo-url: https://github.com/lmu-osc/synthetic-data-tutorial
-  repo-actions: [edit, issue]
-  back-to-top-navigation: true
-  page-navigation: true
-  favicon: assets/LMU_OSC_favicon.jpg
-  margin-header: |
-    ![](/assets/LMU_OSC_logo.svg){width="175"}
+
   navbar:
     right:
-      - href: about.qmd
-        text: About
+      - about.qmd
     left:
       - href: index.qmd
         text: Home
@@ -30,48 +21,49 @@ website:
       - icon: github
         menu:
           - text: Source Code
-            url:  https://github.com/lmu-osc/synthetic-data-tutorial
+            href: https://github.com/lmu-osc/synthetic-data-tutorial
           - text: Report a Bug
-            url:  https://github.com/lmu-osc/synthetic-data-tutorial/issues
+            href: https://github.com/lmu-osc/synthetic-data-tutorial/issues
       - icon: house-heart
-        url: https://www.osc.uni-muenchen.de/index.html
-
+        url: https://www.osc.lmu.de/
 
   sidebar:
     style: "docked"
     contents:
       - text: "Overview"
         href: index.qmd
-      - text: "Statistical disclosure control"
+      - text: "Statistical Disclosure Control"
         href: sdc/index.qmd
-      - text: "Synthetic data: The general idea"
+      - text: "Synthetic Data: The General Idea"
         href: synthetic/index.qmd
-      - text: "Generating synthetic data"
+      - text: "Generating Synthetic Data"
         href: generation/index.qmd
-      - text: "Evaluating synthetic data quality"
+      - text: "Evaluating Synthetic Data Quality"
         href: evaluation/index.qmd
-      - text: "Publishing and using synthetic data"
+      - text: "Publishing and Using Synthetic Data"
         href: publishing/index.qmd
 # End Website
 
+# Begin Includes
+include-in-header:
+  - file: matomo-analytics.html
+include-after-body:
+  - file: footer/footer.html
+# End Includes
 
 # Begin Format
 format:
-  html:
-    theme:
-      - cosmo
-      - lmu-osc-custom.scss
+  tutorial-template-html+tutorial:
     css:
-      - https://raw.githubusercontent.com/lmu-osc/branding-resources/refs/heads/main/lmu-osc-styles.css
+      - footer/footer-style.css
     toc: true
-    fontsize: 13pt
     code-overflow: wrap
     grid:
       sidebar-width: 300px
-    include-in-header:
-      - file: matomo-analytics.html
 # End Format
 
 # Begin Editor
 editor: source
 # End Editor
+
+bibliography: references.bib
