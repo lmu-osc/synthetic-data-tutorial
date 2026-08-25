@@ -1,7 +1,5 @@
 ---
 title: "Statistical Disclosure Control"
-bibliography: ../references.bib
-page-navigation: true
 ---
 
 ## Introduction

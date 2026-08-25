@@ -1,6 +1,5 @@
 ---
 title: "Welcome to the Synthetic Data Tutorial!"
-page-navigation: true
 ---
 
 ## Tutorial Overview

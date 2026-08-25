@@ -1,6 +1,5 @@
 ---
 title: "Generating Synthetic Data in R Using `synthpop`"
-bibliography: ../references.bib
 ---
 
 Now that we understand the concept of synthetic data and know about the dangers and potential, it is time to actually generate synthetic data in `R`. 

@@ -1,7 +1,5 @@
 ---
 title: "Publishing and Using Synthetic Data"
-bibliography: ../references.bib
-page-navigation: true
 ---
 
 ## Publishing synthetic data

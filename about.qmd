@@ -1,13 +1,13 @@
 ---
 title: "About"
 date: 2025-12-18
-page-navigation: true
 citation:
   type: "webpage"
   title: "Generating and evaluating synthetic data in R"
   container-title: "LMU Open Science Center"
   url: https://lmu-osc.github.io/synthetic-data-tutorial/
   doi: "10.5281/zenodo.18318778"
+  version: 1.0.0
 author:
   - name: Thom Benjamin Volker
     roles: [conceptualization, formal analysis, funding acquisition, investigation, methodology, project administration, software, resources, validation, visualization, writing - original draft, writing - editing & review]
@@ -45,3 +45,10 @@ This tutorial was primarily written in 2025 using `R` version `4.5.0`. Major cha
 ## Tutorial Template Quarto Extension
 
 This tutorial was written using the [`lmu-osc/tutorial-template`](https://github.com/lmu-osc/tutorial-template) Quarto extension [@callahan2026].
+
+::: {#refs}
+:::
+
+## How to Cite
+
+**To cite this tutorial, please refer to the project's [CITATION.cff](CITATION.cff) file or use the BibTeX citation provided in the appendix below.**

@@ -56,7 +56,6 @@ format:
   tutorial-template-html+tutorial:
     css:
       - footer/footer-style.css
-      - styles.css
     toc: true
     code-overflow: wrap
     grid:
