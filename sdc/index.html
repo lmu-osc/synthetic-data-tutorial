@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Statistical Disclosure Control – Generating and Evaluating Synthetic Data in R</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -106,8 +102,7 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -132,10 +127,8 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-<!-- Matomo -->
-<script>
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!-- Matomo --><script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -149,15 +142,9 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
 }
-</script>
-<!-- End Matomo Code -->
-  
-
-
-<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+</script><!-- End Matomo Code --><link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
 <link rel="stylesheet" href="../footer/footer-style.css">
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -323,14 +310,10 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
-    </a>
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -340,23 +323,23 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/synthetic-data-tutorial">
             Source Code
             </a>
@@ -367,7 +350,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -377,9 +360,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -390,17 +371,11 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -409,7 +384,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -446,27 +421,19 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+        <nav id="TOC" role="doc-toc" class="toc-active"><ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#statistical-disclosure-control" id="toc-statistical-disclosure-control" class="nav-link" data-scroll-target="#statistical-disclosure-control">Statistical disclosure control</a></li>
   <li><a href="#the-privacy-utility-trade-off" id="toc-the-privacy-utility-trade-off" class="nav-link" data-scroll-target="#the-privacy-utility-trade-off">The privacy-utility trade-off</a></li>
   <li><a href="#conventional-statistical-disclosure-control-methods" id="toc-conventional-statistical-disclosure-control-methods" class="nav-link" data-scroll-target="#conventional-statistical-disclosure-control-methods">Conventional statistical disclosure control methods</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/sdc/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/sdc/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/sdc/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Statistical Disclosure Control</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -481,21 +448,17 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   
 
 
-</header>
-
-
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+</header><section id="introduction" class="level2"><h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Collected research data often contains sensitive information about individuals. For example, social scientists might collect data on income or criminal behavior, and health data often contains medical information of individuals. Such private information may harm the people involved if disclosed to the public. Even if no harm is incurred, the trust of individuals in the data collector, or scientific institutions in general, may be damaged if such data is revealed.</p>
 <p>At the same time, broad data availability is very valuable to researchers and governmental institutions alike. Using previously collected data, researchers may answer novel research questions and governmental institutions may improve policy. In addition to these high-level applications, open data can also be used to evaluate the reproducibility of research projects or serve as realistic data in education. That is, open data is valuable for many applications, but simply releasing the data is often not an option.</p>
 <p>The first step in the process of releasing data - both the actual and synthetic data - is to anonymize it (see for instance our <a href="https://lmu-osc.github.io/data-anonymization/">Data Anonymization tutorial</a>). Anonymization requires that potentially identifying information is removed from the collected data. Examples of such identifying information are names, addresses, IP-addresses, that can often be removed without losing important information. However, after de-identifying the data, your data might still contain information that can lead to indirect identification of individuals, for example because the data can be linked to external data sources. Especially in today’s age of massive data collection, data sources can be linked in surprising ways. For example, in 2006, <span class="citation" data-cites="narayanan_netflix_2007">Narayanan and Shmatikov (<a href="#ref-narayanan_netflix_2007" role="doc-biblioref">2007</a>)</span> reidentified Netflix users by linking their reviews to IMDb data. While likely harmless for most, it exposed sensitive details, such as sexual orientation, leading to potential privacy risks.</p>
-</section>
-<section id="statistical-disclosure-control" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-disclosure-control">Statistical disclosure control</h2>
+</section><section id="statistical-disclosure-control" class="level2"><h2 class="anchored" data-anchor-id="statistical-disclosure-control">Statistical disclosure control</h2>
 <p>The term “Statistical disclosure control” refers to a suite of statistical methods that aim to protect collected data such that they can be safely released to the public without disclosing confidential information about these individuals. The goal of statistical disclosure control is to release a data set that is as similar as possible to the original data, while at the same time ensuring that no individual can be identified from the released data, nor any sensitive information can be inferred <span class="citation" data-cites="hundepool2024">(<a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>. Disclosure is here defined as the release of information about individuals that would not have become public if the data would be kept private. That is, the release of information that is already in the public domain would not be considered a disclosure. Two types of disclosure risk are commonly considered:</p>
 <ol type="1">
-<li><strong>Re-identification disclosure</strong> occurs when individuals can be singled out from the released data, resulting in confidential data being leaked. For example, when data is released on airports and there is an airport with more than 50.000 employees in the Netherlands in the data, one can be fairly confident that this concerns Schiphol Airport. Likewise, if data is released on a patient that has spent a remarkably long time in some hospital, the identity of this patient might become known.</li>
-<li><strong>Attribute disclosure</strong> refers to situations in which characteristics of individuals can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status, even without knowing which record corresponds to this person.</li>
+<li>
+<strong>Re-identification disclosure</strong> occurs when individuals can be singled out from the released data, resulting in confidential data being leaked. For example, when data is released on airports and there is an airport with more than 50.000 employees in the Netherlands in the data, one can be fairly confident that this concerns Schiphol Airport. Likewise, if data is released on a patient that has spent a remarkably long time in some hospital, the identity of this patient might become known.</li>
+<li>
+<strong>Attribute disclosure</strong> refers to situations in which characteristics of individuals can be learned with (near) certainty from the data release. For example, if a release discloses that all inhabitants of a street in some city are on welfare, knowing that a person lives in this street discloses information on their welfare status, even without knowing which record corresponds to this person.</li>
 </ol>
 <p>Every data release requires that both re-identification disclosure and attribute disclosure risks are “sufficiently” small. What it means for the risks to be “sufficiently small” very much depends on the case at hand, but we will discuss some general evaluation strategies of disclosure risk in Section <a href="../evaluation/">Evaluating synthetic data quality</a>. At the same time, the goal of a data release is to allow others to do something useful with the released data, and for this purpose, the released data should be similar to the original data.</p>
 <div class="callout callout-style-default callout-tip callout-empty-content callout-titled" title="*Similarity*, in this context, means that the released, but protected, data can be used for the same purposes as the original data.">
@@ -512,37 +475,37 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
 </div>
 </div>
 <p>To a reasonable degree, analyses on the released data should yield results similar to results obtained from the original data. Similarity does not mean that the released records are similar to the original records, but rather that over the whole, the distributions of the observed and released data are similar.</p>
-</section>
-<section id="the-privacy-utility-trade-off" class="level2">
-<h2 class="anchored" data-anchor-id="the-privacy-utility-trade-off">The privacy-utility trade-off</h2>
+</section><section id="the-privacy-utility-trade-off" class="level2"><h2 class="anchored" data-anchor-id="the-privacy-utility-trade-off">The privacy-utility trade-off</h2>
 <p>Statistical disclosure control often yields a trade-off between privacy and utility: the stricter the data protection, the better the privacy of respondents is protected, but the more information is lost, and the lower the utility of the data. That is, if privacy is (almost) not an issue, the original data or a very lightly perturbed version of the original data can be released. For example, data access servers often work with only slightly altered versions of a collected data set. If stricter privacy regulations are in place, more information will be redacted, or the released data will be perturbed to a larger degree. Hence, stricter privacy typically comes with lower data utility.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-privacy-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-privacy-utility-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: The privacy-utility trade-off: one can typically attain either high privacy or high utility, but not both at the same time. Typically, there can be substantial utility of the synthetic data, but some privacy risk will remain.
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
 <p>This idea is visually displayed in <a href="#fig-privacy-utility" class="quarto-xref">Figure&nbsp;1</a>. When maximum privacy is required, nothing about the original data can be released. This strategy is trivially safe, but suboptimal from a data-users perspective: they can do nothing with it. As we stretch the privacy requirements, some utility is possible: perhaps we can do some simple analyses, like evaluating the means and standard deviations for some variables. If we further lower our privacy requirements, more advanced analyses become feasible, and, in principle, there is more we can learn from the released data. Ultimately, we may release the original data, but the cost hereof is high: with regards to the individuals and their information in our data, there will be no privacy left. It is probably redundant to remark that protection strategies that perturb the data significantly are not inherently safe. That is, particular strategies may reduce the utility substantially, without making any headway regarding the protection of privacy. As a contrived example, consider the case where only the non-sensitive variables are removed from the data. If these variables are interesting from an analytical perspective, data utility is reduced substantially without improving the privacy of the respondents.</p>
 <p>Finally, note that the level of required protection depends on the sensitivity of the data at hand. Data from an insensitive experiment with only very general personal information may require very little protection, while an extensive survey on criminal behavior or sensitive issues should typically be well-protected. In protecting the individuals of the sensitive survey, more information may need to be sacrifized to provide proper protection. At the same time, the level of utility required depends on the problem at hand: if the released data should allow to replicate complex analyses to a reasonable degree of accuracy, more sophisticated disclosure methods are required than when solely some marginal quantities (e.g., means and standard deviations) should be preserved. Hence, the privacy-utility trade-off is relative to the re-use scenario: a released data set can be very useful for some purposes, but almost useless for others.</p>
-</section>
-<section id="conventional-statistical-disclosure-control-methods" class="level2">
-<h2 class="anchored" data-anchor-id="conventional-statistical-disclosure-control-methods">Conventional statistical disclosure control methods</h2>
+</section><section id="conventional-statistical-disclosure-control-methods" class="level2"><h2 class="anchored" data-anchor-id="conventional-statistical-disclosure-control-methods">Conventional statistical disclosure control methods</h2>
 <p>In practice, many techniques for statistical disclosure control have been developed over the last years for microdata; that is, data on individual observations, potentially measured at multiple locations, in contrast to tables with aggregated data. Typically, these techniques limit the amount of information that is released, thereby introducing statistical bias and variance <span class="citation" data-cites="fienberg_slavkovic_2011">(<a href="#ref-fienberg_slavkovic_2011" role="doc-biblioref">Fienberg and Slavković 2011</a>)</span>. For example, one might set a threshold to variables such that extreme values are not released, which typically creates bias in the distribution of the released values. As an other example, adding noise to observed values will increase the variance of the released data relative to the observed data. Common methods that have traditionally been used for statistical disclosure control are <span class="citation" data-cites="reiter_2011 hundepool2024">(e.g., <a href="#ref-reiter_2011" role="doc-biblioref">Reiter 2011</a>; <a href="#ref-hundepool2024" role="doc-biblioref">Hundepool et al. 2024</a>)</span>:</p>
 <ul>
-<li><strong>Aggregation</strong>: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
-<li><strong>Rounding</strong>: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
-<li><strong>Top coding</strong>: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure; this technique is also called “Winsorizing”).</li>
-<li><strong>Microaggregation</strong>: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
-<li><strong>Suppression</strong>: remove sensitive or identifying values from the released data directly (i.e., setting particular values to “missing”/<code>NA</code>, or even removing entire variables).</li>
-<li><strong>Adding noise</strong>: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
+<li>
+<strong>Aggregation</strong>: collapsing categories into larger overarching categories (e.g., towns into municipalities or regions, divisions into companies).</li>
+<li>
+<strong>Rounding</strong>: replacing original values with their rounded counterpart (e.g., income in thousands of euros, age in years).</li>
+<li>
+<strong>Top coding</strong>: cap all values higher or lower than some threshold to this threshold (sometimes, only relatively extreme values, such as very large income values, yield a high risk of disclosure; this technique is also called “Winsorizing”).</li>
+<li>
+<strong>Microaggregation</strong>: combine observations into groups of some size where people within a group are maximally similar, calculate the group mean for each variable used to form groups, and replace values on these variables by the respective group mean.</li>
+<li>
+<strong>Suppression</strong>: remove sensitive or identifying values from the released data directly (i.e., setting particular values to “missing”/<code>NA</code>, or even removing entire variables).</li>
+<li>
+<strong>Adding noise</strong>: random noise is added to the observed values, such that the released value is different from the underlying observed value.</li>
 </ul>
 <p>Each of these methods either introduces errors in the data, such that the released information is not entirely accurate, or limits the amount of information that is released in such a way that disclosure risks are small. However, an important limitation of these methods is that relationships between variables are usually not accounted for. While it is possible for some of these approaches to be applied on a multivariate level, this is often not easy and typically not done in practice. Thus, when relationships between variables are of interest, for example when the released data should allow to reproduce regression analyses on the observed data, these traditional methods might distort the data too much. Synthetic data might provide a better solution, as instead of distorting the data, it attempts to model the multivariate distribution of the data, and thus allows to capture relationships between variables. The idea of synthetic data will be more thoroughly explained in <a href="../synthetic/">the subsequent section</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -569,9 +532,7 @@ Figure&nbsp;1: The privacy-utility trade-off: one can typically attain either hi
 <!-- -->
 
 
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-fienberg_slavkovic_2011" class="csl-entry" role="listitem">
 Fienberg, Stephen E., and Aleksandra B. Slavković. 2011. <span>“Data Privacy and Confidentiality.”</span> In <em>International Encyclopedia of Statistical Science</em>, edited by Miodrag Lovric. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-04898-2_202">https://doi.org/10.1007/978-3-642-04898-2_202</a>.
 </div>
@@ -584,8 +545,7 @@ Narayanan, Arvind, and Vitaly Shmatikov. 2007. <em>How to Break Anonymity of the
 <div id="ref-reiter_2011" class="csl-entry" role="listitem">
 Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidentiality in Public Use Data.”</span> In <em>International Encyclopedia of Statistical Science</em>, edited by Miodrag Lovric. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-04898-2_537">https://doi.org/10.1007/978-3-642-04898-2_537</a>.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1055,9 +1015,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link" aria-label="Overview">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
       </a>          
@@ -1209,8 +1167,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -1221,9 +1178,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
       &nbsp;
     </div>
   </div>
-</footer>
-<footer class="osc-footer-card text-white py-5">
-  <div class="container">
+</footer><footer class="osc-footer-card text-white py-5"><div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-6 col-lg-3 ">
         <h4 class="fw-bold fs-5 fs-lg-4 text-white">
@@ -1239,7 +1194,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Contact</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
               <i class="bi bi-envelope me-1"></i>
               Prof. Dr. Felix Schönbrodt (Managing Director)
@@ -1258,12 +1213,12 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
               Subscribe to our announcement list
             </a>
@@ -1279,7 +1234,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
         <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
@@ -1299,8 +1254,7 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
     </div>
 
     <hr class="my-4 border-light">
-
-    <div class="d-flex flex-wrap gap-3 small">
+<div class="d-flex flex-wrap gap-3 small">
       <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
       <span aria-hidden="true">|</span>
       <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
@@ -1310,8 +1264,6 @@ Reiter, Jerome P. 2011. <span>“Statistical Approaches to Protecting Confidenti
 
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>

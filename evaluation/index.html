@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Evaluating Privacy and Utility of Synthetic Data – Generating and Evaluating Synthetic Data in R</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -106,8 +102,7 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -132,10 +127,8 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-<!-- Matomo -->
-<script>
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!-- Matomo --><script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -149,14 +142,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
 }
-</script>
-<!-- End Matomo Code -->
-  
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+</script><!-- End Matomo Code --><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -181,12 +167,9 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
-
-<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+</script><link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
 <link rel="stylesheet" href="../footer/footer-style.css">
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -352,14 +335,10 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
-    </a>
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -369,23 +348,23 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/synthetic-data-tutorial">
             Source Code
             </a>
@@ -396,7 +375,7 @@ window.Quarto = {
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -406,9 +385,7 @@ window.Quarto = {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -419,17 +396,11 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -438,7 +409,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -475,33 +446,27 @@ window.Quarto = {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-   
-  <ul>
-  <li><a href="#synthetic-data-utility" id="toc-synthetic-data-utility" class="nav-link active" data-scroll-target="#synthetic-data-utility">Synthetic data utility</a></li>
+        <nav id="TOC" role="doc-toc" class="toc-active"><ul>
+<li><a href="#synthetic-data-utility" id="toc-synthetic-data-utility" class="nav-link active" data-scroll-target="#synthetic-data-utility">Synthetic data utility</a></li>
   <li><a href="#fit-for-purpose-measures" id="toc-fit-for-purpose-measures" class="nav-link" data-scroll-target="#fit-for-purpose-measures">Fit-for-purpose measures</a></li>
   <li><a href="#further-synthesis-improvements" id="toc-further-synthesis-improvements" class="nav-link" data-scroll-target="#further-synthesis-improvements">Further synthesis improvements</a></li>
-  <li><a href="#global-utility-measures" id="toc-global-utility-measures" class="nav-link" data-scroll-target="#global-utility-measures">Global utility measures</a>
+  <li>
+<a href="#global-utility-measures" id="toc-global-utility-measures" class="nav-link" data-scroll-target="#global-utility-measures">Global utility measures</a>
   <ul class="collapse">
-  <li><a href="#divergence-estimation-through-density-ratio-estimation" id="toc-divergence-estimation-through-density-ratio-estimation" class="nav-link" data-scroll-target="#divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</a></li>
-  </ul></li>
+<li><a href="#divergence-estimation-through-density-ratio-estimation" id="toc-divergence-estimation-through-density-ratio-estimation" class="nav-link" data-scroll-target="#divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</a></li>
+  </ul>
+</li>
   <li><a href="#sec-outcome-utility" id="toc-sec-outcome-utility" class="nav-link" data-scroll-target="#sec-outcome-utility">Outcome-specific utility</a></li>
   <li><a href="#statistical-disclosure-control" id="toc-statistical-disclosure-control" class="nav-link" data-scroll-target="#statistical-disclosure-control">Statistical disclosure control</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/evaluation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/evaluation/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/evaluation/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/evaluation/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Evaluating Privacy and Utility of Synthetic Data</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -516,10 +481,7 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<div class="callout callout-style-default callout-important callout-titled" title="Code so far">
+</header><div class="callout callout-style-default callout-important callout-titled" title="Code so far">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -531,51 +493,50 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <p>This section builds on the <a href="../generation/">previous section</a>, and assumes you have completed all exercises. You will need the following output.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">url</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(densityratio)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>syn_param <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"parametric"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">default.method =</span> <span class="fu">c</span>(<span class="st">"norm"</span>, <span class="st">"logreg"</span>, <span class="st">"polyreg"</span>, <span class="st">"polr"</span>),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>method <span class="ot">&lt;-</span> syn_param<span class="sc">$</span>method</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>method[<span class="st">"bmi"</span>] <span class="ot">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>visit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hc"</span>, <span class="st">"gen"</span>, <span class="st">"phb"</span>, <span class="st">"tv"</span>, <span class="st">"reg"</span>, <span class="st">"bmi"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>syn_passive <span class="ot">&lt;-</span> <span class="fu">syn</span>(</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> method,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">visit.sequence =</span> visit,</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span></span>
+<span>    <span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">synthpop</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://thomvolker.github.io/densityratio/">densityratio</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">syn_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/syn.html">syn</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"parametric"</span>,</span>
+<span>  default.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"norm"</span>, <span class="st">"logreg"</span>, <span class="st">"polyreg"</span>, <span class="st">"polr"</span><span class="op">)</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">123</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">method</span> <span class="op">&lt;-</span> <span class="va">syn_param</span><span class="op">$</span><span class="va">method</span></span>
+<span><span class="va">method</span><span class="op">[</span><span class="st">"bmi"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"~I(wgt/(hgt/100)^2)"</span></span>
+<span><span class="va">visit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"hc"</span>, <span class="st">"gen"</span>, <span class="st">"phb"</span>, <span class="st">"tv"</span>, <span class="st">"reg"</span>, <span class="st">"bmi"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">syn_passive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/syn.html">syn</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="va">method</span>,</span>
+<span>  visit.sequence <span class="op">=</span> <span class="va">visit</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">123</span>,</span>
+<span>  print <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<section id="synthetic-data-utility" class="level2">
-<h2 class="anchored" data-anchor-id="synthetic-data-utility">Synthetic data utility</h2>
+<section id="synthetic-data-utility" class="level2"><h2 class="anchored" data-anchor-id="synthetic-data-utility">Synthetic data utility</h2>
 <hr>
 <p>The quality of synthetic data can be evaluated on multiple levels and in different ways. Often, three types of utility measures are distinguished <span class="citation" data-cites="drechsler_30years_2024">(<a href="#ref-drechsler_30years_2024" role="doc-biblioref">Drechsler and Haensch 2024</a>)</span>:</p>
 <ol type="1">
-<li><em>Fit-for-purpose measures</em> are typically the first step in evaluating synthetic data utility, and evaluate for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between <code>hgt</code>, <code>wgt</code> and <code>bmi</code>).</li>
-<li><em>Global utility measures</em> compare the observed and synthetic data on the level of the entire (multivariate) distribution. In theory, if the observed and synthetic data are drawn from the same distribution, any analysis performed on the synthetic data should yield results that are close to results obtained from the observed data. However, in practice, such global measures can be too broad, and high global utility does not guarantee that results of specific analyses are similar between observed and synthetic data.</li>
-<li><em>Outcome-specific utility measures</em> evaluate utility for a specific analysis. In the context of synthetic data for open science, it would be helpful if results from the observed data can be approximated closely in the synthetic data. Note that specific utility really focuses on a set of analyses, but does not need to transfer to different analyses.</li>
+<li>
+<em>Fit-for-purpose measures</em> are typically the first step in evaluating synthetic data utility, and evaluate for example whether variable types are consistent with the observed data and whether constraints in the observed data are reproduced in the synthetic data (i.e., non-negative quantities, deterministic relationships like between <code>hgt</code>, <code>wgt</code> and <code>bmi</code>).</li>
+<li>
+<em>Global utility measures</em> compare the observed and synthetic data on the level of the entire (multivariate) distribution. In theory, if the observed and synthetic data are drawn from the same distribution, any analysis performed on the synthetic data should yield results that are close to results obtained from the observed data. However, in practice, such global measures can be too broad, and high global utility does not guarantee that results of specific analyses are similar between observed and synthetic data.</li>
+<li>
+<em>Outcome-specific utility measures</em> evaluate utility for a specific analysis. In the context of synthetic data for open science, it would be helpful if results from the observed data can be approximated closely in the synthetic data. Note that specific utility really focuses on a set of analyses, but does not need to transfer to different analyses.</li>
 </ol>
 <p>In isolation, none of these measures typically provide an all-encompassing qualification of utility, also because utility is use-case dependent. In many instances, the synthetic data modeller does not know what the data will be used for. In these settings, outcome-specific utility measures are only of limited help, and global utility measures might provide the broadest picture of the utility of the synthetic data. However, for open science purposes, one could argue that fit-for-purpose measures and outcome-specific utility measures are most important, because in many instances, a data user would want to reproduce the original analyses. Note, however, that even if outcome-specific utility is low, ultimately, the synthetic data can be very useful still, as it at least allows to run the original analysis code, and evaluate whether it contains any errors. In what follows, we briefly discuss all three types of measures.</p>
-<hr>
-</section>
-<section id="fit-for-purpose-measures" class="level2">
-<h2 class="anchored" data-anchor-id="fit-for-purpose-measures">Fit-for-purpose measures</h2>
+<hr></section><section id="fit-for-purpose-measures" class="level2"><h2 class="anchored" data-anchor-id="fit-for-purpose-measures">Fit-for-purpose measures</h2>
 <hr>
 <p>We already evaluated whether the synthetic data looked plausible, and noticed that our synthetic data had some impossible negative values and fixed the relationship between <code>hgt</code> and <code>wgt</code> for the <code>bmi</code> variable in the synthetic data. We now go one step further, and compare the entire marginal distributions of the variables in the synthetic data with the corresponding variables in the observed data.</p>
 <hr>
@@ -593,7 +554,7 @@ window.Quarto = {
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      age              hgt             wgt              bmi       
  Min.   : 0.035   Min.   : 50.0   Min.   :  3.14   Min.   :11.77  
@@ -610,7 +571,7 @@ window.Quarto = {
  3rd Qu.:56.00   G5:160   P5:103   3rd Qu.:15.000   city : 73  
  Max.   :65.00            P6: 89   Max.   :25.000              </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(syn_passive<span class="sc">$</span>syn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">syn_passive</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      age              hgt              wgt              bmi        
  Min.   : 0.038   Min.   : 45.28   Min.   :-14.53   Min.   :-32.13  
@@ -633,7 +594,7 @@ window.Quarto = {
 </div>
 </div>
 <hr>
-<p><strong>2. Use <code>compare()</code> from the <code>synthpop</code> package to compare the distributions of the observed data with the <code>syn_passive</code> data, set the parameters <code>utility.stats = NULL</code> and <code>utility.for.plot = NULL</code>. What do you see?</strong></p>
+<p><strong>2. Use <code><a href="https://rdrr.io/pkg/synthpop/man/compare.html">compare()</a></code> from the <code>synthpop</code> package to compare the distributions of the observed data with the <code>syn_passive</code> data, set the parameters <code>utility.stats = NULL</code> and <code>utility.for.plot = NULL</code>. What do you see?</strong></p>
 <p><em>Note: We set <code>utility.stats = NULL</code> and <code>utility.for.plot = NULL</code> because here we just focus on the visualizations. We will use different utility statistics later on.</em></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -648,21 +609,20 @@ window.Quarto = {
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  syn_passive,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  data,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">utility.stats =</span> <span class="cn">NULL</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">utility.for.plot =</span> <span class="cn">NULL</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.html">compare</a></span><span class="op">(</span></span>
+<span>  <span class="va">syn_passive</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  utility.stats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  utility.for.plot <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  print.flag <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -671,8 +631,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -681,8 +640,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -691,9 +649,9 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 </div>
 </div>
-<p>We further explore the utility of the synthetic data on a multivariate level. Since visual inspection is typically most insightful, we use the <code>plot()</code> function.</p>
+<p>We further explore the utility of the synthetic data on a multivariate level. Since visual inspection is typically most insightful, we use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function.</p>
 <hr>
-<p><strong>3. Plot the variables <code>age</code>, <code>hgt</code>, <code>wgt</code>, <code>bmi</code>, <code>hc</code> and <code>tv</code> against each other, by calling <code>plot()</code> on the subset of the data containing these variables. Do the same for the synthetic data.</strong></p>
+<p><strong>3. Plot the variables <code>age</code>, <code>hgt</code>, <code>wgt</code>, <code>bmi</code>, <code>hc</code> and <code>tv</code> against each other, by calling <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> on the subset of the data containing these variables. Do the same for the synthetic data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -707,25 +665,23 @@ Comparing percentages observed with synthetic</code></pre>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  data[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span>)],</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Observed data"</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Observed data"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  syn_passive<span class="sc">$</span>syn[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span>)],</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Synthetic data"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">syn_passive</span><span class="op">$</span><span class="va">syn</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Synthetic data"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -736,12 +692,10 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 <hr>
 <p>Now that we investigated fit-for-purpose utility, we must decide whether the synthetic data is of sufficient quality. By now, you probably suspect that this depends on the use-case at hand. You have seen that some measures of utility indicate substantial problems with the synthetic data, in the sense that certain aspects of the distribution of the data are poorly modelled. At the same time, this is not to say that the synthetic data is useless, there is already quite some information in the synthetic data and there is quite a lot that we can do with it already. We will come back to this in the <a href="@sec-outcome-utility">section on outcome-specific utility measures</a>. We decide that we attempt to further improve the utility of the synthetic data.</p>
-</section>
-<section id="further-synthesis-improvements" class="level2">
-<h2 class="anchored" data-anchor-id="further-synthesis-improvements">Further synthesis improvements</h2>
+</section><section id="further-synthesis-improvements" class="level2"><h2 class="anchored" data-anchor-id="further-synthesis-improvements">Further synthesis improvements</h2>
 <p>To improve the utility of the synthetic data, we use regression trees for the continuous variables (the <code>"cart"</code> model in <code>synthpop</code>), which is a non-parametric method that is better able to capture non-linear relationships between variables. In short, <code>cart</code> repetitively splits the predictor space according to which predictor is best able to predict the outcome, leading to so-called <em>leaves</em> in which subsets of the outcome with relatively similar values are collected <span class="citation" data-cites="islr">(see, e.g., Section 8.1.1 in <a href="#ref-islr" role="doc-biblioref">James et al. 2023</a>)</span>. Synthetic data is then obtained by splitting the predictors of the synthetic cases according to the learned splits, after which values are sampled from the leaves. Because this approach recycles observed data, we add some smoothing, so that the observed values are not exactly reproduced in the synthetic data. This smoothing is often essential from a privacy-perspective, because it makes sure that synthetic values are not exactly equal to the observed data values.</p>
 <hr>
-<p><strong>4. Adjust the previously created method vector by replacing every instance of <code>"norm"</code> with <code>"cart"</code>, and call <code>syn()</code> with this new method vector and <code>smoothing = "spline"</code>.</strong></p>
+<p><strong>4. Adjust the previously created method vector by replacing every instance of <code>"norm"</code> with <code>"cart"</code>, and call <code><a href="https://rdrr.io/pkg/synthpop/man/syn.html">syn()</a></code> with this new method vector and <code>smoothing = "spline"</code>.</strong></p>
 <p><em>You may again use <code>seed = 123</code> to replicate our results.</em></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -756,15 +710,15 @@ Comparing percentages observed with synthetic</code></pre>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>method[method <span class="sc">==</span> <span class="st">"norm"</span>] <span class="ot">&lt;-</span> <span class="st">"cart"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>syn_cart <span class="ot">&lt;-</span> synthpop<span class="sc">::</span><span class="fu">syn</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  data,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> method,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoothing =</span> <span class="st">"spline"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">method</span><span class="op">[</span><span class="va">method</span> <span class="op">==</span> <span class="st">"norm"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"cart"</span></span>
+<span></span>
+<span><span class="va">syn_cart</span> <span class="op">&lt;-</span> <span class="fu">synthpop</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/syn.html">syn</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="va">method</span>,</span>
+<span>  smoothing <span class="op">=</span> <span class="st">"spline"</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">123</span>,</span>
+<span>  print.flag <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Variable(s) bmi with passive synthesis: relationship does not hold in data.
@@ -777,7 +731,7 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 </div>
 </div>
 <hr>
-<p><strong>5. Check whether the synthetic data looks okay using the <code>compare()</code> function that we used previously.</strong></p>
+<p><strong>5. Check whether the synthetic data looks okay using the <code><a href="https://rdrr.io/pkg/synthpop/man/compare.html">compare()</a></code> function that we used previously.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -791,21 +745,20 @@ You might want to recompute the variable(s) in the original data.</code></pre>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  syn_cart,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  data,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">utility.stats =</span> <span class="cn">NULL</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">utility.for.plot =</span> <span class="cn">NULL</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">print.flag =</span> <span class="cn">FALSE</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.html">compare</a></span><span class="op">(</span></span>
+<span>  <span class="va">syn_cart</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  utility.stats <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  utility.for.plot <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  print.flag <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-cart-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-cart-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -814,8 +767,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-cart-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-cart-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -824,8 +776,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/compare-synds-cart-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/compare-synds-cart-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -835,7 +786,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 </div>
 <hr>
-<p><strong>6. Plot the variables <code>age</code>, <code>hgt</code>, <code>wgt</code>, <code>bmi</code>, <code>hc</code> and <code>tv</code> against each other, by calling <code>plot()</code> on <code>syn_cart$syn</code>.</strong></p>
+<p><strong>6. Plot the variables <code>age</code>, <code>hgt</code>, <code>wgt</code>, <code>bmi</code>, <code>hc</code> and <code>tv</code> against each other, by calling <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> on <code>syn_cart$syn</code>.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -849,25 +800,23 @@ Comparing percentages observed with synthetic</code></pre>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  data[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span>)],</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Observed data"</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Observed data"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-cart-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-cart-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  syn_cart<span class="sc">$</span>syn[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span>)],</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Synthetic data"</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">syn_cart</span><span class="op">$</span><span class="va">syn</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>, <span class="st">"bmi"</span>, <span class="st">"hc"</span>, <span class="st">"tv"</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Synthetic data"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-cart-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-cart-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -877,10 +826,7 @@ Comparing percentages observed with synthetic</code></pre>
 </div>
 </div>
 <p>We now have two synthetic data sets that seem to have different levels of utility. We will further explore this using global and outcome-specific utility measures.</p>
-<hr>
-</section>
-<section id="global-utility-measures" class="level2">
-<h2 class="anchored" data-anchor-id="global-utility-measures">Global utility measures</h2>
+<hr></section><section id="global-utility-measures" class="level2"><h2 class="anchored" data-anchor-id="global-utility-measures">Global utility measures</h2>
 <hr>
 <p>We evaluate global utility by comparing the distributions of the synthetic data sets with the distribution of the observed data. This is often done using one of two ways.</p>
 <ol type="1">
@@ -889,13 +835,12 @@ Comparing percentages observed with synthetic</code></pre>
 </ol>
 <p>We discuss the former approach, as it performed better for evaluating synthetic data utility according to <span class="citation" data-cites="volker_density_2024">Volker, Wolf, et al. (<a href="#ref-volker_density_2024" role="doc-biblioref">2024</a>)</span>. Still, the <span class="math inline">\(pMSE\)</span> is also used relatively often and can also yield insight in the global utility of a synthetic data set.</p>
 <hr>
-<section id="divergence-estimation-through-density-ratio-estimation" class="level3">
-<h3 class="anchored" data-anchor-id="divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</h3>
+<section id="divergence-estimation-through-density-ratio-estimation" class="level3"><h3 class="anchored" data-anchor-id="divergence-estimation-through-density-ratio-estimation">Divergence estimation through density ratio estimation</h3>
 <p>One way to evaluate global utility is by comparing the distributions of the observed and synthetic data directly. This can be done using density ratio estimation, which, like the name suggests, attempts to estimate the ratio of the densities of two groups of samples (note that we mean the same thing with distribution and density, although some nuances exist). That is, we attempt to estimate <span class="math display">\[
 r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 \]</span> This can be done by estimating the distributions of <span class="math inline">\(f_\text{obs}(X)\)</span> and <span class="math inline">\(f_\text{syn}(X)\)</span>, but estimating <span class="math inline">\(r(X)\)</span> directly typically yields better results. The <code>R</code>-package <code>densityratio</code> has been developed for this purpose <span class="citation" data-cites="densityratio">(<a href="#ref-densityratio" role="doc-biblioref"><span class="nocase">Volker, Gonzalez Poses, et al.</span> 2024</a>)</span>. Based on the density ratio, we can estimate various divergence measures between the two data sets, which is an in-built functionality.</p>
 <hr>
-<p><strong>7. Compare the observed and synthetic data with the <code>ulsif()</code> function from the <code>densityratio</code> package. Do this for both synthetic data sets.</strong></p>
+<p><strong>7. Compare the observed and synthetic data with the <code><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif()</a></code> function from the <code>densityratio</code> package. Do this for both synthetic data sets.</strong></p>
 <p><em>Note: Set <code>numerator_data = data</code> and <code>denominator_data = syn_passive$syn</code> first, and <code>denominator_data = syn_cart$syn</code> second.</em></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -910,14 +855,14 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>r_passive <span class="ot">&lt;-</span> <span class="fu">ulsif</span>(data, syn_passive<span class="sc">$</span>syn)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>r_cart <span class="ot">&lt;-</span> <span class="fu">ulsif</span>(data, syn_cart<span class="sc">$</span>syn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r_passive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_passive</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span>
+<span><span class="va">r_cart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">syn_cart</span><span class="op">$</span><span class="va">syn</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The <code>ulsif()</code> function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.</p>
+<p>The <code><a href="https://thomvolker.github.io/densityratio/reference/ulsif.html">ulsif()</a></code> function performs cross-validation to find the optimal model to estimate the density ratio, so that typically no model specification on behalf of the user is required.</p>
 </div>
 </div>
 </div>
-<p><strong>8. Call <code>plot()</code> on the estimated model objects. This displays the distributions of the estimated density ratio values for the observed and synthetic data.</strong></p>
+<p><strong>8. Call <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> on the estimated model objects. This displays the distributions of the estimated density ratio values for the observed and synthetic data.</strong></p>
 <p><em>Hint:</em> The more these distributions overlap, the higher the similarity between the observed and synthetic data distributions.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -932,9 +877,9 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r_passive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r_passive</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 256 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -942,19 +887,17 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-dr-dist-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-dr-dist-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r_cart)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r_cart</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-dr-dist-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-dr-dist-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -964,7 +907,7 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 </div>
 </div>
 <hr>
-<p><strong>9. Call <code>summary()</code> on the density ratio objects to obtain the estimated Pearson divergence between the observed and synthetic data sets.</strong></p>
+<p><strong>9. Call <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> on the density ratio objects to obtain the estimated Pearson divergence between the observed and synthetic data sets.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -978,7 +921,7 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(r_passive)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">r_passive</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -988,14 +931,14 @@ Kernel Information:
   Kernel type: Gaussian with L2 norm distances
   Number of kernels: 200
 
-Optimal sigma: 1.311213
-Optimal lambda: 0.0379269
-Optimal kernel weights: num [1:201] 0.1069 -0.0237 0.2505 -0.1082 0.2522 ...
+Optimal sigma: 1.311197
+Optimal lambda: 0.001
+Optimal kernel weights: num [1:200] -0.1333 -1.0947 0.0837 -0.2268 -1.5696 ...
  
-Pearson divergence between P(nu) and P(de): 0.8535
+Pearson divergence between P(nu) and P(de): 2.07
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(r_cart)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">r_cart</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1006,10 +949,10 @@ Kernel Information:
   Number of kernels: 200
 
 Optimal sigma: 4.589124
-Optimal lambda: 0.3359818
-Optimal kernel weights: num [1:201] 0.02799 0.00165 0.01181 0.01547 0.00911 ...
+Optimal lambda: 0.6951928
+Optimal kernel weights: num [1:200] 0.00384 0.00849 0.01045 0.00866 0.00872 ...
  
-Pearson divergence between P(nu) and P(de): 0.005043
+Pearson divergence between P(nu) and P(de): 0.007224
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 </div>
@@ -1019,7 +962,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 <p>Finally, we can plot the estimated density ratios against the variables in the synthetic data, to see where the synthetic data does not fit the observed data.</p>
 <hr>
-<p><strong>10. Use <code>plot_bivariate()</code> on the fitted density ratio models, and set <code>grid = TRUE</code> and <code>samples = "denominator"</code> to only display the synthetic data points.</strong></p>
+<p><strong>10. Use <code><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate()</a></code> on the fitted density ratio models, and set <code>grid = TRUE</code> and <code>samples = "denominator"</code> to only display the synthetic data points.</strong></p>
 <p><em>Hint:</em> Very dark blue values indicate that synthetic data points in those regions are rather scarce in the observed data, whereas dark red values indicate that in some regions, the synthetic data is underrepresented.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
@@ -1034,23 +977,21 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(r_passive, <span class="at">grid =</span> <span class="cn">TRUE</span>, <span class="at">samples =</span> <span class="st">"denominator"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_passive</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 256 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-dr-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-dr-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bivariate</span>(r_cart, <span class="at">grid =</span> <span class="cn">TRUE</span>, <span class="at">samples =</span> <span class="st">"denominator"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_cart</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/plot-bivariate-dr-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/plot-bivariate-dr-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1059,10 +1000,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="sec-outcome-utility" class="level2">
-<h2 class="anchored" data-anchor-id="sec-outcome-utility">Outcome-specific utility</h2>
+</section></section><section id="sec-outcome-utility" class="level2"><h2 class="anchored" data-anchor-id="sec-outcome-utility">Outcome-specific utility</h2>
 <p>For outcome-specific utility, we need at least one analysis that we expect data users will be interested in. For now, we assume that the data users will be interested in predicting head circumference (<code>hc</code>), based on <code>age</code>, height (<code>hgt</code>), weight (<code>wgt</code>) and region (<code>reg</code>). Additionally, we will fit a regression analysis where we add quadratic terms for <code>age</code> and <code>hgt</code>. High outcome-specific utility implies that the regression coefficients obtained from the synthetic data are close to the coefficients estimated from the observed data. One way to measure “closeness” in this context is via the confidence interval overlap. The confidence interval overlap quantifies to what extent the confidence intervals of the observed and synthetic coefficients overlap: <span class="math display">\[
 CIO = \frac{1}{2} \Big(
     \frac{\min (U_\text{obs}, U_\text{syn}) -
@@ -1076,15 +1014,14 @@ CIO = \frac{1}{2} \Big(
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/CIO-fig-1.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="index_files/figure-html/CIO-fig-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The length between the dashed vertical lines is the quantity in the numerator, whereas the lengths of the two horizontal lines are in the denominators. If the two confidence intervals are almost the same, the confidence interval overlap is large, and the difference between coefficients is relatively small compared to the uncertainty around the coefficients. Conversely, if the overlap is small (or even negative), the coefficients are relatively far apart, relative to the random variation one would expect.</p>
 <hr>
-<p><strong>11. Fit a linear regression model with main effects only using <code>lm.synds()</code> for both synthetic data sets. Compare the results with the observed data using <code>compare.fit.synds()</code>.</strong></p>
+<p><strong>11. Fit a linear regression model with main effects only using <code><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds()</a></code> for both synthetic data sets. Compare the results with the observed data using <code><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds()</a></code>.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1098,17 +1035,17 @@ CIO = \frac{1}{2} \Big(
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fit_passive <span class="ot">&lt;-</span> <span class="fu">lm.synds</span>(</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  hc <span class="sc">~</span> age <span class="sc">+</span> hgt <span class="sc">+</span> wgt <span class="sc">+</span> reg,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> syn_passive</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>fit_cart <span class="ot">&lt;-</span> <span class="fu">lm.synds</span>(</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  hc <span class="sc">~</span> age <span class="sc">+</span> hgt <span class="sc">+</span> wgt <span class="sc">+</span> reg,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> syn_cart</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fit.synds</span>(fit_passive, <span class="at">data =</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_passive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds</a></span><span class="op">(</span></span>
+<span>  <span class="va">hc</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span> <span class="op">+</span> <span class="va">wgt</span> <span class="op">+</span> <span class="va">reg</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">syn_passive</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_cart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds</a></span><span class="op">(</span></span>
+<span>  <span class="va">hc</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span> <span class="op">+</span> <span class="va">wgt</span> <span class="op">+</span> <span class="va">reg</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">syn_cart</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds</a></span><span class="op">(</span><span class="va">fit_passive</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
 ℹ Please use tidy evaluation idioms with `aes()`.
@@ -1144,12 +1081,11 @@ Confidence interval plot:</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/fit-main-models-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/fit-main-models-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fit.synds</span>(fit_cart, <span class="at">data =</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds</a></span><span class="op">(</span><span class="va">fit_cart</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call used to fit models to the data:
@@ -1178,8 +1114,7 @@ Confidence interval plot:</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/fit-main-models-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/fit-main-models-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1191,7 +1126,7 @@ Confidence interval plot:</code></pre>
 <hr>
 <p>This illustration has important consequences! If you expect that the synthetic data users are solely interested in analyses on main effects (i.e., regression coefficients in linear models, or mean-differences in t-tests), modelling solely these main effects appropriately is typically sufficient to obtain reasonable synthetic data. Even if the marginal (univariate) distributions are poorly captured, many standard analyses can still be conducted. Moreover, modelling every aspect of the synthetic data is thus often not required to obtain useful synthetic data. Additionally, this analysis shows that low global utility does not necessarily mean that outcome-specific utility will also be low. The reverse holds equivalently, though not in this dataset: high global utility also does not automatically render high outcome-specific utility. It is often helpful to be explicit about what the synthetic data can and cannot do, and this is easier with relatively simple synthesis models, such as the parametric models used in <code>syn_passive</code> [see also <a href="../publishing/">the section on publishing synthetic data</a>]. More complex non-parametric models are inherently more of a black-box, and it can be surprising what comes out, even if you carefully evaluated its utility.</p>
 <hr>
-<p><strong>12. Fit a linear regression model with the above specification using <code>lm.synds()</code> for both synthetic data sets, but now add the quadratic effects for <code>age</code> and <code>hgt</code>. Compare the results with the observed data using <code>compare.fit.synds()</code>.</strong></p>
+<p><strong>12. Fit a linear regression model with the above specification using <code><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds()</a></code> for both synthetic data sets, but now add the quadratic effects for <code>age</code> and <code>hgt</code>. Compare the results with the observed data using <code><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds()</a></code>.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1205,17 +1140,17 @@ Confidence interval plot:</code></pre>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fit_passive_qd <span class="ot">&lt;-</span> <span class="fu">lm.synds</span>(</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  hc <span class="sc">~</span> age <span class="sc">+</span> <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hgt <span class="sc">+</span> <span class="fu">I</span>(hgt<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> wgt <span class="sc">+</span> reg,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> syn_passive</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>fit_cart_qd <span class="ot">&lt;-</span> <span class="fu">lm.synds</span>(</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  hc <span class="sc">~</span> age <span class="sc">+</span> <span class="fu">I</span>(age<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hgt <span class="sc">+</span> <span class="fu">I</span>(hgt<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> wgt <span class="sc">+</span> reg,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> syn_cart</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fit.synds</span>(fit_passive_qd, <span class="at">data =</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_passive_qd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds</a></span><span class="op">(</span></span>
+<span>  <span class="va">hc</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">age</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">hgt</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">hgt</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">wgt</span> <span class="op">+</span> <span class="va">reg</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">syn_passive</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_cart_qd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/glm.synds.html">lm.synds</a></span><span class="op">(</span></span>
+<span>  <span class="va">hc</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">age</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">hgt</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">hgt</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">wgt</span> <span class="op">+</span> <span class="va">reg</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">syn_cart</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds</a></span><span class="op">(</span><span class="va">fit_passive_qd</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call used to fit models to the data:
@@ -1247,12 +1182,11 @@ Confidence interval plot:</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/fit-models-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/fit-models-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare.fit.synds</span>(fit_cart_qd, <span class="at">data =</span> data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/compare.fit.synds.html">compare.fit.synds</a></span><span class="op">(</span><span class="va">fit_cart_qd</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call used to fit models to the data:
@@ -1284,8 +1218,7 @@ Confidence interval plot:</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/fit-models-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/fit-models-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1294,10 +1227,7 @@ Confidence interval plot:</code></pre>
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="statistical-disclosure-control" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-disclosure-control">Statistical disclosure control</h2>
+<hr></section><section id="statistical-disclosure-control" class="level2"><h2 class="anchored" data-anchor-id="statistical-disclosure-control">Statistical disclosure control</h2>
 <hr>
 <p>Synthetic data can provide a relatively safe framework for sharing data. However, some risks will remain present, and it is important to evaluate these risks. For example, it can be the case that the synthesis models were so complex that the synthetic records are very similar or even identical to the original records, which can lead to privacy breaches.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Privacy of synthetic data">
@@ -1321,9 +1251,9 @@ Confidence interval plot:</code></pre>
 <li>Subsequently, we evaluate whether the records with the same values on the identifying variables in the synthetic data also have the same values (or very similar values) on the target variable.</li>
 <li>Finally, we check whether this value corresponds to the actual value on the target variable in the original data. The proportion of records that meets each of these criteria is referred to as <em>DiSCO</em> (Disclosive in Synthetic, Correct in Original).</li>
 </ul>
-<p>Both methods (<em>replicated uniques</em> and <em>DiSCO</em>) can be evaluated in <code>synthpop</code> using the <code>multi.disclosure()</code> function.</p>
+<p>Both methods (<em>replicated uniques</em> and <em>DiSCO</em>) can be evaluated in <code>synthpop</code> using the <code><a href="https://rdrr.io/pkg/synthpop/man/multi.disclosure.html">multi.disclosure()</a></code> function.</p>
 <hr>
-<p><strong>13. Call the function <code>multi.disclosure()</code> on the <code>syn_passive</code> and <code>syn_cart</code> data sets. Use <code>age</code>, <code>hgt</code> and <code>reg</code> as identifying variables (the <code>keys</code> argument).</strong></p>
+<p><strong>13. Call the function <code><a href="https://rdrr.io/pkg/synthpop/man/multi.disclosure.html">multi.disclosure()</a></code> on the <code>syn_passive</code> and <code>syn_cart</code> data sets. Use <code>age</code>, <code>hgt</code> and <code>reg</code> as identifying variables (the <code>keys</code> argument).</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1337,7 +1267,7 @@ Confidence interval plot:</code></pre>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.disclosure</span>(syn_passive, data, <span class="at">keys =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/multi.disclosure.html">multi.disclosure</a></span><span class="op">(</span><span class="va">syn_passive</span>, <span class="va">data</span>, keys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------ 1 wgt ------------------- 
 -------------------Synthesis 1 --------------------
@@ -1386,12 +1316,11 @@ Variables Ordered by synthetic disclosure measure
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/sdc-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/sdc-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.disclosure</span>(syn_cart, data, <span class="at">keys =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/multi.disclosure.html">multi.disclosure</a></span><span class="op">(</span><span class="va">syn_cart</span>, <span class="va">data</span>, keys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------ 1 wgt ------------------- 
 -------------------Synthesis 1 --------------------
@@ -1440,8 +1369,7 @@ Variables Ordered by synthetic disclosure measure
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="index_files/figure-html/sdc-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/sdc-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1450,10 +1378,10 @@ Variables Ordered by synthetic disclosure measure
 </div>
 </div>
 </div>
-<p>After evaluating disclosure risks, it is possible to perform post-processing of the synthetic data. This procedure can be streamlined using the <code>sdc()</code> function in <code>synthpop</code>. For example, one might remove the <em>replicated uniques</em> from the synthetic data, using the <code>rm.replicated.uniques</code> argument in <code>sdc()</code>. Additionally, it is possible to cap outliers using the <code>bottom.top.coding</code> argument or to smooth variables using <code>smooth.vars</code>.</p>
-<p>In our case, we already applied smoothing, and there are not really any extreme outliers present. Therefore, the <code>sdc()</code> function cannot do much more to further enhance our privacy protection. For the sake of illustration, we show how to apply the <code>sdc()</code> function below anyhow.</p>
+<p>After evaluating disclosure risks, it is possible to perform post-processing of the synthetic data. This procedure can be streamlined using the <code><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc()</a></code> function in <code>synthpop</code>. For example, one might remove the <em>replicated uniques</em> from the synthetic data, using the <code>rm.replicated.uniques</code> argument in <code><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc()</a></code>. Additionally, it is possible to cap outliers using the <code>bottom.top.coding</code> argument or to smooth variables using <code>smooth.vars</code>.</p>
+<p>In our case, we already applied smoothing, and there are not really any extreme outliers present. Therefore, the <code><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc()</a></code> function cannot do much more to further enhance our privacy protection. For the sake of illustration, we show how to apply the <code><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc()</a></code> function below anyhow.</p>
 <hr>
-<p><strong>14. Apply the <code>sdc()</code> function with <code>keys = c("age", "hgt", "reg")</code> and set <code>rm.replicated.uniques = TRUE</code> and store the results in <code>syn_passive_sdc</code>.</strong></p>
+<p><strong>14. Apply the <code><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc()</a></code> function with <code>keys = c("age", "hgt", "reg")</code> and set <code>rm.replicated.uniques = TRUE</code> and store the results in <code>syn_passive_sdc</code>.</strong></p>
 <p><em>Hint:</em> This function updates the synthetic data object to remove duplicated records from the observed data (if these records were unique in the original data), make sure to release the synthetic data from the updated object if you use this function.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show output">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
@@ -1468,12 +1396,12 @@ Variables Ordered by synthetic disclosure measure
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>syn_passive_sdc <span class="ot">&lt;-</span> <span class="fu">sdc</span>(</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  syn_passive,</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">keys =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span>),</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">rm.replicated.uniques =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">syn_passive_sdc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/synthpop/man/sdc.html">sdc</a></span><span class="op">(</span></span>
+<span>  <span class="va">syn_passive</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  keys <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"reg"</span><span class="op">)</span>,</span>
+<span>  rm.replicated.uniques <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>no. of replicated uniques removed: 0</code></pre>
 </div>
@@ -1481,10 +1409,7 @@ Variables Ordered by synthetic disclosure measure
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<hr></section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <hr>
 <p>In this tutorial, you have learned to create and evaluate synthetic data. We discussed modelling deterministic relationships, refining synthesis models based on utility measures, comparing utility of synthetic data sets, and evaluating remaining disclosure risks. Remember that if you plan to release synthetic data for open science purposes, it is better to stay on the safe side with respect to privacy. When in doubt, choose the option that yields the smallest risk. We will share some advice on publishing synthetic data in the <a href="../publishing/">next section</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1511,9 +1436,7 @@ Variables Ordered by synthetic disclosure measure
 <!-- -->
 
 
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bowen_dp_synthesis_2020" class="csl-entry" role="listitem">
 Bowen, Claire McKay, and Fang Liu. 2020. <span>“Comparative Study of Differentially Private Data Synthesis Methods.”</span> <em>Statistical Science</em> 35 (2): pp. 280–307. <a href="https://doi.org/10.1214/19-STS742">https://doi.org/10.1214/19-STS742</a>.
 </div>
@@ -1538,8 +1461,7 @@ Snoke, Joshua, Gillian M. Raab, Beata Nowok, Chris Dibben, and Aleksandra Slavko
 <div id="ref-volker_density_2024" class="csl-entry" role="listitem">
 Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>A Density Ratio Framework for Evaluating the Utility of Synthetic Data</em>. <a href="https://arxiv.org/abs/2408.13167">https://arxiv.org/abs/2408.13167</a>.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2009,9 +1931,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../generation/index.html" class="pagination-link" aria-label="Generating Synthetic Data">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Generating Synthetic Data</span>
       </a>          
@@ -2640,8 +2560,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -2652,9 +2571,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
       &nbsp;
     </div>
   </div>
-</footer>
-<footer class="osc-footer-card text-white py-5">
-  <div class="container">
+</footer><footer class="osc-footer-card text-white py-5"><div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-6 col-lg-3 ">
         <h4 class="fw-bold fs-5 fs-lg-4 text-white">
@@ -2670,7 +2587,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Contact</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
               <i class="bi bi-envelope me-1"></i>
               Prof. Dr. Felix Schönbrodt (Managing Director)
@@ -2689,12 +2606,12 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
               Subscribe to our announcement list
             </a>
@@ -2710,7 +2627,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
         <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
@@ -2730,8 +2647,7 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
     </div>
 
     <hr class="my-4 border-light">
-
-    <div class="d-flex flex-wrap gap-3 small">
+<div class="d-flex flex-wrap gap-3 small">
       <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
       <span aria-hidden="true">|</span>
       <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
@@ -2741,8 +2657,6 @@ Volker, Thom Benjamin, Peter-Paul de Wolf, and Erik-Jan van Kesteren. 2024. <em>
 
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Synthetic Data: The General Idea – Generating and Evaluating Synthetic Data in R</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -106,8 +102,7 @@ div.csl-indent {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-934778ad9b083564446b567f8672e471.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-eb46ca9efdd02f6dfb5628a3b2cbea03.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -132,12 +127,9 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<!-- Matomo -->
-<script>
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script><link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<!-- Matomo --><script>
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -151,14 +143,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
 }
-</script>
-<!-- End Matomo Code -->
-  
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+</script><!-- End Matomo Code --><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -183,12 +168,9 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
-
-<link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
+</script><link rel="stylesheet" href="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/assets/bootstrap-grid.min.css">
 <link rel="stylesheet" href="../footer/footer-style.css">
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -354,14 +336,10 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content">
-    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content">
-    </a>
+    <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo light-content"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-favicon.jpg" alt="LMU Open Science Center open book icon" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Generating and Evaluating Synthetic Data in R</span>
     </a>
@@ -371,23 +349,23 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/lmu-osc/synthetic-data-tutorial">
             Source Code
             </a>
@@ -398,7 +376,7 @@ window.Quarto = {
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <a href="https://www.osc.lmu.de/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-heart"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -408,9 +386,7 @@ window.Quarto = {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -421,17 +397,11 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo.svg" alt="LMU Open Science Center logo" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../site_libs/quarto-contrib/quarto-project/lmu-osc/tutorial-template/_extensions/lmu-osc/osc-brand/lmu-osc-logo-dark.svg" alt="LMU Open Science Center logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -440,7 +410,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -477,38 +447,34 @@ window.Quarto = {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-   
-  <ul>
-  <li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
-  <li><a href="#sec-modelling" id="toc-sec-modelling" class="nav-link" data-scroll-target="#sec-modelling">Modelling synthetic data</a>
+        <nav id="TOC" role="doc-toc" class="toc-active"><ul>
+<li><a href="#synthetic-data-what-it-is-and-what-it-is-about" id="toc-synthetic-data-what-it-is-and-what-it-is-about" class="nav-link active" data-scroll-target="#synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</a></li>
+  <li>
+<a href="#sec-modelling" id="toc-sec-modelling" class="nav-link" data-scroll-target="#sec-modelling">Modelling synthetic data</a>
   <ul class="collapse">
-  <li><a href="#a-joint-modelling" id="toc-a-joint-modelling" class="nav-link" data-scroll-target="#a-joint-modelling">(A) Joint modelling</a></li>
+<li><a href="#a-joint-modelling" id="toc-a-joint-modelling" class="nav-link" data-scroll-target="#a-joint-modelling">(A) Joint modelling</a></li>
   <li><a href="#b-fully-conditional-specification" id="toc-b-fully-conditional-specification" class="nav-link" data-scroll-target="#b-fully-conditional-specification">(B) Fully conditional specification</a></li>
-  </ul></li>
-  <li><a href="#optional-exercise-a-simple-synthetic-data-model" id="toc-optional-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#optional-exercise-a-simple-synthetic-data-model">(Optional) Exercise: A simple synthetic data model</a>
+  </ul>
+</li>
+  <li>
+<a href="#optional-exercise-a-simple-synthetic-data-model" id="toc-optional-exercise-a-simple-synthetic-data-model" class="nav-link" data-scroll-target="#optional-exercise-a-simple-synthetic-data-model">(Optional) Exercise: A simple synthetic data model</a>
   <ul class="collapse">
-  <li><a href="#joint-modelling-in-practice" id="toc-joint-modelling-in-practice" class="nav-link" data-scroll-target="#joint-modelling-in-practice">Joint modelling in practice</a></li>
+<li><a href="#joint-modelling-in-practice" id="toc-joint-modelling-in-practice" class="nav-link" data-scroll-target="#joint-modelling-in-practice">Joint modelling in practice</a></li>
   <li><a href="#synthetic-data-with-fully-conditional-specification" id="toc-synthetic-data-with-fully-conditional-specification" class="nav-link" data-scroll-target="#synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</a></li>
   <li><a href="#comparing-the-results" id="toc-comparing-the-results" class="nav-link" data-scroll-target="#comparing-the-results">Comparing the results</a></li>
   <li><a href="#conclusion-fully-conditional-specification-versus-joint-modelling" id="toc-conclusion-fully-conditional-specification-versus-joint-modelling" class="nav-link" data-scroll-target="#conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#specifying-synthetic-data-models" id="toc-specifying-synthetic-data-models" class="nav-link" data-scroll-target="#specifying-synthetic-data-models">Specifying synthetic data models</a></li>
   <li><a href="#synthetic-data-for-open-science" id="toc-synthetic-data-for-open-science" class="nav-link" data-scroll-target="#synthetic-data-for-open-science">Synthetic data for open science</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/synthetic/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/edit/main/synthetic/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/blob/main/synthetic/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/lmu-osc/synthetic-data-tutorial/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Synthetic Data: The General Idea</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -523,27 +489,17 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<section id="synthetic-data-what-it-is-and-what-it-is-about" class="level2">
-<h2 class="anchored" data-anchor-id="synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</h2>
+</header><section id="synthetic-data-what-it-is-and-what-it-is-about" class="level2"><h2 class="anchored" data-anchor-id="synthetic-data-what-it-is-and-what-it-is-about">Synthetic data: What it is and what it is about?</h2>
 <hr>
 <p>The idea of synthetic data has first been proposed independently in 1993 by Donald B. Rubin and Roderick J.A. Little, who are known as members of the founding fathers of modern missing data theory <span class="citation" data-cites="rubin1993statistical little_synthetic_1993">(<a href="#ref-rubin1993statistical" role="doc-biblioref">Rubin 1993</a>; <a href="#ref-little_synthetic_1993" role="doc-biblioref">Little 1993</a>)</span>. Both proposed, albeit in slightly different ways, to not release the original data, but replace values from the original data with values drawn from some model. That is, synthetic data is nothing more than <em>generated</em> data, and is occasionally called <em>simulated data</em>, <em>digital twins</em> or, more colloquially, <em>fake</em> data. This model can be specified independent of the data at hand, but typically it is estimated on a data set. Moreover, the model can range from very simple (e.g., a set of values with attached probabilities) to extremely complex (e.g., a neural network with billions of parameters). Whatever model is used, it is essential that new samples can be generated from it. These newly drawn samples can then be released to the public, as a surrogate dataset that mimics the original data statistically.</p>
 <p>In what follows, we assume that there is an observed data set, <span class="math inline">\(X\)</span>, consisting of <span class="math inline">\(n\)</span> observations measured on <span class="math inline">\(p\)</span> variables. Furthermore, we assume that these observations adhere to some structure that we can encode in the joint distribution of the variables, <span class="math inline">\(f(X)\)</span>. If we would know this distribution, we could sample new observations from it directly, but we typically do not know this. However, we can estimate this joint distribution from a data set at hand, leading to <span class="math inline">\(\hat{f}(X)\)</span>, and sample new observations from this.</p>
-<hr>
-</section>
-<section id="sec-modelling" class="level2">
-<h2 class="anchored" data-anchor-id="sec-modelling">Modelling synthetic data</h2>
+<hr></section><section id="sec-modelling" class="level2"><h2 class="anchored" data-anchor-id="sec-modelling">Modelling synthetic data</h2>
 <hr>
 <p>How to estimate this joint distribution is essentially a question of how to specify the synthetic data model. If our model approximates the true data generating process reasonably well, we can expect fairly high quality synthetic data. To be a bit more precise, this means that both univariate and multivariate patterns of the observed data are preserved in the synthetic data, such as the mean and variance for each variable and the covariances between variables. Moreover, if we model <span class="math inline">\(f(X)\)</span> accurately and draw new samples from this model, the introduced noise adds uncertainty that contributes to privacy protection. In what follows, we describe the two strategies that have emerged to estimate <span class="math inline">\(\hat{f}(x)\)</span> and draw samples from it.</p>
-<section id="a-joint-modelling" class="level3">
-<h3 class="anchored" data-anchor-id="a-joint-modelling">(A) Joint modelling</h3>
+<section id="a-joint-modelling" class="level3"><h3 class="anchored" data-anchor-id="a-joint-modelling">(A) Joint modelling</h3>
 <p>One approach to modelling synthetic data, is by estimating the multivariate distribution of the data directly, and use this single joint model to draw values for all variables simultaneously. We can, for example, model the distribution of the data using a normal approximation. That is, we estimate the means and covariances of the variables in the data, assume normality, and generate synthetic samples from this normal distribution. For many data sets, however, this normal approximation provides a poor fit.</p>
 <p>In the past decade, deep learning has become popular for the generation of synthetic data. An advantage of these methods, in particular generative adversarial networks (GANs) and variational auto-encoders (VAEs), is that they do not assume a particular parametric distribution (like the normal approximation). Rather, these methods attempt to learn the distribution of the data, by transforming relatively simple input data in a way that resembles the observed data. While these methods can achieve state-of-the-art performance, extensive tuning is often required to achieve this performance. Moreover, tuning these models such that they produce realistic synthetic data is non-trivial and often performed in an ad hoc fashion, substantially lowering user-friendliness.</p>
-</section>
-<section id="b-fully-conditional-specification" class="level3">
-<h3 class="anchored" data-anchor-id="b-fully-conditional-specification">(B) Fully conditional specification</h3>
+</section><section id="b-fully-conditional-specification" class="level3"><h3 class="anchored" data-anchor-id="b-fully-conditional-specification">(B) Fully conditional specification</h3>
 <p>A second strategy is to break the joint distribution of the data into a series of conditional distributions, one for each variable (or a block of variables). That is, we can factor the joint distribution of the data into a series of conditionals <span class="math display">\[
 f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 \]</span> which greatly simplifies the modelling task. That is, rather than specifying the joint distribution, we can model the distribution of each variable separately, somewhat akin to specifying a good prediction model, but with the addition of reasonable assumptions for the noise. In practice, we might proceed as follows.</p>
@@ -571,31 +527,32 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div class="callout-body-container callout-body">
 <p>There is, of course, much more to say about specifying synthesis models that we cannot cover all in these materials. However, if you wish to learn more about specifying <strong>joint models</strong> for creating synthetic data, you might find the following resources helpful.</p>
 <ul>
-<li><span class="citation" data-cites="murray_multiple_2018">Murray (<a href="#ref-murray_multiple_2018" role="doc-biblioref">2018</a>)</span> (section 6.1): Focuses on specifying joint models for multiple imputation of missing data, but the idea transfers directly to generation of synthetic data (that is, we assume that the missing data occurs in <span class="math inline">\(n_{syn}\)</span> new samples that are fully missing, or we overimpute the observed data).</li>
-<li><span class="citation" data-cites="chollet_deep_2022">Chollet et al. (<a href="#ref-chollet_deep_2022" role="doc-biblioref">2022</a>)</span> (chapter 12): On deep learning for the generation of synthetic data.</li>
-<li><span class="citation" data-cites="volker_gans_2025">Volker (<a href="#ref-volker_gans_2025" role="doc-biblioref">2025</a>)</span>: Easy and primarily illustrative introduction on generating (simple) synthetic data based on GANs in <code>R</code>.</li>
+<li>
+<span class="citation" data-cites="murray_multiple_2018">Murray (<a href="#ref-murray_multiple_2018" role="doc-biblioref">2018</a>)</span> (section 6.1): Focuses on specifying joint models for multiple imputation of missing data, but the idea transfers directly to generation of synthetic data (that is, we assume that the missing data occurs in <span class="math inline">\(n_{syn}\)</span> new samples that are fully missing, or we overimpute the observed data).</li>
+<li>
+<span class="citation" data-cites="chollet_deep_2022">Chollet et al. (<a href="#ref-chollet_deep_2022" role="doc-biblioref">2022</a>)</span> (chapter 12): On deep learning for the generation of synthetic data.</li>
+<li>
+<span class="citation" data-cites="volker_gans_2025">Volker (<a href="#ref-volker_gans_2025" role="doc-biblioref">2025</a>)</span>: Easy and primarily illustrative introduction on generating (simple) synthetic data based on GANs in <code>R</code>.</li>
 </ul>
 <p>If you are interested in any additional resources on <strong>fully conditional specification</strong>, the following papers might be informative.</p>
 <ul>
-<li><span class="citation" data-cites="buuren_fcs_2006"><span class="nocase">van Buuren et al.</span> (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
-<li><span class="citation" data-cites="drechsler_synthetic_2011">Drechsler (<a href="#ref-drechsler_synthetic_2011" role="doc-biblioref">2011</a>)</span> (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section).</li>
+<li>
+<span class="citation" data-cites="buuren_fcs_2006"><span class="nocase">van Buuren et al.</span> (<a href="#ref-buuren_fcs_2006" role="doc-biblioref">2006</a>)</span>: explains the procedure in the context of missing data. Again, adapting the framework to synthetic data is straightforward.</li>
+<li>
+<span class="citation" data-cites="drechsler_synthetic_2011">Drechsler (<a href="#ref-drechsler_synthetic_2011" role="doc-biblioref">2011</a>)</span> (section 3.1.2) discusses the concept of fully conditional specification (and compares it to joint modelling in the subsequent section).</li>
 </ul>
 </div>
 </div>
-<hr>
-</section>
-</section>
-<section id="optional-exercise-a-simple-synthetic-data-model" class="level2">
-<h2 class="anchored" data-anchor-id="optional-exercise-a-simple-synthetic-data-model">(Optional) Exercise: A simple synthetic data model</h2>
+<hr></section></section><section id="optional-exercise-a-simple-synthetic-data-model" class="level2"><h2 class="anchored" data-anchor-id="optional-exercise-a-simple-synthetic-data-model">(Optional) Exercise: A simple synthetic data model</h2>
 <hr>
 <p><em>The following exercise is purely illustrational. In practice, we don’t write our synthesis code from scratch, but we use dedicated <code>R</code> packages to generate synthetic data. However, this section describes how such packages work under the hood, and a basic understanding of this will be helpful for specifying and improving the synthesis models. This exercise is not essential for proceeding the tutorial, but try to understand the general workflow. In the <a href="../generation/">next section</a>, we will use the <code>synthpop</code> package to achieve similar results.</em></p>
 <p>To get a flavour of the two modelling approaches, you will show that it is indeed possible to model a joint distribution as a series of conditionals. For this exercise (and all exercises in subsequent sections), we will use the <code>boys</code> data from the <code>R</code>-package <code>mice</code>,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and for the time being, we focus on the first three variables <code>age</code>, <code>hgt</code> and <code>wgt</code>. You can obtain the data as follows:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">url</span>(<span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://github.com/lmu-osc/synthetic-data-tutorial/raw/refs/heads/main/data/boys.RDS"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data_subset</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"hgt"</span>, <span class="st">"wgt"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Description of the `boys` data">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -611,25 +568,34 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div class="callout-body-container callout-body">
 <p>The <code>boys</code> data contains measurements on 9 variables on 748 Dutch boys. The variables in the data are described below, as well as the first six observations.</p>
 <ul>
-<li><code>age</code>: Decimal age (0-21 years)</li>
-<li><code>hgt</code>: Height (cm)</li>
-<li><code>wgt</code>: Weight (kg)</li>
-<li><code>bmi</code>: Body mass index</li>
-<li><code>hc</code>: Head circumference (cm)</li>
-<li><code>gen</code>: Genital Tanner stage (G1-G5)</li>
-<li><code>phb</code>: Pubic hair (Tanner P1-P6)</li>
-<li><code>tv</code>: Testicular volume (ml)</li>
-<li><code>reg</code>: Region (north, east, west, south, city)</li>
+<li>
+<code>age</code>: Decimal age (0-21 years)</li>
+<li>
+<code>hgt</code>: Height (cm)</li>
+<li>
+<code>wgt</code>: Weight (kg)</li>
+<li>
+<code>bmi</code>: Body mass index</li>
+<li>
+<code>hc</code>: Head circumference (cm)</li>
+<li>
+<code>gen</code>: Genital Tanner stage (G1-G5)</li>
+<li>
+<code>phb</code>: Pubic hair (Tanner P1-P6)</li>
+<li>
+<code>tv</code>: Testicular volume (ml)</li>
+<li>
+<code>reg</code>: Region (north, east, west, south, city)</li>
 </ul>
 <div class="cell" data-tbl-cap="The `boys` data from the `R`-package `mice`">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data) <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="table table-striped table-hover caption-top table-sm small">
-<caption>The <code>boys</code> data from the <code>R</code>-package <code>mice</code></caption>
-<thead>
-<tr class="header">
+<caption>The <code>boys</code> data from the <code>R</code>-package <code>mice</code>
+</caption>
+<thead><tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">age</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">hgt</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">wgt</th>
@@ -639,8 +605,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <th style="text-align: left;" data-quarto-table-cell-role="th">phb</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">tv</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">reg</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0.04</td>
@@ -717,9 +682,8 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 </div>
 <hr>
 <p>We start by applying the joint modelling strategy on the <code>boys</code> data. For simplicity, we draw synthetic samples by approximating the multivariate distribution of <code>age</code>, <code>hgt</code> and <code>wgt</code> using a three-variate normal distribution, using the means of these variables and their variance-covariance matrix obtained from the observed data. To generate these synthetic samples, we use the <code>R</code>-package <code>mvtnorm</code> <span class="citation" data-cites="mvtnorm">(<a href="#ref-mvtnorm" role="doc-biblioref">Genz and Bretz 2009</a>)</span>. Note that this normal model provides a relatively poor fit to the data (if it were correct, people would keep growing eternally). In practice, we would thus choose a different model, and most synthetic data generation software (including the <code>synthpop</code> package that we will use subsequently) allows for this.</p>
-<section id="joint-modelling-in-practice" class="level3">
-<h3 class="anchored" data-anchor-id="joint-modelling-in-practice">Joint modelling in practice</h3>
-<p><strong>1. Load the <code>R</code>-package <code>mvtnorm</code> using the function <code>library()</code>.</strong></p>
+<section id="joint-modelling-in-practice" class="level3"><h3 class="anchored" data-anchor-id="joint-modelling-in-practice">Joint modelling in practice</h3>
+<p><strong>1. Load the <code>R</code>-package <code>mvtnorm</code> using the function <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -733,7 +697,7 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://codeberg.org/thothorn/mvtnorm">mvtnorm</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -753,14 +717,14 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(data_subset)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>varcov <span class="ot">&lt;-</span> <span class="fu">var</span>(data_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">)</span></span>
+<span><span class="va">varcov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
 <hr>
-<p><strong>3. Create your first synthetic data set by calling the function <code>rmvnorm()</code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
+<p><strong>3. Create your first synthetic data set by calling the function <code><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">rmvnorm()</a></code> from the <code>mvtnorm</code> package to sample new observations from a multivariate normal distribution. Set the sample size equal to <span class="math inline">\(n = 748\)</span>, and use the stored mean-vector and variance-covariance matrix.</strong></p>
 <p><em>Note: You may set a seed here for reproducibility (below, <code>seed = 123</code> is used, but this is no better than any other seed).</em></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -775,23 +739,20 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>syn1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rmvnorm</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(data_subset),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> means,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> varcov</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">syn1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">rmvnorm</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">)</span>,</span>
+<span>    mean <span class="op">=</span> <span class="va">means</span>,</span>
+<span>    sigma <span class="op">=</span> <span class="va">varcov</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="synthetic-data-with-fully-conditional-specification" class="level3">
-<h3 class="anchored" data-anchor-id="synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</h3>
+<hr></section><section id="synthetic-data-with-fully-conditional-specification" class="level3"><h3 class="anchored" data-anchor-id="synthetic-data-with-fully-conditional-specification">Synthetic data with fully conditional specification</h3>
 <p>We will now do the same thing, but with the fully conditional specification strategy outlined above. To do this, we need the regression models <code>hgt ~ age</code> and <code>wgt ~ age + hgt</code> fitted on the observed data. Moreover, we need the residual variances of each model.</p>
 <hr>
 <p><strong>4. Regress <code>hgt</code> on <code>age</code> and <code>wgt</code> on <code>age</code> and <code>hgt</code>, and store the results.</strong></p>
@@ -808,8 +769,8 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hgtage <span class="ot">&lt;-</span> <span class="fu">lm</span>(hgt <span class="sc">~</span> age, <span class="at">data =</span> data_subset)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wgtagehgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hgtage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hgt</span> <span class="op">~</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">data_subset</span><span class="op">)</span></span>
+<span><span class="va">wgtagehgt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">wgt</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span>, data <span class="op">=</span> <span class="va">data_subset</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -829,8 +790,8 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_subset<span class="sc">$</span>age)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_subset<span class="sc">$</span>age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span>
+<span><span class="va">sd_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -851,12 +812,12 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nsyn <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data_subset)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>age_syn <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> nsyn,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> mean_age,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> sd_age</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nsyn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_subset</span><span class="op">)</span></span>
+<span><span class="va">age_syn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="va">nsyn</span>,</span>
+<span>  mean <span class="op">=</span> <span class="va">mean_age</span>,</span>
+<span>  sd <span class="op">=</span> <span class="va">sd_age</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -876,9 +837,9 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(hgtage)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(hgtage)<span class="sc">$</span>sigma</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>hgt_syn <span class="ot">&lt;-</span> hgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> hgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, hgt_sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hgt_coefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">hgtage</span><span class="op">)</span></span>
+<span><span class="va">hgt_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">hgtage</span><span class="op">)</span><span class="op">$</span><span class="va">sigma</span></span>
+<span><span class="va">hgt_syn</span> <span class="op">&lt;-</span> <span class="va">hgt_coefs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">hgt_coefs</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="va">age_syn</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nsyn</span>, <span class="fl">0</span>, <span class="va">hgt_sd</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -898,18 +859,15 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wgt_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(wgtagehgt)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>wgt_sd <span class="ot">&lt;-</span> <span class="fu">summary</span>(wgtagehgt)<span class="sc">$</span>sigma</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>wgt_syn <span class="ot">&lt;-</span> wgt_coefs[<span class="dv">1</span>] <span class="sc">+</span> wgt_coefs[<span class="dv">2</span>] <span class="sc">*</span> age_syn <span class="sc">+</span> wgt_coefs[<span class="dv">3</span>] <span class="sc">*</span> hgt_syn <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(nsyn, <span class="dv">0</span>, wgt_sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wgt_coefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">wgtagehgt</span><span class="op">)</span></span>
+<span><span class="va">wgt_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">wgtagehgt</span><span class="op">)</span><span class="op">$</span><span class="va">sigma</span></span>
+<span><span class="va">wgt_syn</span> <span class="op">&lt;-</span> <span class="va">wgt_coefs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">wgt_coefs</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="va">age_syn</span> <span class="op">+</span> <span class="va">wgt_coefs</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">*</span> <span class="va">hgt_syn</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">nsyn</span>, <span class="fl">0</span>, <span class="va">wgt_sd</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="comparing-the-results" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-the-results">Comparing the results</h3>
+<hr></section><section id="comparing-the-results" class="level3"><h3 class="anchored" data-anchor-id="comparing-the-results">Comparing the results</h3>
 <p><strong>9. Compare the means and variance-covariance matrices of the two synthetic data sets with the estimates from the observed data.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Show solution">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
@@ -925,13 +883,13 @@ f(X) = f_1(X_1) f_2(X_2|X_1) \dots f_p(X_p|X_1, \dots X_{p-1}),
 <div class="callout-body-container callout-body">
 <p>First, we calculate the means of the observed and synthetic variables.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>syn2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> age_syn, <span class="at">hgt =</span> hgt_syn, <span class="at">wgt =</span> wgt_syn)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> means,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">syn1 =</span> <span class="fu">colMeans</span>(syn1),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">syn2 =</span> <span class="fu">colMeans</span>(syn2)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">syn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>age <span class="op">=</span> <span class="va">age_syn</span>, hgt <span class="op">=</span> <span class="va">hgt_syn</span>, wgt <span class="op">=</span> <span class="va">wgt_syn</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  obs <span class="op">=</span> <span class="va">means</span>,</span>
+<span>  syn1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">syn1</span><span class="op">)</span>,</span>
+<span>  syn2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">syn2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           obs       syn1       syn2
 age   9.158866   9.442326   9.157884
@@ -941,21 +899,21 @@ wgt  37.182889  38.374684  36.925608</code></pre>
 </div>
 <p>These are all reasonably close! We subsequently compare the variances.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varcov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">varcov</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          age       hgt       wgt
 age  47.52796  312.7603  171.1743
 hgt 312.76034 2163.1238 1144.9079
 wgt 171.17428 1144.9079  683.7035</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">syn1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          age       hgt       wgt
 age  46.41556  305.6102  166.0050
 hgt 305.61024 2111.2565 1105.9608
 wgt 166.00496 1105.9608  660.2429</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(syn2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">syn2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          age       hgt       wgt
 age  48.27611  322.3983  171.9426
@@ -983,12 +941,12 @@ wgt 171.94257 1169.6514  681.2952</code></pre>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> data)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>fit_s1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn1)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>fit_s2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> hgt, <span class="at">data =</span> syn2)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">wgt</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">wgt</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span>, data <span class="op">=</span> <span class="va">syn1</span><span class="op">)</span></span>
+<span><span class="va">fit_s2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">wgt</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">hgt</span>, data <span class="op">=</span> <span class="va">syn2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1010,7 +968,7 @@ Residual standard error: 8.008 on 745 degrees of freedom
 Multiple R-squared:  0.9065,    Adjusted R-squared:  0.9062 
 F-statistic:  3610 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_s1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1032,7 +990,7 @@ Residual standard error: 8.063 on 745 degrees of freedom
 Multiple R-squared:  0.9018,    Adjusted R-squared:  0.9015 
 F-statistic:  3421 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_s2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_s2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1059,16 +1017,9 @@ F-statistic:  3567 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<hr>
-</section>
-<section id="conclusion-fully-conditional-specification-versus-joint-modelling" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</h3>
+<hr></section><section id="conclusion-fully-conditional-specification-versus-joint-modelling" class="level3"><h3 class="anchored" data-anchor-id="conclusion-fully-conditional-specification-versus-joint-modelling">Conclusion: Fully conditional specification versus joint modelling</h3>
 <p>Now you have a flavour of how the two modelling procedures allow to generate synthetic data. While in this specific example, the outcomes were the same, this is not generally the case. That is, when the joint model is a multivariate normal distribution, using separate linear regression models with normal residuals yield equivalent results. However, using fully conditional specification you can specify any model that you deem appropriate, even if this does not give rise to a well-defined multivariate probability distribution. As stated in the section <a href="#sec-modelling">Modelling synthetic data</a>, we can model a subset of the variables, or the entire data set using non-parametric models, and a different model can be specified for each variable. Because of this flexibility, and its presence in existing software, we will use the fully conditional specification strategy throughout. Before we get there, we discuss some additional considerations for generating synthetic data.</p>
-<hr>
-</section>
-</section>
-<section id="specifying-synthetic-data-models" class="level2">
-<h2 class="anchored" data-anchor-id="specifying-synthetic-data-models">Specifying synthetic data models</h2>
+<hr></section></section><section id="specifying-synthetic-data-models" class="level2"><h2 class="anchored" data-anchor-id="specifying-synthetic-data-models">Specifying synthetic data models</h2>
 <p>Regardless of which approach to generating synthetic data you use, it is important that you specify an appropriate synthesis model. That is, <span class="math inline">\(\hat{f}(x)\)</span> needs to model the true data distribution adequately. In general, synthetic data models can be misspecified in two ways.</p>
 <ol type="1">
 <li>It can be that our model is far from accurate, because it misses important aspects of the underlying distribution. For example, we might select a model that does not capture the shape of some variables. We could also miss some important relationships between variables. In such cases, the synthetic data might not look like the observed data, and some analyses performed on the synthetic data might yield results that are far from those one would obtain running the same analyses on the observed data. That is, the synthetic data has low utility.</li>
@@ -1078,14 +1029,12 @@ F-statistic:  3567 on 2 and 745 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-privacy-utility-model" class="quarto-float quarto-figure quarto-figure-center anchored" width="864">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-utility-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-privacy-utility-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-privacy-utility-model-1.png" id="fig-privacy-utility-model" class="img-fluid figure-img" width="864">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-privacy-utility-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1096,10 +1045,7 @@ Figure&nbsp;1
 <li>The third figure on the bottom row shows a model that achieves a better balance: realistic synthetic data can be drawn from the model, but there is sufficient uncertainty, in the sense that synthetic data points (the red points) substantially deviate from the best fitting line, but still blend nicely with the observed data points. In this case, this is achieved by transforming <code>tv</code> by taking its square-root (which substantially reduces the variance for the lower <code>tv</code> scores), and non-linear regression model (with a natural cubic spline basis, see <code>?ns</code> for help if you are interested in this).</li>
 </ol>
 <p>In conclusion, you want a synthesis model to be simple enough to leave sufficient uncertainty with respect to the exact relationships between the variables. This substantially reduces disclosure risks, because this uncertainty renders it much more unlikely that real observations are reproduced by the synthetic data model, or that there occurs a deterministic relationship between variables. Simultaneously, specifying the relationships between variables accurately yields higher utility, which allows data users to do more useful analyses with the synthetic data. Hence, you want to balance data privacy with data utility. How to balance privacy and utility will be the subject of the upcoming sections.</p>
-<hr>
-</section>
-<section id="synthetic-data-for-open-science" class="level2">
-<h2 class="anchored" data-anchor-id="synthetic-data-for-open-science">Synthetic data for open science</h2>
+<hr></section><section id="synthetic-data-for-open-science" class="level2"><h2 class="anchored" data-anchor-id="synthetic-data-for-open-science">Synthetic data for open science</h2>
 <hr>
 <p>The release of a synthetic data set for open science purposes should be guided by the privacy-utility trade-off, with respect to the data at hand. That is, one should consider the goals that should be attainable with the synthetic data, and what privacy risks are looming. From a utility perspective, this implies that researchers who intend to release synthetic data with their code, should consider what aims should be achievable with this data. Often, this depends on the analyses conducted with the real data.</p>
 <p>For instance, for reproducing a regression analysis, means and covariances should be reproduced with reasonable accuracy, but preserving higher order moments (like skewness or kurtosis) or complex relationships might not be necessary. In such cases, it may be sufficiant to have a synthesis model that focuses on these aspects, even though the synthetic data deviates from the observed data in important aspects.</p>
@@ -1130,10 +1076,7 @@ Figure&nbsp;1
 <!-- -->
 
 
-</section>
-
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-chollet_deep_2022" class="csl-entry" role="listitem">
 Chollet, F., T. Kalinowski, and J. J. Allaire. 2022. <em>Deep Learning with r</em>. Manning.
 </div>
@@ -1162,13 +1105,10 @@ Rubin, Donald B. 1993. <span>“Statistical Disclosure Limitation.”</span> <em
 Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Data with Keras in r.”</span> July 14. <a href="https://thomvolker.github.io/blog/1407_gans_in_r/">https://thomvolker.github.io/blog/1407_gans_in_r/</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
 <ol>
 <li id="fn1"><p>Note, however, that until now (beginning of 2026) no tailor-made software exists that works together with existing synthetic data generation packages.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>I filled in the missing values through imputation, so we don’t have to deal with these. However, this implies that we cannot use the <code>boys</code> data from the <code>mice</code>-package directly<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1638,9 +1578,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../sdc/index.html" class="pagination-link" aria-label="Statistical Disclosure Control">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistical Disclosure Control</span>
       </a>          
@@ -2252,8 +2190,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -2264,9 +2201,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
       &nbsp;
     </div>
   </div>
-</footer>
-<footer class="osc-footer-card text-white py-5">
-  <div class="container">
+</footer><footer class="osc-footer-card text-white py-5"><div class="container">
     <div class="row gy-4">
       <div class="col-12 col-md-6 col-lg-3 ">
         <h4 class="fw-bold fs-5 fs-lg-4 text-white">
@@ -2282,7 +2217,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Contact</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="mailto:felix.schoenbrodt@psy.lmu.de" class="text-white text-decoration-underline">
               <i class="bi bi-envelope me-1"></i>
               Prof. Dr. Felix Schönbrodt (Managing Director)
@@ -2301,12 +2236,12 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3">
         <h4 class="fw-semibold fs-5 text-white">Join Us</h4>
         <ul class="list-unstyled mt-2 mb-0">
-          <li>
+<li>
             <a href="https://lists.lrz.de/mailman/listinfo/lmu-osc" target="_blank" class="text-white text-decoration-underline" aria-label="Subscribe to our announcement list (opens in new window)">
               Subscribe to our announcement list
             </a>
@@ -2322,7 +2257,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
             </a>
           </li>
         </ul>
-      </div>
+</div>
 
       <div class="col-12 col-md-6 col-lg-3 d-flex align-items-start gap-3 osc-footer-socials">
         <a href="https://github.com/lmu-osc" target="_blank" class="text-white fs-3" aria-label="LMU Open Science Center on GitHub (opens in new window)">
@@ -2342,8 +2277,7 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
     </div>
 
     <hr class="my-4 border-light">
-
-    <div class="d-flex flex-wrap gap-3 small">
+<div class="d-flex flex-wrap gap-3 small">
       <a href="../footer/imprint.html" class="text-white text-decoration-underline">Imprint</a>
       <span aria-hidden="true">|</span>
       <a href="../footer/privacy.html" class="text-white text-decoration-underline">Privacy Policy</a>
@@ -2353,8 +2287,6 @@ Volker, Thom Benjamin. 2025. <span>“Illustrative GANs for Simple Synthetic Dat
 
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>
