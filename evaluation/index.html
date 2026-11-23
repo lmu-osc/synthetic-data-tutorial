@@ -887,7 +887,7 @@ r(X) = \frac{f_\text{obs}(X)}{f_\text{syn}(X)}.
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">r_passive</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 256 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -940,10 +940,10 @@ Kernel Information:
   Number of kernels: 200
 
 Optimal sigma: 1.31124
-Optimal lambda: 0.0379269
-Optimal kernel weights: num [1:201] 0.1069 -0.0237 0.2505 -0.1082 0.2522 ...
+Optimal lambda: 0.001
+Optimal kernel weights: num [1:200] -0.1334 -1.0947 0.0837 -0.2269 -1.5696 ...
  
-Pearson divergence between P(nu) and P(de): 0.8535
+Pearson divergence between P(nu) and P(de): 2.07
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">r_cart</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -957,10 +957,10 @@ Kernel Information:
   Number of kernels: 200
 
 Optimal sigma: 4.589132
-Optimal lambda: 0.3359818
-Optimal kernel weights: num [1:201] 0.02799 0.00165 0.01181 0.01547 0.00911 ...
+Optimal lambda: 0.6951928
+Optimal kernel weights: num [1:200] 0.00384 0.00849 0.01045 0.00866 0.00872 ...
  
-Pearson divergence between P(nu) and P(de): 0.005043
+Pearson divergence between P(nu) and P(de): 0.007224
 For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 </div>
 </div>
@@ -987,7 +987,7 @@ For a two-sample homogeneity test, use 'summary(x, test = TRUE)'.</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://thomvolker.github.io/densityratio/reference/plot_bivariate.html">plot_bivariate</a></span><span class="op">(</span><span class="va">r_passive</span>, grid <span class="op">=</span> <span class="cn">TRUE</span>, samples <span class="op">=</span> <span class="st">"denominator"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Negative estimated density ratios for 76 observation(s) converted to
+<pre><code>Warning: Negative estimated density ratios for 256 observation(s) converted to
 0.01 before applying logarithmic transformation</code></pre>
 </div>
 <div class="cell-output-display">
@@ -1079,6 +1079,7 @@ regcity      0.243792835  0.27100778 -0.027214945    -0.07238087  0.9815352
 
 Measures for one synthesis and 8 coefficients
 Mean confidence interval overlap:  0.926483
+
 Mean absolute std. coef diff:  0.2881814
 
 Mahalanobis distance ratio for lack-of-fit (target 1.0): 0.27
@@ -1112,6 +1113,7 @@ regcity      0.10239185  0.27100778 -0.168615934     -0.4484510  0.8855971
 
 Measures for one synthesis and 8 coefficients
 Mean confidence interval overlap:  0.7622692
+
 Mean absolute std. coef diff:  0.9318878
 
 Mahalanobis distance ratio for lack-of-fit (target 1.0): 1.2
@@ -1180,6 +1182,9 @@ regcity      2.194214e-01  0.16112124  0.058300129      0.2059689  0.9474559
 
 Measures for one synthesis and 10 coefficients
 Mean confidence interval overlap:  -1.599385
+Note some CI overlaps are negtive, indicating gaps between the two CIs.
+Mean overlap with gaps set to zero gives:  0.3404558
+
 Mean absolute std. coef diff:  10.1894
 
 Mahalanobis distance ratio for lack-of-fit (target 1.0): 62.58
@@ -1216,6 +1221,7 @@ regcity      0.161698307  0.16112124  5.770689e-04    0.002038731  0.9994799
 
 Measures for one synthesis and 10 coefficients
 Mean confidence interval overlap:  0.7894476
+
 Mean absolute std. coef diff:  0.8253502
 
 Mahalanobis distance ratio for lack-of-fit (target 1.0): 1.87
